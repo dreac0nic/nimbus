@@ -12,6 +12,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\NimbusApplication.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\NimbusApplication.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD12D565-5AB0-44A1-BAAD-B6B8B690D9F7}</ProjectGuid>
@@ -54,7 +58,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Users\Hazen\Documents\projects\Nimbus\ogre\boost\boost;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OIS;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE\Overlay;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Hazen\Documents\projects\Nimbus\ogre\boost;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OIS;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE\Overlay;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -71,7 +75,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>C:\Users\Hazen\Documents\projects\Nimbus\ogre\boost\boost;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OIS;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE\Overlay;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Hazen\Documents\projects\Nimbus\ogre\boost;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OIS;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE\Overlay;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
