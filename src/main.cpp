@@ -14,7 +14,8 @@ int main(int argc, char* argv[])
 	// Begin the application
 	NimbusApplication::begin();
 
-	std::cin.get();
+	// Pause the application
+	//std::cin.get();
 
 	return 0;
 }

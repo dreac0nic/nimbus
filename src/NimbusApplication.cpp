@@ -1,5 +1,11 @@
 #include "NimbusApplication.h"
 #include <OgreConfigFile.h>
+#include <OgreRenderWindow.h>
+#include <OgreCamera.h>
+#include <OgreViewport.h>
+#include <OgreSceneNode.h>
+#include <OgreEntity.h>
+#include <OgreSceneManager.h>
 
 NimbusApplication NimbusApplication::app = NimbusApplication();
 
@@ -17,13 +23,32 @@ void NimbusApplication::begin(void)
 {
 	try
 	{
-		app.loadConfiguration();
+		if(!app.loadConfiguration())
+		{
+			std::cerr << "Failed to load configuration files" << std::endl;
+			return;
+		}
+		if(!app.createScene())
+		{
+			std::cerr << "Failed to create scene" << std::endl;
+			return;
+		}
 	}
 	catch(Exception e)
 	{
 		std::cerr << "Ogre encountered an error" << std::endl;
 		std::cerr << e.getFullDescription() << std::endl;
 	}
+}
+
+bool NimbusApplication::frameRenderingQueued(const FrameEvent& evt)
+{
+	if(mWindow->isClosed())
+	{
+		return false;
+	}
+
+	return true;
 }
 
 bool NimbusApplication::loadConfiguration(void)
@@ -94,5 +119,61 @@ bool NimbusApplication::loadConfiguration(void)
 
 bool NimbusApplication::createScene(void)
 {
+	SceneManager* sceneMgr;
+	Camera* camera;
+	Viewport* viewport;
+
+	Entity* dragon;
+	SceneNode* dragonNode;
+
+	Light* light;
+
+	// Create the scene manager
+	sceneMgr = mRoot->createSceneManager("DefaultSceneManager");
+
+	//////////
+	// Set up the camera
+
+	// Create the camera
+	camera = sceneMgr->createCamera("PlayerCam");
+
+	// Position the camera
+	camera->setPosition(Vector3(0,50,80));
+	camera->lookAt(Vector3(0,0,-100));
+	camera->setNearClipDistance(5);
+
+	// Add a viewport for the camera
+	viewport = mWindow->addViewport(camera);
+
+	// Correct the aspect ratio of the camera
+	camera->setAspectRatio(
+		Real(viewport->getActualWidth()) / Real(viewport->getActualHeight()));
+
+	//////////
+	// Set up the appropriate models
+
+	// Load the dragon
+	dragon = sceneMgr->createEntity("Dragon", "dragon.mesh");
+	dragonNode = sceneMgr->getRootSceneNode()->createChildSceneNode();
+	dragonNode->attachObject(dragon);
+
+	dragonNode->setPosition(0,0,-100);
+	dragonNode->setScale(40.0, 40.0, 40.0);
+	dragonNode->pitch(Degree(90));
+
+	//////////
+	// Set up light sources
+
+	// Set the ambient light
+	sceneMgr->setAmbientLight(ColourValue(0.5,0.5,0.5));
+
+	// Create a point light for main light
+	light = sceneMgr->createLight("MainLight");
+	light->setPosition(20, 80, 50);
+
+	// Start the rendering process
+	mRoot->addFrameListener(this);
+	mRoot->startRendering();
+
 	return true;
 }

@@ -2,6 +2,7 @@
 #define NIMBUSAPPLICATION_H
 
 #include <OgreRoot.h>
+#include <OgreFrameListener.h>
 
 using namespace Ogre;
 
@@ -16,7 +17,7 @@ the application independent from Ogre. This would make our game more
 independent rather than depending on Ogre for it's vital running
 functionality.
 */
-class NimbusApplication
+class NimbusApplication : public FrameListener
 {
 private:
 	// The singleton variable (this application overuses the Singleton design)
@@ -55,6 +56,10 @@ private:
 	NimbusApplication class.
 	*/
 	NimbusApplication(void);
+
+protected:
+	// Ogre::FrameListener
+	virtual bool frameRenderingQueued(const FrameEvent& evt);
 
 public:
 	virtual ~NimbusApplication(void);
