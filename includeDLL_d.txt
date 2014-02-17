@@ -1,0 +1,2 @@
+OgreMain_d.dll
+OIS_d.dll

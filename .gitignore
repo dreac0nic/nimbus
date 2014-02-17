@@ -1,0 +1,16 @@
+# .gitignore file
+
+# Build Directory Ignores
+
+Build/*
+
+# Include Directory Ignores
+
+ogre/*
+
+# IDE Specific Ignores
+
+# Visual Studio
+*.sdf
+*.suo
+*.opensdf
