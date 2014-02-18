@@ -6,6 +6,7 @@
 #include <OgreSceneNode.h>
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
+#include "TestMode.h"
 
 NimbusApplication NimbusApplication::app = NimbusApplication();
 
@@ -16,6 +17,7 @@ NimbusApplication::NimbusApplication(void):
 
 NimbusApplication::~NimbusApplication(void)
 {
+	delete runMode;
 	delete mRoot;
 }
 
@@ -28,11 +30,13 @@ void NimbusApplication::begin(void)
 			std::cerr << "Failed to load configuration files" << std::endl;
 			return;
 		}
-		if(!app.createScene())
-		{
-			std::cerr << "Failed to create scene" << std::endl;
-			return;
-		}
+
+		// Create the initial run mode
+		app.runMode = new TestMode(app.mWindow);
+
+		// Start the rendering process
+		app.mRoot->addFrameListener(&app);
+		app.mRoot->startRendering();
 	}
 	catch(Exception e)
 	{
@@ -45,6 +49,16 @@ bool NimbusApplication::frameRenderingQueued(const FrameEvent& evt)
 {
 	if(mWindow->isClosed())
 	{
+		return false;
+	}
+
+	// Run the current RunMode
+	runMode = runMode->run(evt);
+
+	// Check that the we should continue running
+	if(runMode == 0)
+	{
+		LogManager::getSingletonPtr()->logMessage("(Nimbus) Received 0 RunMode... Terminating");
 		return false;
 	}
 
@@ -108,72 +122,17 @@ bool NimbusApplication::loadConfiguration(void)
 	}
 
 	//////////
-	// Create a RenderWindow
+	// Initialize the application
 
-	// Consider manually creating a window so we have more control...
-	// (not necessary with above config options)
+	// Initialize the root
 	mWindow = mRoot->initialise(true, "Nimbus[wt]");
 
-	return true;
-}
-
-bool NimbusApplication::createScene(void)
-{
-	SceneManager* sceneMgr;
-	Camera* camera;
-	Viewport* viewport;
-
-	Entity* dragon;
-	SceneNode* dragonNode;
-
-	Light* light;
-
-	// Create the scene manager
-	sceneMgr = mRoot->createSceneManager("DefaultSceneManager");
-
-	//////////
-	// Set up the camera
-
-	// Create the camera
-	camera = sceneMgr->createCamera("PlayerCam");
-
-	// Position the camera
-	camera->setPosition(Vector3(0,50,80));
-	camera->lookAt(Vector3(0,0,-100));
-	camera->setNearClipDistance(5);
-
-	// Add a viewport for the camera
-	viewport = mWindow->addViewport(camera);
-
-	// Correct the aspect ratio of the camera
-	camera->setAspectRatio(
-		Real(viewport->getActualWidth()) / Real(viewport->getActualHeight()));
-
-	//////////
-	// Set up the appropriate models
-
-	// Load the dragon
-	dragon = sceneMgr->createEntity("Dragon", "dragon.mesh");
-	dragonNode = sceneMgr->getRootSceneNode()->createChildSceneNode();
-	dragonNode->attachObject(dragon);
-
-	dragonNode->setPosition(0,0,-100);
-	dragonNode->setScale(40.0, 40.0, 40.0);
-	dragonNode->pitch(Degree(90));
-
-	//////////
-	// Set up light sources
-
-	// Set the ambient light
-	sceneMgr->setAmbientLight(ColourValue(0.5,0.5,0.5));
-
-	// Create a point light for main light
-	light = sceneMgr->createLight("MainLight");
-	light->setPosition(20, 80, 50);
-
-	// Start the rendering process
-	mRoot->addFrameListener(this);
-	mRoot->startRendering();
+	// TODO: We need to be passing the RenderWindow around so we only ever
+	// have one of them. One solution would be to make NimbusApplication a
+	// Singleton... but that's just basically making it global. We could also be
+	// sure to explicitly call initialize() with RenderWindow as a parameter... or
+	// it could be a parameter of run(). Neither of those sound very good either.
+	// I'm currently out of ideas on this one.
 
 	return true;
 }

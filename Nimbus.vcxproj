@@ -13,9 +13,13 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
+    <ClCompile Include="src\TestMode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\NimbusApplication.h" />
+    <ClInclude Include="src\RunMode.h" />
+    <ClInclude Include="src\SelfInitializingSingleton.h" />
+    <ClInclude Include="src\TestMode.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD12D565-5AB0-44A1-BAAD-B6B8B690D9F7}</ProjectGuid>

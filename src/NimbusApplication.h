@@ -1,6 +1,7 @@
 #ifndef NIMBUSAPPLICATION_H
 #define NIMBUSAPPLICATION_H
 
+#include "RunMode.h"
 #include <OgreRoot.h>
 #include <OgreFrameListener.h>
 
@@ -30,6 +31,9 @@ private:
 	// The Ogre::RenderWindow for this application
 	RenderWindow* mWindow;
 
+	// The current RunMode of the application
+	RunMode* runMode;
+
 	// Member Functions
 
 	/** Loads all configuration files for the application.
@@ -40,17 +44,6 @@ private:
 	@return Bool indicating success of loading.
 	*/
 	bool loadConfiguration(void);
-
-	/** A test function which will be used to show that Ogre has been loaded
-	properly. Requires that the mRoot has been initialized.
-	
-	DO NOT use this for final application. Instead, create the SceneManager
-	in the appropriate RunMode. Each RunMode should probably have its own
-	SceneManager and scene construction method.
-	
-	@return Bool indicating success of creating the scene.
-	*/
-	bool createScene(void);
 
 	/** Private default constructor to prevent instances of the
 	NimbusApplication class.
