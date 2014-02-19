@@ -18,6 +18,7 @@ NimbusApplication::NimbusApplication(void):
 NimbusApplication::~NimbusApplication(void)
 {
 	delete runMode;
+	delete mInputManager;
 	delete mRoot;
 }
 
@@ -30,6 +31,9 @@ void NimbusApplication::begin(void)
 			std::cerr << "Failed to load configuration files" << std::endl;
 			return;
 		}
+
+		// Create the input manager
+		app.mInputManager = new InputManager(app.mWindow);
 
 		// Create the initial run mode
 		app.runMode = new TestMode(app.mWindow);
@@ -52,8 +56,11 @@ bool NimbusApplication::frameRenderingQueued(const FrameEvent& evt)
 		return false;
 	}
 
-	// Run the current RunMode
-	runMode = runMode->run(evt);
+	// Check for input
+	if(!mInputManager->update())
+	{
+		return false;
+	}
 
 	// Check that the we should continue running
 	if(runMode == 0)
@@ -61,6 +68,9 @@ bool NimbusApplication::frameRenderingQueued(const FrameEvent& evt)
 		LogManager::getSingletonPtr()->logMessage("(Nimbus) Received 0 RunMode... Terminating");
 		return false;
 	}
+
+	// Run the current RunMode
+	runMode = runMode->run(evt);
 
 	return true;
 }

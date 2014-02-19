@@ -11,11 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
     <ClCompile Include="src\TestMode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\InputManager.h" />
+    <ClInclude Include="src\Manager.h" />
     <ClInclude Include="src\NimbusApplication.h" />
     <ClInclude Include="src\RunMode.h" />
     <ClInclude Include="src\TestMode.h" />

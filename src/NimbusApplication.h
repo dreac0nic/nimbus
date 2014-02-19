@@ -2,6 +2,7 @@
 #define NIMBUSAPPLICATION_H
 
 #include "RunMode.h"
+#include "InputManager.h"
 #include <OgreRoot.h>
 #include <OgreFrameListener.h>
 
@@ -31,6 +32,9 @@ private:
 	// The Ogre::RenderWindow for this application
 	RenderWindow* mWindow;
 
+	// The InputManager (This probably goes here since if it is independent of RunMode)
+	InputManager* mInputManager;
+
 	// The current RunMode of the application
 	RunMode* runMode;
 
@@ -45,7 +49,7 @@ private:
 	*/
 	bool loadConfiguration(void);
 
-	/** Private default constructor to prevent instances of the
+	/** Private default constructor to prevent outside instances of the
 	NimbusApplication class.
 	*/
 	NimbusApplication(void);
@@ -63,6 +67,11 @@ public:
 	triggers until internally terminated. (Specifically renderFrameQueued.)
 	*/
 	static void begin(void);
+
+	/** A hack function designed to emulate an exit event.
+	Kills the application. Replace with appropriate event system equivalent.
+	*/
+	static void exitEvent(void) { app.runMode = 0; }
 };
 
 #endif
