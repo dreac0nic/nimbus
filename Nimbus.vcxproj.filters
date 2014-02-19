@@ -32,9 +32,6 @@
     <ClInclude Include="src\RunMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SelfInitializingSingleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\TestMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>

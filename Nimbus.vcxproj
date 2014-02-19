@@ -18,7 +18,6 @@
   <ItemGroup>
     <ClInclude Include="src\NimbusApplication.h" />
     <ClInclude Include="src\RunMode.h" />
-    <ClInclude Include="src\SelfInitializingSingleton.h" />
     <ClInclude Include="src\TestMode.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
