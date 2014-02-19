@@ -8,8 +8,6 @@
 #include <OgreSceneManager.h>
 #include "TestMode.h"
 
-NimbusApplication NimbusApplication::app = NimbusApplication();
-
 NimbusApplication::NimbusApplication(void):
 	mRoot(0)
 {
@@ -23,6 +21,9 @@ NimbusApplication::~NimbusApplication(void)
 
 void NimbusApplication::begin(void)
 {
+	// Store the application for convenience sake
+	NimbusApplication app = NimbusApplication::getSingleton();
+
 	try
 	{
 		if(!app.loadConfiguration())

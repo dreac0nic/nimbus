@@ -2,12 +2,18 @@
 #define NIMBUSAPPLICATION_H
 
 #include "RunMode.h"
+#include "SelfInitializingSingleton.h"
 #include <OgreRoot.h>
 #include <OgreFrameListener.h>
 
 using namespace Ogre;
 
 /** The driving application base for Nimbus.
+
+Nimbus application is a singleton class as it is the base from which
+the rest of the application runs. It is static for the purpose of making a
+clean external interface. It should not be accessed directly by game internal
+classes.
 
 This application current handles much of the interface with Ogre.
 Eventually, a lot of this should eventually be delegated to appropriate
@@ -18,12 +24,11 @@ the application independent from Ogre. This would make our game more
 independent rather than depending on Ogre for it's vital running
 functionality.
 */
-class NimbusApplication : public FrameListener
+class NimbusApplication :
+	public FrameListener,
+	public SelfInitializingSingleton<NimbusApplication>
 {
 private:
-	// The singleton variable (this application overuses the Singleton design)
-	static NimbusApplication app;
-
 	// Member Variables
 
 	// The Ogre::Root object for this application
@@ -45,16 +50,19 @@ private:
 	*/
 	bool loadConfiguration(void);
 
-	/** Private default constructor to prevent instances of the
-	NimbusApplication class.
-	*/
-	NimbusApplication(void);
-
 protected:
 	// Ogre::FrameListener
 	virtual bool frameRenderingQueued(const FrameEvent& evt);
 
 public:
+	/** Private default constructor to prevent instances of the
+	NimbusApplication class.
+	
+	(This is clearly not private... demonstrating
+	how SelfInitializingSingleton is broken. I think I might try an alternative.)
+	*/
+	NimbusApplication(void);
+
 	virtual ~NimbusApplication(void);
 
 	/** Starts the application running.
