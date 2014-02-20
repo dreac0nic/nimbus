@@ -11,7 +11,6 @@ namespace Nimbus
 {
 	typedef void vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid;
 	typedef vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid voooooooooooooooooooooooooooooooooooooooid;
-	typedef int EventType; // Yeah, I'm super lazy ...
 	typedef std::vector< std::map< std::queue<int>, std::string > > Event;
 
 	/* The EventSystem framework handles the receving and dispatching of events to registered EventListeners. 
@@ -49,9 +48,43 @@ namespace Nimbus
 	class EventSystem
 	{
 	public:
+		// CLASS MEMBERS --
+		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
+		 */
+		enum EventType { SHUTDOWN, MOUSE_CLICKED };
+		/* EVENT TYPE INFORMATION
+		 
+		 EXAMPLE_EVENT:
+			This is a brief description of what the event is, when it is fired, and what generally happens during this even.
+
+			Payload:
+				"KeyName" => KeyType
+
+		 SHUTDOWN:
+			The shutdown event is fired when a system asks the program to exit. The event will be handled by the main application 
+			and will proceed to cleanly shutdown all subsystems.
+
+			Payload: NONE
+
+		MOUSE_CLICKED
+			An event fired whenever a button on the mouse is clicked in our application.
+
+			Payload:
+				"ButtonPressed" => OIS::MouseButtonID
+				"ScreenPosition" => Ogre::Vector2
+		*/
+
+		// OBJECT METHODS --
+		//  -- CONSTRUCTORS / DESTRUCTORS
+		/* EventSystem constructor, yep!
+		 */
 		EventSystem();
+
+		/* EventSystem destructor, it DESTROYS THINGS!
+		 */
 		virtual ~EventSystem();
 
+		// -- GENERAL METHODS
 		/* Used to register an EventListener to the system for a certain type of Event.
 		 
 		 @param listener A reference to an isntance of the listener for the Event type.
