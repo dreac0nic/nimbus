@@ -55,7 +55,7 @@ namespace Nimbus
 		//  -- CONSTRUCTORS / DESTRUCTORS
 		/* EventSystem constructor, yep!
 		 */
-		EventSystem();
+		EventSystem(void);
 	public:
 		// CLASS MEMBERS --
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
@@ -93,7 +93,7 @@ namespace Nimbus
 
 		/* EventSystem destructor, it DESTROYS THINGS!
 		 */
-		virtual ~EventSystem();
+		virtual ~EventSystem(void);
 
 		// -- GENERAL METHODS
 		/* Used to register an EventListener to the system for a certain type of Event.
