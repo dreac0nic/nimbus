@@ -6,8 +6,6 @@
 #include <OgreRoot.h>
 #include <OgreFrameListener.h>
 
-using namespace Ogre;
-
 /** The driving application base for Nimbus.
 
 This application current handles much of the interface with Ogre.
@@ -28,9 +26,9 @@ private:
 	// Member Variables
 
 	// The Ogre::Root object for this application
-	Root* mRoot;
+	Ogre::Root* mRoot;
 	// The Ogre::RenderWindow for this application
-	RenderWindow* mWindow;
+	Ogre::RenderWindow* mWindow;
 
 	// The InputManager (This probably goes here since if it is independent of RunMode)
 	InputManager* mInputManager;
@@ -56,7 +54,7 @@ private:
 
 protected:
 	// Ogre::FrameListener
-	virtual bool frameRenderingQueued(const FrameEvent& evt);
+	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
 public:
 	virtual ~NimbusApplication(void);
