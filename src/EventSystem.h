@@ -52,7 +52,7 @@ namespace Nimbus
 		static EventSystem singleton;
 
 		// OBJECT METHODS --
-		//  -- CONSTRUCTORS / DESTRUCTORS
+		//  -- CONSTRUCTORS
 		/* EventSystem constructor, yep!
 		 */
 		EventSystem(void);
@@ -100,7 +100,7 @@ namespace Nimbus
 
 		 @return True for a successful registration, false if the listener could not be registered.
 		 */
-		bool registerListener(EventListener* listener, EventType type);
+		bool registerListener(const EventListener& listener, EventType type);
 
 		/* Used to deregister a previously registered EventListener.
 		 
@@ -108,7 +108,7 @@ namespace Nimbus
 		  @param type The type of Event the listener is registered to.
 
 		  */
-		vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid unregisterListener(EventListener* listener, EventType type);
+		vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid unregisterListener(const EventListener& listener, EventType type);
 
 		/* Fires an Event to the EventSystem to distribute to the appropriate listeners.
 		 
@@ -116,7 +116,7 @@ namespace Nimbus
 		 @param type The type of Event to fire.
 
 		 */
-		voooooooooooooooooooooooooooooooooooooooid fireEvent(Event* event, EventType type);
+		voooooooooooooooooooooooooooooooooooooooid fireEvent(EventType type, map<std::string, void*> payload);
 	};
 }
 
