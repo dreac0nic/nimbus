@@ -47,6 +47,15 @@ namespace Nimbus
 	 */
 	class EventSystem
 	{
+	private:
+		// The singleton pointer
+		static EventSystem* singleton;
+
+		// OBJECT METHODS --
+		//  -- CONSTRUCTORS / DESTRUCTORS
+		/* EventSystem constructor, yep!
+		 */
+		EventSystem();
 	public:
 		// CLASS MEMBERS --
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
@@ -74,11 +83,13 @@ namespace Nimbus
 				"ScreenPosition" => Ogre::Vector2
 		*/
 
-		// OBJECT METHODS --
-		//  -- CONSTRUCTORS / DESTRUCTORS
-		/* EventSystem constructor, yep!
-		 */
-		EventSystem();
+		/** Initializes the EventSystem.
+		*/
+		static bool init();
+
+		/** Shuts down the EventSystem.
+		*/
+		static bool shutdown();
 
 		/* EventSystem destructor, it DESTROYS THINGS!
 		 */
