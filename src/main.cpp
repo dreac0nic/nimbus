@@ -1,6 +1,8 @@
 #include "NimbusApplication.h"
 #include <iostream>
 
+using namespace Nimbus;
+
 /** The main function to start the Nimbus application.
  */
 int main(int argc, char* argv[])

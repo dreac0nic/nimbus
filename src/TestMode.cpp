@@ -7,6 +7,7 @@
 #include <OgreSceneManager.h>
 
 using namespace Nimbus;
+using namespace Ogre;
 
 TestMode::TestMode(RenderWindow* window):
 	mWindow(window)

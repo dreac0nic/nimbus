@@ -9,6 +9,7 @@
 #include "TestMode.h"
 
 using namespace Nimbus;
+using namespace Ogre;
 
 NimbusApplication NimbusApplication::app = NimbusApplication();
 
