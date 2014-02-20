@@ -67,6 +67,9 @@ namespace Nimbus
 			public EventListener
 		{
 		public:
+			ShutdownListener() {}
+			virtual ~ShutdownListener() {}
+
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload);
 		};
