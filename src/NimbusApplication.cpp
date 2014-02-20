@@ -10,11 +10,13 @@
 using namespace Nimbus;
 using namespace Ogre;
 
-NimbusApplication NimbusApplication::app = NimbusApplication();
+NimbusApplication* NimbusApplication::app = NULL;
 
 NimbusApplication::NimbusApplication(void):
 	mRoot(0)
 {
+	NimbusApplication::app = this;
+
 	this->mEventSystem = new EventSystem();
 
 	// Register the shutdown event listener
@@ -34,21 +36,21 @@ void NimbusApplication::begin(void)
 	try
 	{
 		// Configure the application
-		if(!app.loadConfiguration())
+		if(!app->loadConfiguration())
 		{
 			std::cerr << "Failed to load configuration files" << std::endl;
 			return;
 		}
 
 		// Create the input manager
-		app.mInputManager = new InputManager(app.mWindow);
+		app->mInputManager = new InputManager(app->mWindow);
 
 		// Create the initial run mode
-		app.mCurrentRunMode = new TestMode(app.mWindow);
+		app->mCurrentRunMode = new TestMode(app->mWindow);
 
 		// Start the rendering process
-		app.mRoot->addFrameListener(&app);
-		app.mRoot->startRendering();
+		app->mRoot->addFrameListener(app);
+		app->mRoot->startRendering();
 	}
 	catch(Exception e)
 	{
@@ -161,5 +163,5 @@ void NimbusApplication::ShutdownListener::handleEvent(payloadmap payload)
 	Ogre::LogManager::getSingleton().logMessage("(Nimbus) Received shutdown event.\n");
 
 	// Set the current run mode to 0
-	NimbusApplication::app.mCurrentRunMode = 0;
+	NimbusApplication::app->mCurrentRunMode = 0;
 }

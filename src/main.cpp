@@ -7,6 +7,9 @@ using namespace Nimbus;
  */
 int main(int argc, char* argv[])
 {
+	// Initialize the application
+	NimbusApplication* application = new NimbusApplication();
+
 	// This used to be a placeholder for a render window so I knew the application ran...
 	// Now I just like the dragon... :)
 	std::cout << "Nimbus Application... in development" << std::endl << std::endl;
@@ -19,6 +22,9 @@ int main(int argc, char* argv[])
 
 	// Pause the application
 	//std::cin.get();
+
+	// Cleanup!
+	delete application;
 
 	return 0;
 }

@@ -24,10 +24,19 @@ namespace Nimbus
 	*/
 	class NimbusApplication : public Ogre::FrameListener
 	{
-	private:
+	public:
+		// Class/Static Members
 		// The singleton variable (this application overuses the Singleton design)
-		static NimbusApplication app;
+		static NimbusApplication* app;
 
+		/** Starts the application running.
+	
+		The application will continue running according to Ogre::FrameListener
+		triggers until internally terminated. (Specifically renderFrameQueued.)
+		*/
+		static void begin(void);
+
+	private:
 		// Member Variables
 
 		// The Ogre::Root object for this application
@@ -55,11 +64,6 @@ namespace Nimbus
 		*/
 		bool loadConfiguration(void);
 
-		/** Private default constructor to prevent outside instances of the
-		NimbusApplication class.
-		*/
-		NimbusApplication(void);
-
 	protected:
 		// Ogre::FrameListener
 		virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
@@ -80,19 +84,9 @@ namespace Nimbus
 		};
 
 	public:
+		NimbusApplication(void);
+
 		virtual ~NimbusApplication(void);
-
-		/** Starts the application running.
-	
-		The application will continue running according to Ogre::FrameListener
-		triggers until internally terminated. (Specifically renderFrameQueued.)
-		*/
-		static void begin(void);
-
-		/** A hack function designed to emulate an exit event.
-		Kills the application. Replace with appropriate event system equivalent.
-		*/
-		//static void exitEvent(void) { app.mCurrentRunMode = 0; }
 	};
 }
 
