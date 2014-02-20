@@ -3,6 +3,7 @@
 
 #include "RunMode.h"
 #include "InputManager.h"
+#include "EventListener.h"
 #include <OgreRoot.h>
 #include <OgreFrameListener.h>
 
@@ -57,6 +58,18 @@ namespace Nimbus
 	protected:
 		// Ogre::FrameListener
 		virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+
+		// Event Listeners
+
+		/** Listens for the shutdown event
+		*/
+		class ShutdownListener : 
+			public EventListener
+		{
+		public:
+			// From Nimbus::EventListener
+			virtual void handleEvent(std::map<std::string, void*> payload);
+		};
 
 	public:
 		virtual ~NimbusApplication(void);

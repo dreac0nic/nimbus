@@ -149,3 +149,9 @@ bool NimbusApplication::loadConfiguration(void)
 
 	return true;
 }
+
+void NimbusApplication::ShutdownListener::handleEvent(std::map<std::string, void*> payload)
+{
+	// Set the current run mode to 0
+	NimbusApplication::app.mCurrentRunMode = 0;
+}
