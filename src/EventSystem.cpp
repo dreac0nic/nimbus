@@ -21,12 +21,25 @@ EventSystem::~EventSystem(void)
 
 bool EventSystem::registerListener(const EventListener& listener, EventType type)
 {
+	mListeners[type].push_back(listener);
 }
 
 vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid EventSystem::unregisterListener(const EventListener& listener, EventType type)
 {
+	vector<EventListener>::iterator item;
+
+	for(item = mListeners[type].begin(); item != mListeners[type].end(); ++item) {
+		if(&listener == &(*item)) { // ALL THE DOOMED COMPARISONS NEEDS MORE SYMBOLS
+			break;
+		}
+	}
+
+	mListeners[type].erase(item);
 }
 
 voooooooooooooooooooooooooooooooooooooooid EventSystem::fireEvent(EventType type, const payloadmap& payload = payloadmap())
 {
+	for(vector<EventListener>::iterator i = mListeners[type].begin(); i != mListeners[type].end(); ++i) {
+		(*i).handleEvent(payload); // OH MY GOODNESS TEH SCIENCE
+	}
 }
