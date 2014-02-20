@@ -83,7 +83,7 @@ namespace Nimbus
 
 	private:
 		// A map for all the listeners for a certain event.
-		std::map< EventType, std::vector<EventListener> > mListeners;
+		std::map< EventType, std::vector<EventListener*> > mListeners;
 
 		// CONSTRUCTORS
 		/* EventSystem constructor, yep!
@@ -103,7 +103,7 @@ namespace Nimbus
 
 		 @return True for a successful registration, false if the listener could not be registered.
 		 */
-		bool registerListener(const EventListener& listener, EventType type);
+		bool registerListener(EventListener* listener, EventType type);
 
 		/* Used to deregister a previously registered EventListener.
 		 
@@ -111,7 +111,7 @@ namespace Nimbus
 		  @param type The type of Event the listener is registered to.
 
 		  */
-		vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid unregisterListener(const EventListener& listener, EventType type);
+		vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid unregisterListener(EventListener* listener, EventType type);
 
 		/* Fires an Event to the EventSystem to distribute to the appropriate listeners.
 		 
