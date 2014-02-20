@@ -4,6 +4,8 @@
 #include "RunMode.h"
 #include "InputManager.h"
 #include "EventListener.h"
+#include "TestMode.h"
+#include "EventSystem.h"
 #include <OgreRoot.h>
 #include <OgreFrameListener.h>
 
@@ -35,6 +37,9 @@ namespace Nimbus
 
 		// The InputManager (This probably goes here since if it is independent of RunMode)
 		InputManager* mInputManager;
+
+		// The EventSystem handle, for future reference and cleanup.
+		EventSystem* mEventSystem;
 
 		// The current RunMode of the application
 		RunMode* mCurrentRunMode;

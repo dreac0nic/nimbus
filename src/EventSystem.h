@@ -48,7 +48,7 @@ namespace Nimbus
 	{
 	public:
 		// The singleton pointer
-		static EventSystem singleton;
+		static EventSystem* singleton;
 
 		// CLASS MEMBERS --
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
@@ -78,19 +78,21 @@ namespace Nimbus
 
 		/** Gets the singleton.
 		@return The singleton.
+
+		NOTE: CAN return a null value if the EventSystem has not been initialized!!
 		*/
-		static EventSystem getSingleton() { return singleton; }
+		static EventSystem* getSingleton() { return singleton; }
 
 	private:
 		// A map for all the listeners for a certain event.
 		std::map< EventType, std::vector<EventListener*> > mListeners;
 
+	public:
 		// CONSTRUCTORS
 		/* EventSystem constructor, yep!
 		 */
 		EventSystem(void);
 
-	public:
 		/* EventSystem destructor, it DESTROYS THINGS!
 		 */
 		virtual ~EventSystem(void);

@@ -6,8 +6,6 @@
 #include <OgreSceneNode.h>
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
-#include "TestMode.h"
-#include "EventSystem.h"
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -17,14 +15,17 @@ NimbusApplication NimbusApplication::app = NimbusApplication();
 NimbusApplication::NimbusApplication(void):
 	mRoot(0)
 {
+	this->mEventSystem = new EventSystem();
+
 	// Register the shutdown event listener
-	EventSystem::getSingleton().registerListener(new ShutdownListener(), EventSystem::EventType::SHUTDOWN);
+	EventSystem::getSingleton()->registerListener(new ShutdownListener(), EventSystem::EventType::SHUTDOWN);
 }
 
 NimbusApplication::~NimbusApplication(void)
 {
 	delete mCurrentRunMode;
 	delete mInputManager;
+	delete mEventSystem;
 	delete mRoot;
 }
 

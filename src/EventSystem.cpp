@@ -3,10 +3,13 @@
 using namespace std;
 using namespace Nimbus;
 
-EventSystem EventSystem::singleton = EventSystem();
+EventSystem* EventSystem::singleton = NULL;
 
 EventSystem::EventSystem(void)
 {
+	// Setup the singleton pointer.
+	EventSystem::singleton = this;
+
 	// Initialize the listener map.
 	mListeners = map<EventType, vector<EventListener*>>();
 }
