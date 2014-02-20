@@ -11,12 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EventSystem.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
     <ClCompile Include="src\TestMode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EventListener.h" />
+    <ClInclude Include="EventSystem.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Manager.h" />
     <ClInclude Include="src\NimbusApplication.h" />
