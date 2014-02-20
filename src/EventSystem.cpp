@@ -21,6 +21,6 @@ vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid EventSystem::u
 {
 }
 
-voooooooooooooooooooooooooooooooooooooooid EventSystem::fireEvent(EventType type, map<std::string, void*> payload)
+voooooooooooooooooooooooooooooooooooooooid EventSystem::fireEvent(EventType type, const payloadmap& payload = payloadmap())
 {
 }

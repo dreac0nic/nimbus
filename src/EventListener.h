@@ -6,6 +6,9 @@
 
 namespace Nimbus 
 {
+	// 
+	typedef std::map<std::string, void*> payloadmap;
+
 	/* EventListener is a pure virtual class outlining a class that handles specific events.
 	 
 	 The idea behind EventListener being pure virtual means that any object can create
@@ -22,7 +25,7 @@ namespace Nimbus
 
 		 @param payload A C++ STL map using a string key and a void* for data storage.
 		 */
-		virtual void handleEvent(std::map<std::string, void*> payload) = 0;
+		virtual void handleEvent(payloadmap payload) = 0;
 	};
 }
 
