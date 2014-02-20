@@ -6,6 +6,8 @@
 #include <OgreViewport.h>
 #include <OgreSceneManager.h>
 
+using namespace Nimbus;
+
 TestMode::TestMode(RenderWindow* window):
 	mWindow(window)
 {

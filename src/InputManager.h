@@ -8,70 +8,73 @@
 #include <OISMouse.h>
 #include <OgreWindowEventUtilities.h>
 
-/** Manager to bind input to events in the game.
-
-Events should be passed through the event callback system so that in game
-activities are not associated directly to keys, but rather to generic event
-calls created by key presses.
-
-The input manager uses buffered input because buffered input is better than
-polled input. This of course is not true, but for some reason, callbacks seem
-cleaner. So we'll use them if possible. If polling is necessary, we have an
-update function. At the moment, this only does generic input checks, and this
-is probably for the best.
-
-Currently, the input manager is a single monolithic class for handling game
-input. As a design decision, input managers could be made specific to each
-RunMode. That way input in a menu would be handled differently than in the
-game.
-
-The other possibility is to simply send off events regardless of the mode.
-Since no listeners would be registered, the only adverse effect would be
-a few (< 5?) extra function calls per input action caught.
-*/
-class InputManager :
-	public Manager,
-	public Ogre::WindowEventListener,	// Subscribe to window size changes	
-	public OIS::KeyListener,			// It should be fairly obvious why
-	public OIS::MouseListener			// this class inherits these
+namespace Nimbus
 {
-private:
-	// Member variables
+	/** Manager to bind input to events in the game.
 
-	// An injected copy of the render window (we still need to look at how this works)
-	Ogre::RenderWindow* mWindow;
+	Events should be passed through the event callback system so that in game
+	activities are not associated directly to keys, but rather to generic event
+	calls created by key presses.
 
-	OIS::InputManager* mInputManager;
-	OIS::Mouse* mMouse;
-	OIS::Keyboard* mKeyboard;
+	The input manager uses buffered input because buffered input is better than
+	polled input. This of course is not true, but for some reason, callbacks seem
+	cleaner. So we'll use them if possible. If polling is necessary, we have an
+	update function. At the moment, this only does generic input checks, and this
+	is probably for the best.
 
-protected:
-	// Ogre::WindowEventListener
-	virtual void windowResized(Ogre::RenderWindow* rw);
-	virtual void windowClosed(Ogre::RenderWindow* rw); 
+	Currently, the input manager is a single monolithic class for handling game
+	input. As a design decision, input managers could be made specific to each
+	RunMode. That way input in a menu would be handled differently than in the
+	game.
 
-	// OIS::KeyListener
-	virtual bool keyPressed(const OIS::KeyEvent& evt);
-	virtual bool keyReleased(const OIS::KeyEvent& evt);
-
-	// OIS::MouseListener
-	virtual bool mouseMoved(const OIS::MouseEvent& evt);
-	virtual bool mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id);
-	virtual bool mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id);
-
-public:
-	/** Constructs the input manager.
-	@param rw A pointer to the render window of the application. It's ugly, but
-	it's necessary right now so that OIS unregisters correctly.
-	(See windowClosed() )
+	The other possibility is to simply send off events regardless of the mode.
+	Since no listeners would be registered, the only adverse effect would be
+	a few (< 5?) extra function calls per input action caught.
 	*/
-	InputManager(Ogre::RenderWindow* rw);
+	class InputManager :
+		public Manager,
+		public Ogre::WindowEventListener,	// Subscribe to window size changes	
+		public OIS::KeyListener,			// It should be fairly obvious why
+		public OIS::MouseListener			// this class inherits these
+	{
+	private:
+		// Member variables
 
-	virtual ~InputManager(void);
+		// An injected copy of the render window (we still need to look at how this works)
+		Ogre::RenderWindow* mWindow;
 
-	// Manager
-	// Run once per frame to update input listeners.
-	virtual bool update(void);
-};
+		OIS::InputManager* mInputManager;
+		OIS::Mouse* mMouse;
+		OIS::Keyboard* mKeyboard;
+
+	protected:
+		// Ogre::WindowEventListener
+		virtual void windowResized(Ogre::RenderWindow* rw);
+		virtual void windowClosed(Ogre::RenderWindow* rw); 
+
+		// OIS::KeyListener
+		virtual bool keyPressed(const OIS::KeyEvent& evt);
+		virtual bool keyReleased(const OIS::KeyEvent& evt);
+
+		// OIS::MouseListener
+		virtual bool mouseMoved(const OIS::MouseEvent& evt);
+		virtual bool mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id);
+		virtual bool mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id);
+
+	public:
+		/** Constructs the input manager.
+		@param rw A pointer to the render window of the application. It's ugly, but
+		it's necessary right now so that OIS unregisters correctly.
+		(See windowClosed() )
+		*/
+		InputManager(Ogre::RenderWindow* rw);
+
+		virtual ~InputManager(void);
+
+		// Manager
+		// Run once per frame to update input listeners.
+		virtual bool update(void);
+	};
+}
 
 #endif

@@ -8,6 +8,8 @@
 #include <OgreSceneManager.h>
 #include "TestMode.h"
 
+using namespace Nimbus;
+
 NimbusApplication NimbusApplication::app = NimbusApplication();
 
 NimbusApplication::NimbusApplication(void):

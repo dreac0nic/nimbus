@@ -3,6 +3,8 @@
 #include <OgreLogManager.h>
 #include "NimbusApplication.h"
 
+using namespace Nimbus;
+
 InputManager::InputManager(Ogre::RenderWindow* rw):
 	mWindow(rw)
 {
