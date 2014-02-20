@@ -36,7 +36,7 @@ namespace Nimbus
 		InputManager* mInputManager;
 
 		// The current RunMode of the application
-		RunMode* runMode;
+		RunMode* mCurrentRunMode;
 
 		// Member Functions
 
@@ -71,7 +71,7 @@ namespace Nimbus
 		/** A hack function designed to emulate an exit event.
 		Kills the application. Replace with appropriate event system equivalent.
 		*/
-		static void exitEvent(void) { app.runMode = 0; }
+		static void exitEvent(void) { app.mCurrentRunMode = 0; }
 	};
 }
 
