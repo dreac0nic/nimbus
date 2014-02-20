@@ -20,7 +20,7 @@ NimbusApplication::NimbusApplication(void):
 
 NimbusApplication::~NimbusApplication(void)
 {
-	delete runMode;
+	delete mCurrentRunMode;
 	delete mInputManager;
 	delete mRoot;
 }
@@ -39,7 +39,7 @@ void NimbusApplication::begin(void)
 		app.mInputManager = new InputManager(app.mWindow);
 
 		// Create the initial run mode
-		app.runMode = new TestMode(app.mWindow);
+		app.mCurrentRunMode = new TestMode(app.mWindow);
 
 		// Start the rendering process
 		app.mRoot->addFrameListener(&app);
@@ -66,14 +66,14 @@ bool NimbusApplication::frameRenderingQueued(const FrameEvent& evt)
 	}
 
 	// Check that the we should continue running
-	if(runMode == 0)
+	if(mCurrentRunMode == 0)
 	{
 		LogManager::getSingletonPtr()->logMessage("(Nimbus) Received 0 RunMode... Terminating");
 		return false;
 	}
 
 	// Run the current RunMode
-	runMode = runMode->run(evt);
+	mCurrentRunMode = mCurrentRunMode->run(evt);
 
 	return true;
 }
@@ -148,4 +148,10 @@ bool NimbusApplication::loadConfiguration(void)
 	// I'm currently out of ideas on this one.
 
 	return true;
+}
+
+void NimbusApplication::ShutdownListener::handleEvent(std::map<std::string, void*> payload)
+{
+	// Set the current run mode to 0
+	NimbusApplication::app.mCurrentRunMode = 0;
 }

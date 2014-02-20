@@ -3,6 +3,7 @@
 
 #include "RunMode.h"
 #include "InputManager.h"
+#include "EventListener.h"
 #include <OgreRoot.h>
 #include <OgreFrameListener.h>
 
@@ -36,7 +37,7 @@ namespace Nimbus
 		InputManager* mInputManager;
 
 		// The current RunMode of the application
-		RunMode* runMode;
+		RunMode* mCurrentRunMode;
 
 		// Member Functions
 
@@ -58,6 +59,18 @@ namespace Nimbus
 		// Ogre::FrameListener
 		virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
+		// Event Listeners
+
+		/** Listens for the shutdown event
+		*/
+		class ShutdownListener : 
+			public EventListener
+		{
+		public:
+			// From Nimbus::EventListener
+			virtual void handleEvent(std::map<std::string, void*> payload);
+		};
+
 	public:
 		virtual ~NimbusApplication(void);
 
@@ -71,7 +84,7 @@ namespace Nimbus
 		/** A hack function designed to emulate an exit event.
 		Kills the application. Replace with appropriate event system equivalent.
 		*/
-		static void exitEvent(void) { app.runMode = 0; }
+		static void exitEvent(void) { app.mCurrentRunMode = 0; }
 	};
 }
 
