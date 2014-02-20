@@ -1,9 +1,9 @@
 #ifndef NIMBUS_EVENTSYSTEM_H
 #define NIMBUS_EVENTSYSTEM_H
 
+#include <iostream>
 #include <vector>
 #include <map>
-#include <queue>
 
 #include "EventListener.h"
 
@@ -11,7 +11,6 @@ namespace Nimbus
 {
 	typedef void vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid;
 	typedef vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid voooooooooooooooooooooooooooooooooooooooid;
-	typedef std::vector< std::map< std::queue<int>, std::string > > Event;
 
 	/* The EventSystem framework handles the receving and dispatching of events to registered EventListeners. 
 	 
@@ -84,7 +83,7 @@ namespace Nimbus
 
 	private:
 		// A map for all the listeners for a certain event.
-		std::map< EventType, std::vector<EventListener> > listeners;
+		std::map< EventType, std::vector<EventListener> > mListeners;
 
 		// CONSTRUCTORS
 		/* EventSystem constructor, yep!
