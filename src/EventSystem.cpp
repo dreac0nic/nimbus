@@ -39,7 +39,7 @@ vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid EventSystem::u
 	mListeners[type].erase(item);
 }
 
-voooooooooooooooooooooooooooooooooooooooid EventSystem::fireEvent(EventType type, const payloadmap& payload = payloadmap())
+voooooooooooooooooooooooooooooooooooooooid EventSystem::fireEvent(EventType type, const payloadmap& payload)
 {
 	for(vector<EventListener*>::iterator i = mListeners[type].begin(); i != mListeners[type].end(); ++i) {
 		(*i)->handleEvent(payload); // OH MY GOODNESS TEH SCIENCE
