@@ -67,7 +67,7 @@ bool InputManager::keyPressed(const OIS::KeyEvent& evt)
 	if(evt.key == OIS::KC_ESCAPE)
 	{
 		//NimbusApplication::exitEvent();
-		EventSystem::getSingleton().fireEvent(NULL, EventSystem::EventType::SHUTDOWN);
+		EventSystem::getSingleton().fireEvent(EventSystem::EventType::SHUTDOWN);
 	}
 
 	return true;
