@@ -61,7 +61,7 @@ namespace Nimbus
 			This is a brief description of what the event is, when it is fired, and what generally happens during this even.
 
 			Payload:
-				"KeyName" => KeyType
+				"KeyName" => KeyType // Possibly a comment, if relevant
 
 		 SHUTDOWN:
 			The shutdown event is fired when a system asks the program to exit. The event will be handled by the main application 

@@ -18,7 +18,7 @@ NimbusApplication::NimbusApplication(void):
 	mRoot(0)
 {
 	// Register the shutdown event listener
-	EventSystem::getSingleton().registerListener(&(ShutdownListener()), EventSystem::EventType::SHUTDOWN);
+	EventSystem::getSingleton().registerListener(ShutdownListener(), EventSystem::EventType::SHUTDOWN);
 }
 
 NimbusApplication::~NimbusApplication(void)
@@ -154,8 +154,11 @@ bool NimbusApplication::loadConfiguration(void)
 	return true;
 }
 
-void NimbusApplication::ShutdownListener::handleEvent(std::map<std::string, void*> payload)
+void NimbusApplication::ShutdownListener::handleEvent(payloadmap payload)
 {
+	std::cerr << "Received shutdown event.\n";
+	Ogre::LogManager::getSingleton().logMessage("(Nimbus) Received shutdown event.\n");
+
 	// Set the current run mode to 0
 	NimbusApplication::app.mCurrentRunMode = 0;
 }

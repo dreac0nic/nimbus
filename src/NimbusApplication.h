@@ -68,7 +68,7 @@ namespace Nimbus
 		{
 		public:
 			// From Nimbus::EventListener
-			virtual void handleEvent(std::map<std::string, void*> payload);
+			virtual void handleEvent(payloadmap payload);
 		};
 
 	public:
@@ -84,7 +84,7 @@ namespace Nimbus
 		/** A hack function designed to emulate an exit event.
 		Kills the application. Replace with appropriate event system equivalent.
 		*/
-		static void exitEvent(void) { app.mCurrentRunMode = 0; }
+		//static void exitEvent(void) { app.mCurrentRunMode = 0; }
 	};
 }
 
