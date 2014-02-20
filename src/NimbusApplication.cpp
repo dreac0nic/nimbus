@@ -18,7 +18,7 @@ NimbusApplication::NimbusApplication(void):
 	mRoot(0)
 {
 	// Register the shutdown event listener
-	EventSystem::getSingleton().registerListener(ShutdownListener(), EventSystem::EventType::SHUTDOWN);
+	EventSystem::getSingleton().registerListener(new ShutdownListener(), EventSystem::EventType::SHUTDOWN);
 }
 
 NimbusApplication::~NimbusApplication(void)
