@@ -3,9 +3,6 @@
 
 #include "RunMode.h"
 
-// This might be a very bad idea, we'll have to see how widely this spreads
-using namespace Ogre;
-
 class TestMode :
 	public RunMode
 {
@@ -13,11 +10,11 @@ private:
 	// Member variables
 
 	// Hacky injection... figure this out asap
-	RenderWindow* mWindow;
+	Ogre::RenderWindow* mWindow;
 
-	SceneManager* mSceneMgr;
-	Camera* mCamera;
-	Viewport* mViewport;
+	Ogre::SceneManager* mSceneMgr;
+	Ogre::Camera* mCamera;
+	Ogre::Viewport* mViewport;
 
 protected:
 	// RunMode
@@ -29,12 +26,12 @@ public:
 	so that the RunMode can create it's own viewport... which should be a per RunMode
 	activity.
 	*/
-	TestMode(RenderWindow* window);
+	TestMode(Ogre::RenderWindow* window);
 	virtual ~TestMode(void);
 
 	/** Runs the test mode.
 	*/
-	virtual RunMode* run(const FrameEvent& evt);
+	virtual RunMode* run(const Ogre::FrameEvent& evt);
 };
 
 #endif
