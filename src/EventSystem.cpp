@@ -22,6 +22,8 @@ EventSystem::~EventSystem(void)
 bool EventSystem::registerListener(EventListener* listener, EventType type)
 {
 	mListeners[type].push_back(listener);
+
+	return true;
 }
 
 vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid EventSystem::unregisterListener(EventListener* listener, EventType type)
