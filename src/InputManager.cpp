@@ -2,6 +2,7 @@
 #include <OgreRenderWindow.h>
 #include <OgreLogManager.h>
 #include "NimbusApplication.h"
+#include "EventSystem.h"
 
 using namespace Nimbus;
 
@@ -65,7 +66,8 @@ bool InputManager::keyPressed(const OIS::KeyEvent& evt)
 	// have a proper event system yet
 	if(evt.key == OIS::KC_ESCAPE)
 	{
-		NimbusApplication::exitEvent();
+		//NimbusApplication::exitEvent();
+		EventSystem::getSingleton().fireEvent(NULL, EventSystem::EventType::SHUTDOWN);
 	}
 
 	return true;

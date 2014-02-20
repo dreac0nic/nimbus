@@ -7,6 +7,7 @@
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
 #include "TestMode.h"
+#include "EventSystem.h"
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -16,6 +17,8 @@ NimbusApplication NimbusApplication::app = NimbusApplication();
 NimbusApplication::NimbusApplication(void):
 	mRoot(0)
 {
+	// Register the shutdown event listener
+	EventSystem::getSingleton().registerListener(&(ShutdownListener()), EventSystem::EventType::SHUTDOWN);
 }
 
 NimbusApplication::~NimbusApplication(void)
@@ -29,6 +32,7 @@ void NimbusApplication::begin(void)
 {
 	try
 	{
+		// Configure the application
 		if(!app.loadConfiguration())
 		{
 			std::cerr << "Failed to load configuration files" << std::endl;
