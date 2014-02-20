@@ -49,7 +49,7 @@ namespace Nimbus
 	{
 	private:
 		// The singleton pointer
-		static EventSystem* singleton;
+		static EventSystem singleton;
 
 		// OBJECT METHODS --
 		//  -- CONSTRUCTORS / DESTRUCTORS
@@ -83,13 +83,10 @@ namespace Nimbus
 				"ScreenPosition" => Ogre::Vector2
 		*/
 
-		/** Initializes the EventSystem.
+		/** Gets the singleton.
+		@return The singleton.
 		*/
-		static bool init();
-
-		/** Shuts down the EventSystem.
-		*/
-		static bool shutdown();
+		static EventSystem getSingleton() { return singleton; }
 
 		/* EventSystem destructor, it DESTROYS THINGS!
 		 */
