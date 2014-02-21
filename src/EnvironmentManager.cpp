@@ -12,4 +12,5 @@ EnvironmentManager::~EnvironmentManager(void)
 
 bool EnvironmentManager::update(void)
 {
+	return true;
 }

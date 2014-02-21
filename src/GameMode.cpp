@@ -13,4 +13,5 @@ GameMode::~GameMode(void)
 
 RunMode* GameMode::run(const FrameEvent& evt)
 {
+	return 0;
 }
