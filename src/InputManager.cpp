@@ -6,8 +6,7 @@
 
 using namespace Nimbus;
 
-InputManager::InputManager(Ogre::RenderWindow* rw):
-	mWindow(rw)
+InputManager::InputManager(void)
 {
 	//////////
 	// Initialize the OIS input system
@@ -16,8 +15,11 @@ InputManager::InputManager(Ogre::RenderWindow* rw):
 	size_t windowHandle = 0;
 	std::ostringstream windowHandleString;
 
+	// Get the Ogre::RenderWindow
+	Ogre::RenderWindow* window = NimbusApplication::getRenderWindow();
+
 	// Get the window handle
-	mWindow->getCustomAttribute("WINDOW", &windowHandle);
+	window->getCustomAttribute("WINDOW", &windowHandle);
 	windowHandleString << windowHandle;
 	parameters.insert(std::make_pair(std::string("WINDOW"), windowHandleString.str()));
 
@@ -33,16 +35,16 @@ InputManager::InputManager(Ogre::RenderWindow* rw):
 	mMouse->setEventCallback(this);
 
 	// Set the initial window size for the mouse input object
-	windowResized(mWindow);
+	windowResized(window);
 
 	// Register as a Window listener for future resize and close events
-	Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
+	Ogre::WindowEventUtilities::addWindowEventListener(window, this);
 }
 
 InputManager::~InputManager(void)
 {
-	Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
-	windowClosed(mWindow);
+	Ogre::WindowEventUtilities::removeWindowEventListener(NimbusApplication::getRenderWindow(), this);
+	windowClosed(NimbusApplication::getRenderWindow());
 }
 
 bool InputManager::update(void)
@@ -129,7 +131,7 @@ void InputManager::windowResized(Ogre::RenderWindow* rw)
 void InputManager::windowClosed(Ogre::RenderWindow* rw)
 {
 	// If the relevant window is closing
-	if(rw = mWindow)
+	if(rw = NimbusApplication::getRenderWindow())
 	{
 		// And the input manager has been created
 		if(mInputManager)

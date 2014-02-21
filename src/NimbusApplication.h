@@ -4,7 +4,6 @@
 #include "RunMode.h"
 #include "InputManager.h"
 #include "EventListener.h"
-#include "TestMode.h"
 #include "EventSystem.h"
 #include <OgreRoot.h>
 #include <OgreFrameListener.h>
@@ -36,6 +35,12 @@ namespace Nimbus
 		triggers until internally terminated. (Specifically renderFrameQueued.)
 		*/
 		static void begin(void);
+
+		/** Gets the Ogre::RenderWindow for the current application.
+
+		@return A pointer to the Ogre::RenderWindow of NimbusApplication.
+		*/
+		static Ogre::RenderWindow* getRenderWindow(void);
 
 	private:
 		// Member Variables

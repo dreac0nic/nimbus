@@ -5,12 +5,12 @@
 #include <OgreCamera.h>
 #include <OgreViewport.h>
 #include <OgreSceneManager.h>
+#include "NimbusApplication.h"
 
 using namespace Nimbus;
 using namespace Ogre;
 
-TestMode::TestMode(RenderWindow* window):
-	mWindow(window)
+TestMode::TestMode(void)
 {
 }
 
@@ -55,7 +55,7 @@ bool TestMode::initialize()
 	mCamera->setNearClipDistance(5);
 
 	// Add a viewport for the camera
-	mViewport = mWindow->addViewport(mCamera);
+	mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
 
 	//////////
 	// Set up the appropriate models

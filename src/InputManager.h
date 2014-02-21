@@ -40,9 +40,6 @@ namespace Nimbus
 	private:
 		// Member variables
 
-		// An injected copy of the render window (we still need to look at how this works)
-		Ogre::RenderWindow* mWindow;
-
 		OIS::InputManager* mInputManager;
 		OIS::Mouse* mMouse;
 		OIS::Keyboard* mKeyboard;
@@ -63,11 +60,8 @@ namespace Nimbus
 
 	public:
 		/** Constructs the input manager.
-		@param rw A pointer to the render window of the application. It's ugly, but
-		it's necessary right now so that OIS unregisters correctly.
-		(See windowClosed() )
 		*/
-		InputManager(Ogre::RenderWindow* rw);
+		InputManager(void);
 
 		virtual ~InputManager(void);
 

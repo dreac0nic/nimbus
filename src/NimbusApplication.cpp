@@ -1,4 +1,5 @@
 #include "NimbusApplication.h"
+#include "TestMode.h"
 #include <OgreConfigFile.h>
 #include <OgreRenderWindow.h>
 #include <OgreCamera.h>
@@ -43,10 +44,10 @@ void NimbusApplication::begin(void)
 		}
 
 		// Create the input manager
-		app->mInputManager = new InputManager(app->mWindow);
+		app->mInputManager = new InputManager();
 
 		// Create the initial run mode
-		app->mCurrentRunMode = new TestMode(app->mWindow);
+		app->mCurrentRunMode = new TestMode();
 
 		// Start the rendering process
 		app->mRoot->addFrameListener(app);
@@ -57,6 +58,11 @@ void NimbusApplication::begin(void)
 		std::cerr << "Ogre encountered an error" << std::endl;
 		std::cerr << e.getFullDescription() << std::endl;
 	}
+}
+
+RenderWindow* NimbusApplication::getRenderWindow(void)
+{
+	return app->mWindow;
 }
 
 bool NimbusApplication::frameRenderingQueued(const FrameEvent& evt)
