@@ -16,17 +16,17 @@ namespace Nimbus
 		Ogre::Viewport* mViewport;
 
 	protected:
-		// RunMode
+		// From Nimbus::RunMode
 		virtual bool initialize();
 
 	public:
 		/** Creates a TestMode type run mode.
-		*/
+		 */
 		TestMode(void);
 		virtual ~TestMode(void);
 
 		/** Runs the test mode.
-		*/
+		 */
 		virtual RunMode* run(const Ogre::FrameEvent& evt);
 	};
 }

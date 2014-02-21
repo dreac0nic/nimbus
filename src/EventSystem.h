@@ -79,10 +79,12 @@ namespace Nimbus
 		*/
 
 		/** Gets the singleton.
-		@return The singleton.
 
-		NOTE: CAN return a null value if the EventSystem has not been initialized!!
-		*/
+		 @return
+		 The singleton.
+
+		 NOTE: CAN return a null value if the EventSystem has not been initialized!!
+		 */
 		static EventSystem* getSingleton() { return singleton; }
 
 	private:
@@ -102,26 +104,32 @@ namespace Nimbus
 		// -- GENERAL METHODS
 		/* Used to register an EventListener to the system for a certain type of Event.
 		 
-		 @param listener A reference to an isntance of the listener for the Event type.
-		 @param type The type of Event the listener would like to listen for.
+		 @param
+		 listener A reference to an isntance of the listener for the Event type.
+		 @param
+		 type The type of Event the listener would like to listen for.
 
-		 @return True for a successful registration, false if the listener could not be registered.
+		 @return
+		 True for a successful registration, false if the listener could not be registered.
 		 */
 		bool registerListener(EventListener* listener, EventType type);
 
 		/* Used to deregister a previously registered EventListener.
 		 
-		  @param listener A reference to the EventListener to deregister.
-		  @param type The type of Event the listener is registered to.
+		  @param
+		  listener A reference to the EventListener to deregister.
+		  @param
+		  type The type of Event the listener is registered to.
 
 		  */
 		vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid unregisterListener(EventListener* listener, EventType type);
 
 		/* Fires an Event to the EventSystem to distribute to the appropriate listeners.
 		 
-		 @param event A reference to the Event to fire.
-		 @param type The type of Event to fire.
-
+		 @param
+		 event A reference to the Event to fire.
+		 @param
+		 type The type of Event to fire.
 		 */
 		voooooooooooooooooooooooooooooooooooooooid fireEvent(EventType type, const payloadmap& payload = payloadmap());
 	};

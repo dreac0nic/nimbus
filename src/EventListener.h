@@ -6,7 +6,7 @@
 
 namespace Nimbus 
 {
-	// 
+	// Typedef defining the payload type of an event
 	typedef std::map<std::string, void*> payloadmap;
 
 	/* EventListener is a pure virtual class outlining a class that handles specific events.
@@ -23,7 +23,8 @@ namespace Nimbus
 		 This function should be overridden and implemented in order to handle the specific
 		 event this handler is destined to handle.
 
-		 @param payload A C++ STL map using a string key and a void* for data storage.
+		 @param
+		 payload A C++ STL map using a string key and a void* for data storage.
 		 */
 		virtual void handleEvent(payloadmap payload) = 0;
 	};

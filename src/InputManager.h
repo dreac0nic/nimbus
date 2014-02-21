@@ -45,15 +45,15 @@ namespace Nimbus
 		OIS::Keyboard* mKeyboard;
 
 	protected:
-		// Ogre::WindowEventListener
+		// From Ogre::WindowEventListener
 		virtual void windowResized(Ogre::RenderWindow* rw);
 		virtual void windowClosed(Ogre::RenderWindow* rw); 
 
-		// OIS::KeyListener
+		// From OIS::KeyListener
 		virtual bool keyPressed(const OIS::KeyEvent& evt);
 		virtual bool keyReleased(const OIS::KeyEvent& evt);
 
-		// OIS::MouseListener
+		// From OIS::MouseListener
 		virtual bool mouseMoved(const OIS::MouseEvent& evt);
 		virtual bool mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id);
 		virtual bool mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id);
@@ -65,7 +65,7 @@ namespace Nimbus
 
 		virtual ~InputManager(void);
 
-		// Manager
+		// From Nimbus::Manager
 		// Run once per frame to update input listeners.
 		virtual bool update(void);
 	};
