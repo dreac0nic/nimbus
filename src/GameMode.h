@@ -2,6 +2,9 @@
 #define NIMBUS_GAMEMODE_H
 
 #include "RunMode.h"
+#include "EnvironmentManager.h"
+#include "EntityManager.h"
+#include "World.h"
 
 namespace Nimbus
 {
@@ -14,6 +17,18 @@ namespace Nimbus
 	class GameMode :
 		public RunMode
 	{
+	private:
+		// Member variables
+
+		// The Environment Manager
+		EnvironmentManager* mEnvironmentMan;
+
+		// The Entity Manager
+		EntityManager* mEntityMan;
+
+		// The game World
+		World* gameWorld;
+
 	public:
 		GameMode(void);
 		virtual ~GameMode(void);
