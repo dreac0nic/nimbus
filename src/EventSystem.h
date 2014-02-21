@@ -46,9 +46,11 @@ namespace Nimbus
 	 */
 	class EventSystem
 	{
-	public:
+	private:
 		// The singleton pointer
 		static EventSystem* singleton;
+
+	public:
 
 		// CLASS MEMBERS --
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.

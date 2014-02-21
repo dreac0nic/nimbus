@@ -160,7 +160,7 @@ bool NimbusApplication::loadConfiguration(void)
 void NimbusApplication::ShutdownListener::handleEvent(payloadmap payload)
 {
 	std::cerr << "Received shutdown event.\n";
-	Ogre::LogManager::getSingleton().logMessage("(Nimbus) Received shutdown event.\n");
+	Ogre::LogManager::getSingleton().logMessage("(Nimbus) Received shutdown event.");
 
 	// Set the current run mode to 0
 	NimbusApplication::app->mCurrentRunMode = 0;

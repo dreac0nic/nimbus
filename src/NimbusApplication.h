@@ -24,11 +24,12 @@ namespace Nimbus
 	*/
 	class NimbusApplication : public Ogre::FrameListener
 	{
-	public:
+	private:
 		// Class/Static Members
 		// The singleton variable (this application overuses the Singleton design)
 		static NimbusApplication* app;
 
+	public:
 		/** Starts the application running.
 	
 		The application will continue running according to Ogre::FrameListener
