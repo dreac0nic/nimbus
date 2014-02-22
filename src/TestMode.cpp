@@ -50,8 +50,8 @@ bool TestMode::initialize()
 	// Set up the camera
 
 	// Position the camera
-	mCamera->setPosition(Vector3(0,50,80));
-	mCamera->lookAt(Vector3(0,0,-100));
+	mCamera->setPosition(Vector3(0, 50, 80));
+	mCamera->lookAt(Vector3(0, 0, -100));
 	mCamera->setNearClipDistance(5);
 
 	// Add a viewport for the camera
@@ -69,7 +69,7 @@ bool TestMode::initialize()
 	dragonNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	dragonNode->attachObject(dragon);
 
-	dragonNode->setPosition(0,0,-100);
+	dragonNode->setPosition(0, 0, -100);
 	dragonNode->setScale(40.0, 40.0, 40.0);
 	dragonNode->pitch(Degree(90));
 
@@ -77,7 +77,7 @@ bool TestMode::initialize()
 	// Set up light sources
 
 	// Set the ambient light
-	mSceneMgr->setAmbientLight(ColourValue(0.5,0.5,0.5));
+	mSceneMgr->setAmbientLight(ColourValue(0.5, 0.5, 0.5));
 
 	// Create a point light for main light
 	light = mSceneMgr->createLight("MainLight");

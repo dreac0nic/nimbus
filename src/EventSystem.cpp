@@ -29,7 +29,7 @@ bool EventSystem::registerListener(EventListener* listener, EventType type)
 	return true;
 }
 
-vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid EventSystem::unregisterListener(EventListener* listener, EventType type)
+void EventSystem::unregisterListener(EventListener* listener, EventType type)
 {
 	vector<EventListener*>::iterator item;
 
@@ -42,7 +42,7 @@ vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid EventSystem::u
 	mListeners[type].erase(item);
 }
 
-voooooooooooooooooooooooooooooooooooooooid EventSystem::fireEvent(EventType type, const payloadmap& payload)
+void EventSystem::fireEvent(EventType type, const payloadmap& payload)
 {
 	for(vector<EventListener*>::iterator i = mListeners[type].begin(); i != mListeners[type].end(); ++i) {
 		(*i)->handleEvent(payload); // OH MY GOODNESS TEH SCIENCE
