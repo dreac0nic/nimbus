@@ -23,7 +23,9 @@ namespace Nimbus
 		~GameEntity(void);
 
 		// OBJECT METHODS --
+		bool add(Behaviour behaviour);
 		void update(void);
+		void remove(Behaviour behaviour);
 
 		// ACCESSOR METHODS --
 		/* Return a reference to the behaviours used by this entity. */
