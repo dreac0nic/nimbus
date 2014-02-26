@@ -24,15 +24,13 @@
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Behavior.h" />
+    <ClInclude Include="src\Behaviour.h" />
     <ClInclude Include="src\EventListener.h" />
     <ClInclude Include="src\EventSystem.h" />
     <ClInclude Include="src\GameEntity.h" />
     <ClInclude Include="src\GameEntitySet.h" />
     <ClInclude Include="src\EntityManager.h" />
     <ClInclude Include="src\EnvironmentManager.h" />
-    <ClInclude Include="src\EventListener.h" />
-    <ClInclude Include="src\EventSystem.h" />
     <ClInclude Include="src\GameMode.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Manager.h" />
