@@ -7,6 +7,7 @@
 
 namespace Nimbus
 {
+	typedef int GameEntityType;
 	typedef std::map<std::string, Behaviour> behaviourmap;
 
 	class GameEntity
