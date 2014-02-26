@@ -3,7 +3,7 @@
 
 namespace Nimbus
 {
-	class Behavior
+	class Behaviour
 	{
 		
 	};
