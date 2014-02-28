@@ -25,9 +25,6 @@ namespace Nimbus
 		EntityManager(void);
 		virtual ~EntityManager(void);
 
-		// Object Methods --
-		void addEntity(std::string entityType);
-
 		// From Nimbus::Manager
 		virtual bool update(void);
 	};
