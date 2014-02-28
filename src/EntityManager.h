@@ -1,6 +1,8 @@
 #ifndef NIMBUS_ENTITYMANAGER_H
 #define NIMBUS_ENTITYMANAGER_H
 
+#include <string>
+
 #include "manager.h"
 
 namespace Nimbus
@@ -22,6 +24,9 @@ namespace Nimbus
 	public:
 		EntityManager(void);
 		virtual ~EntityManager(void);
+
+		// Object Methods --
+		void addEntity(std::string entityType);
 
 		// From Nimbus::Manager
 		virtual bool update(void);
