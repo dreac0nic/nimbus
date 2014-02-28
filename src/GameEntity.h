@@ -30,7 +30,7 @@ namespace Nimbus
 
 		// ACCESSOR METHODS --
 		/* Return a reference to the behaviours used by this entity. */
-		behaviourmap* getBehaviours(void) { return &(this->behaviourmap); }
+		behaviourmap* getBehaviours(void) { return &(this->behaviours); }
 	};
 }
 
