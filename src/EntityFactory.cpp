@@ -13,7 +13,7 @@ EntityFactory::EntityFactory(std::string entityDefinitionFile)
 
 	// The current entity
 	GameEntity* currentEntity = NULL;
-	string currentEntityTypeName;
+	GameEntityType currentEntityType;
 
 	// The type of the current settings section
 	string sectionType;
@@ -38,13 +38,13 @@ EntityFactory::EntityFactory(std::string entityDefinitionFile)
 		{
 			if(currentEntity != NULL)
 			{
-				this->mEntityInstances[currentEntityTypeName] = currentEntity;
+				this->mEntityInstances[currentEntityType] = currentEntity;
 
 				currentEntity = NULL;
 			}
 
 			currentEntity = new GameEntity(settings);
-			currentEntityTypeName = currentEntity->getEntityType();
+			currentEntityType = currentEntity->getEntityType();
 		}
 		// If defining a behaviour for the current entity type
 		else if(sectionType == "Behavior")

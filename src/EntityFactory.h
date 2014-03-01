@@ -17,7 +17,7 @@ namespace Nimbus
 		 definition file to the list of behaviours specified in definition
 		 file.
 		*/
-		std::map< std::string, GameEntity* > mEntityInstances;
+		std::map< GameEntityType, GameEntity* > mEntityInstances;
 
 		/* Simple map that maps the behaviour type name defined by
 		 programmers... Attempts to kind of offset hard-coding...

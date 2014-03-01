@@ -45,7 +45,7 @@ namespace Nimbus
 		behaviourmap* getBehaviours(void) { return &(this->behaviours); }
 
 		/* Return the entity type name. */
-		std::string getEntityType() { return this->mEntityType; }
+		GameEntityType getEntityType() { return this->mEntityType; }
 	};
 }
 
