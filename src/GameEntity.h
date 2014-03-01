@@ -8,7 +8,7 @@
 namespace Nimbus
 {
 	typedef int GameEntityType;
-	typedef std::map<std::string, Behaviour> behaviourmap;
+	typedef std::map<std::string, Behaviour*> behaviourmap;
 
 	class GameEntity
 	{
@@ -24,9 +24,9 @@ namespace Nimbus
 		~GameEntity(void);
 
 		// OBJECT METHODS --
-		bool add(Behaviour behaviour);
+		bool add(Behaviour* behaviour);
 		void update(void);
-		void remove(Behaviour behaviour);
+		void remove(Behaviour* behaviour);
 
 		// ACCESSOR METHODS --
 		/* Return a reference to the behaviours used by this entity. */

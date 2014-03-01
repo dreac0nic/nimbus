@@ -17,7 +17,7 @@ namespace Nimbus
 		 definition file to the list of behaviours specified in definition
 		 file.
 		*/
-		std::map< std::string, std::vector<BehaviourType> > entityTypes;
+		std::map< std::string, GameEntity* > entityInstances;
 
 	public:
 		EntityFactory(std::string entityDefinitionFile);
