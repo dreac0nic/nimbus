@@ -13,9 +13,9 @@ namespace Nimbus
 		Behaviour(void);
 		~Behaviour(void);
 
-		void startup(void);
-		void update(void);
-		void shutdown(void);
+		virtual void startup(void);
+		virtual void update(void);
+		virtual void shutdown(void);
 	};
 }
 
