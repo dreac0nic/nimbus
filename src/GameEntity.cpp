@@ -13,7 +13,7 @@ GameEntity::GameEntity(map<string, string> cowmap)
 	if(cowmap.find("age") != cowmap.end())
 	{
 		stringstream convert (cowmap["age"]);
-		convert >> this->mAge;
+		// convert >> this->mAge;
 	}
 }
 
