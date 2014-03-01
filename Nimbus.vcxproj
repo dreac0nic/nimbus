@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EntityFactory.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\EnvironmentManager.cpp" />
     <ClCompile Include="src\EventSystem.cpp" />
@@ -25,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Behaviour.h" />
+    <ClInclude Include="src\EntityFactory.h" />
     <ClInclude Include="src\EventListener.h" />
     <ClInclude Include="src\EventSystem.h" />
     <ClInclude Include="src\GameEntity.h" />
