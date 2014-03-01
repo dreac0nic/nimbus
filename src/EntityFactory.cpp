@@ -1,4 +1,5 @@
 #include "EntityFactory.h"
+#include "BlankBehaviour.h"
 #include <OgreConfigFile.h>
 
 using namespace Nimbus;
@@ -16,6 +17,9 @@ EntityFactory::EntityFactory(std::string entityDefinitionFile)
 
 	// The type of the current settings section
 	string sectionType;
+
+	// Load the behaviour prototype list
+	this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour();
 
 	// Load the entity type config file
 	// ../../assets/scripts/EntityTypes.ini
@@ -41,6 +45,15 @@ EntityFactory::EntityFactory(std::string entityDefinitionFile)
 
 			currentEntity = new GameEntity(settings);
 			currentEntityTypeName = currentEntity->getEntityType();
+		}
+		// If defining a behaviour for the current entity type
+		else if(sectionType == "Behavior")
+		{
+			if(currentEntity != NULL)
+			{
+				// ConfigFile::SettingsMultiMap::iterator settingIterator = settings->find("name");
+				currentEntity->add(this->mBehaviourInstances[(*(settings->find("name"))).second]->clone(settings));
+			}
 		}
 	}
 }

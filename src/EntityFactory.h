@@ -19,6 +19,14 @@ namespace Nimbus
 		*/
 		std::map< std::string, GameEntity* > mEntityInstances;
 
+		/* Simple map that maps the behaviour type name defined by
+		 programmers... Attempts to kind of offset hard-coding...
+		 but at some level, I don't really see a way around the hard coding.
+		 Maybe in some universe, there is a perfect factory system that
+		 doesn't require hard coding. Maybe it's written in LISP...
+		*/
+		std::map< std::string, Behaviour* > mBehaviourInstances;
+
 	public:
 		EntityFactory(std::string entityDefinitionFile);
 		~EntityFactory(void);

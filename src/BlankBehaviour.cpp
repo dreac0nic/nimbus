@@ -1,11 +1,19 @@
 #include "BlankBehaviour.h"
 
+using namespace Ogre;
 using namespace Nimbus;
 
 BlankBehaviour::BlankBehaviour(void):
 	Behaviour()
 {
 	// Empty constructor
+}
+
+BlankBehaviour::BlankBehaviour(ConfigFile::SettingsMultiMap* initializingSettings)
+{
+	// (Pretty munch) Empty settings constructor
+
+	this->mBehaviourType = (*(initializingSettings->find("name"))).second;
 }
 
 BlankBehaviour::~BlankBehaviour(void)
@@ -31,4 +39,11 @@ void BlankBehaviour::update(void)
 void BlankBehaviour::shutdown(void)
 {
 	// IT IS BLANK YOU DO NOT SHUTDOWN NOTHING
+}
+
+Behaviour* BlankBehaviour::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
+{
+	// IT IS (Pretty munch) BLANK YOU DO CLONE NOTHING
+
+	return new BlankBehaviour(initializingSettings);
 }
