@@ -1,6 +1,9 @@
 #ifndef NIMBUS_ENTITYFACTORY_H
 #define NIMBUS_ENTITYFACTORY_H
 
+#include <iostream>
+#include <fstream>
+
 #include <string>
 #include <vector>
 #include <map>
