@@ -27,6 +27,7 @@ GameEntity::~GameEntity(void)
 
 bool GameEntity::add(Behaviour* behaviour)
 {
+	return false;
 }
 
 void GameEntity::update(void)

@@ -26,11 +26,6 @@ void BlankBehaviour::startup(void)
 	// IT IS BLANK YOU DO NOT STARTUP NOTHING
 }
 
-void BlankBehaviour::startup(void)
-{
-	// IT IS BLANK YOU DO NOT STARTUP NOTHING
-}
-
 void BlankBehaviour::update(void)
 {
 	// IT IS BLANK YOU DO NOT UPDATE NOTHING
