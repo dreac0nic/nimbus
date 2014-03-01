@@ -28,6 +28,20 @@ EntityFactory::EntityFactory(std::string entityDefinitionFile)
 		sectionType = sectionIterator.peekNextKey();
 
 		ConfigFile::SettingsMultiMap* settings = sectionIterator.getNext();
+
+		// If defining a new entity type
+		if(sectionType == "Entity")
+		{
+			if(currentEntity != NULL)
+			{
+				this->mEntityInstances[currentEntityTypeName] = currentEntity;
+
+				currentEntity = NULL;
+			}
+
+			currentEntity = new GameEntity(settings);
+			currentEntityTypeName = currentEntity->getEntityType();
+		}
 	}
 }
 
