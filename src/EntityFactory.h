@@ -34,6 +34,8 @@ namespace Nimbus
 		// Object Methods --
 		/* CreateEntity() creates a given type of entity and returns a reference
 		 to the created entity.
+
+		 Note: You are responsible for garbage collecting this new entity.
 		*/
 		GameEntity* createEntity(std::string entityType);
 	};

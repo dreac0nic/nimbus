@@ -15,6 +15,8 @@ EntityFactory::EntityFactory(std::string entityDefinitionFile)
 	GameEntity* currentEntity = NULL;
 	GameEntityType currentEntityType;
 
+	Behaviour* tempBehaviour = NULL;
+
 	// The type of the current settings section
 	string sectionType;
 
@@ -52,15 +54,29 @@ EntityFactory::EntityFactory(std::string entityDefinitionFile)
 			if(currentEntity != NULL)
 			{
 				// ConfigFile::SettingsMultiMap::iterator settingIterator = settings->find("name");
-				currentEntity->add(this->mBehaviourInstances[(*(settings->find("name"))).second]->clone(settings));
+				tempBehaviour = this->mBehaviourInstances[(*(settings->find("name"))).second]->clone(settings);
+				currentEntity->add(tempBehaviour);
 			}
 		}
 	}
+
+	// Store the last entity type loaded
+	this->mEntityInstances[currentEntityType] = currentEntity;
 }
 
 EntityFactory::~EntityFactory(void)
 {
-	// EMPTY DESTRUCTOR
+	// Delete all prototype Entities
+	for(std::map<GameEntityType, GameEntity*>::iterator i = this->mEntityInstances.begin(); i != this->mEntityInstances.end(); ++i)
+	{
+		delete i->second;
+	}
+
+	// Delete all prototype Behaviours
+	for(std::map<std::string, Behaviour*>::iterator i = this->mBehaviourInstances.begin(); i != this->mBehaviourInstances.end(); ++i)
+	{
+		delete i->second;
+	}
 }
 
 GameEntity* EntityFactory::createEntity(std::string entityType)
