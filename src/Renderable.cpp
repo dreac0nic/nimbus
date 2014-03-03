@@ -1,22 +1,27 @@
 #include "Renderable.h"
 
+using namespace Ogre;
 using namespace Nimbus;
 
-Renderable::Renderable(World* world):
+Nimbus::Renderable::Renderable(World* world):
 	Behaviour(world)
 {
+	this->mWorld = world;
 }
 
-Renderable::Renderable(World* world, Ogre::ConfigFile::SettingsMultiMap* intializingSettings):
-	Behaviour(world, intializingSettings)
+Nimbus::Renderable::Renderable(World* world, ConfigFile::SettingsMultiMap* initializingSettings):
+	Behaviour(world, initializingSettings)
 {
+	this->mWorld = world;
+	this->mBehaviourType = (*(initializingSettings->find("name"))).second;
 }
 
-Renderable::~Renderable()
+Nimbus::Renderable::~Renderable()
 {
+	// Empty destructor
 }
 
-void Renderable::startup(void)
+void Nimbus::Renderable::startup(void)
 {
 	// STARTUP FOR RENDERABLE
 	/*
@@ -25,7 +30,7 @@ void Renderable::startup(void)
 	*/
 }
 
-void Renderable::update(void)
+void Nimbus::Renderable::update(void)
 {
 	// UPDATE FOR RENDERABLE
 	/*
@@ -33,10 +38,15 @@ void Renderable::update(void)
 	*/
 }
 
-void Renderable::shutdown(void)
+void Nimbus::Renderable::shutdown(void)
 {
 	// SHUTDOWN FOR RENDERABLE
 	/*
 		Deinitialize all the renderable stuff.
 	*/
+}
+
+Behaviour* Nimbus::Renderable::clone(ConfigFile::SettingsMultiMap* initializingSettings)
+{
+	return new Nimbus::Renderable(this->mWorld, initializingSettings);
 }

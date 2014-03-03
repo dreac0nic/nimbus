@@ -9,9 +9,9 @@ namespace Nimbus
 		public Behaviour
 	{
 	public:
-		BlankBehaviour(void);
-		BlankBehaviour(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
-		~BlankBehaviour(void);
+		BlankBehaviour(World* world);
+		BlankBehaviour(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+		virtual ~BlankBehaviour(void);
 
 		// From: Behaviour
 		virtual void startup(void);

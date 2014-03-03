@@ -27,8 +27,11 @@ namespace Nimbus
 		*/
 		std::map< std::string, Behaviour* > mBehaviourInstances;
 
+		/* The world that needs to be passed to behaviours. */
+		World* mWorld;
+
 	public:
-		EntityFactory(std::string entityDefinitionFile);
+		EntityFactory(World* world, std::string entityDefinitionFile);
 		~EntityFactory(void);
 
 		// Object Methods --

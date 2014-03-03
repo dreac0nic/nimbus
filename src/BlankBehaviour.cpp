@@ -3,16 +3,18 @@
 using namespace Ogre;
 using namespace Nimbus;
 
-BlankBehaviour::BlankBehaviour(void):
-	Behaviour()
+BlankBehaviour::BlankBehaviour(World* world):
+	Behaviour(world)
 {
-	// Empty constructor
+	this->mWorld = world;
 }
 
-BlankBehaviour::BlankBehaviour(ConfigFile::SettingsMultiMap* initializingSettings)
+BlankBehaviour::BlankBehaviour(World* world, ConfigFile::SettingsMultiMap* initializingSettings):
+	Behaviour(world, initializingSettings)
 {
 	// (Pretty munch) Empty settings constructor
 
+	this->mWorld = world;
 	this->mBehaviourType = (*(initializingSettings->find("name"))).second;
 }
 
@@ -36,9 +38,9 @@ void BlankBehaviour::shutdown(void)
 	// IT IS BLANK YOU DO NOT SHUTDOWN NOTHING
 }
 
-Behaviour* BlankBehaviour::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* BlankBehaviour::clone(ConfigFile::SettingsMultiMap* initializingSettings)
 {
 	// IT IS (Pretty munch) BLANK YOU DO CLONE NOTHING
 
-	return new BlankBehaviour(initializingSettings);
+	return new BlankBehaviour(this->mWorld, initializingSettings);
 }

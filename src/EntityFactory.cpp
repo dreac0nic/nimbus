@@ -6,7 +6,7 @@ using namespace Nimbus;
 using namespace Ogre;
 using namespace std;
 
-EntityFactory::EntityFactory(std::string entityDefinitionFile)
+EntityFactory::EntityFactory(World* world, std::string entityDefinitionFile)
 {
 	// LOAD ENTITY DEFINITIONS
 	ConfigFile entityConfig;
@@ -20,8 +20,11 @@ EntityFactory::EntityFactory(std::string entityDefinitionFile)
 	// The type of the current settings section
 	string sectionType;
 
+	// Storing the world for future use
+	this->mWorld = world;
+
 	// Load the behaviour prototype list
-	this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour();
+	this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour(world);
 
 	// Load the entity type config file
 	// ../../assets/scripts/EntityTypes.ini
@@ -49,11 +52,12 @@ EntityFactory::EntityFactory(std::string entityDefinitionFile)
 			currentEntityType = currentEntity->getEntityType();
 		}
 		// If defining a behaviour for the current entity type
-		else if(sectionType == "Behavior")
+		else if(sectionType == "Behaviour")
 		{
 			if(currentEntity != NULL)
 			{
 				// ConfigFile::SettingsMultiMap::iterator settingIterator = settings->find("name");
+				string temp = (*(settings->find("name"))).second;
 				tempBehaviour = this->mBehaviourInstances[(*(settings->find("name"))).second]->clone(settings);
 				currentEntity->add(tempBehaviour);
 			}

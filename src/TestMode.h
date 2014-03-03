@@ -2,6 +2,7 @@
 #define TESTMODE_H
 
 #include "RunMode.h"
+#include "EntityFactory.h"
 
 namespace Nimbus
 {

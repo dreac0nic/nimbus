@@ -14,11 +14,17 @@ GameEntity::GameEntity(ConfigFile::SettingsMultiMap* initializingSettings)
 	std::stringstream settingConverter;
 
 	currentSetting = initializingSettings->find("age");
-	settingConverter = std::stringstream((*currentSetting).second);
-	settingConverter >> this->mAge;
+	if (currentSetting != initializingSettings->end())
+	{
+		settingConverter = std::stringstream((*currentSetting).second);
+		settingConverter >> this->mAge;
+	}
 
 	currentSetting = initializingSettings->find("name");
-	this->mEntityType = (*currentSetting).second;
+	if (currentSetting != initializingSettings->end())
+	{
+		this->mEntityType = (*currentSetting).second;
+	}
 }
 
 GameEntity::~GameEntity(void)
