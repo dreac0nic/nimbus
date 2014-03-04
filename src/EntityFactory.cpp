@@ -6,42 +6,42 @@ using namespace Nimbus;
 using namespace Ogre;
 using namespace std;
 
-EntityFactory::EntityFactory(World* world, std::string entityDefinitionFile)
+EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 {
-	// LOAD ENTITY DEFINITIONS
-	ConfigFile entityConfig;
-
-	// The current entity
-	GameEntity* currentEntity = NULL;
-	GameEntityType currentEntityType;
-
-	Behaviour* tempBehaviour = NULL;
-
-	// The type of the current settings section
-	string sectionType;
-
 	// Storing the world for future use
 	this->mWorld = world;
 
+	// LOAD ENTITY DEFINITIONS
+	ConfigFile filePathsConfig;
+
+	// The type of the current settings section
+	string filePathsSectionType;
+
+	/* The current entity
+	GameEntity* currentEntity = NULL;
+	GameEntityType currentEntityType;
+
+	Behaviour* tempBehaviour = NULL;*/
+
 	// Load the behaviour prototype list
-	this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour(world);
+	//this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour(world);
 
 	// Load the entity type config file
-	// ../../assets/scripts/EntityTypes.ini
-	entityConfig.load(entityDefinitionFile);
+	// ../../assets/scripts/ConfigFiles.ini
+	filePathsConfig.load(filePathsFile);
 
 	// Iterate over each section of the config file
-	ConfigFile::SectionIterator sectionIterator = entityConfig.getSectionIterator();
-	while(sectionIterator.hasMoreElements())
+	ConfigFile::SectionIterator filePathsSectionIterator = filePathsConfig.getSectionIterator();
+	while(filePathsSectionIterator.hasMoreElements())
 	{
-		sectionType = sectionIterator.peekNextKey();
+		filePathsSectionType = filePathsSectionIterator.peekNextKey();
 
-		ConfigFile::SettingsMultiMap* settings = sectionIterator.getNext();
+		ConfigFile::SettingsMultiMap* filePathsSettings = filePathsSectionIterator.getNext();
 
 		// If defining a new entity type
-		if(sectionType == "Entity")
+		if(filePathsSectionType == "Entities")
 		{
-			if(currentEntity != NULL)
+			/*if(currentEntity != NULL)
 			{
 				this->mEntityInstances[currentEntityType] = currentEntity;
 
@@ -49,9 +49,24 @@ EntityFactory::EntityFactory(World* world, std::string entityDefinitionFile)
 			}
 
 			currentEntity = new GameEntity(settings);
-			currentEntityType = currentEntity->getEntityType();
+			currentEntityType = currentEntity->getEntityType();*/
+
+			ConfigFile::SettingsMultiMap::iterator entityPaths = filePathsSettings->begin();
+			string entityName = entityPaths->first;
+			string entityPath = entityPaths->second;
+
+			ConfigFile entityConfig;
+			string entitySectionType;
+			entityConfig.load(entityPath);
+			ConfigFile::SectionIterator entitySectionIterator = entityConfig.getSectionIterator();
+			while(entitySectionIterator.hasMoreElements())
+			{
+				entitySectionType = entitySectionIterator.peekNextKey();
+
+				ConfigFile::SettingsMultiMap* entitySettings = entitySectionIterator.getNext();
+			}
 		}
-		// If defining a behaviour for the current entity type
+		/* If defining a behaviour for the current entity type
 		else if(sectionType == "Behaviour")
 		{
 			if(currentEntity != NULL)
@@ -60,11 +75,11 @@ EntityFactory::EntityFactory(World* world, std::string entityDefinitionFile)
 				tempBehaviour = this->mBehaviourInstances[(*(settings->find("name"))).second]->clone(settings);
 				currentEntity->add(tempBehaviour);
 			}
-		}
+		}*/
 	}
 
 	// Store the last entity type loaded
-	this->mEntityInstances[currentEntityType] = currentEntity;
+	//this->mEntityInstances[currentEntityType] = currentEntity;
 }
 
 EntityFactory::~EntityFactory(void)
