@@ -2,6 +2,7 @@
 #define NIMBUS_BEHAVIOUR_H
 
 #include <string>
+#include <OgreConfigFile.h>
 
 namespace Nimbus
 {
@@ -9,13 +10,19 @@ namespace Nimbus
 	/* THE ULTIMATE STUBBINESS */
 	class Behaviour
 	{
-	public:
-		Behaviour(void);
-		~Behaviour(void);
+	protected:
+		/* Behaviour type */
+		BehaviourType mBehaviourType;
 
-		virtual void startup(void);
-		virtual void update(void);
-		virtual void shutdown(void);
+	public:
+		Behaviour(void) {}
+		~Behaviour(void) {}
+
+		virtual void startup(void) = 0;
+		virtual void update(void) = 0;
+		virtual void shutdown(void) = 0;
+
+		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings) = 0;
 	};
 }
 

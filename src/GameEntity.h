@@ -7,7 +7,7 @@
 
 namespace Nimbus
 {
-	typedef int GameEntityType;
+	typedef std::string GameEntityType;
 	typedef std::map<std::string, Behaviour*> behaviourmap;
 
 	class GameEntity
@@ -16,9 +16,21 @@ namespace Nimbus
 		/* Map of behaviours used by the entity. */
 		behaviourmap behaviours;
 
+		/* The type name of the game entity. */
+		GameEntityType mEntityType;
+
+		/* Test variable to prove that loading entities does indeed work. */
+		int mAge;
+
 	public:
 		/* Standard blank constructor. */
 		GameEntity(void);
+
+		/* Settings based constructor. */
+		GameEntity(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+
+		/* Prototype constructor. */
+		GameEntity(GameEntity* other);
 
 		/* Standard blank destructor. */
 		~GameEntity(void);
@@ -31,6 +43,9 @@ namespace Nimbus
 		// ACCESSOR METHODS --
 		/* Return a reference to the behaviours used by this entity. */
 		behaviourmap* getBehaviours(void) { return &(this->behaviours); }
+
+		/* Return the entity type name. */
+		GameEntityType getEntityType() { return this->mEntityType; }
 	};
 }
 
