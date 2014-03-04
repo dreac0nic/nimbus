@@ -19,7 +19,6 @@ namespace Nimbus
 	public:
 		/* Standard blank constructor. */
 		GameEntity(void);
-		GameEntity(map<std::string, std::string> map);
 
 		/* Standard blank destructor. */
 		~GameEntity(void);
