@@ -35,7 +35,7 @@ RunMode* GameMode::run(const FrameEvent& evt)
 
 bool GameMode::initialize()
 {
-	this->mEntityFactory = new EntityFactory(this->mWorld, "C:/Users/Terry/Downloads/Nimbus/nimbus/assets/scripts/EntityTypes.ini");
+	this->mEntityFactory = new EntityFactory(this->mWorld, "../../assets/scripts/ConfigFiles.ini");
 
 	// Note that the RunMode has been initialized
 	this->initialized = true;

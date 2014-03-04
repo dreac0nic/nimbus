@@ -57,7 +57,6 @@ EntityFactory::EntityFactory(World* world, std::string entityDefinitionFile)
 			if(currentEntity != NULL)
 			{
 				// ConfigFile::SettingsMultiMap::iterator settingIterator = settings->find("name");
-				string temp = (*(settings->find("name"))).second;
 				tempBehaviour = this->mBehaviourInstances[(*(settings->find("name"))).second]->clone(settings);
 				currentEntity->add(tempBehaviour);
 			}
