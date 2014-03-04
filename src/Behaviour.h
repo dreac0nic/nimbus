@@ -4,19 +4,26 @@
 #include <string>
 #include <OgreConfigFile.h>
 
+#include "World.h"
+
 namespace Nimbus
 {
 	typedef std::string BehaviourType;
+
 	/* THE ULTIMATE STUBBINESS */
 	class Behaviour
 	{
 	protected:
+		/* Handle to the world for Behavioural use. */
+		World* mWorld;
+
 		/* Behaviour type */
 		BehaviourType mBehaviourType;
 
 	public:
-		Behaviour(void) {}
-		~Behaviour(void) {}
+		Behaviour(World* world) { this->mWorld = world;}
+		Behaviour(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings) { this->mWorld = world; } // Fix with delegating constructor, later
+		virtual ~Behaviour(void) {}
 
 		virtual void startup(void) = 0;
 		virtual void update(void) = 0;
