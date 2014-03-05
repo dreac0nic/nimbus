@@ -22,6 +22,13 @@ BlankBehaviour::BlankBehaviour(World* world, ConfigFile::SettingsMultiMap* initi
 	}
 }
 
+BlankBehaviour::BlankBehaviour(BlankBehaviour* other, World* world):
+	Behaviour(other, world)
+{
+	this->mBehaviourType = other->getBehaviourType();
+	this->mWorld = world;
+}
+
 BlankBehaviour::~BlankBehaviour(void)
 {
 	// Empty destructor
@@ -47,4 +54,9 @@ Behaviour* BlankBehaviour::clone(ConfigFile::SettingsMultiMap* initializingSetti
 	// IT IS (Pretty munch) BLANK YOU DO CLONE NOTHING
 
 	return new BlankBehaviour(this->mWorld, initializingSettings);
+}
+
+Behaviour* Nimbus::BlankBehaviour::clone()
+{
+	return new Nimbus::BlankBehaviour(this, this->mWorld);
 }

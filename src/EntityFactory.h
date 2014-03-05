@@ -7,6 +7,8 @@
 
 #include "GameEntity.h"
 #include "Behaviour.h"
+#include "EventListener.h"
+#include "EventSystem.h"
 
 namespace Nimbus
 {
@@ -29,6 +31,23 @@ namespace Nimbus
 
 		/* The world that needs to be passed to behaviours. */
 		World* mWorld;
+
+	protected:
+		// EventListeners
+		class CreateEntityListener : 
+			public EventListener
+		{
+		private:
+			// Reference to the factory that contains this listener
+			EntityFactory* containingFactory;
+
+		public:
+			CreateEntityListener(EntityFactory* factory) { this->containingFactory = factory; }
+			virtual ~CreateEntityListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload);
+		};
 
 	public:
 		EntityFactory(World* world, std::string entityDefinitionFile);

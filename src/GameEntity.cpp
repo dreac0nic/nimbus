@@ -8,6 +8,19 @@ GameEntity::GameEntity(void)
 {
 }
 
+GameEntity::GameEntity(GameEntity* other)
+{
+	// Copying all of the properties and behaviours in the given entity to this new entity
+	this->mEntityType = other->getEntityType();
+
+	behaviourmap::iterator behaviour = other->getBehaviours()->begin();
+	while (behaviour != other->getBehaviours()->end())
+	{
+		this->mBehaviours[behaviour->first] = behaviour->second->clone();
+		behaviour++;
+	}
+}
+
 GameEntity::~GameEntity(void)
 {
 }

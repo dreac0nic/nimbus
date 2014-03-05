@@ -16,7 +16,7 @@ EntityManager::~EntityManager(void)
 bool EntityManager::update(void)
 {
 	vector<GameEntity*> entities = this->mWorld->getEntities();
-	for (int x = 0; x < entities.size(); x++)
+	for (unsigned int x = 0; x < entities.size(); x++)
 	{
 		entities[x]->update();
 	}

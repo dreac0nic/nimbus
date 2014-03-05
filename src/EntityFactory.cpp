@@ -1,16 +1,16 @@
 #include <sstream>
 #include <OgreConfigFile.h>
 #include <OgreLogManager.h>
+
 #include "EntityFactory.h"
 #include "BlankBehaviour.h"
 #include "Renderable.h"
-#include <OgreConfigFile.h>
 
 using namespace Nimbus;
 using namespace Ogre;
 using namespace std;
 
-EntityFactory::EntityFactory(World* world, std::string filePathsFile)
+Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 {
 	// Debugness! An logs!
 	std::stringstream logBuilder;
@@ -97,13 +97,17 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 						entity->add(this->mBehaviourInstances[entitySectionType]->clone(entitySettings));
 					}
 				}
+
+				// Adding the entity into the map
+				this->mEntityInstances[entityName] = entity;
 			}
-			
 		}
 	}
+
+	EventSystem::getSingleton()->registerListener(new CreateEntityListener(this), EventSystem::EventType::CREATE_ENTITY);
 }
 
-EntityFactory::~EntityFactory(void)
+Nimbus::EntityFactory::~EntityFactory(void)
 {
 	// Delete all prototype Entities
 	for(std::map<GameEntityType, GameEntity*>::iterator i = this->mEntityInstances.begin(); i != this->mEntityInstances.end(); ++i)
@@ -118,9 +122,26 @@ EntityFactory::~EntityFactory(void)
 	}
 }
 
-GameEntity* EntityFactory::createEntity(std::string entityType)
+GameEntity* Nimbus::EntityFactory::createEntity(std::string entityType)
 {
-	GameEntity* factorizedEntity = new GameEntity();
+	GameEntity* factorizedEntity = new GameEntity(this->mEntityInstances[entityType]);
 
 	return factorizedEntity;
+}
+
+void Nimbus::EntityFactory::CreateEntityListener::handleEvent(payloadmap payload)
+{
+	if (payload.find("EntityType") != payload.end())
+	{
+		GameEntity* entity = containingFactory->createEntity(*(static_cast<string*>(payload["EntityType"])));
+		containingFactory->mWorld->addEntity(entity);
+	}
+
+	// Cleaning up any unneeded payload memory space
+	payloadmap::iterator payloads = payload.begin();
+	while (payloads != payload.end())
+	{
+		delete payloads->second;
+		payloads++;
+	}
 }

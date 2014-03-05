@@ -56,6 +56,10 @@ bool GameMode::initialize()
 	// Configure entity types
 	this->mEntityMan->configureEntityTypes("../../assets/scripts/ConfigFiles.ini", this->mWorld);
 
+	std::map<std::string, void*> entityType;
+	entityType["EntityType"] = new std::string("Dragon");
+	EventSystem::getSingleton()->fireEvent(EventSystem::CREATE_ENTITY, entityType);
+
 	// Note that the RunMode has been initialized
 	this->initialized = true;
 	return true;

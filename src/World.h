@@ -35,13 +35,14 @@ namespace Nimbus
 	{
 	private:
 		// The list that keeps track of all entities currently in the world
-		std::vector<GameEntity*> entities;
+		std::vector<GameEntity*> mEntities;
 
 	public:
 		World(void);
 		virtual ~World(void);
 
-		std::vector<GameEntity*> getEntities() { return this->entities; }
+		std::vector<GameEntity*> getEntities() { return this->mEntities; }
+		void addEntity(GameEntity* entity);
 	};
 
 }

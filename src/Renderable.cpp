@@ -27,6 +27,14 @@ Nimbus::Renderable::Renderable(World* world, ConfigFile::SettingsMultiMap* initi
 	}
 }
 
+Nimbus::Renderable::Renderable(Nimbus::Renderable* other, World* world):
+	Behaviour(other, world)
+{
+	this->mBehaviourType = other->getBehaviourType();
+	this->mWorld = world;
+	this->mModel = other->getEntity();
+}
+
 Nimbus::Renderable::~Renderable()
 {
 	// Empty destructor
@@ -57,7 +65,17 @@ void Nimbus::Renderable::shutdown(void)
 	*/
 }
 
+Ogre::Entity* Nimbus::Renderable::getEntity()
+{
+	return this->mModel;
+}
+
 Behaviour* Nimbus::Renderable::clone(ConfigFile::SettingsMultiMap* initializingSettings)
 {
 	return new Nimbus::Renderable(this->mWorld, initializingSettings);
+}
+
+Behaviour* Nimbus::Renderable::clone()
+{
+	return new Nimbus::Renderable(this, this->mWorld);
 }
