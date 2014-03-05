@@ -1,6 +1,8 @@
 #include "EntityFactory.h"
 #include "BlankBehaviour.h"
 #include <OgreConfigFile.h>
+#include <OgreLogManager.h>
+#include <sstream>
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -8,6 +10,9 @@ using namespace std;
 
 EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 {
+	// Debugness! An logs!
+	std::stringstream logBuilder;
+
 	// Storing the world for future use
 	this->mWorld = world;
 
@@ -16,6 +21,10 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 
 	// The type of the current settings section
 	string filePathsSectionType;
+
+	logBuilder << "(Nimbus) Loading game entity types from " << filePathsFile;
+	LogManager::getSingleton().logMessage(logBuilder.str());
+	logBuilder.str("");
 
 	// Load the entity type config file
 	// ../../assets/scripts/ConfigFiles.ini
@@ -40,6 +49,10 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 				// Store the entity name and the path to the entity file
 				string entityName = entityPaths->first;
 				string entityPath = entityPaths->second;
+
+				logBuilder << "(Nimbus)     Loading " << entityName << " from " << entityPath;
+				LogManager::getSingleton().logMessage(logBuilder.str());
+				logBuilder.str("");
 
 				// Setup a new entity config file for the specific entity type
 				ConfigFile entityConfig;
