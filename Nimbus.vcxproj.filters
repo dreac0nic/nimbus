@@ -66,9 +66,6 @@
     <ClCompile Include="src\behaviours\Float.cpp">
       <Filter>Source Files\Behaviours</Filter>
     </ClCompile>
-    <ClCompile Include="src\behaviours\Rain.cpp">
-      <Filter>Source Files\Behaviours</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\NimbusApplication.h">
@@ -123,9 +120,6 @@
       <Filter>Header Files\Behaviours</Filter>
     </ClInclude>
     <ClInclude Include="src\behaviours\Float.h">
-      <Filter>Header Files\Behaviours</Filter>
-    </ClInclude>
-    <ClInclude Include="src\behaviours\Rain.h">
       <Filter>Header Files\Behaviours</Filter>
     </ClInclude>
   </ItemGroup>
