@@ -1,8 +1,9 @@
-#include "EntityFactory.h"
-#include "BlankBehaviour.h"
+#include <sstream>
 #include <OgreConfigFile.h>
 #include <OgreLogManager.h>
-#include <sstream>
+#include "EntityFactory.h"
+#include "BlankBehaviour.h"
+#include "Renderable.h"
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -21,6 +22,11 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 
 	// The type of the current settings section
 	string filePathsSectionType;
+
+	// Load the behaviour prototype list
+	this->mBehaviourInstances.clear();
+	this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour(world);
+	this->mBehaviourInstances["Renderable"] = new Renderable(world);
 
 	logBuilder << "(Nimbus) Loading game entity types from " << filePathsFile;
 	LogManager::getSingleton().logMessage(logBuilder.str());
@@ -58,12 +64,37 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 				ConfigFile entityConfig;
 				string entitySectionType;
 				entityConfig.load(entityPath);
+
+				// Create a blank entity to morph into the prototype
+				GameEntity* entity = new GameEntity();
+
+				// Iterate through all the sections to initialize the prototype entity
 				ConfigFile::SectionIterator entitySectionIterator = entityConfig.getSectionIterator();
 				while(entitySectionIterator.hasMoreElements())
 				{
 					entitySectionType = entitySectionIterator.peekNextKey();
 
 					ConfigFile::SettingsMultiMap* entitySettings = entitySectionIterator.getNext();
+
+					// If this is the general settings section
+					if(entitySectionType == "General")
+					{
+						logBuilder << "(Nimbus)         Setting general settings for " << entityName;
+						LogManager::getSingleton().logMessage(logBuilder.str());
+						logBuilder.str("");
+
+						// Configure the entity itself
+						entity->configure(entitySettings);
+					}
+					// Otherwise add the appropriate behaviour to the entity
+					else if(entitySectionType != "")
+					{
+						logBuilder << "(Nimbus)         Adding the " << entitySectionType << " behaviour to " << entityName;
+						LogManager::getSingleton().logMessage(logBuilder.str());
+						logBuilder.str("");
+
+						entity->add(this->mBehaviourInstances[entitySectionType]->clone(entitySettings));
+					}
 				}
 			}
 			
