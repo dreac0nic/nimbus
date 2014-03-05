@@ -39,6 +39,12 @@ bool GameEntity::add(Behaviour* behaviour)
 
 void GameEntity::update(void)
 {
+	behaviourmap::iterator behaviour = mBehaviours.begin();
+	while (behaviour != mBehaviours.end())
+	{
+		behaviour->second->update();
+		behaviour++;
+	}
 }
 
 void remove(Behaviour* behaviour)

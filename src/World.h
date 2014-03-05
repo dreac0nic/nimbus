@@ -1,8 +1,11 @@
 #ifndef NIMBUS_WORLD_H
 #define NIMBUS_WORLD_H
 
+#include <vector>
+
 namespace Nimbus
 {
+	class GameEntity;
 	/** This class aggregates the entire world of Nimbus.
 	 
 	 All the elements that make up the world should be placed in this class.
@@ -30,9 +33,15 @@ namespace Nimbus
 	 */
 	class World
 	{
+	private:
+		// The list that keeps track of all entities currently in the world
+		std::vector<GameEntity*> entities;
+
 	public:
 		World(void);
 		virtual ~World(void);
+
+		std::vector<GameEntity*> getEntities() { return this->entities; }
 	};
 
 }

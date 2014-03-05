@@ -19,6 +19,12 @@ Nimbus::Renderable::Renderable(World* world, ConfigFile::SettingsMultiMap* initi
 	{
 		this->mBehaviourType = (*(initializingSettings->find("name"))).second;
 	}
+
+	// Grabbing the actual mesh name
+	if(initializingSettings->find("model") != initializingSettings->end())
+	{
+		this->mModelPath = (*(initializingSettings->find("model"))).second;
+	}
 }
 
 Nimbus::Renderable::~Renderable()

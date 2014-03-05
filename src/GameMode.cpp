@@ -33,6 +33,9 @@ RunMode* GameMode::run(const FrameEvent& evt)
 		return 0;
 	}
 
+	// Updating all of the entities through the manager
+	this->mEntityMan->update();
+
 	// Continue to run this runmode
 	return this;
 }
@@ -47,7 +50,7 @@ bool GameMode::initialize()
 	this->mWorld = new World();
 
 	// Construct the world managers
-	this->mEntityMan = new EntityManager();
+	this->mEntityMan = new EntityManager(this->mWorld);
 	this->mEnvironmentMan = new EnvironmentManager();
 
 	// Configure entity types

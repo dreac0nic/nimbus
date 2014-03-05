@@ -33,8 +33,11 @@ namespace Nimbus
 		*/
 		EntityFactory* mEntityFactory;
 
+		// The world object to access the entities from
+		World* mWorld;
+
 	public:
-		EntityManager(void);
+		EntityManager(World* world);
 		virtual ~EntityManager(void);
 
 		// From Nimbus::Manager

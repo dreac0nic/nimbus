@@ -8,6 +8,9 @@ namespace Nimbus
 	class Renderable:
 		public Behaviour
 	{
+	private:
+		std::string mModelPath;
+
 	public:
 		Renderable(World *world);
 		Renderable(World *world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);

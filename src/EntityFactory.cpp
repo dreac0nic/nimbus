@@ -120,7 +120,7 @@ EntityFactory::~EntityFactory(void)
 
 GameEntity* EntityFactory::createEntity(std::string entityType)
 {
-	GameEntity* factorizedEntity = new GameEntity;
+	GameEntity* factorizedEntity = new GameEntity();
 
 	return factorizedEntity;
 }

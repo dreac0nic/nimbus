@@ -3,8 +3,9 @@
 using namespace Nimbus;
 using namespace std;
 
-EntityManager::EntityManager(void)
+EntityManager::EntityManager(World* world)
 {
+	this->mWorld = world;
 }
 
 EntityManager::~EntityManager(void)
@@ -14,6 +15,11 @@ EntityManager::~EntityManager(void)
 
 bool EntityManager::update(void)
 {
+	vector<GameEntity*> entities = this->mWorld->getEntities();
+	for (int x = 0; x < entities.size(); x++)
+	{
+		entities[x]->update();
+	}
 	return true;
 }
 
