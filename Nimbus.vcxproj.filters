@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\MapGeneration">
+      <UniqueIdentifier>{faa5adb0-d489-45ee-a773-606d268e2a46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MapGeneration">
+      <UniqueIdentifier>{beab7612-4392-445a-9c7c-1a5d5d04be12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -29,6 +35,30 @@
     </ClCompile>
     <ClCompile Include="src\EventSystem.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Edge.cpp">
+      <Filter>Source Files\MapGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\LineSegment.cpp">
+      <Filter>Source Files\MapGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Halfedge.cpp">
+      <Filter>Source Files\MapGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Vertex.cpp">
+      <Filter>Source Files\MapGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Voronoi.cpp">
+      <Filter>Source Files\MapGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Polygon.cpp">
+      <Filter>Source Files\MapGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Site.cpp">
+      <Filter>Source Files\MapGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>Source Files\MapGeneration</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,8 +83,11 @@
     <ClInclude Include="src\EventSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\MapGeneration\Map.h">
+      <Filter>Header Files\MapGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MapGeneration\Voronoi.h">
+      <Filter>Header Files\MapGeneration</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
