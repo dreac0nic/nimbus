@@ -16,6 +16,10 @@ GameMode::GameMode(void)
 
 GameMode::~GameMode(void)
 {
+	// Delete dynamic member variables... I think this is the right place for this.
+	delete this->mEntityMan;
+	delete this->mEnvironmentMan;
+	delete this->mWorld;
 }
 
 RunMode* GameMode::run(const FrameEvent& evt)
@@ -35,7 +39,19 @@ RunMode* GameMode::run(const FrameEvent& evt)
 
 bool GameMode::initialize()
 {
-	this->mEntityFactory = new EntityFactory(this->mWorld, "../../assets/scripts/ConfigFiles.ini");
+	//this->mEntityFactory = new EntityFactory(this->mWorld, "../../assets/scripts/ConfigFiles.ini");
+	
+	// Construct the game world (truthfully this should be done by the menu probably...
+	//     this would allow for game configuration and loading... of maybe we
+	//     should have a loading game mode.
+	this->mWorld = new World();
+
+	// Construct the world managers
+	this->mEntityMan = new EntityManager();
+	this->mEnvironmentMan = new EnvironmentManager();
+
+	// Configure entity types
+	this->mEntityMan->configureEntityTypes("../../assets/scripts/ConfigFiles.ini", this->mWorld);
 
 	// Note that the RunMode has been initialized
 	this->initialized = true;
