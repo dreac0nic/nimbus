@@ -7,7 +7,8 @@ Nimbus::FlockSoaring::FlockSoaring(World* world):
 {
 }
 
-Nimbus::FlockSoaring::FlockSoaring(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
+Nimbus::FlockSoaring::FlockSoaring(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
+	Soaring(world, initializingSettings)
 {
 }
 
