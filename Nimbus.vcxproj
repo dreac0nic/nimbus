@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\behaviours\Float.cpp" />
     <ClCompile Include="src\BlankBehaviour.cpp" />
     <ClCompile Include="src\EntityFactory.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
@@ -29,7 +28,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Behaviour.h" />
-    <ClInclude Include="src\behaviours\Float.h" />
     <ClInclude Include="src\BlankBehaviour.h" />
     <ClInclude Include="src\EntityFactory.h" />
     <ClInclude Include="src\EventListener.h" />
