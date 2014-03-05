@@ -8,27 +8,27 @@ GameEntity::GameEntity(void)
 {
 }
 
-GameEntity::GameEntity(ConfigFile::SettingsMultiMap* initializingSettings)
+GameEntity::~GameEntity(void)
+{
+}
+
+void GameEntity::configure(ConfigFile::SettingsMultiMap* configurationSettings)
 {
 	ConfigFile::SettingsMultiMap::iterator currentSetting;
 	std::stringstream settingConverter;
 
-	currentSetting = initializingSettings->find("age");
-	if (currentSetting != initializingSettings->end())
+	currentSetting = configurationSettings->find("age");
+	if (currentSetting != configurationSettings->end())
 	{
 		settingConverter = std::stringstream((*currentSetting).second);
 		settingConverter >> this->mAge;
 	}
 
-	currentSetting = initializingSettings->find("name");
-	if (currentSetting != initializingSettings->end())
+	currentSetting = configurationSettings->find("name");
+	if (currentSetting != configurationSettings->end())
 	{
 		this->mEntityType = (*currentSetting).second;
 	}
-}
-
-GameEntity::~GameEntity(void)
-{
 }
 
 bool GameEntity::add(Behaviour* behaviour)
