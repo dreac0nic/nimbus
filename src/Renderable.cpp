@@ -13,7 +13,12 @@ Nimbus::Renderable::Renderable(World* world, ConfigFile::SettingsMultiMap* initi
 	Behaviour(world, initializingSettings)
 {
 	this->mWorld = world;
-	this->mBehaviourType = (*(initializingSettings->find("name"))).second;
+
+	// The way this works now is a bit different... so consider changing this.
+	if(initializingSettings->find("name") != initializingSettings->end())
+	{
+		this->mBehaviourType = (*(initializingSettings->find("name"))).second;
+	}
 }
 
 Nimbus::Renderable::~Renderable()
