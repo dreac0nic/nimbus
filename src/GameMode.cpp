@@ -44,10 +44,15 @@ bool GameMode::initialize()
 {
 	//this->mEntityFactory = new EntityFactory(this->mWorld, "../../assets/scripts/ConfigFiles.ini");
 	
+	// Create the scene manager
+	mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
+	// Create the camera
+	mCamera = mSceneMgr->createCamera("PlayerCam");
+	
 	// Construct the game world (truthfully this should be done by the menu probably...
 	//     this would allow for game configuration and loading... of maybe we
 	//     should have a loading game mode.
-	this->mWorld = new World();
+	this->mWorld = new World(this->mSceneMgr);
 
 	// Construct the world managers
 	this->mEntityMan = new EntityManager(this->mWorld);

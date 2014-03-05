@@ -2,8 +2,9 @@
 
 using namespace Nimbus;
 
-World::World(void)
+World::World(Ogre::SceneManager* sceneManager)
 {
+	this->mSceneManager = sceneManager;
 }
 
 World::~World(void)

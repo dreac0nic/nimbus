@@ -1,4 +1,5 @@
 #include "Renderable.h"
+#include <OgreSceneManager.h>
 
 using namespace Ogre;
 using namespace Nimbus;
@@ -24,6 +25,7 @@ Nimbus::Renderable::Renderable(World* world, ConfigFile::SettingsMultiMap* initi
 	if(initializingSettings->find("model") != initializingSettings->end())
 	{
 		this->mModelPath = (*(initializingSettings->find("model"))).second;
+		this->mModel = this->mWorld->getSceneManager()->createEntity("Dragon", this->mModelPath);
 	}
 }
 

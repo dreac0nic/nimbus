@@ -2,6 +2,7 @@
 #define NIMBUS_WORLD_H
 
 #include <vector>
+#include <OgreSceneNode.h>
 
 namespace Nimbus
 {
@@ -37,12 +38,19 @@ namespace Nimbus
 		// The list that keeps track of all entities currently in the world
 		std::vector<GameEntity*> mEntities;
 
+		// The scene node that contains everything
+		Ogre::SceneNode* mWorldNode;
+		Ogre::SceneManager* mSceneManager;
+
 	public:
-		World(void);
+		World(Ogre::SceneManager* sceneManager);
 		virtual ~World(void);
 
+		// Accessor methods
 		std::vector<GameEntity*> getEntities() { return this->mEntities; }
 		void addEntity(GameEntity* entity);
+		Ogre::SceneNode* getWorldNode() { return this->mWorldNode; }
+		Ogre::SceneManager* getSceneManager() { return this->mSceneManager; }
 	};
 
 }
