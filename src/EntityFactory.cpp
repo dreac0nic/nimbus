@@ -32,20 +32,28 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 		// If defining the entity types
 		if(filePathsSectionType == "Entities")
 		{
-			ConfigFile::SettingsMultiMap::iterator entityPaths = filePathsSettings->begin();
-			string entityName = entityPaths->first;
-			string entityPath = entityPaths->second;
-
-			ConfigFile entityConfig;
-			string entitySectionType;
-			entityConfig.load(entityPath);
-			ConfigFile::SectionIterator entitySectionIterator = entityConfig.getSectionIterator();
-			while(entitySectionIterator.hasMoreElements())
+			// For each entity type in the section
+			for(ConfigFile::SettingsIterator::iterator entityPaths = filePathsSettings->begin();
+				entityPaths != filePathsSettings->end();
+				++entityPaths)
 			{
-				entitySectionType = entitySectionIterator.peekNextKey();
+				// Store the entity name and the path to the entity file
+				string entityName = entityPaths->first;
+				string entityPath = entityPaths->second;
 
-				ConfigFile::SettingsMultiMap* entitySettings = entitySectionIterator.getNext();
+				// Setup a new entity config file for the specific entity type
+				ConfigFile entityConfig;
+				string entitySectionType;
+				entityConfig.load(entityPath);
+				ConfigFile::SectionIterator entitySectionIterator = entityConfig.getSectionIterator();
+				while(entitySectionIterator.hasMoreElements())
+				{
+					entitySectionType = entitySectionIterator.peekNextKey();
+
+					ConfigFile::SettingsMultiMap* entitySettings = entitySectionIterator.getNext();
+				}
 			}
+			
 		}
 	}
 }
