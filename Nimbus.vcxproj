@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\behaviours\FlockSoaring.cpp" />
     <ClCompile Include="src\behaviours\Positional.cpp" />
     <ClCompile Include="src\behaviours\Rainy.cpp" />
     <ClCompile Include="src\behaviours\Soaring.cpp" />
@@ -31,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Behaviour.h" />
+    <ClInclude Include="src\behaviours\FlockSoaring.h" />
     <ClInclude Include="src\behaviours\Positional.h" />
     <ClInclude Include="src\behaviours\Rainy.h" />
     <ClInclude Include="src\behaviours\Soaring.h" />
