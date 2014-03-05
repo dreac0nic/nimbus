@@ -14,7 +14,7 @@ namespace Nimbus
 	{
 	private:
 		/* Map of behaviours used by the entity. */
-		behaviourmap behaviours;
+		behaviourmap mBehaviours;
 
 		/* The type name of the game entity. */
 		GameEntityType mEntityType;
@@ -36,13 +36,14 @@ namespace Nimbus
 		~GameEntity(void);
 
 		// OBJECT METHODS --
+		void initialize(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
 		bool add(Behaviour* behaviour);
 		void update(void);
 		void remove(Behaviour* behaviour);
 
 		// ACCESSOR METHODS --
 		/* Return a reference to the behaviours used by this entity. */
-		behaviourmap* getBehaviours(void) { return &(this->behaviours); }
+		behaviourmap* getBehaviours(void) { return &(this->mBehaviours); }
 
 		/* Return the entity type name. */
 		GameEntityType getEntityType() { return this->mEntityType; }

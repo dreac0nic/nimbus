@@ -30,10 +30,11 @@ namespace Nimbus
 		virtual void shutdown(void) = 0;
 
 		/* In form with the prototype pattern, this method creates a new instance of the behaviour. (Deep copy)
-
-		Note: You are responsible for garbage collecting this behavior.
-		*/
+		Note: You are responsible for garbage collecting this behavior. */
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings) = 0;
+
+		/* Return the entity type name. */
+		BehaviourType getBehaviourType() { return this->mBehaviourType; }
 	};
 }
 

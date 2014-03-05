@@ -1,5 +1,6 @@
 #include "EntityFactory.h"
 #include "BlankBehaviour.h"
+#include "Renderable.h"
 #include <OgreConfigFile.h>
 
 using namespace Nimbus;
@@ -24,7 +25,7 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 	Behaviour* tempBehaviour = NULL;*/
 
 	// Load the behaviour prototype list
-	//this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour(world);
+	this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour(world);
 
 	// Load the entity type config file
 	// ../../assets/scripts/ConfigFiles.ini
@@ -51,6 +52,9 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 			currentEntity = new GameEntity(settings);
 			currentEntityType = currentEntity->getEntityType();*/
 
+			GameEntity* currentEntity = new GameEntity();
+			Behaviour* tempBehaviour = NULL;
+
 			ConfigFile::SettingsMultiMap::iterator entityPaths = filePathsSettings->begin();
 			string entityName = entityPaths->first;
 			string entityPath = entityPaths->second;
@@ -58,12 +62,27 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 			ConfigFile entityConfig;
 			string entitySectionType;
 			entityConfig.load(entityPath);
+			
 			ConfigFile::SectionIterator entitySectionIterator = entityConfig.getSectionIterator();
 			while(entitySectionIterator.hasMoreElements())
 			{
 				entitySectionType = entitySectionIterator.peekNextKey();
 
 				ConfigFile::SettingsMultiMap* entitySettings = entitySectionIterator.getNext();
+
+				if (entitySectionType == "General")
+				{
+					currentEntity->initialize(entitySettings);
+				}
+				else if (entitySectionType == "Renderable")
+				{
+					if (this->mBehaviourInstances.find(entitySectionType) == this->mBehaviourInstances.end())
+					{
+						this->mBehaviourInstances["Renderable"] = new Nimbus::Renderable(world, entitySettings);
+					}
+					tempBehaviour = this->mBehaviourInstances[entitySectionType]->clone(entitySettings);
+					currentEntity->add(tempBehaviour);
+				}
 			}
 		}
 		/* If defining a behaviour for the current entity type

@@ -35,6 +35,7 @@ RunMode* GameMode::run(const FrameEvent& evt)
 
 bool GameMode::initialize()
 {
+	this->mWorld = new World();
 	this->mEntityFactory = new EntityFactory(this->mWorld, "../../assets/scripts/ConfigFiles.ini");
 
 	// Note that the RunMode has been initialized
