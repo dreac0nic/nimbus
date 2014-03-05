@@ -17,15 +17,6 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 	// The type of the current settings section
 	string filePathsSectionType;
 
-	/* The current entity
-	GameEntity* currentEntity = NULL;
-	GameEntityType currentEntityType;
-
-	Behaviour* tempBehaviour = NULL;*/
-
-	// Load the behaviour prototype list
-	//this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour(world);
-
 	// Load the entity type config file
 	// ../../assets/scripts/ConfigFiles.ini
 	filePathsConfig.load(filePathsFile);
@@ -38,19 +29,9 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 
 		ConfigFile::SettingsMultiMap* filePathsSettings = filePathsSectionIterator.getNext();
 
-		// If defining a new entity type
+		// If defining the entity types
 		if(filePathsSectionType == "Entities")
 		{
-			/*if(currentEntity != NULL)
-			{
-				this->mEntityInstances[currentEntityType] = currentEntity;
-
-				currentEntity = NULL;
-			}
-
-			currentEntity = new GameEntity(settings);
-			currentEntityType = currentEntity->getEntityType();*/
-
 			ConfigFile::SettingsMultiMap::iterator entityPaths = filePathsSettings->begin();
 			string entityName = entityPaths->first;
 			string entityPath = entityPaths->second;
@@ -66,20 +47,7 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 				ConfigFile::SettingsMultiMap* entitySettings = entitySectionIterator.getNext();
 			}
 		}
-		/* If defining a behaviour for the current entity type
-		else if(sectionType == "Behaviour")
-		{
-			if(currentEntity != NULL)
-			{
-				// ConfigFile::SettingsMultiMap::iterator settingIterator = settings->find("name");
-				tempBehaviour = this->mBehaviourInstances[(*(settings->find("name"))).second]->clone(settings);
-				currentEntity->add(tempBehaviour);
-			}
-		}*/
 	}
-
-	// Store the last entity type loaded
-	//this->mEntityInstances[currentEntityType] = currentEntity;
 }
 
 EntityFactory::~EntityFactory(void)
