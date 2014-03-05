@@ -15,7 +15,11 @@ BlankBehaviour::BlankBehaviour(World* world, ConfigFile::SettingsMultiMap* initi
 	// (Pretty munch) Empty settings constructor
 
 	this->mWorld = world;
-	this->mBehaviourType = (*(initializingSettings->find("name"))).second;
+
+	if(initializingSettings->find("name") != initializingSettings->end())
+	{
+		this->mBehaviourType = (*(initializingSettings->find("name"))).second;
+	}
 }
 
 BlankBehaviour::~BlankBehaviour(void)

@@ -1,3 +1,6 @@
+#include <sstream>
+#include <OgreConfigFile.h>
+#include <OgreLogManager.h>
 #include "EntityFactory.h"
 #include "BlankBehaviour.h"
 #include "Renderable.h"
@@ -9,6 +12,9 @@ using namespace std;
 
 EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 {
+	// Debugness! An logs!
+	std::stringstream logBuilder;
+
 	// Storing the world for future use
 	this->mWorld = world;
 
@@ -18,14 +24,14 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 	// The type of the current settings section
 	string filePathsSectionType;
 
-	/* The current entity
-	GameEntity* currentEntity = NULL;
-	GameEntityType currentEntityType;
-
-	Behaviour* tempBehaviour = NULL;*/
-
 	// Load the behaviour prototype list
+	this->mBehaviourInstances.clear();
 	this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour(world);
+	this->mBehaviourInstances["Renderable"] = new Renderable(world);
+
+	logBuilder << "(Nimbus) Loading game entity types from " << filePathsFile;
+	LogManager::getSingleton().logMessage(logBuilder.str());
+	logBuilder.str("");
 
 	// Load the entity type config file
 	// ../../assets/scripts/ConfigFiles.ini
@@ -39,66 +45,62 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 
 		ConfigFile::SettingsMultiMap* filePathsSettings = filePathsSectionIterator.getNext();
 
-		// If defining a new entity type
+		// If defining the entity types
 		if(filePathsSectionType == "Entities")
 		{
-			/*if(currentEntity != NULL)
+			// For each entity type in the section
+			for(ConfigFile::SettingsIterator::iterator entityPaths = filePathsSettings->begin();
+				entityPaths != filePathsSettings->end();
+				++entityPaths)
 			{
-				this->mEntityInstances[currentEntityType] = currentEntity;
+				// Store the entity name and the path to the entity file
+				string entityName = entityPaths->first;
+				string entityPath = entityPaths->second;
 
-				currentEntity = NULL;
-			}
+				logBuilder << "(Nimbus)     Loading " << entityName << " from " << entityPath;
+				LogManager::getSingleton().logMessage(logBuilder.str());
+				logBuilder.str("");
 
-			currentEntity = new GameEntity(settings);
-			currentEntityType = currentEntity->getEntityType();*/
+				// Setup a new entity config file for the specific entity type
+				ConfigFile entityConfig;
+				string entitySectionType;
+				entityConfig.load(entityPath);
 
-			GameEntity* currentEntity = new GameEntity();
-			Behaviour* tempBehaviour = NULL;
+				// Create a blank entity to morph into the prototype
+				GameEntity* entity = new GameEntity();
 
-			ConfigFile::SettingsMultiMap::iterator entityPaths = filePathsSettings->begin();
-			string entityName = entityPaths->first;
-			string entityPath = entityPaths->second;
-
-			ConfigFile entityConfig;
-			string entitySectionType;
-			entityConfig.load(entityPath);
-			
-			ConfigFile::SectionIterator entitySectionIterator = entityConfig.getSectionIterator();
-			while(entitySectionIterator.hasMoreElements())
-			{
-				entitySectionType = entitySectionIterator.peekNextKey();
-
-				ConfigFile::SettingsMultiMap* entitySettings = entitySectionIterator.getNext();
-
-				if (entitySectionType == "General")
+				// Iterate through all the sections to initialize the prototype entity
+				ConfigFile::SectionIterator entitySectionIterator = entityConfig.getSectionIterator();
+				while(entitySectionIterator.hasMoreElements())
 				{
-					currentEntity->initialize(entitySettings);
-				}
-				else if (entitySectionType == "Renderable")
-				{
-					if (this->mBehaviourInstances.find(entitySectionType) == this->mBehaviourInstances.end())
+					entitySectionType = entitySectionIterator.peekNextKey();
+
+					ConfigFile::SettingsMultiMap* entitySettings = entitySectionIterator.getNext();
+
+					// If this is the general settings section
+					if(entitySectionType == "General")
 					{
-						this->mBehaviourInstances["Renderable"] = new Nimbus::Renderable(world, entitySettings);
+						logBuilder << "(Nimbus)         Setting general settings for " << entityName;
+						LogManager::getSingleton().logMessage(logBuilder.str());
+						logBuilder.str("");
+
+						// Configure the entity itself
+						entity->configure(entitySettings);
 					}
-					tempBehaviour = this->mBehaviourInstances[entitySectionType]->clone(entitySettings);
-					currentEntity->add(tempBehaviour);
+					// Otherwise add the appropriate behaviour to the entity
+					else if(entitySectionType != "")
+					{
+						logBuilder << "(Nimbus)         Adding the " << entitySectionType << " behaviour to " << entityName;
+						LogManager::getSingleton().logMessage(logBuilder.str());
+						logBuilder.str("");
+
+						entity->add(this->mBehaviourInstances[entitySectionType]->clone(entitySettings));
+					}
 				}
 			}
+			
 		}
-		/* If defining a behaviour for the current entity type
-		else if(sectionType == "Behaviour")
-		{
-			if(currentEntity != NULL)
-			{
-				// ConfigFile::SettingsMultiMap::iterator settingIterator = settings->find("name");
-				tempBehaviour = this->mBehaviourInstances[(*(settings->find("name"))).second]->clone(settings);
-				currentEntity->add(tempBehaviour);
-			}
-		}*/
 	}
-
-	// Store the last entity type loaded
-	//this->mEntityInstances[currentEntityType] = currentEntity;
 }
 
 EntityFactory::~EntityFactory(void)

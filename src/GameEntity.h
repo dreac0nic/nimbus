@@ -26,17 +26,20 @@ namespace Nimbus
 		/* Standard blank constructor. */
 		GameEntity(void);
 
-		/* Settings based constructor. */
-		GameEntity(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
-
 		/* Prototype constructor. */
 		GameEntity(GameEntity* other);
 
 		/* Standard blank destructor. */
 		~GameEntity(void);
 
+		/* Configure the entity according to the general settings map.
+
+		This settings map is obtained from the general section in the Entity Type
+		ini file. It contains all general information needed to construct the entity.
+		*/
+		void configure(Ogre::ConfigFile::SettingsMultiMap* configurationSettings);
+
 		// OBJECT METHODS --
-		void initialize(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
 		bool add(Behaviour* behaviour);
 		void update(void);
 		void remove(Behaviour* behaviour);

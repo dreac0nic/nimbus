@@ -27,9 +27,6 @@ namespace Nimbus
 		// The Entity Manager
 		EntityManager* mEntityMan;
 
-		// The Entity Factory
-		EntityFactory* mEntityFactory;
-
 		// The game World
 		World* mWorld;
 
