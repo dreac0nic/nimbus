@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\BlankBehaviour.cpp" />
     <ClCompile Include="src\EntityFactory.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\EnvironmentManager.cpp" />
@@ -23,12 +22,10 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
     <ClCompile Include="src\Renderable.cpp" />
-    <ClCompile Include="src\TestMode.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Behaviour.h" />
-    <ClInclude Include="src\BlankBehaviour.h" />
     <ClInclude Include="src\EntityFactory.h" />
     <ClInclude Include="src\EventListener.h" />
     <ClInclude Include="src\EventSystem.h" />
@@ -42,7 +39,6 @@
     <ClInclude Include="src\NimbusApplication.h" />
     <ClInclude Include="src\Renderable.h" />
     <ClInclude Include="src\RunMode.h" />
-    <ClInclude Include="src\TestMode.h" />
     <ClInclude Include="src\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

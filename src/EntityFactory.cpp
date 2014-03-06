@@ -3,7 +3,6 @@
 #include <OgreLogManager.h>
 
 #include "EntityFactory.h"
-#include "BlankBehaviour.h"
 #include "Renderable.h"
 
 using namespace Nimbus;
@@ -26,7 +25,6 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 
 	// Load the behaviour prototype list
 	this->mBehaviourInstances.clear();
-	this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour(world);
 	this->mBehaviourInstances["Renderable"] = new Renderable(world);
 
 	logBuilder << "(Nimbus) Loading game entity types from " << filePathsFile;
