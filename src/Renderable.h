@@ -14,6 +14,7 @@ namespace Nimbus
 		Ogre::Vector3 mPosition;
 		Ogre::Vector3 mScale;
 		Ogre::Vector3 mRotation;
+		Ogre::SceneNode* mNode;
 
 	public:
 		Renderable(World *world);

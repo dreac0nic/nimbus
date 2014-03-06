@@ -17,7 +17,7 @@ namespace Nimbus
 
 	public:
 		Behaviour(World* world) { this->mWorld = world;}
-		Behaviour(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings) { this->mWorld = world; } // Fix with delegating constructor, later
+		Behaviour(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings) { this->mWorld = world; }
 		Behaviour(Behaviour* other, World* world) {};
 		virtual ~Behaviour(void) {}
 

@@ -7,14 +7,12 @@ using namespace Nimbus;
 Nimbus::Renderable::Renderable(World* world):
 	Behaviour(world)
 {
-	this->mWorld = world;
 }
 
 Nimbus::Renderable::Renderable(World* world, ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(world, initializingSettings)
+	Behaviour(world)
 {
 	std::string ogreName;
-	this->mWorld = world;
 
 	// The way this works now is a bit different... so consider changing this.
 	if(initializingSettings->find("ogreName") != initializingSettings->end())
@@ -82,28 +80,20 @@ Nimbus::Renderable::~Renderable()
 
 void Nimbus::Renderable::startup(void)
 {
-	// STARTUP FOR RENDERABLE
-	/*
-		Initialize all the various renderable stuff for
-		Ogre and meshes and scenegraphing and yeah.
-	*/
-	Ogre::SceneNode* node = mWorld->getWorldNode()->createChildSceneNode();
-	node->attachObject(this->mModel);
+	this->mNode = mWorld->getWorldNode()->createChildSceneNode();
+	this->mNode->attachObject(this->mModel);
 
 	// Setting initial properties
-	node->setPosition(mPosition.x, mPosition.x, mPosition.z);
-	node->setScale(mScale.x, mScale.y, mScale.z);
-	node->pitch(Degree(mRotation.x));
-	node->yaw(Degree(mRotation.y));
-	node->roll(Degree(mRotation.z));
+	this->mNode->setPosition(mPosition.x, mPosition.x, mPosition.z);
+	this->mNode->setScale(mScale.x, mScale.y, mScale.z);
+	this->mNode->pitch(Degree(mRotation.x));
+	this->mNode->yaw(Degree(mRotation.y));
+	this->mNode->roll(Degree(mRotation.z));
 }
 
 void Nimbus::Renderable::update(void)
 {
-	// UPDATE FOR RENDERABLE
-	/*
-		Update rendering information.
-	*/
+	this->mNode->yaw(Degree(0.5), Node::TS_WORLD);
 }
 
 void Nimbus::Renderable::shutdown(void)
