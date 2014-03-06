@@ -94,7 +94,8 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 						LogManager::getSingleton().logMessage(logBuilder.str());
 						logBuilder.str("");
 
-						entity->addBehaviour(this->mBehaviourInstances[entitySectionType]->clone(entitySettings));
+						entity->addBehaviour(this->mBehaviourInstances[entitySectionType]->clone(entitySettings),
+							entitySectionType);
 					}
 				}
 

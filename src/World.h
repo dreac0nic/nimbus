@@ -35,6 +35,9 @@ namespace Nimbus
 	class World
 	{
 	private:
+		// The counter for each thing that we add to the world
+		int idCounter;
+
 		// The list that keeps track of all entities currently in the world
 		std::vector<GameEntity*> mEntities;
 
@@ -47,6 +50,7 @@ namespace Nimbus
 		virtual ~World(void);
 
 		// Accessor methods
+		int getCurrentId();
 		std::vector<GameEntity*> getEntities() { return this->mEntities; }
 		void addEntity(GameEntity* entity);
 		Ogre::SceneNode* getWorldNode() { return this->mWorldNode; }

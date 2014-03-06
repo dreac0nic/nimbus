@@ -8,17 +8,12 @@
 
 namespace Nimbus
 {
-	typedef std::string BehaviourType;
-
 	/* THE ULTIMATE STUBBINESS */
 	class Behaviour
 	{
 	protected:
 		/* Handle to the world for Behavioural use. */
 		World* mWorld;
-
-		/* Behaviour type */
-		BehaviourType mBehaviourType;
 
 	public:
 		Behaviour(World* world) { this->mWorld = world;}
@@ -34,9 +29,6 @@ namespace Nimbus
 		Note: You are responsible for garbage collecting this behavior. */
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings) = 0;
 		virtual Behaviour* clone() = 0;
-
-		/* Return the entity type name. */
-		BehaviourType getBehaviourType() { return this->mBehaviourType; }
 	};
 }
 

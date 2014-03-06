@@ -10,8 +10,10 @@ namespace Nimbus
 		public Behaviour
 	{
 	private:
-		std::string mModelPath;
 		Ogre::Entity* mModel;
+		Ogre::Vector3 mPosition;
+		Ogre::Vector3 mScale;
+		Ogre::Vector3 mRotation;
 
 	public:
 		Renderable(World *world);
@@ -21,6 +23,9 @@ namespace Nimbus
 
 		// Accessor methods
 		virtual Ogre::Entity* getEntity();
+		virtual Ogre::Vector3 getPosition();
+		virtual Ogre::Vector3 getScale();
+		virtual Ogre::Vector3 getRotation();
 
 		// From: Behaviour
 		virtual void startup(void);

@@ -41,7 +41,7 @@ namespace Nimbus
 
 		// OBJECT METHODS --
 		void startup(void);
-		bool addBehaviour(Behaviour* behaviour);
+		bool addBehaviour(Behaviour* behaviour, std::string name);
 		void update(void);
 		void removeBehaviour(Behaviour* behaviour);
 

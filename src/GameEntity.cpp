@@ -54,9 +54,9 @@ void GameEntity::startup()
 	}
 }
 
-bool GameEntity::addBehaviour(Behaviour* behaviour)
+bool GameEntity::addBehaviour(Behaviour* behaviour, std::string name)
 {
-	this->mBehaviours[behaviour->getBehaviourType()] = behaviour;
+	this->mBehaviours[name] = behaviour;
 	return true;
 }
 
