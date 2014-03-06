@@ -4,11 +4,13 @@
 using namespace Nimbus;
 using namespace Ogre;
 
-GameEntity::GameEntity(void)
+GameEntity::GameEntity(int id) :
+	mId(id)
 {
 }
 
-GameEntity::GameEntity(GameEntity* other)
+GameEntity::GameEntity(int id, GameEntity* other) :
+	mId(id)
 {
 	// Copying all of the properties and behaviours in the given entity to this new entity
 	this->mEntityType = other->getEntityType();
@@ -29,13 +31,6 @@ void GameEntity::configure(ConfigFile::SettingsMultiMap* initializingSettings)
 {
 	ConfigFile::SettingsMultiMap::iterator currentSetting;
 	std::stringstream settingConverter;
-
-	currentSetting = initializingSettings->find("age");
-	if (currentSetting != initializingSettings->end())
-	{
-		settingConverter = std::stringstream((*currentSetting).second);
-		settingConverter >> this->mAge;
-	}
 
 	currentSetting = initializingSettings->find("name");
 	if (currentSetting != initializingSettings->end())

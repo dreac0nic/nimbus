@@ -19,15 +19,15 @@ namespace Nimbus
 		/* The type name of the game entity. */
 		GameEntityType mEntityType;
 
-		/* Test variable to prove that loading entities does indeed work. */
-		int mAge;
+		/* The id of the entity. */
+		int mId;
 
 	public:
 		/* Standard blank constructor. */
-		GameEntity(void);
+		GameEntity(int id);
 
 		/* Prototype constructor. */
-		GameEntity(GameEntity* other);
+		GameEntity(int id, GameEntity* other);
 
 		/* Standard blank destructor. */
 		~GameEntity(void);
@@ -51,6 +51,9 @@ namespace Nimbus
 
 		/* Return the entity type name. */
 		GameEntityType getEntityType() { return this->mEntityType; }
+
+		/* Gets the id of the entity. */
+		int getEntityId() { return this->mId; }
 	};
 }
 

@@ -65,7 +65,7 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 				entityConfig.load(entityPath);
 
 				// Create a blank entity to morph into the prototype
-				GameEntity* entity = new GameEntity();
+				GameEntity* entity = new GameEntity(this->mWorld->getCurrentId());
 
 				// Iterate through all the sections to initialize the prototype entity
 				ConfigFile::SectionIterator entitySectionIterator = entityConfig.getSectionIterator();
@@ -123,7 +123,7 @@ Nimbus::EntityFactory::~EntityFactory(void)
 
 GameEntity* Nimbus::EntityFactory::createEntity(std::string entityType)
 {
-	GameEntity* factorizedEntity = new GameEntity(this->mEntityInstances[entityType]);
+	GameEntity* factorizedEntity = new GameEntity(this->mWorld->getCurrentId(), this->mEntityInstances[entityType]);
 
 	return factorizedEntity;
 }
