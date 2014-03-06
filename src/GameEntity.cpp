@@ -4,12 +4,12 @@
 using namespace Nimbus;
 using namespace Ogre;
 
-GameEntity::GameEntity(int id) :
+GameEntity::GameEntity(GameEntityId id) :
 	mId(id)
 {
 }
 
-GameEntity::GameEntity(int id, GameEntity* other) :
+GameEntity::GameEntity(GameEntityId id, GameEntity* other) :
 	mId(id)
 {
 	// Copying all of the properties and behaviours in the given entity to this new entity

@@ -9,6 +9,7 @@ namespace Nimbus
 {
 	typedef std::string GameEntityType;
 	typedef std::map<std::string, Behaviour*> behaviourmap;
+	typedef int GameEntityId;
 
 	class GameEntity
 	{
@@ -20,14 +21,14 @@ namespace Nimbus
 		GameEntityType mEntityType;
 
 		/* The id of the entity. */
-		int mId;
+		GameEntityId mId;
 
 	public:
 		/* Standard blank constructor. */
-		GameEntity(int id);
+		GameEntity(GameEntityId id);
 
 		/* Prototype constructor. */
-		GameEntity(int id, GameEntity* other);
+		GameEntity(GameEntityId id, GameEntity* other);
 
 		/* Standard blank destructor. */
 		~GameEntity(void);
