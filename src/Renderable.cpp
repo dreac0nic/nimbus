@@ -49,6 +49,13 @@ void Nimbus::Renderable::startup(void)
 		Initialize all the various renderable stuff for
 		Ogre and meshes and scenegraphing and yeah.
 	*/
+	Ogre::SceneNode* node = mWorld->getWorldNode()->createChildSceneNode();
+	node->attachObject(this->mModel);
+
+	// Hardcoding properties for now
+	node->setPosition(0, 0, -100);
+	node->setScale(40.0, 40.0, 40.0);
+	node->pitch(Degree(90));
 }
 
 void Nimbus::Renderable::update(void)

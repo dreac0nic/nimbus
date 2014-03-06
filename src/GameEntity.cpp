@@ -44,7 +44,17 @@ void GameEntity::configure(ConfigFile::SettingsMultiMap* initializingSettings)
 	}
 }
 
-bool GameEntity::add(Behaviour* behaviour)
+void GameEntity::startup()
+{
+	behaviourmap::iterator behaviour = mBehaviours.begin();
+	while (behaviour != mBehaviours.end())
+	{
+		behaviour->second->startup();
+		behaviour++;
+	}
+}
+
+bool GameEntity::addBehaviour(Behaviour* behaviour)
 {
 	this->mBehaviours[behaviour->getBehaviourType()] = behaviour;
 	return true;
@@ -60,6 +70,6 @@ void GameEntity::update(void)
 	}
 }
 
-void remove(Behaviour* behaviour)
+void GameEntity::removeBehaviour(Behaviour* behaviour)
 {
 }

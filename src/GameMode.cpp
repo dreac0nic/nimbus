@@ -48,6 +48,19 @@ bool GameMode::initialize()
 	mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
 	// Create the camera
 	mCamera = mSceneMgr->createCamera("PlayerCam");
+
+	// Hardcoding some things for now
+	// Position the camera
+	mCamera->setPosition(Vector3(0, 50, 80));
+	mCamera->lookAt(Vector3(0, 0, -100));
+	mCamera->setNearClipDistance(5);
+	// Add a viewport for the camera
+	mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
+	// Correct the aspect ratio of the camera
+	mCamera->setAspectRatio(
+		Real(mViewport->getActualWidth()) / Real(mViewport->getActualHeight()));
+	// Set the ambient light
+	mSceneMgr->setAmbientLight(ColourValue(0.5, 0.5, 0.5));
 	
 	// Construct the game world (truthfully this should be done by the menu probably...
 	//     this would allow for game configuration and loading... of maybe we
@@ -64,6 +77,9 @@ bool GameMode::initialize()
 	std::map<std::string, void*> entityType;
 	entityType["EntityType"] = new std::string("Dragon");
 	EventSystem::getSingleton()->fireEvent(EventSystem::CREATE_ENTITY, entityType);
+
+	// Adding the world root node to the actual scene
+	this->mSceneMgr->getRootSceneNode()->addChild(this->mWorld->getWorldNode());
 
 	// Note that the RunMode has been initialized
 	this->initialized = true;

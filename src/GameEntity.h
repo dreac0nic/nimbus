@@ -40,9 +40,10 @@ namespace Nimbus
 		void configure(Ogre::ConfigFile::SettingsMultiMap* configurationSettings);
 
 		// OBJECT METHODS --
-		bool add(Behaviour* behaviour);
+		void startup(void);
+		bool addBehaviour(Behaviour* behaviour);
 		void update(void);
-		void remove(Behaviour* behaviour);
+		void removeBehaviour(Behaviour* behaviour);
 
 		// ACCESSOR METHODS --
 		/* Return a reference to the behaviours used by this entity. */
