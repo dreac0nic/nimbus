@@ -2,6 +2,9 @@
 
 using namespace Nimbus::Voronoi;
 
+std::stack<Edge*> *Edge::_pool = new std::stack<Edge*>();
+Edge *Edge::DELETED = new Edge();
+
 ///////////////Edge creation functions///////////////
 
 Edge *Edge::create(){
@@ -51,7 +54,12 @@ Edge *Edge::createBisectingEdge(Site *site0, Site *site1){
 }//end createBisectingEdge
 
 void Edge::init(){
+	_sites = new std::map<LR, Site*>();
+}
+
+Edge::Edge(){
 	_edgeIndex = _numEdges++;
+	init();
 }
 
 Edge::~Edge(){
@@ -152,6 +160,7 @@ void Edge::clipVertices(Rectangle *bounds){
 		}
 	}
 
+	_clippedVertices = new std::map<LR, Point*>();
 	if (vertex0 == _leftVertex) {
 		_clippedVertices->insert(std::pair<LR, Point*>(LR_LEFT, new Point(x0, y0)));
 		_clippedVertices->insert(std::pair<LR, Point*>(LR_RIGHT, new Point(x1, y1)));
@@ -230,8 +239,22 @@ LineSegment *Edge::voronoiEdge(){
 }
 
 ///////////////Edge list functions///////////////
-Halfedge *Edge::getHash(int b){
 
+Halfedge *Edge::getHash(int b){
+	Halfedge *halfEdge;
+
+        if (b < 0 || b >= _hashSize) {
+            return NULL;
+        }
+        halfEdge = _hash->at(b);
+        if (halfEdge != NULL && halfEdge->edge == Edge::DELETED) {
+            /* Hash table points to deleted halfedge.  Patch as necessary. */
+            _hash->at(b) = NULL;
+            // still can't dispose halfEdge yet!
+            return NULL;
+        } else {
+            return halfEdge;
+        }
 }
 
 void Edge::initList(float xmin, float deltax, int sqrt_nsites){
@@ -239,7 +262,7 @@ void Edge::initList(float xmin, float deltax, int sqrt_nsites){
 	_deltax = deltax;
 	_hashSize = 2 * sqrt_nsites;
 
-	_hash->capacity= _hashSize;
+	_hash = new std::vector<Halfedge*>();
 
 	// two dummy Halfedges:
 	_leftEnd = Halfedge::createDummy();
@@ -307,4 +330,158 @@ Halfedge *Edge::edgeListLeftNeighbor(Point *p){
 		_hash->at(bucket) = halfEdge;
 	}
 	return halfEdge;
+}
+
+//////////////Edge sorting functions//////////////
+
+
+void Edge::initQueue(){
+        _edges = new std::vector<Edge*>();
+        _edgeOrientations = new std::vector<LR>();
+}
+
+std::vector<Edge*> *Edge::getEdges(){
+	return _edges;
+}
+
+std::vector<LR> *Edge::getEdgeOrientations(){
+	return _edgeOrientations;
+}
+
+std::vector<Edge*> *Edge::reorderBySite(std::vector<Edge*> *origEdges){
+	int i;
+	int n = origEdges->size();
+	Edge *edge;
+	// we're going to reorder the edges in order of traversal
+	std::vector<bool> *done;
+
+	done->insert(done->begin(), n, false);
+
+	int nDone = 0;
+
+	std::vector<Edge*> *newEdges;
+	std::vector<Edge*>::iterator newEdgesIt = newEdges->begin();
+
+	std::vector<LR>::iterator edgeOrientIt = _edgeOrientations->begin();
+
+	i = 0;
+	edge = origEdges->at(i);
+	newEdges->at(i) = edge;
+	edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_LEFT);
+	Site *firstPoint = edge->getLeftSite();
+	Site *lastPoint = edge->getRightSite();
+
+	done->at(i) = true;
+	++nDone;
+
+	while (nDone < n) {
+		for (i = 1; i < n; ++i) {
+			if (done->at(i)) {
+				continue;
+			}
+			edge = origEdges->at(i);
+			Site *leftPoint = edge->getLeftSite();
+			Site *rightPoint = edge->getRightSite();
+
+			if (leftPoint == lastPoint) {
+				lastPoint = rightPoint;
+				edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_LEFT);
+				newEdgesIt = newEdges->insert(newEdgesIt, edge);
+				done->at(i) = true;
+			} else if (rightPoint == firstPoint) {
+				firstPoint = leftPoint;
+				edgeOrientIt = _edgeOrientations->insert(_edgeOrientations->begin(), LR_LEFT);
+				newEdges->insert(newEdges->begin(), edge);
+				done->at(i) = true;
+			} else if (leftPoint == firstPoint) {
+				firstPoint = rightPoint;
+				edgeOrientIt = _edgeOrientations->insert(_edgeOrientations->begin(), LR_RIGHT);
+				newEdgesIt = newEdges->insert(newEdges->begin(), edge);
+
+				done->at(i) = true;
+			} else if (rightPoint == lastPoint) {
+				lastPoint = leftPoint;
+				edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_RIGHT);
+				newEdgesIt = newEdges->insert(newEdgesIt, edge);
+				done->at(i) = true;
+			}
+			if (done->at(i)) {
+				++nDone;
+			}
+		}
+	}
+
+	return newEdges;
+}
+
+std::vector<Edge*> *Edge::reorderByVertex(std::vector<Edge*> *origEdges){
+	int i;
+	int n = origEdges->size();
+	Edge *edge;
+	// we're going to reorder the edges in order of traversal
+	std::vector<bool> *done;
+
+	done->insert(done->begin(), n, false);
+
+	int nDone = 0;
+
+	std::vector<Edge*> *newEdges;
+	std::vector<Edge*>::iterator newEdgesIt = newEdges->begin();
+
+	std::vector<LR>::iterator edgeOrientIt = _edgeOrientations->begin();
+
+	i = 0;
+	edge = origEdges->at(i);
+	newEdges->at(i) = edge;
+	edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_LEFT);
+	Vertex *firstPoint = edge->getLeftVertex();
+	Vertex *lastPoint = edge->getRightVertex();
+
+	if (firstPoint == Vertex::VERTEX_AT_INFINITY || lastPoint == Vertex::VERTEX_AT_INFINITY) {
+		return new std::vector<Edge*>;
+	}
+
+	done->at(i) = true;
+	++nDone;
+
+	while (nDone < n) {
+		for (i = 1; i < n; ++i) {
+			if (done->at(i)) {
+				continue;
+			}
+			edge = origEdges->at(i);
+			Vertex *leftPoint = edge->getRightVertex();
+			Vertex *rightPoint = edge->getRightVertex();
+			if (firstPoint == Vertex::VERTEX_AT_INFINITY || lastPoint == Vertex::VERTEX_AT_INFINITY) {
+				return new std::vector<Edge*>;
+			}
+			if (leftPoint == lastPoint) {
+				lastPoint = rightPoint;
+				edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_LEFT);
+				newEdgesIt = newEdges->insert(newEdgesIt, edge);
+				done->at(i) = true;
+			} else if (rightPoint == firstPoint) {
+				firstPoint = leftPoint;
+				edgeOrientIt = _edgeOrientations->insert(_edgeOrientations->begin(), LR_LEFT);
+				newEdges->insert(newEdges->begin(), edge);
+				done->at(i) = true;
+			} else if (leftPoint == firstPoint) {
+				firstPoint = rightPoint;
+				edgeOrientIt = _edgeOrientations->insert(_edgeOrientations->begin(), LR_RIGHT);
+				newEdgesIt = newEdges->insert(newEdges->begin(), edge);
+
+				done->at(i) = true;
+			} else if (rightPoint == lastPoint) {
+				lastPoint = leftPoint;
+				edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_RIGHT);
+				newEdgesIt = newEdges->insert(newEdgesIt, edge);
+				done->at(i) = true;
+			}
+			if (done->at(i)) {
+				++nDone;
+			}
+		}
+	}
+
+	return newEdges;
 }

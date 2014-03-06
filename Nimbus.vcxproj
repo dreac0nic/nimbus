@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="src\EventSystem.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -19,7 +18,9 @@
     <ClCompile Include="src\MapGeneration\Halfedge.cpp" />
     <ClCompile Include="src\MapGeneration\LineSegment.cpp" />
     <ClCompile Include="src\MapGeneration\Polygon.cpp" />
+    <ClCompile Include="src\MapGeneration\Rectangle.cpp" />
     <ClCompile Include="src\MapGeneration\Site.cpp" />
+    <ClCompile Include="src\MapGeneration\Util.cpp" />
     <ClCompile Include="src\MapGeneration\Vertex.cpp" />
     <ClCompile Include="src\MapGeneration\Voronoi.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />

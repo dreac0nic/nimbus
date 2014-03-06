@@ -57,7 +57,10 @@
     <ClCompile Include="src\MapGeneration\Site.cpp">
       <Filter>Source Files\MapGeneration</Filter>
     </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
+    <ClCompile Include="src\MapGeneration\Rectangle.cpp">
+      <Filter>Source Files\MapGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Util.cpp">
       <Filter>Source Files\MapGeneration</Filter>
     </ClCompile>
   </ItemGroup>
