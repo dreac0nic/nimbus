@@ -65,11 +65,11 @@ GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(
 	this->currentEntity = other.currentEntity;
 }
 
-GameEntitySet::GeneralEntityIterator& GameEntitySet::GeneralEntityIterator::operator++()
+const GameEntitySet::GeneralEntityIterator& GameEntitySet::GeneralEntityIterator::operator++()
 {
-	GeneralEntityIterator* temp = new GeneralEntityIterator(*this);
-	++this->currentEntity;
-	return *temp;
+	this->currentEntity = this->currentEntity++;
+
+	return *this;
 }
 
 GameEntitySet::GeneralEntityIterator& GameEntitySet::GeneralEntityIterator::operator++(int junk)

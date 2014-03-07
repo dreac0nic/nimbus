@@ -41,7 +41,7 @@ namespace Nimbus
 			GeneralEntityIterator(const GeneralEntityIterator& other);
 			
 			// Post increment
-			GeneralEntityIterator& operator++();
+			const GeneralEntityIterator& operator++();
 			// Pre increment
 			GeneralEntityIterator& operator++(int junk);
 
