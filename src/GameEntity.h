@@ -25,7 +25,7 @@ namespace Nimbus
 
 	public:
 		/* Standard blank constructor. */
-		GameEntity(GameEntityId id);
+		GameEntity(GameEntityId id, GameEntityType type);
 
 		/* Prototype constructor. */
 		GameEntity(GameEntityId id, GameEntity* other);

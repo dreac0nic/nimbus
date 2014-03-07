@@ -4,8 +4,9 @@
 using namespace Nimbus;
 using namespace Ogre;
 
-GameEntity::GameEntity(GameEntityId id) :
-	mId(id)
+GameEntity::GameEntity(GameEntityId id, GameEntityType type) :
+	mId(id),
+	mEntityType(type)
 {
 }
 

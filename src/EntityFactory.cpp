@@ -25,7 +25,7 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 
 	// Load the behaviour prototype list
 	this->mBehaviourInstances.clear();
-	this->mBehaviourInstances["Renderable"] = new Renderable(world);
+	this->mBehaviourInstances["Renderable"] = new Renderable("Renderable", world);
 
 	logBuilder << "(Nimbus) Loading game entity types from " << filePathsFile;
 	LogManager::getSingleton().logMessage(logBuilder.str());
@@ -65,7 +65,7 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 				entityConfig.load(entityPath);
 
 				// Create a blank entity to morph into the prototype
-				GameEntity* entity = new GameEntity(this->mWorld->getCurrentId());
+				GameEntity* entity = new GameEntity(this->mWorld->getCurrentId(), entityName);
 
 				// Iterate through all the sections to initialize the prototype entity
 				ConfigFile::SectionIterator entitySectionIterator = entityConfig.getSectionIterator();
