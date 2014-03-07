@@ -6,6 +6,9 @@
 #include <OgreViewport.h>
 #include <OgreSceneManager.h>
 #include "NimbusApplication.h"
+#include <OgreOverlay.h>
+#include <OgreOverlaySystem.h>
+#include <OgreOverlayManager.h>
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -42,6 +45,16 @@ bool TestMode::initialize()
 
 	// Create the scene manager
 	mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
+
+	// Overlay stuffz
+	Ogre::OverlaySystem* overlaySystem = new Ogre::OverlaySystem;
+	mSceneMgr->addRenderQueueListener(overlaySystem);
+
+	Ogre::OverlayManager* mOverlayMgr = Ogre::OverlayManager::getSingletonPtr();
+
+	Ogre::Overlay* theOverlay = mOverlayMgr->create("theOverlay");
+
+
 
 	// Create the camera
 	mCamera = mSceneMgr->createCamera("PlayerCam");
