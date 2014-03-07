@@ -4,13 +4,13 @@
 using namespace Ogre;
 using namespace Nimbus;
 
-Nimbus::Renderable::Renderable(World* world):
-	Behaviour(world)
+Nimbus::Renderable::Renderable(BehaviourType type, World* world):
+	Behaviour(type, world)
 {
 }
 
-Nimbus::Renderable::Renderable(World* world, ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(world)
+Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::SettingsMultiMap* initializingSettings):
+	Behaviour(type, world)
 {
 	std::string ogreName;
 
@@ -66,6 +66,7 @@ Nimbus::Renderable::Renderable(World* world, ConfigFile::SettingsMultiMap* initi
 Nimbus::Renderable::Renderable(Nimbus::Renderable* other, World* world):
 	Behaviour(other, world)
 {
+	this->mBehaviourType = other->getBehaviourType();
 	this->mWorld = world;
 	this->mModel = other->getEntity();
 	this->mPosition = other->getPosition();
@@ -126,7 +127,7 @@ Ogre::Vector3 Nimbus::Renderable::getRotation()
 
 Behaviour* Nimbus::Renderable::clone(ConfigFile::SettingsMultiMap* initializingSettings)
 {
-	return new Nimbus::Renderable(this->mWorld, initializingSettings);
+	return new Nimbus::Renderable(this->mBehaviourType, this->mWorld, initializingSettings);
 }
 
 Behaviour* Nimbus::Renderable::clone()

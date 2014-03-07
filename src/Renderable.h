@@ -17,8 +17,8 @@ namespace Nimbus
 		Ogre::SceneNode* mNode;
 
 	public:
-		Renderable(World *world);
-		Renderable(World *world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+		Renderable(BehaviourType type, World *world);
+		Renderable(BehaviourType type, World *world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
 		Renderable(Renderable* other, World* world);
 		virtual ~Renderable(void);
 

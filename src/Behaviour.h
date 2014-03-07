@@ -8,6 +8,8 @@
 
 namespace Nimbus
 {
+	typedef std::string BehaviourType;
+
 	/* THE ULTIMATE STUBBINESS */
 	class Behaviour
 	{
@@ -15,9 +17,14 @@ namespace Nimbus
 		/* Handle to the world for Behavioural use. */
 		World* mWorld;
 
+		/* The type of Behaviour */
+		BehaviourType mBehaviourType;
+
 	public:
-		Behaviour(World* world) { this->mWorld = world;}
-		Behaviour(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings) { this->mWorld = world; }
+		Behaviour(BehaviourType type, World* world) :
+			mWorld(world), mBehaviourType(type) {}
+		Behaviour(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings) :
+			mWorld(world), mBehaviourType(type) {}
 		Behaviour(Behaviour* other, World* world) {};
 		virtual ~Behaviour(void) {}
 
@@ -29,6 +36,9 @@ namespace Nimbus
 		Note: You are responsible for garbage collecting this behavior. */
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings) = 0;
 		virtual Behaviour* clone() = 0;
+
+		// Public accessors
+		BehaviourType getBehaviourType() { return this->mBehaviourType; }
 	};
 }
 
