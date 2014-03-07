@@ -54,7 +54,22 @@ bool TestMode::initialize()
 
 	Ogre::Overlay* theOverlay = mOverlayMgr->create("theOverlay");
 
+	Ogre::OverlayElement* theOneElementToRuleThemAll = mOverlayMgr->createOverlayElement("TextArea", "cowtype");
+	theOneElementToRuleThemAll->setMetricsMode(Ogre::GMM_PIXELS);
+	theOneElementToRuleThemAll->setPosition(20,20);
+	theOneElementToRuleThemAll->setDimensions(100, 100);
 
+	theOneElementToRuleThemAll->setCaption("This is not text");
+
+	Ogre::OverlayContainer* theContainer = static_cast<Ogre::OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "TheContainer"));
+	theContainer->setMetricsMode(Ogre::GMM_PIXELS);
+	theContainer->setPosition(10,10);
+
+	theContainer->addChild(theOneElementToRuleThemAll);
+
+	theOverlay->add2D(theContainer);
+
+	theOverlay->show();
 
 	// Create the camera
 	mCamera = mSceneMgr->createCamera("PlayerCam");
@@ -69,6 +84,8 @@ bool TestMode::initialize()
 
 	// Add a viewport for the camera
 	mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
+
+	mViewport->setBackgroundColour(Ogre::ColourValue(1.0f, .4f, .4f));
 
 	//////////
 	// Set up the appropriate models
