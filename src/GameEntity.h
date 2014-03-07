@@ -3,7 +3,7 @@
 
 #include <map>
 
-#include "Behaviour.h"
+#include "./Behaviours/Behaviour.h"
 
 namespace Nimbus
 {

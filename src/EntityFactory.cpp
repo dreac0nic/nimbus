@@ -1,9 +1,11 @@
+// Includes in source ...
 #include <sstream>
 #include <OgreConfigFile.h>
 #include <OgreLogManager.h>
 
 #include "EntityFactory.h"
-#include "Renderable.h"
+#include "./Behaviours/Renderable.h"
+// ... wut?
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -11,6 +13,9 @@ using namespace std;
 
 Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 {
+	// Error message for above includes ...
+	std::cerr << "!!! CAUTION !!! EntityFactory.cpp contains includes! Confirm with team before removing message!!" << std::endl;
+
 	// Debugness! An logs!
 	std::stringstream logBuilder;
 

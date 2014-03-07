@@ -4,7 +4,7 @@
 #include <string>
 #include <OgreConfigFile.h>
 
-#include "World.h"
+#include "..\World.h"
 
 namespace Nimbus
 {

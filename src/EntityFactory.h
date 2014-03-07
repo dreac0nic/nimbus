@@ -6,7 +6,7 @@
 #include <map>
 
 #include "GameEntity.h"
-#include "Behaviour.h"
+#include "./Behaviours/Behaviour.h"
 #include "EventListener.h"
 #include "EventSystem.h"
 
