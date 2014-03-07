@@ -67,9 +67,9 @@ GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(
 
 GameEntitySet::GeneralEntityIterator& GameEntitySet::GeneralEntityIterator::operator++()
 {
-	GeneralEntityIterator temp(*this);
+	GeneralEntityIterator* temp = new GeneralEntityIterator(*this);
 	++this->currentEntity;
-	return temp;
+	return *temp;
 }
 
 GameEntitySet::GeneralEntityIterator& GameEntitySet::GeneralEntityIterator::operator++(int junk)
