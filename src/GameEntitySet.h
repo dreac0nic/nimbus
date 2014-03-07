@@ -9,15 +9,18 @@
 namespace Nimbus
 {
 	
-	/* THE ULTIMATE STUBBINESS */
+	/* The GameEntitySet is a class for holding all the entities in the game
+	world. It's main benefit and purpose is to provide custom iterators over
+	entities so that users can select specific relevant sets of entities
+	based on their component behaviours. */
 	class GameEntitySet
 	{
 	public:
 		// Public iterator generic type
 		typedef std::iterator<std::input_iterator_tag, GameEntity> entityiterator;
 	
-	private:
-		// Private iterator implementations
+	//private:
+		// Private iterator implementations... umm I'd like to make this private
 		
 		/* An implementation of the entity iterator that iterates over all the entities
 		in the entity set.
@@ -26,12 +29,14 @@ namespace Nimbus
 			public entityiterator
 		{
 		private:
+			typedef std::map<GameEntityId, GameEntity*>::iterator generaliterator;
+
 			// The current entity
-			std::map<GameEntityId, GameEntity*>::iterator currentEntity;
+			generaliterator currentEntity;
 
 		public:
 			// Umm... not sure why we need this
-			GeneralEntityIterator(GameEntity* entity);
+			GeneralEntityIterator(generaliterator& entity);
 			// Copy constructor
 			GeneralEntityIterator(const GeneralEntityIterator& other);
 			
@@ -51,7 +56,11 @@ namespace Nimbus
 			bool operator!=(const GeneralEntityIterator& rhs);
 		};
 
-		std::map<GameEntityType, std::vector<GameEntity* > > mEntitiesByType;
+	private:
+		// Member variables
+
+		std::map<GameEntityType, std::list<GameEntity*> > mEntitiesByType;
+		std::map<BehaviourType, std::list<GameEntity*> > mEntitiesByBehaviour;
 		std::map<GameEntityId, GameEntity*> mEntitiesById;
 
 	public:
@@ -60,7 +69,8 @@ namespace Nimbus
 
 		void addGameEntity(GameEntity* entity);
 
-		entityiterator getIterator(GameEntityType type);
+		GeneralEntityIterator begin(GameEntityType type = "");
+		GeneralEntityIterator end(GameEntityType type = "");
 	};
 }
 
