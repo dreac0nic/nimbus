@@ -1,13 +1,19 @@
-#include "EntityFactory.h"
-#include "BlankBehaviour.h"
+#include <sstream>
 #include <OgreConfigFile.h>
+#include <OgreLogManager.h>
+
+#include "EntityFactory.h"
+#include "Renderable.h"
 
 using namespace Nimbus;
 using namespace Ogre;
 using namespace std;
 
-EntityFactory::EntityFactory(World* world, std::string filePathsFile)
+Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 {
+	// Debugness! An logs!
+	std::stringstream logBuilder;
+
 	// Storing the world for future use
 	this->mWorld = world;
 
@@ -17,14 +23,13 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 	// The type of the current settings section
 	string filePathsSectionType;
 
-	/* The current entity
-	GameEntity* currentEntity = NULL;
-	GameEntityType currentEntityType;
-
-	Behaviour* tempBehaviour = NULL;*/
-
 	// Load the behaviour prototype list
-	//this->mBehaviourInstances["BlankBehaviour"] = new BlankBehaviour(world);
+	this->mBehaviourInstances.clear();
+	this->mBehaviourInstances["Renderable"] = new Renderable("Renderable", world);
+
+	logBuilder << "(Nimbus) Loading game entity types from " << filePathsFile;
+	LogManager::getSingleton().logMessage(logBuilder.str());
+	logBuilder.str("");
 
 	// Load the entity type config file
 	// ../../assets/scripts/ConfigFiles.ini
@@ -38,51 +43,70 @@ EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 
 		ConfigFile::SettingsMultiMap* filePathsSettings = filePathsSectionIterator.getNext();
 
-		// If defining a new entity type
+		// If defining the entity types
 		if(filePathsSectionType == "Entities")
 		{
-			/*if(currentEntity != NULL)
+			// For each entity type in the section
+			for(ConfigFile::SettingsIterator::iterator entityPaths = filePathsSettings->begin();
+				entityPaths != filePathsSettings->end();
+				++entityPaths)
 			{
-				this->mEntityInstances[currentEntityType] = currentEntity;
+				// Store the entity name and the path to the entity file
+				string entityName = entityPaths->first;
+				string entityPath = entityPaths->second;
 
-				currentEntity = NULL;
-			}
+				logBuilder << "(Nimbus)     Loading " << entityName << " from " << entityPath;
+				LogManager::getSingleton().logMessage(logBuilder.str());
+				logBuilder.str("");
 
-			currentEntity = new GameEntity(settings);
-			currentEntityType = currentEntity->getEntityType();*/
+				// Setup a new entity config file for the specific entity type
+				ConfigFile entityConfig;
+				string entitySectionType;
+				entityConfig.load(entityPath);
 
-			ConfigFile::SettingsMultiMap::iterator entityPaths = filePathsSettings->begin();
-			string entityName = entityPaths->first;
-			string entityPath = entityPaths->second;
+				// Create a blank entity to morph into the prototype
+				GameEntity* entity = new GameEntity(this->mWorld->getCurrentId(), entityName);
 
-			ConfigFile entityConfig;
-			string entitySectionType;
-			entityConfig.load(entityPath);
-			ConfigFile::SectionIterator entitySectionIterator = entityConfig.getSectionIterator();
-			while(entitySectionIterator.hasMoreElements())
-			{
-				entitySectionType = entitySectionIterator.peekNextKey();
+				// Iterate through all the sections to initialize the prototype entity
+				ConfigFile::SectionIterator entitySectionIterator = entityConfig.getSectionIterator();
+				while(entitySectionIterator.hasMoreElements())
+				{
+					entitySectionType = entitySectionIterator.peekNextKey();
 
-				ConfigFile::SettingsMultiMap* entitySettings = entitySectionIterator.getNext();
+					ConfigFile::SettingsMultiMap* entitySettings = entitySectionIterator.getNext();
+
+					// If this is the general settings section
+					if(entitySectionType == "General")
+					{
+						logBuilder << "(Nimbus)         Setting general settings for " << entityName;
+						LogManager::getSingleton().logMessage(logBuilder.str());
+						logBuilder.str("");
+
+						// Configure the entity itself
+						entity->configure(entitySettings);
+					}
+					// Otherwise add the appropriate behaviour to the entity
+					else if(entitySectionType != "")
+					{
+						logBuilder << "(Nimbus)         Adding the " << entitySectionType << " behaviour to " << entityName;
+						LogManager::getSingleton().logMessage(logBuilder.str());
+						logBuilder.str("");
+
+						entity->addBehaviour(this->mBehaviourInstances[entitySectionType]->clone(entitySettings),
+							entitySectionType);
+					}
+				}
+
+				// Adding the entity into the map
+				this->mEntityInstances[entityName] = entity;
 			}
 		}
-		/* If defining a behaviour for the current entity type
-		else if(sectionType == "Behaviour")
-		{
-			if(currentEntity != NULL)
-			{
-				// ConfigFile::SettingsMultiMap::iterator settingIterator = settings->find("name");
-				tempBehaviour = this->mBehaviourInstances[(*(settings->find("name"))).second]->clone(settings);
-				currentEntity->add(tempBehaviour);
-			}
-		}*/
 	}
 
-	// Store the last entity type loaded
-	//this->mEntityInstances[currentEntityType] = currentEntity;
+	EventSystem::getSingleton()->registerListener(new CreateEntityListener(this), EventSystem::EventType::CREATE_ENTITY);
 }
 
-EntityFactory::~EntityFactory(void)
+Nimbus::EntityFactory::~EntityFactory(void)
 {
 	// Delete all prototype Entities
 	for(std::map<GameEntityType, GameEntity*>::iterator i = this->mEntityInstances.begin(); i != this->mEntityInstances.end(); ++i)
@@ -97,9 +121,26 @@ EntityFactory::~EntityFactory(void)
 	}
 }
 
-GameEntity* EntityFactory::createEntity(std::string entityType)
+GameEntity* Nimbus::EntityFactory::createEntity(std::string entityType)
 {
-	GameEntity* factorizedEntity = new GameEntity;
+	GameEntity* factorizedEntity = new GameEntity(this->mWorld->getCurrentId(), this->mEntityInstances[entityType]);
 
 	return factorizedEntity;
+}
+
+void Nimbus::EntityFactory::CreateEntityListener::handleEvent(payloadmap payload)
+{
+	if (payload.find("EntityType") != payload.end())
+	{
+		GameEntity* entity = containingFactory->createEntity(*(static_cast<string*>(payload["EntityType"])));
+		containingFactory->mWorld->addEntity(entity);
+	}
+
+	// Cleaning up any unneeded payload memory space
+	payloadmap::iterator payloads = payload.begin();
+	while (payloads != payload.end())
+	{
+		delete payloads->second;
+		payloads++;
+	}
 }

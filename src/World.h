@@ -1,8 +1,12 @@
 #ifndef NIMBUS_WORLD_H
 #define NIMBUS_WORLD_H
 
+#include <vector>
+#include <OgreSceneNode.h>
+
 namespace Nimbus
 {
+	class GameEntity;
 	/** This class aggregates the entire world of Nimbus.
 	 
 	 All the elements that make up the world should be placed in this class.
@@ -30,9 +34,27 @@ namespace Nimbus
 	 */
 	class World
 	{
+	private:
+		// The counter for each thing that we add to the world
+		int idCounter;
+
+		// The list that keeps track of all entities currently in the world
+		std::vector<GameEntity*> mEntities;
+
+		// The scene node that contains everything
+		Ogre::SceneNode* mWorldNode;
+		Ogre::SceneManager* mSceneManager;
+
 	public:
-		World(void);
+		World(Ogre::SceneManager* sceneManager);
 		virtual ~World(void);
+
+		// Accessor methods
+		int getCurrentId();
+		std::vector<GameEntity*> getEntities() { return this->mEntities; }
+		void addEntity(GameEntity* entity);
+		Ogre::SceneNode* getWorldNode() { return this->mWorldNode; }
+		Ogre::SceneManager* getSceneManager() { return this->mSceneManager; }
 	};
 
 }

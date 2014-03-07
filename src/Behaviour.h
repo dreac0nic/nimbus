@@ -17,12 +17,15 @@ namespace Nimbus
 		/* Handle to the world for Behavioural use. */
 		World* mWorld;
 
-		/* Behaviour type */
+		/* The type of Behaviour */
 		BehaviourType mBehaviourType;
 
 	public:
-		Behaviour(World* world) { this->mWorld = world;}
-		Behaviour(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings) { this->mWorld = world; } // Fix with delegating constructor, later
+		Behaviour(BehaviourType type, World* world) :
+			mWorld(world), mBehaviourType(type) {}
+		Behaviour(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings) :
+			mWorld(world), mBehaviourType(type) {}
+		Behaviour(Behaviour* other, World* world) {};
 		virtual ~Behaviour(void) {}
 
 		virtual void startup(void) = 0;
@@ -30,10 +33,12 @@ namespace Nimbus
 		virtual void shutdown(void) = 0;
 
 		/* In form with the prototype pattern, this method creates a new instance of the behaviour. (Deep copy)
-
-		Note: You are responsible for garbage collecting this behavior.
-		*/
+		Note: You are responsible for garbage collecting this behavior. */
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings) = 0;
+		virtual Behaviour* clone() = 0;
+
+		// Public accessors
+		BehaviourType getBehaviourType() { return this->mBehaviourType; }
 	};
 }
 

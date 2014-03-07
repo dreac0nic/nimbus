@@ -52,7 +52,7 @@ namespace Nimbus
 		// CLASS MEMBERS --
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
 		 */
-		enum EventType { SHUTDOWN, MOUSE_CLICKED };
+		enum EventType { SHUTDOWN, MOUSE_CLICKED, CREATE_ENTITY };
 		/* EVENT TYPE INFORMATION
 		 
 		 EXAMPLE_EVENT:
@@ -73,6 +73,12 @@ namespace Nimbus
 			Payload:
 				"ButtonPressed" => OIS::MouseButtonID
 				"ScreenPosition" => Ogre::Vector2
+
+		CREATE_ENTITY
+			The event that causes the EntityFactory to produce a new entity of given type.
+
+			Payload:
+				"EntityType" => std::string
 		*/
 
 		/** Gets the singleton.

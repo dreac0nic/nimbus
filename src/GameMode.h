@@ -27,11 +27,13 @@ namespace Nimbus
 		// The Entity Manager
 		EntityManager* mEntityMan;
 
-		// The Entity Factory
-		EntityFactory* mEntityFactory;
-
 		// The game World
 		World* mWorld;
+
+		// Ogre variables
+		Ogre::SceneManager* mSceneMgr;
+		Ogre::Camera* mCamera;
+		Ogre::Viewport* mViewport;
 
 	protected:
 		// From Nimbus::RunMode
