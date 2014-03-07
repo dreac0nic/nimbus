@@ -41,7 +41,7 @@ void Nimbus::Rainy::shutdown(void)
 	*/
 }
 
-Behaviour* Nimbus::Rainy::clone(ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Nimbus::Rainy::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
 {
 	return new Nimbus::Rainy(this->mWorld, initializingSettings);
 }

@@ -129,8 +129,3 @@ Behaviour* Nimbus::Renderable::clone(ConfigFile::SettingsMultiMap* initializingS
 {
 	return new Nimbus::Renderable(this->mBehaviourType, this->mWorld, initializingSettings);
 }
-
-Behaviour* Nimbus::Renderable::clone()
-{
-	return new Nimbus::Renderable(this, this->mWorld);
-}

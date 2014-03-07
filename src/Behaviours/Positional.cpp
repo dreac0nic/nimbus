@@ -41,7 +41,7 @@ void Nimbus::Positional::shutdown(void)
 	*/
 }
 
-Behaviour* Nimbus::Positional::clone(ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Nimbus::Positional::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
 {
 	return new Nimbus::Positional(this->mWorld, initializingSettings);
 }

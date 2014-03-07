@@ -41,7 +41,7 @@ void Nimbus::FlockSoaring::shutdown(void)
 	*/
 }
 
-Behaviour* Nimbus::FlockSoaring::clone(ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Nimbus::FlockSoaring::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
 {
 	return new Nimbus::FlockSoaring(this->mWorld, initializingSettings);
 }

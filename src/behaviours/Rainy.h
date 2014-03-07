@@ -40,7 +40,7 @@ namespace Nimbus
 		/* Duplicates the entity using the settings given.
 			Currently merely returns a pointer given by the constructor.
 		*/
-		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
+		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
 	};
 }
 
