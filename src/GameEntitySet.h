@@ -30,13 +30,14 @@ namespace Nimbus
 		{
 		private:
 			typedef std::map<GameEntityId, GameEntity*>::iterator generaliterator;
+			std::map<GameEntityId, GameEntity*>* mEntityMap;
 
 			// The current entity
 			generaliterator currentEntity;
 
 		public:
 			// Umm... not sure why we need this
-			GeneralEntityIterator(generaliterator& entity);
+			GeneralEntityIterator(generaliterator& entity, std::map<GameEntityId, GameEntity*>* entityMap);
 			// Copy constructor
 			GeneralEntityIterator(const GeneralEntityIterator& other);
 			

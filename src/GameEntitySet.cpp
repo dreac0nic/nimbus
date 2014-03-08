@@ -2,11 +2,9 @@
 
 using namespace Nimbus;
 
-GameEntitySet::GameEntitySet(void)
+GameEntitySet::GameEntitySet(void) :
+	mEntitiesByBehaviour(), mEntitiesById(), mEntitiesByType()
 {
-	this->mEntitiesByBehaviour.clear();
-	this->mEntitiesById.clear();
-	this->mEntitiesByType.clear();
 }
 
 GameEntitySet::~GameEntitySet(void)
@@ -32,20 +30,20 @@ GameEntitySet::GeneralEntityIterator GameEntitySet::begin(GameEntityType type)
 {
 	if(type == "")
 	{
-		return GeneralEntityIterator(this->mEntitiesById.begin());
+		return GeneralEntityIterator(this->mEntitiesById.begin(), &this->mEntitiesById);
 	}
 
-	return GeneralEntityIterator(this->mEntitiesById.end());
+	return GeneralEntityIterator(this->mEntitiesById.end(), &this->mEntitiesById);
 }
 
 GameEntitySet::GeneralEntityIterator GameEntitySet::end(GameEntityType type)
 {
 	if(type == "")
 	{
-		return GeneralEntityIterator(this->mEntitiesById.end());
+		return GeneralEntityIterator(this->mEntitiesById.end(), &this->mEntitiesById);
 	}
 
-	return GeneralEntityIterator(this->mEntitiesById.end());
+	return GeneralEntityIterator(this->mEntitiesById.end(), &this->mEntitiesById);
 }
 
 //////////
@@ -54,9 +52,11 @@ GameEntitySet::GeneralEntityIterator GameEntitySet::end(GameEntityType type)
 // General Entity Iterator
 // Designed to iterate over all entities one at a time
 
-GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(generaliterator& initial)
+GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(generaliterator& initial,
+															std::map<GameEntityId, GameEntity*>* entityMap)
 {
 	this->currentEntity = initial;
+	this->mEntityMap = entityMap;
 }
 
 GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(
@@ -68,7 +68,6 @@ GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(
 const GameEntitySet::GeneralEntityIterator& GameEntitySet::GeneralEntityIterator::operator++()
 {
 	this->currentEntity = ++this->currentEntity;
-
 	return *this;
 }
 
@@ -90,10 +89,18 @@ GameEntity* GameEntitySet::GeneralEntityIterator::operator->()
 
 bool GameEntitySet::GeneralEntityIterator::operator==(const GameEntitySet::GeneralEntityIterator& rhs)
 {
+	if (this->currentEntity == mEntityMap->end() || rhs.currentEntity == mEntityMap->end())
+	{
+		return this->currentEntity == rhs.currentEntity;
+	}
 	return (*this->currentEntity).second == (*rhs.currentEntity).second;
 }
 
 bool GameEntitySet::GeneralEntityIterator::operator!=(const GameEntitySet::GeneralEntityIterator& rhs)
 {
-	return (*this->currentEntity).second != (*rhs.currentEntity).second;
+	if (this->currentEntity == mEntityMap->end() || rhs.currentEntity == mEntityMap->end())
+	{
+		return this->currentEntity != rhs.currentEntity;
+	}
+	return this->currentEntity->second != rhs.currentEntity->second;
 }

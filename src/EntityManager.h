@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "manager.h"
+#include "Manager.h"
 #include "EntityFactory.h"
 
 namespace Nimbus

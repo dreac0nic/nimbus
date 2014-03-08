@@ -1,4 +1,5 @@
 #include "EntityManager.h"
+#include "GameEntitySet.h"
 
 using namespace Nimbus;
 using namespace std;
@@ -15,10 +16,12 @@ EntityManager::~EntityManager(void)
 
 bool EntityManager::update(void)
 {
-	vector<GameEntity*> entities = this->mWorld->getEntities();
-	for (unsigned int x = 0; x < entities.size(); x++)
+	GameEntitySet* entities = this->mWorld->getEntities();
+	GameEntitySet::GeneralEntityIterator entity = entities->begin(); 
+	while (entity != entities->end())
 	{
-		entities[x]->update();
+		entity->update();
+		entity++;
 	}
 	return true;
 }
