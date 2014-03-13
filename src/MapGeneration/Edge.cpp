@@ -2,10 +2,19 @@
 
 using namespace Nimbus::Voronoi;
 
-std::stack<Edge*> *Edge::_pool = new std::stack<Edge*>();
 Edge *Edge::DELETED = new Edge();
+int Edge::_numEdges = 0;
+std::stack<Edge*> *Edge::_pool = new std::stack<Edge*>();
+std::vector<Edge*> *Edge::_edges = new std::vector<Edge*>();
+std::vector<LR> *Edge::_edgeOrientations = new std::vector<LR>();
+std::vector<Halfedge*> *Edge::_hash = new std::vector<Halfedge*>();
+Halfedge *Edge::_leftEnd;
+Halfedge *Edge::_rightEnd;
+float Edge::_deltax = 0;
+float Edge::_xmin = 0;
+int Edge::_hashSize = 0;
 
-///////////////Edge creation functions///////////////
+///////////////Edge functions///////////////
 
 Edge *Edge::create(){
 	Edge *edge;
@@ -65,6 +74,23 @@ Edge::Edge(){
 Edge::~Edge(){
 
 }
+
+float Edge::compareSitesDistances_MAX(Edge *edge0, Edge *edge1){
+	double length0 = edge0->sitesDistance();
+	double length1 = edge1->sitesDistance();
+	if (length0 < length1) {
+		return 1;
+	}
+	if (length0 > length1) {
+		return -1;
+	}
+	return 0;
+}
+
+float Edge::compareSitesDistances(Edge *edge0, Edge *edge1){
+	return -compareSitesDistances_MAX(edge0, edge1);
+}
+
 void Edge::clipVertices(Rectangle *bounds){
 	float xmin = bounds->x;
 	float ymin = bounds->y;
@@ -243,18 +269,18 @@ LineSegment *Edge::voronoiEdge(){
 Halfedge *Edge::getHash(int b){
 	Halfedge *halfEdge;
 
-        if (b < 0 || b >= _hashSize) {
-            return NULL;
-        }
-        halfEdge = _hash->at(b);
-        if (halfEdge != NULL && halfEdge->edge == Edge::DELETED) {
-            /* Hash table points to deleted halfedge.  Patch as necessary. */
-            _hash->at(b) = NULL;
-            // still can't dispose halfEdge yet!
-            return NULL;
-        } else {
-            return halfEdge;
-        }
+	if (b < 0 || b >= _hashSize) {
+		return NULL;
+	}
+	halfEdge = _hash->at(b);
+	if (halfEdge != NULL && halfEdge->edge == Edge::DELETED) {
+		/* Hash table points to deleted halfedge.  Patch as necessary. */
+		_hash->at(b) = NULL;
+		// still can't dispose halfEdge yet!
+		return NULL;
+	} else {
+		return halfEdge;
+	}
 }
 
 void Edge::initList(float xmin, float deltax, int sqrt_nsites){
@@ -336,8 +362,8 @@ Halfedge *Edge::edgeListLeftNeighbor(Point *p){
 
 
 void Edge::initQueue(){
-        _edges = new std::vector<Edge*>();
-        _edgeOrientations = new std::vector<LR>();
+	_edges = new std::vector<Edge*>();
+	_edgeOrientations = new std::vector<LR>();
 }
 
 std::vector<Edge*> *Edge::getEdges(){
@@ -353,13 +379,13 @@ std::vector<Edge*> *Edge::reorderBySite(std::vector<Edge*> *origEdges){
 	int n = origEdges->size();
 	Edge *edge;
 	// we're going to reorder the edges in order of traversal
-	std::vector<bool> *done;
+	std::vector<bool> *done = new std::vector<bool>;
 
 	done->insert(done->begin(), n, false);
 
 	int nDone = 0;
 
-	std::vector<Edge*> *newEdges;
+	std::vector<Edge*> *newEdges = new std::vector<Edge*>();
 	std::vector<Edge*>::iterator newEdgesIt = newEdges->begin();
 
 	std::vector<LR>::iterator edgeOrientIt = _edgeOrientations->begin();
@@ -419,13 +445,13 @@ std::vector<Edge*> *Edge::reorderByVertex(std::vector<Edge*> *origEdges){
 	int n = origEdges->size();
 	Edge *edge;
 	// we're going to reorder the edges in order of traversal
-	std::vector<bool> *done;
+	std::vector<bool> *done = new std::vector<bool>();
 
 	done->insert(done->begin(), n, false);
 
 	int nDone = 0;
 
-	std::vector<Edge*> *newEdges;
+	std::vector<Edge*> *newEdges = new std::vector<Edge*>();
 	std::vector<Edge*>::iterator newEdgesIt = newEdges->begin();
 
 	std::vector<LR>::iterator edgeOrientIt = _edgeOrientations->begin();

@@ -2,6 +2,14 @@
 
 using namespace Nimbus::Voronoi;
 
+std::stack<Halfedge*> *Halfedge::_pool = new std::stack<Halfedge*>();
+std::vector<Halfedge*> *Halfedge::_hash = new std::vector<Halfedge*>();
+int Halfedge::_count = 0;
+int Halfedge::_minBucket = 0;
+int Halfedge::_hashSize = 0;
+float Halfedge::_ymin = 0;
+float Halfedge::_deltay = 0;
+
 Halfedge *Halfedge::init(Edge *edge, LR lr){
 	Halfedge::edge = edge;
 	leftRight = lr;
@@ -26,7 +34,7 @@ Halfedge *Halfedge::create(Edge *edge, LR lr){
 }
 
 Halfedge *Halfedge::createDummy(){
-	return create(NULL, LR_NONE);
+	return create(NULL, LR_LEFT);
 }
 
 bool Halfedge::isLeftOf(Point *p){
