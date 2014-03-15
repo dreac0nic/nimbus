@@ -14,6 +14,7 @@
     <ClCompile Include="src\EventSystem.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\MapGeneration\Edge.cpp" />
     <ClCompile Include="src\MapGeneration\Halfedge.cpp" />
     <ClCompile Include="src\MapGeneration\LineSegment.cpp" />
@@ -25,13 +26,15 @@
     <ClCompile Include="src\MapGeneration\Voronoi.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
     <ClCompile Include="src\TestMode.cpp" />
+    <ClCompile Include="src\Tile.cpp" />
+    <ClCompile Include="src\TileEdge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EventListener.h" />
     <ClInclude Include="src\EventSystem.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Manager.h" />
-    <ClInclude Include="src\MapGeneration\Map.h" />
+    <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\MapGeneration\Voronoi.h" />
     <ClInclude Include="src\NimbusApplication.h" />
     <ClInclude Include="src\RunMode.h" />
