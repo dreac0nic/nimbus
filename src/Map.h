@@ -38,6 +38,7 @@ namespace Nimbus{
 		Tile();
 		Tile(Point *loc);
 		void calculateBox();
+		void toString();
 	};
 
 	class Corner{
@@ -53,6 +54,8 @@ namespace Nimbus{
 		Corner *downslope;
 		int river;
 		float moisture;
+
+		void toString();
 	};
 
 	class TileEdge{
@@ -64,6 +67,7 @@ namespace Nimbus{
 		int river;
 
 		void setVoronoi(Corner *c0, Corner *c1);
+		void toString();
 	};
 
 	class Map{
@@ -103,6 +107,7 @@ namespace Nimbus{
 		Map(Voronoi::Voronoi *v, int numLloydRelaxations);
 		Biome getBiome(Tile *p);
 		Tile *getTileAt(float x, float y);
+		void toString();
 	};
 }
 

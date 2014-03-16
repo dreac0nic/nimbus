@@ -26,3 +26,8 @@ void Tile::calculateBox(){
 		}
 	}
 }
+
+void Tile::toString(){
+	std::cout << "Tile, x:" << loc->x << ", y:" << loc->y << " " << (border? "b": "-") << (ocean? "o": "-") << (water? "w": "-") << (coast? "c": "-") << "\n";
+	
+}
