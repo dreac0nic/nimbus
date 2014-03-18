@@ -16,8 +16,25 @@ namespace Nimbus
 	class GameEntitySet
 	{
 	public:
-		// Public iterator generic type
-		typedef std::iterator<std::input_iterator_tag, GameEntity> entityiterator;
+		class EntityIterator :
+			public std::iterator<std::input_iterator_tag, GameEntity>
+		{
+		public:
+			// Post increment
+			virtual EntityIterator& operator++() { return *this; }
+			// Pre increment
+			virtual EntityIterator& operator++(int junk) { return *this; }
+
+			// Dereference
+			virtual GameEntity& operator*() { return *(new GameEntity(0, "null")); }
+			// Functional dereference
+			virtual GameEntity* operator->() { return NULL; }
+
+			// Equality
+			virtual bool operator==(EntityIterator& rhs) { return false; }
+			// Inequality
+			virtual bool operator!=(EntityIterator& rhs) { return true; }
+		};
 	
 	//private:
 		// Private iterator implementations... umm I'd like to make this private
@@ -26,7 +43,7 @@ namespace Nimbus
 		in the entity set.
 		*/
 		class GeneralEntityIterator :
-			public entityiterator
+			public EntityIterator
 		{
 		private:
 			typedef std::map<GameEntityId, GameEntity*>::iterator generaliterator;
@@ -39,12 +56,12 @@ namespace Nimbus
 			// Umm... not sure why we need this
 			GeneralEntityIterator(generaliterator& entity, std::map<GameEntityId, GameEntity*>* entityMap);
 			// Copy constructor
-			GeneralEntityIterator(const GeneralEntityIterator& other);
+			GeneralEntityIterator(EntityIterator& other);
 			
 			// Post increment
-			const GeneralEntityIterator& operator++();
+			EntityIterator& operator++();
 			// Pre increment
-			GeneralEntityIterator& operator++(int junk);
+			EntityIterator& operator++(int junk);
 
 			// Dereference
 			GameEntity& operator*();
@@ -52,9 +69,9 @@ namespace Nimbus
 			GameEntity* operator->();
 
 			// Equality
-			bool operator==(const GeneralEntityIterator& rhs);
+			bool operator==(EntityIterator& rhs);
 			// Inequality
-			bool operator!=(const GeneralEntityIterator& rhs);
+			bool operator!=(EntityIterator& rhs);
 		};
 
 	private:
@@ -70,8 +87,8 @@ namespace Nimbus
 
 		void addGameEntity(GameEntity* entity);
 
-		GeneralEntityIterator begin(GameEntityType type = "");
-		GeneralEntityIterator end(GameEntityType type = "");
+		EntityIterator& begin(GameEntityType type = "");
+		EntityIterator& end(GameEntityType type = "");
 	};
 }
 
