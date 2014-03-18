@@ -10,11 +10,11 @@ Polygon::~Polygon(){
 
 }
 
-float Polygon::signedDoubleArea(){
+double Polygon::signedDoubleArea(){
 	int index, nextIndex;
 	int n = _vertices->size();
 	Point *point, *next;
-	float signedDoubleArea = 0;
+	double signedDoubleArea = 0;
 	for (index = 0; index < n; ++index) {
 		nextIndex = (index + 1) % n;
 		point = _vertices->at(index);
@@ -24,12 +24,8 @@ float Polygon::signedDoubleArea(){
 	return signedDoubleArea;
 }
 
-float Polygon::area(){
-	return (float)std::abs(signedDoubleArea() * 0.5);
-}
-
 Winding Polygon::winding(){
-	float sda = signedDoubleArea();
+	double sda = signedDoubleArea();
 	if (sda < 0) {
 		return CLOCKWISE;
 	}

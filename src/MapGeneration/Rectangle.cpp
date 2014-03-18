@@ -2,11 +2,15 @@
 
 using namespace Nimbus::Voronoi;
 
-Rectangle::Rectangle(float x, float y, float width, float height){
-	Rectangle::width = width;
-	Rectangle::height = height;
-	left = Rectangle::x = x;
-	top = Rectangle::y = y;
+Rectangle::Rectangle(){
+	width = height = left = top = right = bottom = 0;
+}
+
+Rectangle::Rectangle(double x1, double y1, double width1, double height1){
+	width = width1;
+	height = height1;
+	left = x = x1;
+	top = y = y1;
 	right = x + width;
 	bottom = y + height;
 }
@@ -19,7 +23,7 @@ bool Rectangle::inBounds(Point *p){
 	return inBounds(p->x, p->y);
 }
 
-bool Rectangle::inBounds(float x0, float y0){
+bool Rectangle::inBounds(double x0, double y0){
 	if (x0 < x || x0 > right || y0 < y || y0 > bottom) {
 		return false;
 	}

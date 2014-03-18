@@ -3,6 +3,7 @@
 
 
 #include <OgreVector2.h>
+#include "OGRE\OgreVector2.h"
 #include <utility>
 #include <stdlib.h>
 #include "MapGeneration/Voronoi.h"
@@ -13,7 +14,7 @@ namespace Nimbus{
 	class Tile;
 	class Corner;
 	class TileEdge;
-	class Map;
+	class Map; // wars
 
 	//Temporary; fill or replace
 	enum Biome{MOUNTAIN, DESERT, COAST, OCEAN};
@@ -25,14 +26,14 @@ namespace Nimbus{
 		static int deltaY;
 
 		int index;
-		Point *loc;
-		std::vector<Corner*> *corners;
-		std::vector<Tile*> *neighbors;
-		std::vector<TileEdge*> *borders;
+		Point loc;
+		std::vector<Corner*> corners;
+		std::vector<Tile*> neighbors;
+		std::vector<TileEdge*> borders;
 		bool border, ocean, water, coast;
-		float elevation;
-		float moisture;
-		float area;
+		double elevation;
+		double moisture;
+		double area;
 		Biome biome;
 
 		Tile();
@@ -43,18 +44,19 @@ namespace Nimbus{
 
 	class Corner{
 	public:
-		std::vector<Tile*> *touches;
-		std::vector<Corner*> *adjacent;
-		std::vector<TileEdge*> *protrudes;
+		std::vector<Tile*> touches;
+		std::vector<Corner*> adjacent;
+		std::vector<TileEdge*> protrudes;
 		Point *loc;
 		int index;
 		bool border;
-		float elevation;
+		double elevation;
 		bool water, ocean, coast;
 		Corner *downslope;
 		int river;
-		float moisture;
+		double moisture;
 
+		bool operator< (const Corner &other) const;
 		void toString();
 	};
 
@@ -93,20 +95,21 @@ namespace Nimbus{
 		void assignBiomes();
 
 	public:
-		std::vector<TileEdge*> *edges;
-		std::vector<Corner*> *corners;
-		std::vector<Tile*> *centers;
-		Voronoi::Rectangle *bounds;
-		float **noise;
-		float ISLAND_FACTOR;
+		std::vector<TileEdge*> edges;
+		std::vector<Corner*> corners;
+		std::vector<Tile*> centers;
+		Voronoi::Rectangle bounds;
+		double **noise;
+		double ISLAND_FACTOR;
 		int bumps;
-		float startAngle;
-		float dipAngle;
-		float dipWidth;
+		double startAngle;
+		double dipAngle;
+		double dipWidth;
 
 		Map(Voronoi::Voronoi *v, int numLloydRelaxations);
 		Biome getBiome(Tile *p);
-		Tile *getTileAt(float x, float y);
+		//Finds the nearest tile to a given point.
+		Tile *getTileAt(double x, double y);
 		void toString();
 	};
 }

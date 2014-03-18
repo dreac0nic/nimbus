@@ -2,6 +2,12 @@
 
 using namespace Nimbus::Voronoi;
 
+void Voronoi::init(){
+	Site::initList();
+	Edge::initList(0,0,0);
+	Edge::initQueue();
+}
+
 void Voronoi::addSites(std::vector<Point*> *points){
 	int length = points->size();
 	for (int i = 0; i < length; ++i) {
@@ -17,7 +23,7 @@ void Voronoi::addSite(Point *p, int index){
 }
 
 std::vector<LineSegment*> *Voronoi::delaunayLinesForEdges(std::vector<Edge*> *edges){
-	std::vector<LineSegment*> *segments = new std::vector<LineSegment*>();
+	std::vector<LineSegment*> *segments = new std::vector<LineSegment*>;
 
 	for (int i = 0; i < edges->size(); i++) {
 		segments->insert(segments->end(), edges->at(i)->delaunayLine());
@@ -43,13 +49,13 @@ void Voronoi::fortunesAlgorithm(){
 	int sqrt_nsites = (int) sqrt(Site::getLength() + 4);
 	Halfedge::initQueue(dataBounds->y, dataBounds->height, sqrt_nsites);
 	Edge::initList(dataBounds->x, dataBounds->width, sqrt_nsites);
-	std::vector<Halfedge*> *halfEdges = new std::vector<Halfedge*>();
-	std::vector<Vertex*> *vertices = new std::vector<Vertex*>();
-
+	std::vector<Halfedge*> *halfEdges = new std::vector<Halfedge*>;
+	std::vector<Vertex*> *vertices = new std::vector<Vertex*>;
 	Site *bottomMostSite = Site::next();
 	newSite = Site::next();
 
 	for (;;) {
+		
 		if (Halfedge::empty() == false) {
 			newintstar = Halfedge::min();
 		}
@@ -72,7 +78,7 @@ void Voronoi::fortunesAlgorithm(){
 				edge = Edge::createBisectingEdge(bottomSite, newSite);
 				//trace("new edge: " + edge);
 				_edges->insert(_edges->end() , edge);
-
+				
 				bisector = Halfedge::create(edge, LR_LEFT);
 				halfEdges->insert(halfEdges->end(), bisector);
 				// inserting two Halfedges into edgeList constitutes Step 10:
@@ -112,9 +118,6 @@ void Voronoi::fortunesAlgorithm(){
 			rrbnd = rbnd->edgeListRightNeighbor;
 			bottomSite = leftRegion(lbnd, bottomMostSite);
 			topSite = rightRegion(rbnd, bottomMostSite);
-			// these three sites define a Delaunay triangle
-			// (not actually using these for anything...)
-			//_triangles.push(new Triangle(bottomSite, topSite, rightRegion(lbnd)));
 
 			v = lbnd->vertex;
 			v->setIndex();
@@ -150,6 +153,7 @@ void Voronoi::fortunesAlgorithm(){
 				Halfedge::insert(bisector);
 			}
 		} else {
+
 			break;
 		}
 	}
@@ -175,7 +179,7 @@ void Voronoi::fortunesAlgorithm(){
 }
 
 std::vector<Edge*> *Voronoi::hullEdges(){
-	std::vector<Edge*> *filtered = new std::vector<Edge*>();
+	std::vector<Edge*> *filtered = new std::vector<Edge*>;
 
 	for (int i = 0; i < _edges->size(); i++) {
 		if (_edges->at(i)->isPartOfConvexHull()) {
@@ -268,12 +272,15 @@ Voronoi::Voronoi(std::vector<Point*> *points){
 	fortunesAlgorithm();
 }
 
-Voronoi::Voronoi(int numSites, float maxWidth, float maxHeight){
-	std::vector<Point*> *points = new std::vector<Point*>();
+Voronoi::Voronoi(int numSites, double maxWidth, double maxHeight){
+	std::vector<Point*> *points = new std::vector<Point*>;
+
 	for (int i = 0; i < numSites; i++) {
 		points->insert(points->end(), new Point(rand() * maxWidth, rand() * maxHeight));
 	}
+
 	init(points, new Rectangle(0, 0, maxWidth, maxHeight));
+	
 	fortunesAlgorithm();
 }
 
@@ -296,7 +303,7 @@ std::vector<LineSegment*> *Voronoi::hull(){
 std::vector<Point*> *Voronoi::hullPointsInOrder(){
 	std::vector<Edge*> *hulledges = hullEdges();
 
-	std::vector<Point*> *points = new std::vector<Point*>();
+	std::vector<Point*> *points = new std::vector<Point*>;
 	if (hulledges->empty()) {
 		return points;
 	}
@@ -334,7 +341,7 @@ Site *Voronoi::rightRegion(Halfedge *he, Site *bottomMostSite){
 }
 
 std::vector<Point*> *Voronoi::neighborSitesForSite(Point *coord){
-	std::vector<Point*> *points = new std::vector<Point*>();
+	std::vector<Point*> *points = new std::vector<Point*>;
 	Site *site = _sitesIndexedByLocation->at(coord);
 	if (site == NULL) {
 		return points;
@@ -349,7 +356,7 @@ std::vector<Point*> *Voronoi::neighborSitesForSite(Point *coord){
 std::vector<Point*> *Voronoi::region(Point *p){
 	Site *site = _sitesIndexedByLocation->at(p);
 	if (site == NULL) {
-		return new std::vector<Point*>();
+		return new std::vector<Point*>;
 	}
 	return site->region(_plotBounds);
 }

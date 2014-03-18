@@ -2,20 +2,22 @@
 #define VORONOI_H
 
 #include <OgreVector2.h>
+#include "OGRE\OgreVector2.h"
 #include <stack>
 #include <utility>
 #include <stdlib.h>
 
 namespace Nimbus{
 	namespace Voronoi{
-		class Rectangle;
-		class Edge;
-		class Halfedge;
-		class LineSegment;
-		class Polygon;
-		class Site;
-		class Vertex;
-		class Voronoi;
+		//numbers are testing priority ratings (High numbers done first)
+		class Rectangle;//tested
+		class Edge;//3
+		class Halfedge;//5
+		class LineSegment;//tested
+		class Polygon;//tested
+		class Site;//2
+		class Vertex;//4
+		class Voronoi;//1
 
 		enum Winding{CLOCKWISE, COUNTERCLOCKWISE, NONE};
 		enum LR{LR_LEFT, LR_RIGHT};
@@ -25,7 +27,7 @@ namespace Nimbus{
 
 		class Util{
 		public:
-			static bool closeEnough(float d1, float d2, float diff);
+			static bool closeEnough(double d1, double d2, double diff);
 		};
 
 		/*Helper class for bounding box.
@@ -34,11 +36,12 @@ namespace Nimbus{
 		*/
 		class Rectangle{
 		public:
-			float x, y, width, height, right, bottom, left, top;
-			Rectangle(float x, float y, float width, float height);
+			double x, y, width, height, right, bottom, left, top;
+			Rectangle();
+			Rectangle(double x, double y, double width, double height);
 			bool liesOnAxes(Point *p);
 			bool inBounds(Point *p);
-			bool inBounds(float x0, float y0);
+			bool inBounds(double x0, double y0);
 		};
 
 		/*Edges exist between (bisect) two Sites and between (bisect) two Vertices.
@@ -49,11 +52,11 @@ namespace Nimbus{
 		private:
 			//Edge related
 			static int _numEdges;
-			static std::stack<Edge*> *_pool;
+			static std::stack<Edge*> _pool;
 			static Edge *create();
 
-			std::map<LR, Point*> *_clippedVertices;
-			std::map<LR, Site*> *_sites;
+			std::map<LR, Point*> _clippedVertices;
+			std::map<LR, Site*> _sites;
 			int _edgeIndex;
 			Vertex *_leftVertex;
 			Vertex *_rightVertex;
@@ -61,26 +64,28 @@ namespace Nimbus{
 			Edge();
 
 			//Edge list
-			static float _deltax;
-			static float _xmin;
+			static double _deltax;
+			static double _xmin;
 			static int _hashSize;
-			static std::vector<Halfedge*> *_hash;
+			static std::vector<Halfedge*> _hash;
 			static Halfedge *getHash(int b);
 
 			//Edge sorting
-			static std::vector<Edge*> *_edges;
-			static std::vector<LR> *_edgeOrientations;
+			static std::vector<Edge*> _edges;
+			static std::vector<LR> _edgeOrientations;
 
 		public:
 			//Edge related
 			static Edge *DELETED;
 			//returns 1 if edge 1 is longer, -1 if edge0 is longer, or 0 if they are equal
-			static float compareSitesDistances_MAX(Edge *edge0, Edge *edge1);
+			static double compareSitesDistances_MAX(Edge *edge0, Edge *edge1);
 			//returns 1 if edge 1 is shorter, -1 if edge0 is shorter, or 0 if they are equal
-			static float compareSitesDistances(Edge *edge0, Edge *edge1);
+			static double compareSitesDistances(Edge *edge0, Edge *edge1);
+
+			bool operator< (const Edge &other) const;
 
 			static Edge *createBisectingEdge(Site *site0, Site *site1);
-			float a, b, c;
+			double a, b, c;
 			~Edge();
 			void clipVertices(Rectangle *bounds);
 			LineSegment *delaunayLine();
@@ -95,14 +100,14 @@ namespace Nimbus{
 			void setLeftSite(Site *s);
 			void setRightSite(Site *s);
 			Site *site(LR leftRight);
-			float sitesDistance();
+			double sitesDistance();
 			Vertex *vertex(LR leftRight);
 			LineSegment *voronoiEdge();
 
 			//Edge list
 			static Halfedge *_leftEnd;
 			static Halfedge *_rightEnd;
-			static void initList(float xmin, float deltax, int sqrt_nsites);
+			static void initList(double xmin, double deltax, int sqrt_nsites);
 			static void insert(Halfedge *lb, Halfedge *newHalfedge);
 			static void remove(Halfedge *halfEdge);
 			static Halfedge *edgeListLeftNeighbor(Point *p);
@@ -126,15 +131,15 @@ namespace Nimbus{
 			static int _count;
 			static int _minBucket;
 			static int _hashSize;
-			static float _ymin;
-			static float _deltay;
+			static double _ymin;
+			static double _deltay;
 			static bool isEmpty(int bucket);
 			static void adjustMinBucket();
 
 			Halfedge *init(Edge *edge, LR lr);
 
 		public:
-			static void initQueue(float ymin, float deltay, int sqrt_nsites);
+			static void initQueue(double ymin, double deltay, int sqrt_nsites);
 			static void disposeQueue();
 			static void insert(Halfedge *halfEdge);
 			static void remove(Halfedge *halfEdge);
@@ -149,7 +154,7 @@ namespace Nimbus{
 			Edge *edge;
 			Vertex *vertex;
 			LR leftRight;
-			float ystar;
+			double ystar;
 			Halfedge(Edge *edge, LR lr);
 			~Halfedge();
 			static Halfedge *create(Edge *edge, LR lr);
@@ -161,22 +166,21 @@ namespace Nimbus{
 		public:
 			std::pair<Point*, Point*> *points;
 
-			~LineSegment();
-			LineSegment(std::pair <Point*, Point*> *points);
 			LineSegment(Point *point0, Point *point1);
-			static float compareLengthsMax(LineSegment *segment0, LineSegment *segment1);
-			static float compareLengths(LineSegment *edge0, LineSegment *edge1);
+			LineSegment(std::pair <Point*, Point*> *points);
+			~LineSegment();
+			static double compareLengthsMax(LineSegment *segment0, LineSegment *segment1);
+			static double compareLengths(LineSegment *edge0, LineSegment *edge1);
 		};
 
 		class Polygon{
 		private:
-			float signedDoubleArea();
+			double signedDoubleArea();
 			std::vector<Point*> *_vertices;
 
 		public:
 			Polygon(std::vector<Point*> *vertices);
 			~Polygon();
-			float area();
 			Winding winding();
 		};
 
@@ -189,9 +193,8 @@ namespace Nimbus{
 		class Site{
 		private:
 			static std::stack<Site*> *_pool;
-			static const float EPSILON;
-			static void sortSites(std::vector<Site*> *sites);
-			static float compare(Site *s1, Site *s2);
+			static const double EPSILON;
+			static double compare(Site *s1, Site *s2);
 			static bool closeEnough(Point *p0, Point *p1);
 			static int check(Point *point, Rectangle *bounds);
 			static std::vector<Site*> *_sites;
@@ -206,10 +209,10 @@ namespace Nimbus{
 			void reorderEdges();
 			std::vector<Point*> *clipToBounds(Rectangle *bounds);
 			void connect(std::vector<Point*> *points, int j, Rectangle *bounds, bool closingUp);
-			Site *init(Point *p, int index, float weight);
+			Site *init(Point *p, int index, double weight);
 
 		public:
-			static Site *create(Point *p, int index, float weight);
+			static Site *create(Point *p, int index, double weight);
 			static void initList();
 			static void disposeList();
 			static int push(Site *site);
@@ -219,9 +222,11 @@ namespace Nimbus{
 			static std::vector<Point *> *siteCoords();
 			static std::vector< std::vector<Point *> *> *regions(Rectangle * plotBounds);
 
-			float weight;
+			bool operator< (const Site &other) const;
+
+			double weight;
 			std::vector<Edge*> *_edges;
-			Site(Point *p, int index, float weight);
+			Site(Point *p, int index, double weight);
 			~Site();
 			int comp(const void *a,const void *b);
 			Point *getCoord();
@@ -230,9 +235,9 @@ namespace Nimbus{
 			std::vector<Site*> *neighborSites();
 			Site *neighborSite(Edge *edge);
 			std::vector<Point*> *region(Rectangle *clippingbounds);
-			float getX();
-			float getY();
-			float dist(Point *p);
+			double getX();
+			double getY();
+			double dist(Point *p);
 		};
 
 		/*Provides a way to create points at the intersection of two edges.
@@ -246,17 +251,18 @@ namespace Nimbus{
 			Point *_coord;
 			int _vertIndex;
 
-			static Vertex *create(float x, float y);
-			Vertex(float x, float y);
+			static Vertex *create(double x, double y);
+			Vertex(double x, double y);
+			Vertex();
 		public:
 			static Vertex *VERTEX_AT_INFINITY;
 			~Vertex();
 
-			Vertex *init(float x, float y);
+			Vertex *init(double x, double y);
 			Point *getCoord();
 			int getVertexIndex();
-			float getX();
-			float getY();
+			double getX();
+			double getY();
 			void setIndex();
 
 			//This is the only way to make a vertex
@@ -287,10 +293,11 @@ namespace Nimbus{
 		public:
 			static int compareByYThenX(Site *s1, Point *p1);
 			static int compareByYThenX(Site *s1, Site *s2);
+			static void init();
 
 			Voronoi(std::vector<Point*> *points, Rectangle *plotBounds);
 			Voronoi(std::vector<Point*> *points);
-			Voronoi(int numSites, float maxWidth, float maxHeight);
+			Voronoi(int numSites, double maxWidth, double maxHeight);
 			~Voronoi();
 			std::vector<LineSegment*> *delaunayLinesForSite(Point *coord);
 			std::vector<Edge*> *edges();

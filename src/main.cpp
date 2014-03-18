@@ -1,24 +1,31 @@
 #include <iostream>
 #include "Map.h"
+#include "MapGeneration\Voronoi.h"
 
-using namespace Nimbus;
+using namespace Nimbus::Voronoi;
+
+void pause(){
+	std::cout << "Press Enter.\n";
+	std::cin.get();
+}
+
+void testVoronoi(){
+	Edge::initList(0,1,2);
+	Edge::initQueue();
+	Site site1 = Site(new Point(0,0), 0, 1.0);
+	Site site2 = Site(new Point(0,4), 1, 3.0);
+	Edge edge = *Edge::createBisectingEdge(&site1, &site2);
+
+	edge.clipVertices(new Rectangle(-1,-1,2,2));
+	std::cout << edge.getClippedEnds()->at(LR_LEFT)->y << " " << edge.getClippedEnds()->at(LR_LEFT)->x << "\n";
+	std::cout << edge.getClippedEnds()->at(LR_RIGHT)->y << " " << edge.getClippedEnds()->at(LR_RIGHT)->x;
+
+	pause();
+}
 
 /** The main function to start the Nimbus application.
- */
+*/
 int main(int argc, char* argv[])
 {
-
-	Map map = Map(new Voronoi::Voronoi(20, 100.0, 100.0),2);
-
-	for (int i = 0; i < map.edges->size(); i++){
-		map.edges->at(i)->toString();
-	}
-	for (int i = 0; i < map.corners->size(); i++){
-		map.corners->at(i)->toString();
-	}
-	for (int i = 0; i < map.centers->size(); i++){
-		map.centers->at(i)->toString();
-	}
-
-	return 0;
+	testVoronoi();
 }

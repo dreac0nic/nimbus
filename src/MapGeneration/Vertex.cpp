@@ -2,16 +2,16 @@
 
 using namespace Nimbus::Voronoi;
 
-std::stack<Vertex*> *Vertex::_pool = new std::stack<Vertex*>();
+std::stack<Vertex*> *Vertex::_pool = new std::stack<Vertex*>;
 int Vertex::_numVertices = 0;
-Vertex *Vertex::VERTEX_AT_INFINITY = new Vertex(FLT_MAX, FLT_MAX);
+Vertex *Vertex::VERTEX_AT_INFINITY = new Vertex(DBL_MAX, DBL_MAX);
 
-Vertex::Vertex(float x, float y){
+Vertex::Vertex(double x, double y){
 	init(x,y);
 }
 
-Vertex *Vertex::create(float x, float y){
-	if (x == FLT_MAX || y== FLT_MAX) {
+Vertex *Vertex::create(double x, double y){
+	if (x == DBL_MAX || y== DBL_MAX) {
             return VERTEX_AT_INFINITY;
         }
         if (_pool->size() > 0) {
@@ -36,15 +36,15 @@ int Vertex::getVertexIndex(){
 	return _vertIndex;
 }
 
-float Vertex::getX(){
+double Vertex::getX(){
 	return _coord->x;
 }
 
-float Vertex::getY(){
+double Vertex::getY(){
 	return _coord->y;
 }
 
-Vertex *Vertex::init(float x, float y){
+Vertex *Vertex::init(double x, double y){
 	_coord = new Point(x,y);
 	return this;
 }

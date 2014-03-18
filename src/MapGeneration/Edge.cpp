@@ -4,23 +4,30 @@ using namespace Nimbus::Voronoi;
 
 Edge *Edge::DELETED = new Edge();
 int Edge::_numEdges = 0;
-std::stack<Edge*> *Edge::_pool = new std::stack<Edge*>();
-std::vector<Edge*> *Edge::_edges = new std::vector<Edge*>();
-std::vector<LR> *Edge::_edgeOrientations = new std::vector<LR>();
-std::vector<Halfedge*> *Edge::_hash = new std::vector<Halfedge*>();
+std::stack<Edge*> Edge::_pool;
+std::vector<Edge*> Edge::_edges;
+std::vector<LR> Edge::_edgeOrientations;
+std::vector<Halfedge*> Edge::_hash;
 Halfedge *Edge::_leftEnd;
 Halfedge *Edge::_rightEnd;
-float Edge::_deltax = 0;
-float Edge::_xmin = 0;
+double Edge::_deltax = 0;
+double Edge::_xmin = 0;
 int Edge::_hashSize = 0;
 
 ///////////////Edge functions///////////////
 
+bool Edge::operator< (const Edge &other) const{
+	double length0 = _sites.at(LR_LEFT)->getCoord()->distance(*(_sites.at(LR_RIGHT)->getCoord()));
+	double length1 = other._sites.at(LR_LEFT)->getCoord()->distance(*(other._sites.at(LR_RIGHT)->getCoord()));
+	
+	return length0 < length1;
+}
+
 Edge *Edge::create(){
 	Edge *edge;
-	if (_pool->size() > 0) {
-		edge = _pool->top();
-		_pool->pop();
+	if (_pool.size() > 0) {
+		edge = _pool.top();
+		_pool.pop();
 		edge->init();
 	} else {
 		edge = new Edge();
@@ -29,8 +36,8 @@ Edge *Edge::create(){
 }
 
 Edge *Edge::createBisectingEdge(Site *site0, Site *site1){
-	float dx, dy, absdx, absdy;
-	float a, b, c;
+	double dx, dy, absdx, absdy;
+	double a, b, c;
 	Edge *edge;
 
 	dx = site1->getX() - site0->getX();
@@ -55,6 +62,9 @@ Edge *Edge::createBisectingEdge(Site *site0, Site *site1){
 	site0->addEdge(edge);
 	site1->addEdge(edge);
 
+	edge->_leftVertex = NULL;
+	edge->_rightVertex = NULL;
+
 	edge->a = a;
 	edge->b = b;
 	edge->c = c;
@@ -63,7 +73,6 @@ Edge *Edge::createBisectingEdge(Site *site0, Site *site1){
 }//end createBisectingEdge
 
 void Edge::init(){
-	_sites = new std::map<LR, Site*>();
 }
 
 Edge::Edge(){
@@ -75,7 +84,7 @@ Edge::~Edge(){
 
 }
 
-float Edge::compareSitesDistances_MAX(Edge *edge0, Edge *edge1){
+double Edge::compareSitesDistances_MAX(Edge *edge0, Edge *edge1){
 	double length0 = edge0->sitesDistance();
 	double length1 = edge1->sitesDistance();
 	if (length0 < length1) {
@@ -87,18 +96,18 @@ float Edge::compareSitesDistances_MAX(Edge *edge0, Edge *edge1){
 	return 0;
 }
 
-float Edge::compareSitesDistances(Edge *edge0, Edge *edge1){
+double Edge::compareSitesDistances(Edge *edge0, Edge *edge1){
 	return -compareSitesDistances_MAX(edge0, edge1);
 }
 
 void Edge::clipVertices(Rectangle *bounds){
-	float xmin = bounds->x;
-	float ymin = bounds->y;
-	float xmax = bounds->right;
-	float ymax = bounds->bottom;
+	double xmin = bounds->x;
+	double ymin = bounds->y;
+	double xmax = bounds->right;
+	double ymax = bounds->bottom;
 
 	Vertex *vertex0, *vertex1;
-	float x0, x1, y0, y1;
+	double x0, x1, y0, y1;
 
 	if (a == 1.0 && b >= 0.0) {
 		vertex0 = _rightVertex;
@@ -186,13 +195,14 @@ void Edge::clipVertices(Rectangle *bounds){
 		}
 	}
 
-	_clippedVertices = new std::map<LR, Point*>();
+	_clippedVertices.clear();
+
 	if (vertex0 == _leftVertex) {
-		_clippedVertices->insert(std::pair<LR, Point*>(LR_LEFT, new Point(x0, y0)));
-		_clippedVertices->insert(std::pair<LR, Point*>(LR_RIGHT, new Point(x1, y1)));
+		_clippedVertices.insert(std::pair<LR, Point*>(LR_LEFT, new Point(x0, y0)));
+		_clippedVertices.insert(std::pair<LR, Point*>(LR_RIGHT, new Point(x1, y1)));
 	} else {
-		_clippedVertices->insert(std::pair<LR, Point*>(LR_RIGHT, new Point(x0, y0)));
-		_clippedVertices->insert(std::pair<LR, Point*>(LR_LEFT, new Point(x1, y1)));
+		_clippedVertices.insert(std::pair<LR, Point*>(LR_RIGHT, new Point(x0, y0)));
+		_clippedVertices.insert(std::pair<LR, Point*>(LR_LEFT, new Point(x1, y1)));
 	}
 }
 
@@ -201,11 +211,11 @@ LineSegment *Edge::delaunayLine(){
 }
 
 std::map<LR, Point*> *Edge::getClippedEnds(){
-	return _clippedVertices;
+	return &_clippedVertices;
 }
 
 Site *Edge::getLeftSite(){
-	return _sites->at(LR_LEFT);
+	return _sites.at(LR_LEFT);
 }
 
 Vertex *Edge::getLeftVertex(){
@@ -213,7 +223,7 @@ Vertex *Edge::getLeftVertex(){
 }
 
 Site *Edge::getRightSite(){
-	return _sites->at(LR_RIGHT);
+	return _sites.at(LR_RIGHT);
 }
 
 Vertex *Edge::getRightVertex(){
@@ -221,7 +231,7 @@ Vertex *Edge::getRightVertex(){
 }
 
 bool Edge::getVisible(){
-	return _clippedVertices != NULL;
+	return &_clippedVertices != NULL;
 }
 
 bool Edge::isPartOfConvexHull(){
@@ -237,18 +247,18 @@ void Edge::setVertex(LR leftRight, Vertex *v){
 }
 
 void Edge::setLeftSite(Site *s){
-	_sites->insert(std::pair<LR, Site*>(LR_LEFT, s));
+	_sites.insert(std::pair<LR, Site*>(LR_LEFT, s));
 }
 
 void Edge::setRightSite(Site *s){
-	_sites->insert(std::pair<LR, Site*>(LR_RIGHT, s));
+	_sites.insert(std::pair<LR, Site*>(LR_RIGHT, s));
 }
 
 Site *Edge::site(LR leftRight){
-	return _sites->at(leftRight);
+	return _sites.at(leftRight);
 }
 
-float Edge::sitesDistance(){
+double Edge::sitesDistance(){
 	return(getLeftSite()->getCoord()->distance(*(getRightSite()->getCoord())));
 }
 
@@ -260,8 +270,8 @@ LineSegment *Edge::voronoiEdge(){
 	if (!getVisible()) {
 		return new LineSegment(NULL, NULL);
 	}
-	return new LineSegment(_clippedVertices->at(LR_LEFT),
-		_clippedVertices->at(LR_RIGHT));
+	return new LineSegment(_clippedVertices.at(LR_LEFT),
+		_clippedVertices.at(LR_RIGHT));
 }
 
 ///////////////Edge list functions///////////////
@@ -272,10 +282,10 @@ Halfedge *Edge::getHash(int b){
 	if (b < 0 || b >= _hashSize) {
 		return NULL;
 	}
-	halfEdge = _hash->at(b);
+	halfEdge = _hash.at(b);
 	if (halfEdge != NULL && halfEdge->edge == Edge::DELETED) {
 		/* Hash table points to deleted halfedge.  Patch as necessary. */
-		_hash->at(b) = NULL;
+		_hash.at(b) = NULL;
 		// still can't dispose halfEdge yet!
 		return NULL;
 	} else {
@@ -283,12 +293,16 @@ Halfedge *Edge::getHash(int b){
 	}
 }
 
-void Edge::initList(float xmin, float deltax, int sqrt_nsites){
+void Edge::initList(double xmin, double deltax, int sqrt_nsites){
+	if(sqrt_nsites == 0) {
+		sqrt_nsites = 1;
+	}
+
 	_xmin = xmin;
 	_deltax = deltax;
 	_hashSize = 2 * sqrt_nsites;
 
-	_hash = new std::vector<Halfedge*>();
+	_hash.resize(_hashSize);
 
 	// two dummy Halfedges:
 	_leftEnd = Halfedge::createDummy();
@@ -298,8 +312,8 @@ void Edge::initList(float xmin, float deltax, int sqrt_nsites){
 	_rightEnd->edgeListLeftNeighbor = _leftEnd;
 	_rightEnd->edgeListRightNeighbor = NULL;
 
-	_hash->at(0) = _leftEnd;
-	_hash->at(_hashSize - 1) = _rightEnd;
+	_hash.at(0) = _leftEnd;
+	_hash.at(_hashSize - 1) = _rightEnd;
 }
 
 void Edge::insert(Halfedge *lb, Halfedge *newHalfedge){
@@ -353,7 +367,7 @@ Halfedge *Edge::edgeListLeftNeighbor(Point *p){
 
 	/* Update hash table and reference counts */
 	if (bucket > 0 && bucket < _hashSize - 1) {
-		_hash->at(bucket) = halfEdge;
+		_hash.at(bucket) = halfEdge;
 	}
 	return halfEdge;
 }
@@ -362,16 +376,16 @@ Halfedge *Edge::edgeListLeftNeighbor(Point *p){
 
 
 void Edge::initQueue(){
-	_edges = new std::vector<Edge*>();
-	_edgeOrientations = new std::vector<LR>();
+	_edges.clear();
+	_edgeOrientations.clear();
 }
 
 std::vector<Edge*> *Edge::getEdges(){
-	return _edges;
+	return &_edges;
 }
 
 std::vector<LR> *Edge::getEdgeOrientations(){
-	return _edgeOrientations;
+	return &_edgeOrientations;
 }
 
 std::vector<Edge*> *Edge::reorderBySite(std::vector<Edge*> *origEdges){
@@ -385,15 +399,15 @@ std::vector<Edge*> *Edge::reorderBySite(std::vector<Edge*> *origEdges){
 
 	int nDone = 0;
 
-	std::vector<Edge*> *newEdges = new std::vector<Edge*>();
+	std::vector<Edge*> *newEdges = new std::vector<Edge*>;
 	std::vector<Edge*>::iterator newEdgesIt = newEdges->begin();
 
-	std::vector<LR>::iterator edgeOrientIt = _edgeOrientations->begin();
+	std::vector<LR>::iterator edgeOrientIt = _edgeOrientations.begin();
 
 	i = 0;
 	edge = origEdges->at(i);
 	newEdges->at(i) = edge;
-	edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_LEFT);
+	_edgeOrientations.push_back(LR_LEFT);
 	Site *firstPoint = edge->getLeftSite();
 	Site *lastPoint = edge->getRightSite();
 
@@ -411,23 +425,23 @@ std::vector<Edge*> *Edge::reorderBySite(std::vector<Edge*> *origEdges){
 
 			if (leftPoint == lastPoint) {
 				lastPoint = rightPoint;
-				edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_LEFT);
+				edgeOrientIt = _edgeOrientations.insert(edgeOrientIt, LR_LEFT);
 				newEdgesIt = newEdges->insert(newEdgesIt, edge);
 				done->at(i) = true;
 			} else if (rightPoint == firstPoint) {
 				firstPoint = leftPoint;
-				edgeOrientIt = _edgeOrientations->insert(_edgeOrientations->begin(), LR_LEFT);
+				edgeOrientIt = _edgeOrientations.insert(_edgeOrientations.begin(), LR_LEFT);
 				newEdges->insert(newEdges->begin(), edge);
 				done->at(i) = true;
 			} else if (leftPoint == firstPoint) {
 				firstPoint = rightPoint;
-				edgeOrientIt = _edgeOrientations->insert(_edgeOrientations->begin(), LR_RIGHT);
+				edgeOrientIt = _edgeOrientations.insert(_edgeOrientations.begin(), LR_RIGHT);
 				newEdgesIt = newEdges->insert(newEdges->begin(), edge);
 
 				done->at(i) = true;
 			} else if (rightPoint == lastPoint) {
 				lastPoint = leftPoint;
-				edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_RIGHT);
+				edgeOrientIt = _edgeOrientations.insert(edgeOrientIt, LR_RIGHT);
 				newEdgesIt = newEdges->insert(newEdgesIt, edge);
 				done->at(i) = true;
 			}
@@ -445,21 +459,21 @@ std::vector<Edge*> *Edge::reorderByVertex(std::vector<Edge*> *origEdges){
 	int n = origEdges->size();
 	Edge *edge;
 	// we're going to reorder the edges in order of traversal
-	std::vector<bool> *done = new std::vector<bool>();
+	std::vector<bool> *done = new std::vector<bool>;
 
 	done->insert(done->begin(), n, false);
 
 	int nDone = 0;
 
-	std::vector<Edge*> *newEdges = new std::vector<Edge*>();
+	std::vector<Edge*> *newEdges = new std::vector<Edge*>;
 	std::vector<Edge*>::iterator newEdgesIt = newEdges->begin();
 
-	std::vector<LR>::iterator edgeOrientIt = _edgeOrientations->begin();
+	std::vector<LR>::iterator edgeOrientIt = _edgeOrientations.begin();
 
 	i = 0;
 	edge = origEdges->at(i);
 	newEdges->at(i) = edge;
-	edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_LEFT);
+	edgeOrientIt = _edgeOrientations.insert(edgeOrientIt, LR_LEFT);
 	Vertex *firstPoint = edge->getLeftVertex();
 	Vertex *lastPoint = edge->getRightVertex();
 
@@ -483,23 +497,23 @@ std::vector<Edge*> *Edge::reorderByVertex(std::vector<Edge*> *origEdges){
 			}
 			if (leftPoint == lastPoint) {
 				lastPoint = rightPoint;
-				edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_LEFT);
+				edgeOrientIt = _edgeOrientations.insert(edgeOrientIt, LR_LEFT);
 				newEdgesIt = newEdges->insert(newEdgesIt, edge);
 				done->at(i) = true;
 			} else if (rightPoint == firstPoint) {
 				firstPoint = leftPoint;
-				edgeOrientIt = _edgeOrientations->insert(_edgeOrientations->begin(), LR_LEFT);
+				edgeOrientIt = _edgeOrientations.insert(_edgeOrientations.begin(), LR_LEFT);
 				newEdges->insert(newEdges->begin(), edge);
 				done->at(i) = true;
 			} else if (leftPoint == firstPoint) {
 				firstPoint = rightPoint;
-				edgeOrientIt = _edgeOrientations->insert(_edgeOrientations->begin(), LR_RIGHT);
+				edgeOrientIt = _edgeOrientations.insert(_edgeOrientations.begin(), LR_RIGHT);
 				newEdgesIt = newEdges->insert(newEdges->begin(), edge);
 
 				done->at(i) = true;
 			} else if (rightPoint == lastPoint) {
 				lastPoint = leftPoint;
-				edgeOrientIt = _edgeOrientations->insert(edgeOrientIt, LR_RIGHT);
+				edgeOrientIt = _edgeOrientations.insert(edgeOrientIt, LR_RIGHT);
 				newEdgesIt = newEdges->insert(newEdgesIt, edge);
 				done->at(i) = true;
 			}

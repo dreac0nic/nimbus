@@ -2,18 +2,34 @@
 
 using namespace Nimbus::Voronoi;
 
-std::stack<Site*> *Site::_pool = new std::stack<Site*>();
-float const Site::EPSILON = .005;
+std::stack<Site*> *Site::_pool = new std::stack<Site*>;
+double const Site::EPSILON = .005;
 int Site::_currentIndex=0;
 bool Site::_sorted=false;
 std::vector<Site*> *Site::_sites;
 
-Site::Site(Point *p, int index, float weight){
+Site::Site(Point *p, int index, double weight){
 	init(p, index, weight);
 }
 
 Site::~Site(){
 
+}
+
+bool Site::operator< (const Site &other) const{
+	if (_coord.y < other._coord.y) {
+		return -1;
+	}
+	if (_coord.y > other._coord.y) {
+		return 1;
+	}
+	if (_coord.x < other._coord.x) {
+		return -1;
+	}
+	if (_coord.x > other._coord.x) {
+		return 1;
+	}
+	return 0;
 }
 
 Point *Site::getCoord(){
@@ -29,7 +45,6 @@ int Site::comp(const void *a, const void*b){
 }
 
 Edge *Site::nearestEdge(){
-	//implementation not complete
 	std::sort(_edges->begin(),_edges->end());
 	return _edges->at(0);
 }
@@ -37,12 +52,12 @@ Edge *Site::nearestEdge(){
 
 std::vector<Site*> *Site::neighborSites(){
 	if (_edges == NULL || _edges->empty()) {
-		return new std::vector<Site*>();
+		return new std::vector<Site*>;
 	}
 	if (_edgeOrientations == NULL) {
 		reorderEdges();
 	}
-	std::vector<Site*> *list = new std::vector<Site*>();
+	std::vector<Site*> *list = new std::vector<Site*>;
 	for (int i = 0; i < _edges->size(); i++) {
 		list->insert(list->end(), neighborSite(_edges->at(i)));
 	}
@@ -73,19 +88,19 @@ std::vector<Point*> *Site::region(Rectangle *clippingbounds){
 	return _region;
 }
 
-float Site::getX(){
+double Site::getX(){
 	return _coord.x;
 }
 
-float Site::getY(){
+double Site::getY(){
 	return _coord.y;
 }
 
-float Site::dist(Point *p){
+double Site::dist(Point *p){
 	return _coord.distance(*p);
 }
 
-Site *Site::create(Point *p, int index, float weight){
+Site *Site::create(Point *p, int index, double weight){
 	if (_pool->size() > 0) {
 		Site * temp= _pool->top()->init(p, index, weight);
 		_pool->pop();
@@ -93,11 +108,6 @@ Site *Site::create(Point *p, int index, float weight){
 	} else {
 		return new Site(p, index, weight);
 	}
-}
-
-void Site::sortSites(std::vector<Site*> *sites){
-	//implementation not complete
-	std::sort(sites->begin(),sites->end());
 }
 
 bool Site::closeEnough(Point *p0, Point *p1){
@@ -275,7 +285,7 @@ void Site::connect(std::vector<Point*> *points, int j, Rectangle *bounds, bool c
 	}
 }
 
-Site *Site::init(Point *p, int index, float weight){
+Site *Site::init(Point *p, int index, double weight){
 	_coord = *p;
 	_siteIndex = index;
 	Site::weight = weight;
@@ -298,7 +308,7 @@ void Site::disposeList(){
 
 int Site::push(Site *site){
 	_sorted = false;
-	_sites->insert(_sites->end(), site);
+	_sites->push_back(site);
 	return _sites->size();
 }
 
@@ -319,7 +329,7 @@ Site *Site::next(){
 
 Rectangle *Site::getSitesBounds(){
 	if (_sorted == false) {
-		Site::sortSites(_sites);
+		std::sort(_sites->begin(), _sites->end());
 		_currentIndex = 0;
 		_sorted = true;
 	}
@@ -327,7 +337,7 @@ Rectangle *Site::getSitesBounds(){
 	if (_sites->empty()) {
 		return new Rectangle(0, 0, 0, 0);
 	}
-	xmin = FLT_MAX;
+	xmin = DBL_MAX;
 	xmax = FLT_MIN;
 	for (int i = 0; i < _sites->size(); i++) {
 		if (_sites->at(i)->getX() < xmin) {

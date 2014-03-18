@@ -7,6 +7,8 @@ Build/*
 # Include Directory Ignores
 
 ogre/*
+ipch/*
+UnitTests/Debug
 
 # IDE Specific Ignores
 
