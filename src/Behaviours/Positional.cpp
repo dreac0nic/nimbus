@@ -1,6 +1,7 @@
 #include "Positional.h"
 
 using namespace Nimbus;
+using namespace Ogre;
 
 Nimbus::Positional::Positional(BehaviourType type, World* world):
 	Behaviour(type, world)
@@ -20,25 +21,25 @@ Nimbus::Positional::~Positional(void)
 void Nimbus::Positional::startup(void)
 {
 	// STARTUP FOR POSITIONAL
-	/*
-		NO IDEA WHAT GOES HERE
-	*/
+	this->mDisplacementVector = Vector3::ZERO;
+
+	// Register event listeners.
 }
 
 void Nimbus::Positional::update(void)
 {
 	// UPDATE THE POSITIONAL
-	/*
-		POSITION THINGS YEAH
-	*/
+	if(this->mDisplacementVector != Vector3::ZERO) {
+		this->mPosition += this->mDisplacementVector;
+
+		this->mDisplacementVector = Vector3::ZERO;
+	}
 }
 
 void Nimbus::Positional::shutdown(void)
 {
 	// SUT DOWN THE POSITIONAL STUFF
-	/*
-		YARHARFIDDLEEDEE
-	*/
+	// Deregister event listeners.
 }
 
 Behaviour* Nimbus::Positional::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)

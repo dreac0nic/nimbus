@@ -19,6 +19,9 @@ namespace Nimbus
 		/* Holds the position of the entity. */
 		Ogre::Vector3 mPosition;
 
+		/* Contains the displaced vector for the last frame. */
+		Ogre::Vector3 mDisplacementVector;
+
 	public:
 		/* Default constructor, taking a world pointer.
 			@param type The type of Behaviour being constructed.
