@@ -8,7 +8,7 @@ Nimbus::Positional::Positional(World* world):
 }
 
 Nimbus::Positional::Positional(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(world, intializingSettings)
+	Behaviour(world, initializingSettings)
 {
 }
 
