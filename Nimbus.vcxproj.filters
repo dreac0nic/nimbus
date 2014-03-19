@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Behaviours">
       <UniqueIdentifier>{7a511ab5-4d87-4a7e-822a-a38d63f9815f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Iterators">
+      <UniqueIdentifier>{2cd104a0-796d-457e-adaf-b736b48e7b88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -56,6 +59,12 @@
     </ClCompile>
     <ClCompile Include="src\Renderable.cpp">
       <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GeneralEntityIterator.cpp">
+      <Filter>Source Files\Iterators</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TypeEntityIterator.cpp">
+      <Filter>Source Files\Iterators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

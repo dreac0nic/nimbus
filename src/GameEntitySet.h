@@ -2,6 +2,7 @@
 #define NIMBUS_GAMEENTITYSET_H
 
 #include <iterator>
+#include <list>
 #include <map>
 
 #include "GameEntity.h"
@@ -57,6 +58,41 @@ namespace Nimbus
 			bool operator!=(const GeneralEntityIterator& rhs);
 		};
 
+		/** An implementation of the entity iterator which iterates over a
+		specific type of entity (entityType)
+		*/
+		class TypeEntityIterator :
+			public entityiterator
+		{
+		private:
+			typedef std::list<GameEntity* >::iterator typeiterator;
+			std::list<GameEntity* >* mEntities;
+
+			// The current entity
+			typeiterator mCurrentEntity;
+
+		public:
+			// Initial constructor to initialize the iterator to an arbitrary position
+			TypeEntityIterator(typeiterator& entity, std::list<GameEntity* >* entityList);
+			// Copy constructor
+			TypeEntityIterator(const TypeEntityIterator& other);
+			
+			// Post increment
+			const TypeEntityIterator& operator++();
+			// Pre increment
+			TypeEntityIterator& operator++(int junk);
+
+			// Dereference
+			GameEntity& operator*();
+			// Functional dereference
+			GameEntity* operator->();
+
+			// Equality
+			bool operator==(const TypeEntityIterator& rhs);
+			// Inequality
+			bool operator!=(const TypeEntityIterator& rhs);
+		};
+
 	private:
 		// Member variables
 
@@ -70,8 +106,11 @@ namespace Nimbus
 
 		void addGameEntity(GameEntity* entity);
 
-		GeneralEntityIterator begin(GameEntityType type = "");
-		GeneralEntityIterator end(GameEntityType type = "");
+		GeneralEntityIterator beginGeneralIterator();
+		GeneralEntityIterator endGeneralIterator();
+
+		TypeEntityIterator beginTypeIterator(GameEntityType type);
+		TypeEntityIterator endTypeIterator(GameEntityType type);
 	};
 }
 
