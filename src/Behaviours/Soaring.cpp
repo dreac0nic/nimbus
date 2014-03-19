@@ -2,13 +2,13 @@
 
 using namespace Nimbus;
 
-Nimbus::Soaring::Soaring(World* world):
-	Positional(world)
+Nimbus::Soaring::Soaring(BehaviourType type, World* world):
+	Positional(type, world)
 {
 }
 
-Nimbus::Soaring::Soaring(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
-	Positional(world, initializingSettings)
+Nimbus::Soaring::Soaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
+	Positional(type, world, initializingSettings)
 {
 }
 

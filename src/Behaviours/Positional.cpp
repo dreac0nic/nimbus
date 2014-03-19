@@ -2,13 +2,13 @@
 
 using namespace Nimbus;
 
-Nimbus::Positional::Positional(World* world):
-	Behaviour(world)
+Nimbus::Positional::Positional(BehaviourType type, World* world):
+	Behaviour(type, world)
 {
 }
 
-Nimbus::Positional::Positional(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(world, initializingSettings)
+Nimbus::Positional::Positional(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
+	Behaviour(type, world, initializingSettings)
 {
 }
 

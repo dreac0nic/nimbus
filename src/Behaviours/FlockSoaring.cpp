@@ -2,13 +2,13 @@
 
 using namespace Nimbus;
 
-Nimbus::FlockSoaring::FlockSoaring(World* world):
-	Soaring(world)
+Nimbus::FlockSoaring::FlockSoaring(BehaviourType type, World* world):
+	Soaring(type, world)
 {
 }
 
-Nimbus::FlockSoaring::FlockSoaring(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
-	Soaring(world, initializingSettings)
+Nimbus::FlockSoaring::FlockSoaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
+	Soaring(type, world, initializingSettings)
 {
 }
 

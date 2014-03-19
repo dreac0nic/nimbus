@@ -2,13 +2,13 @@
 
 using namespace Nimbus;
 
-Nimbus::Rainy::Rainy(World* world):
-	Behaviour(world)
+Nimbus::Rainy::Rainy(BehaviourType type, World* world):
+	Behaviour(type, world)
 {
 }
 
-Nimbus::Rainy::Rainy(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(world, initializingSettings)
+Nimbus::Rainy::Rainy(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
+	Behaviour(type, world, initializingSettings)
 {
 }
 

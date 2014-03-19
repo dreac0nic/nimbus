@@ -16,15 +16,17 @@ namespace Nimbus
 	{
 	public:
 		/* Default constructor, taking a world pointer.
+			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 		*/
-		Soaring(World* world);
+		Soaring(BehaviourType type, World* world);
 
 		/* Constructor based of a set of initial settings.
+			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 			@param intitializingSettings A map of settings used to construct the intial entity.
 		*/
-		Soaring(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+		Soaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
 
 		/* Virtual destructor for destroying things. */
 		virtual ~Soaring(void);

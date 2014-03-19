@@ -14,15 +14,17 @@ namespace Nimbus
 	{
 	public:
 		/* Default constructor, taking a world pointer.
+			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 		*/
-		Rainy(World* world);
+		Rainy(BehaviourType type, World* world);
 
 		/* Constructor based of a set of initial settings.
+			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 			@param intitializingSettings A map of settings used to construct the intial entity.
 		*/
-		Rainy(World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+		Rainy(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
 
 		/* Virtual destructor for destroying things. */
 		virtual ~Rainy(void);
