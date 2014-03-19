@@ -23,7 +23,6 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
     <ClCompile Include="src\Renderable.cpp" />
-    <ClCompile Include="src\TypeEntityIterator.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>

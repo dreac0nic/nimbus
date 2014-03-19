@@ -36,12 +36,17 @@ GameEntitySet::GeneralEntityIterator GameEntitySet::endGeneralIterator()
 	return GeneralEntityIterator(this->mEntitiesById.end(), &this->mEntitiesById);
 }
 
-GameEntitySet::TypeEntityIterator GameEntitySet::beginTypeIterator(GameEntityType type)
+std::list<GameEntity*> GameEntitySet::getEntitiesOfType(std::string type)
 {
-	return TypeEntityIterator(this->mEntitiesByType[type].begin(), &this->mEntitiesByType[type]);
+	return this->mEntitiesByType[type];
 }
 
-GameEntitySet::TypeEntityIterator GameEntitySet::endTypeIterator(GameEntityType type)
+std::list<GameEntity*> GameEntitySet::getEntitiesWithBehaviour(std::string behaviour)
 {
-	return TypeEntityIterator(this->mEntitiesByType[type].end(), &this->mEntitiesByType[type]);
+	return this->mEntitiesByBehaviour[behaviour];
+}
+
+GameEntity* GameEntitySet::getEntity(int id)
+{
+	return this->mEntitiesById[id];
 }

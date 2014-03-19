@@ -26,14 +26,12 @@ bool EntityManager::update(void)
 		entity++;
 	}
 
-	GameEntitySet::TypeEntityIterator entityByType = entities->beginTypeIterator("Dragon");
-	for(; entityByType != entities->endTypeIterator("Dragon"); ++entities)
+	std::list<GameEntity*> dragons = entities->getEntitiesOfType("Dragon");
+	for (std::list<GameEntity*>::iterator it = dragons.begin(); it != dragons.end(); it++)
 	{
-		stringstream debugstream("");
-		debugstream << "(Nimbus) I found a draaaaaagon. <insert musical notation here in the key of G>\n";
-		debugstream << "         " << entityByType->getEntityId() << ": " << entityByType->getEntityType() << "\n";
-		Ogre::LogManager::getSingleton().logMessage(debugstream.str());
+		Ogre::LogManager::getSingleton().logMessage("I found a dragon");
 	}
+	Ogre::LogManager::getSingleton().logMessage(entities->getEntity(4)->getEntityType());
 
 	return true;
 }
