@@ -17,7 +17,7 @@ EntityManager::~EntityManager(void)
 bool EntityManager::update(void)
 {
 	GameEntitySet* entities = this->mWorld->getEntities();
-	GameEntitySet::EntityIterator entity = entities->begin(); 
+	GameEntitySet::GeneralEntityIterator entity = entities->begin(); 
 	while (entity != entities->end())
 	{
 		entity->update();

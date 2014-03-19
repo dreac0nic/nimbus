@@ -26,24 +26,24 @@ void GameEntitySet::addGameEntity(GameEntity* entity)
 	}
 }
 
-GameEntitySet::EntityIterator& GameEntitySet::begin(GameEntityType type)
+GameEntitySet::GeneralEntityIterator GameEntitySet::begin(GameEntityType type)
 {
 	if(type == "")
 	{
-		return *(new GeneralEntityIterator(this->mEntitiesById.begin(), &this->mEntitiesById));
+		return GeneralEntityIterator(this->mEntitiesById.begin(), &this->mEntitiesById);
 	}
 
-	return *(new GeneralEntityIterator(this->mEntitiesById.end(), &this->mEntitiesById));
+	return GeneralEntityIterator(this->mEntitiesById.end(), &this->mEntitiesById);
 }
 
-GameEntitySet::EntityIterator& GameEntitySet::end(GameEntityType type)
+GameEntitySet::GeneralEntityIterator GameEntitySet::end(GameEntityType type)
 {
 	if(type == "")
 	{
-		return *(new GeneralEntityIterator(this->mEntitiesById.end(), &this->mEntitiesById));
+		return GeneralEntityIterator(this->mEntitiesById.end(), &this->mEntitiesById);
 	}
 
-	return *(new GeneralEntityIterator(this->mEntitiesById.end(), &this->mEntitiesById));
+	return GeneralEntityIterator(this->mEntitiesById.end(), &this->mEntitiesById);
 }
 
 //////////
@@ -60,18 +60,18 @@ GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(generaliterator& ini
 }
 
 GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(
-	GameEntitySet::EntityIterator& other)
+	const GameEntitySet::GeneralEntityIterator& other)
 {
-	this->currentEntity = this->mEntityMap->find(other->getEntityId());
+	this->currentEntity = other.currentEntity;
 }
 
-GameEntitySet::EntityIterator& GameEntitySet::GeneralEntityIterator::operator++()
+const GameEntitySet::GeneralEntityIterator& GameEntitySet::GeneralEntityIterator::operator++()
 {
 	this->currentEntity = ++this->currentEntity;
 	return *this;
 }
 
-GameEntitySet::EntityIterator& GameEntitySet::GeneralEntityIterator::operator++(int junk)
+GameEntitySet::GeneralEntityIterator& GameEntitySet::GeneralEntityIterator::operator++(int junk)
 {
 	++this->currentEntity;
 	return *this;
@@ -87,20 +87,20 @@ GameEntity* GameEntitySet::GeneralEntityIterator::operator->()
 	return (*this->currentEntity).second;
 }
 
-bool GameEntitySet::GeneralEntityIterator::operator==(GameEntitySet::EntityIterator& rhs)
+bool GameEntitySet::GeneralEntityIterator::operator==(const GameEntitySet::GeneralEntityIterator& rhs)
 {
-	if (this->currentEntity != mEntityMap->end())
+	if (this->currentEntity == mEntityMap->end() || rhs.currentEntity == mEntityMap->end())
 	{
-		return this->currentEntity->second == &(*(rhs));
+		return this->currentEntity == rhs.currentEntity;
 	}
-	return this == &rhs;
+	return (*this->currentEntity).second == (*rhs.currentEntity).second;
 }
 
-bool GameEntitySet::GeneralEntityIterator::operator!=(GameEntitySet::EntityIterator& rhs)
+bool GameEntitySet::GeneralEntityIterator::operator!=(const GameEntitySet::GeneralEntityIterator& rhs)
 {
-	if (this->currentEntity != mEntityMap->end())
+	if (this->currentEntity == mEntityMap->end() || rhs.currentEntity == mEntityMap->end())
 	{
-		return (this->currentEntity->second) != &(*(rhs));
+		return this->currentEntity != rhs.currentEntity;
 	}
-	return this != &rhs;
+	return this->currentEntity->second != rhs.currentEntity->second;
 }
