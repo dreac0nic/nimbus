@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Map">
       <UniqueIdentifier>{cd489ea1-650c-44b0-9bb8-1c9114b5bbea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Map">
+      <UniqueIdentifier>{9c083eeb-fc1c-4b09-adf2-8442aba39367}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -66,17 +69,17 @@
     <ClCompile Include="src\MapGeneration\Util.cpp">
       <Filter>Source Files\MapGeneration</Filter>
     </ClCompile>
-    <ClCompile Include="src\Tile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TileEdge.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Corner.cpp">
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
     <ClCompile Include="src\Map.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
-    <ClCompile Include="src\Corner.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Tile.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TileEdge.cpp">
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
