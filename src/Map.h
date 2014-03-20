@@ -1,79 +1,23 @@
 #ifndef MAP_H
 #define MAP_H
 
-
 #include <OgreVector2.h>
 #include "OGRE\OgreVector2.h"
 #include <utility>
-#include <stdlib.h>
+//#include <stdlib.h>
+#include "Tile.h"
 #include "MapGeneration/Voronoi.h"
 
 namespace Nimbus{
-	typedef Ogre::Vector2 Point;
 
 	class Tile;
 	class Corner;
 	class TileEdge;
 	class Map; // wars
 
-	//Temporary; fill or replace
-	enum Biome{MOUNTAIN, DESERT, COAST, OCEAN};
-
-	//This is the Center class renamed to fit our terms.
-	class Tile{
-	public:
-		static int deltaX;
-		static int deltaY;
-
-		int index;
-		Point loc;
-		std::vector<Corner*> corners;
-		std::vector<Tile*> neighbors;
-		std::vector<TileEdge*> borders;
-		bool border, ocean, water, coast;
-		double elevation;
-		double moisture;
-		double area;
-		Biome biome;
-
-		Tile();
-		Tile(Point *loc);
-		void calculateBox();
-		void toString();
-	};
-
-	class Corner{
-	public:
-		std::vector<Tile*> touches;
-		std::vector<Corner*> adjacent;
-		std::vector<TileEdge*> protrudes;
-		Point *loc;
-		int index;
-		bool border;
-		double elevation;
-		bool water, ocean, coast;
-		Corner *downslope;
-		int river;
-		double moisture;
-
-		bool operator< (const Corner &other) const;
-		void toString();
-	};
-
-	class TileEdge{
-	public:
-		int index;
-		Tile *d0, *d1;
-		Corner *v0, *v1;
-		Point *midpoint;
-		int river;
-
-		void setVoronoi(Corner *c0, Corner *c1);
-		void toString();
-	};
-
 	class Map{
 	private:
+		// Generation functions
 		void improveCorners();
 		TileEdge *edgeWithTiles(Tile *t1, Tile *t2);
 		void buildGraph(Voronoi::Voronoi *v);
@@ -95,10 +39,25 @@ namespace Nimbus{
 		void assignBiomes();
 
 	public:
+		//////////
+		// Member Variables
+
+		// Map content objects
+
+		/* List of all edges on the map. */
 		std::vector<TileEdge*> edges;
+
+		/* List of all corners on the map. */
 		std::vector<Corner*> corners;
+
+		/* List of all tile centers on the map. */
 		std::vector<Tile*> centers;
+
+		/* Bounds of map. */
 		Voronoi::Rectangle bounds;
+
+		// Map generation elements
+
 		double **noise;
 		double ISLAND_FACTOR;
 		int bumps;
@@ -106,10 +65,30 @@ namespace Nimbus{
 		double dipAngle;
 		double dipWidth;
 
+		//////////
+		// Public Member Functions
+
+		/** Constructs a map using a voronoi generator
+		@param v A pointer to a Voronoi generator
+		@param numLloydRelaxations
+		*/
 		Map(Voronoi::Voronoi *v, int numLloydRelaxations);
+
+		/** Gets the biome of a given tile... may need to change.
+		@param tile A pointer to a tile to get the biome of.
+		@return The enumeration of which biome the given tile is.
+		*/
 		Biome getBiome(Tile *p);
-		//Finds the nearest tile to a given point.
+
+		/**Finds the nearest tile to a given point.
+		@param x The x coordinate of the tile.
+		@param y The y coordinate of the tile.
+		@return A pointer to the tile closest to the given point.
+		*/
 		Tile *getTileAt(double x, double y);
+
+		/** Mystical function of converting stuff to yarn.
+		*/
 		void toString();
 	};
 }

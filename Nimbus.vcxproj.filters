@@ -19,6 +19,9 @@
     <Filter Include="Header Files\MapGeneration">
       <UniqueIdentifier>{beab7612-4392-445a-9c7c-1a5d5d04be12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Map">
+      <UniqueIdentifier>{cd489ea1-650c-44b0-9bb8-1c9114b5bbea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -102,7 +105,16 @@
       <Filter>Header Files\MapGeneration</Filter>
     </ClInclude>
     <ClInclude Include="src\Map.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Corner.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TileEdge.h">
+      <Filter>Header Files\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

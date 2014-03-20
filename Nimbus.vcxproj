@@ -31,6 +31,7 @@
     <ClCompile Include="src\TileEdge.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Corner.h" />
     <ClInclude Include="src\EventListener.h" />
     <ClInclude Include="src\EventSystem.h" />
     <ClInclude Include="src\InputManager.h" />
@@ -40,6 +41,8 @@
     <ClInclude Include="src\NimbusApplication.h" />
     <ClInclude Include="src\RunMode.h" />
     <ClInclude Include="src\TestMode.h" />
+    <ClInclude Include="src\Tile.h" />
+    <ClInclude Include="src\TileEdge.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD12D565-5AB0-44A1-BAAD-B6B8B690D9F7}</ProjectGuid>

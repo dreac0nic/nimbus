@@ -5,36 +5,62 @@
 using namespace Nimbus;
 
 Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations){
+
+	// Generate the number of bumps
 	bumps = rand()*5 + 1;
+
+	// Generate the start angle
 	startAngle = rand() * 2 * PI;
+
+	// Generate the dip angle and width
 	dipAngle = rand() * 2 * PI;
 	dipWidth = rand() * .5 + .2;
+
+	// Get the bounds of the map as defined by the generation object
 	bounds = *v->getPlotBounds();
+
+	// Perform lloyd relaxations to create our points for map generation
 	for (int i = 0; i < numLloydRelaxations; i++) {
+
+		// Get the points used in this relaxation
 		std::vector<Point*> *points = v->siteCoords();
+
+		// For each point in this relaxation
 		for (int i = 0; i < points->size(); i++) {
-			std::vector<Point*> *region = v->region(points->at(i));
+
+			// Get the points in the surrounding region
+			std::vector<Point*> *region = v->region(points[i]);
 			double x = 0;
 			double y = 0;
+
+			// Go through each other point in the region and aggregate the x and y values
 			for (int j = 0; j < region->size(); i++) {
-				x += region->at(i)->x;
-				y += region->at(i)->y;
+				x += region[i]->x;
+				y += region[i]->y;
 			}
+
+			// Average the aggregated x and y values
 			x /= region->size();
 			y /= region->size();
-			points->at(i)->x = x;
-			points->at(i)->y = y;
+			points[i]->x = x;
+			points[i]->y = y;
 		}
+
+		// Create a new Voronoi generator given the new points
 		v = new Voronoi::Voronoi(points, v->getPlotBounds());
 	}
+
+	// Construct the voronoi point graph using the generator
 	buildGraph(v);
 	improveCorners();
 
+	// Modify the resulting graph to be more like a happy map object
 	assignCornerElevations();
 	assignOceanCoastAndLand();
 	redistributeElevations(landCorners());
 	assignPolygonElevations();
 
+	// Take the resulting map and make it look cool
 	calculateDownslopes();
 	createRivers();
 	assignBiomes();
@@ -50,15 +76,21 @@ Tile *Map::getTileAt(double x, double y){
 	Tile *tile;
 	double minDistance= Tile::deltaX + Tile::deltaY; //Will be higher than any possible value.
 
+	// For each of the tiles on the map
 	for (int i = 0; i < centers.size(); i++){
+
+		// If the tile is close enough to the given point
 		if(Voronoi::Util::closeEnough(x, centers.at(i)->loc.x, Tile::deltaX) && Voronoi::Util::closeEnough(y, centers.at(i)->loc.y, Tile::deltaY)){
+			// Check to see if the new distance is less than the current minimum
 			if(centers.at(i)->loc.distance(p) < minDistance){
+				// And keep the minimum distance
 				tile = centers.at(i);
 				minDistance = centers.at(i)->loc.distance(p) < minDistance;
 			}
 		}
 	}
 
+	// Return the closest tile
 	return tile;
 }
 
