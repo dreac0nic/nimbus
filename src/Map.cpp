@@ -32,6 +32,7 @@ Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations)
 		std::vector<Point*> *points = v->siteCoords();
 
 		// For each point in this relaxation
+		/*
 		for (int i = 0; i < points->size(); i++) {
 
 			// Get the points in the surrounding region
@@ -50,6 +51,24 @@ Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations)
 			y /= region->size();
 			points[i]->x = x;
 			points[i]->y = y;
+		}
+		*/
+		for(auto* point: (*points)) {
+			// Initialize locals.
+			std::vector<Point*>* region = v->region(point);
+
+			double x = 0.0f;
+			double y = 0.0f;
+
+			// Go through each other point in the region and aggregate the x and y values.
+			for(auto* otherPoint: (*region)) {
+				x += otherPoint->x;
+				x += otherPoint->y;
+			}
+
+			// Average the aggregated x and y values.
+			point->x = x/region->size();
+			point->y = y/region->size();
 		}
 
 		// Create a new Voronoi generator given the new points
