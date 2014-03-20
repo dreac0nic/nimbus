@@ -7,6 +7,11 @@ Nimbus::Rainy::Rainy(BehaviourType type, World* world):
 {
 }
 
+Nimbus::Rainy::Rainy(Rainy* other, World* world):
+	Behaviour(other, world)
+{
+}
+
 Nimbus::Rainy::Rainy(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
 	Behaviour(type, world, initializingSettings)
 {
@@ -43,5 +48,10 @@ void Nimbus::Rainy::shutdown(void)
 
 Behaviour* Nimbus::Rainy::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
 {
-	return new Nimbus::Rainy(this->mWorld, initializingSettings);
+	return new Nimbus::Rainy(this->mBehaviourType, this->mWorld, initializingSettings);
+}
+
+Behaviour* Nimbus::Rainy::clone(void)
+{
+	return new Nimbus::Rainy(this, this->mWorld);
 }

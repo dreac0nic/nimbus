@@ -13,6 +13,10 @@ EntityManager::~EntityManager(void)
 	delete this->mEntityFactory;
 }
 
+void EntityManager::initialize(void)
+{
+}
+
 bool EntityManager::update(void)
 {
 	vector<GameEntity*> entities = this->mWorld->getEntities();
@@ -21,6 +25,14 @@ bool EntityManager::update(void)
 		entities[x]->update();
 	}
 	return true;
+}
+
+void EntityManager::pause(void)
+{
+}
+
+void EntityManager::stop(void)
+{
 }
 
 void EntityManager::configureEntityTypes(string entityTypesFile, World* world)

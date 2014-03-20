@@ -35,16 +35,15 @@ namespace Nimbus
 		Ogre::Camera* mCamera;
 		Ogre::Viewport* mViewport;
 
-	protected:
-		// From Nimbus::RunMode
-		virtual bool initialize();
-
 	public:
 		GameMode(void);
 		virtual ~GameMode(void);
 
 		// From Nimbus::RunMode
+		virtual void initialize();
 		virtual RunMode* run(const Ogre::FrameEvent& evt);
+		virtual void pause();
+		virtual void stop();
 	};
 
 }

@@ -8,6 +8,11 @@ Nimbus::Positional::Positional(BehaviourType type, World* world):
 {
 }
 
+Nimbus::Positional::Positional(Positional* other, World* world):
+	Behaviour(other, world)
+{
+}
+
 Nimbus::Positional::Positional(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
 	Behaviour(type, world, initializingSettings)
 {
@@ -44,5 +49,10 @@ void Nimbus::Positional::shutdown(void)
 
 Behaviour* Nimbus::Positional::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
 {
-	return new Nimbus::Positional(this->mWorld, initializingSettings);
+	return new Nimbus::Positional(this->mBehaviourType, this->mWorld, initializingSettings);
+}
+
+Behaviour* Nimbus::Positional::clone(void)
+{
+	return new Nimbus::Positional(this, this->mWorld);
 }

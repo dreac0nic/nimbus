@@ -20,6 +20,12 @@ namespace Nimbus
 		*/
 		FlockSoaring(BehaviourType type, World* world);
 
+		/* Another constructor, taking a template object.
+			@param other The template of the type.
+			@param world A pointer to the game world.
+		*/
+		FlockSoaring(FlockSoaring* other, World* world);
+
 		/* Constructor based of a set of initial settings.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
@@ -44,6 +50,7 @@ namespace Nimbus
 			Currently merely returns a pointer given by the constructor.
 		*/
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+		virtual Behaviour* clone(void);
 	};
 }
 

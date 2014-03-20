@@ -7,6 +7,11 @@ Nimbus::FlockSoaring::FlockSoaring(BehaviourType type, World* world):
 {
 }
 
+Nimbus::FlockSoaring::FlockSoaring(FlockSoaring* other, World* world):
+	Soaring(other, world)
+{
+}
+
 Nimbus::FlockSoaring::FlockSoaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
 	Soaring(type, world, initializingSettings)
 {
@@ -43,5 +48,10 @@ void Nimbus::FlockSoaring::shutdown(void)
 
 Behaviour* Nimbus::FlockSoaring::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
 {
-	return new Nimbus::FlockSoaring(this->mWorld, initializingSettings);
+	return new Nimbus::FlockSoaring(this->mBehaviourType, this->mWorld, initializingSettings);
+}
+
+Behaviour* Nimbus::FlockSoaring::clone(void)
+{
+	return new Nimbus::FlockSoaring(this, this->mWorld);
 }

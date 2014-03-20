@@ -48,6 +48,7 @@ void NimbusApplication::begin(void)
 
 		// Create the initial run mode
 		app->mCurrentRunMode = new GameMode();
+		app->mCurrentRunMode->initialize();
 
 		// Start the rendering process
 		app->mRoot->addFrameListener(app);

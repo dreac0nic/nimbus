@@ -10,41 +10,15 @@ namespace Nimbus
 	 */
 	class RunMode
 	{
-	protected:
-		// Indicates if the RunMode has been initialized.
-		bool initialized;
+	public:
+		RunMode() {}
+
+		virtual ~RunMode() {}
 
 		/** Sets up all necessary components of the run mode.
 		 Should be called before run begins.
-		 
-		 @return
-		 A boolean indicating success of initialization.
 		 */
-		virtual bool initialize()
-		{
-			initialized = true;
-			return true;
-		}
-
-		/** Stops the execution of the run mode.
-		 Should be called after the run completes.
-		 
-		 @return
-		 A boolean indicating success of stopping.
-		 */
-		virtual bool stop()
-		{
-			initialized = false;
-			return true;
-		}
-
-	public:
-		RunMode()
-		{
-			initialized = false;
-		}
-
-		virtual ~RunMode() {}
+		virtual void initialize() = 0;
 
 		/** Updates all information in the run mode. Runs a single frame.
 		 
@@ -58,6 +32,16 @@ namespace Nimbus
 		 it will return a 0 (null).
 		 */
 		virtual RunMode* run(const Ogre::FrameEvent& evt) = 0;
+
+		/** Pauses the execution of the run mode.
+		 Should be called when the run mode needs to take a break.
+		 */
+		virtual void pause() = 0;
+
+		/** Stops the execution of the run mode.
+		 Should be called after the run completes.
+		 */
+		virtual void stop() = 0;
 	};
 }
 

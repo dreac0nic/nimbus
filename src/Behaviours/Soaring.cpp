@@ -7,6 +7,11 @@ Nimbus::Soaring::Soaring(BehaviourType type, World* world):
 {
 }
 
+Nimbus::Soaring::Soaring(Soaring* other, World* world):
+	Positional(other, world)
+{
+}
+
 Nimbus::Soaring::Soaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
 	Positional(type, world, initializingSettings)
 {
@@ -43,9 +48,10 @@ void Nimbus::Soaring::shutdown(void)
 
 Behaviour* Nimbus::Soaring::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
 {
-	return new Nimbus::Soaring(this->mWorld, initializingSettings);
+	return new Nimbus::Soaring(this->mBehaviourType, this->mWorld, initializingSettings);
 }
 
 Behaviour* Nimbus::Soaring::clone(void)
 {
-	return new Nimbus::Soaring(this, this-mWorld);
+	return new Nimbus::Soaring(this, this->mWorld);
+}

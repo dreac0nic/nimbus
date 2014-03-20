@@ -41,7 +41,10 @@ namespace Nimbus
 		virtual ~EntityManager(void);
 
 		// From Nimbus::Manager
+		virtual void initialize(void);
 		virtual bool update(void);
+		virtual void pause(void);
+		virtual void stop(void);
 
 		/* Configures the entity factory.
 
