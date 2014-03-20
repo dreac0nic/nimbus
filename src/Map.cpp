@@ -1,10 +1,16 @@
+#include <vector>
+
 #include "Map.h"
+#include "Tile.h"
+#include "TileEdge.h"
+#include "Corner.h"
 
 #define PI 3.1415927
 
 using namespace Nimbus;
 
-Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations){
+Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations)
+{
 
 	// Generate the number of bumps
 	bumps = rand()*5 + 1;
@@ -66,12 +72,14 @@ Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations){
 	assignBiomes();
 }
 
-Biome Map::getBiome(Tile *p){
+Biome Map::getBiome(Tile *p)
+{
 	//not yet implimented
 	return OCEAN;
 }
 
-Tile *Map::getTileAt(double x, double y){
+Tile *Map::getTileAt(double x, double y)
+{
 	Point p = Point(x, y);
 	Tile *tile;
 	double minDistance= Tile::deltaX + Tile::deltaY; //Will be higher than any possible value.
