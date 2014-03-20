@@ -17,15 +17,15 @@ Tile::Tile(Point *loc)
 
 void Tile::calculateBox(void)
 {
-	for (int i = 0; i < corners.size(); i++){
+	for (unsigned int i = 0; i < corners.size(); i++){
 		double x = std::abs(corners.at(i)->loc->x - loc.x);
 		if(x > deltaX){
-			deltaX = x;
+			deltaX = x; // DOUBLE -> INT POSSIBLE LOSS OF DATA
 		}
 
 		double y = std::abs(corners.at(i)->loc->y - loc.y);
 		if(y > deltaY){
-			deltaY = y;
+			deltaY = y; // DOUBLE -> INT POSSIBLE LOSS OF DATA
 		}
 	}
 }
