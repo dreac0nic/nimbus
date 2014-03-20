@@ -1,21 +1,22 @@
-#ifndef MAP_H
-#define MAP_H
+#ifndef NIMBUS_MAP_H
+#define NIMBUS_MAP_H
 
-#include <OgreVector2.h>
-#include "OGRE\OgreVector2.h"
 #include <utility>
-//#include <stdlib.h>
+
+#include <OGRE\OgreVector2.h>
+
 #include "Tile.h"
 #include "MapGeneration/Voronoi.h"
 
-namespace Nimbus{
-
+namespace Nimbus
+{
 	class Tile;
 	class Corner;
 	class TileEdge;
 	class Map; // wars -- cool, wars! i like wars!
 
-	class Map{
+	class Map
+	{
 	private:
 		// Generation functions
 		void improveCorners();
