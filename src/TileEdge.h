@@ -3,7 +3,7 @@
 
 #include <OGRE\OgreVector2.h>
 
-namespace nimbus
+namespace Nimbus
 {
 	// Class forward-declarations.
 	/* Tile holds the Voronoi tile of the map. */
@@ -33,7 +33,7 @@ namespace nimbus
 		virtual ~TileEdge(void);
 
 		void setVoronoi(Corner *c0, Corner *c1);
-		void toString();
+		void toString(void);
 	};
 }
 
