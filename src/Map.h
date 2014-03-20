@@ -13,7 +13,7 @@ namespace Nimbus{
 	class Tile;
 	class Corner;
 	class TileEdge;
-	class Map; // wars
+	class Map; // wars -- cool, wars! i like wars!
 
 	class Map{
 	private:
