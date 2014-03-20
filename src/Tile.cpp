@@ -15,6 +15,10 @@ Tile::Tile(Point *loc)
 	this->loc = *loc;
 }
 
+Tile::~Tile(void)
+{
+}
+
 void Tile::calculateBox(void)
 {
 	for (unsigned int i = 0; i < corners.size(); i++){
