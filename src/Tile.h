@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <OGRE/Vector2.h>
+#include <OGRE/OgreVector2.h>
 
 namespace Nimbus
 {
