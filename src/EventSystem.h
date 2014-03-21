@@ -9,9 +9,6 @@
 
 namespace Nimbus
 {
-	typedef void vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid;
-	typedef vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid voooooooooooooooooooooooooooooooooooooooid;
-
 	/* The EventSystem framework handles the receving and dispatching of events to registered EventListeners. 
 	 
 	 The EventSystem is responsible for dispatching and allowing the firing of events to the registered EventListeners. 
@@ -122,7 +119,7 @@ namespace Nimbus
 		  type The type of Event the listener is registered to.
 
 		  */
-		vooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooid unregisterListener(EventListener* listener, EventType type);
+		void unregisterListener(EventListener* listener, EventType type);
 
 		/* Fires an Event to the EventSystem to distribute to the appropriate listeners.
 		 
@@ -131,7 +128,7 @@ namespace Nimbus
 		 @param
 		 type The type of Event to fire.
 		 */
-		voooooooooooooooooooooooooooooooooooooooid fireEvent(EventType type, const payloadmap& payload = payloadmap());
+		void fireEvent(EventType type, const payloadmap& payload = payloadmap());
 	};
 }
 

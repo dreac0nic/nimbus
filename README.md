@@ -3,6 +3,8 @@ Nimbus
 
 This is the actual official 100% legit real-deal repo for the Nimbus (working title) game project.
 
+Setup instructions may be found [here](https://github.com/dreac0nic/nimbus/wiki/Setting-Up) in the wiki.
+
 Version 0.1
 -----------
 

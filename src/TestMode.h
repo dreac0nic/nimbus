@@ -10,7 +10,6 @@ namespace Nimbus
 	{
 	private:
 		// Member variables
-
 		Ogre::SceneManager* mSceneMgr;
 		Ogre::Camera* mCamera;
 		Ogre::Viewport* mViewport;
