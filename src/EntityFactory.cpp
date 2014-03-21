@@ -133,10 +133,20 @@ GameEntity* Nimbus::EntityFactory::createEntity(std::string entityType)
 
 void Nimbus::EntityFactory::CreateEntityListener::handleEvent(payloadmap payload, EventListener* responder)
 {
+	payloadmap responsePayload;
+	GameEntity* entity;
+
 	if (payload.find("EntityType") != payload.end())
 	{
-		GameEntity* entity = containingFactory->createEntity(*(static_cast<string*>(payload["EntityType"])));
+		entity = containingFactory->createEntity(*(static_cast<string*>(payload["EntityType"])));
 		containingFactory->mWorld->addEntity(entity);
+
+		// Send a response if one is requested
+		if(responder != NULL)
+		{
+			responsePayload["GameEntity"] = entity;
+			responder->handleEvent(responsePayload);
+		}
 	}
 
 	// Cleaning up any unneeded payload memory space

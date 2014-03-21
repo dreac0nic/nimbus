@@ -45,6 +45,6 @@ void EventSystem::unregisterListener(EventListener* listener, EventType type)
 void EventSystem::fireEvent(EventType type, const payloadmap& payload, EventListener* responder)
 {
 	for(vector<EventListener*>::iterator i = mListeners[type].begin(); i != mListeners[type].end(); ++i) {
-		(*i)->handleEvent(payload); // OH MY GOODNESS TEH SCIENCE
+		(*i)->handleEvent(payload, responder); // OH MY GOODNESS TEH SCIENCE
 	}
 }
