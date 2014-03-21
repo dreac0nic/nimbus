@@ -80,6 +80,7 @@ namespace Nimbus
 
 			Payload:
 				"Path" => std::list<Ogre::Ray>
+				"Points" => std::list<Ogre::Vector2>
 
 		CREATE_ENTITY
 			The event that causes the EntityFactory to produce a new entity of given type.

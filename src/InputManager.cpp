@@ -94,6 +94,7 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 		logstring << "The left mouse button was pressed at ("
 			<< evt.state.X.abs << ", " << evt.state.Y.abs << ")"
 			<< std::endl;
+		// Ogre::Camera::getCameraToViewportRay(Real screenx, Real screeny)
 	}
 	if(evt.state.buttonDown(OIS::MB_Right))
 	{
