@@ -36,7 +36,7 @@ Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations)
 		for (int i = 0; i < points->size(); i++) {
 
 			// Get the points in the surrounding region
-			std::vector<Point*> *region = v->region(points[i]);
+			std::vector<Point*> *region = v->region((*points)[i]);
 			double x = 0;
 			double y = 0;
 
@@ -53,7 +53,9 @@ Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations)
 			points[i]->y = y;
 		}
 		*/
-		for(auto* point: (*points)) {
+		// C++11 niceness: for(Point* point: (*points)) {
+		 for(std::vector<Point*>::iterator it = points->begin(); it != points->end(); ++it) {
+			Point* point = *it;
 			// Initialize locals.
 			std::vector<Point*>* region = v->region(point);
 
@@ -61,7 +63,7 @@ Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations)
 			double y = 0.0f;
 
 			// Go through each other point in the region and aggregate the x and y values.
-			for(auto* otherPoint: (*region)) {
+			for(Point* otherPoint: (*region)) {
 				x += otherPoint->x;
 				x += otherPoint->y;
 			}
