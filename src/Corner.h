@@ -75,6 +75,9 @@ namespace Nimbus
 
 		/* Convert the corner to a string. */
 		void toString(void);
+
+		/* Convert the corner to a OGRE Vector3. */
+		Ogre::Vector3 getVector3(void);
 	};
 }
 
