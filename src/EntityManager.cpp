@@ -1,4 +1,7 @@
 #include "EntityManager.h"
+#include "GameEntitySet.h"
+#include <OgreLogManager.h>
+#include <sstream>
 
 using namespace Nimbus;
 using namespace std;
@@ -19,11 +22,23 @@ void EntityManager::initialize(void)
 
 bool EntityManager::update(void)
 {
-	vector<GameEntity*> entities = this->mWorld->getEntities();
-	for (unsigned int x = 0; x < entities.size(); x++)
+	GameEntitySet* entities = this->mWorld->getEntities();
+	GameEntitySet::GeneralEntityIterator entity = entities->beginGeneralIterator(); 
+	while (entity != entities->endGeneralIterator())
 	{
-		entities[x]->update();
+		entity->update();
+		entity++;
 	}
+
+	/* Example of how to access entities
+	std::list<GameEntity*> dragons = entities->getEntitiesOfType("Dragon");
+	for (std::list<GameEntity*>::iterator it = dragons.begin(); it != dragons.end(); it++)
+	{
+		Ogre::LogManager::getSingleton().logMessage("I found a dragon");
+	}
+	Ogre::LogManager::getSingleton().logMessage(entities->getEntity(4)->getEntityType());
+	*/
+
 	return true;
 }
 

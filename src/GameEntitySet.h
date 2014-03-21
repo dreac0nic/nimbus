@@ -2,6 +2,7 @@
 #define NIMBUS_GAMEENTITYSET_H
 
 #include <iterator>
+#include <list>
 #include <map>
 
 #include "GameEntity.h"
@@ -30,18 +31,19 @@ namespace Nimbus
 		{
 		private:
 			typedef std::map<GameEntityId, GameEntity*>::iterator generaliterator;
+			std::map<GameEntityId, GameEntity*>* mEntityMap;
 
 			// The current entity
 			generaliterator currentEntity;
 
 		public:
 			// Umm... not sure why we need this
-			GeneralEntityIterator(generaliterator& entity);
+			GeneralEntityIterator(generaliterator& entity, std::map<GameEntityId, GameEntity*>* entityMap);
 			// Copy constructor
 			GeneralEntityIterator(const GeneralEntityIterator& other);
 			
 			// Post increment
-			GeneralEntityIterator& operator++();
+			const GeneralEntityIterator& operator++();
 			// Pre increment
 			GeneralEntityIterator& operator++(int junk);
 
@@ -69,8 +71,12 @@ namespace Nimbus
 
 		void addGameEntity(GameEntity* entity);
 
-		GeneralEntityIterator begin(GameEntityType type = "");
-		GeneralEntityIterator end(GameEntityType type = "");
+		GeneralEntityIterator beginGeneralIterator();
+		GeneralEntityIterator endGeneralIterator();
+
+		std::list<GameEntity*> getEntitiesOfType(std::string type);
+		std::list<GameEntity*> getEntitiesWithBehaviour(std::string behaviour);
+		GameEntity* getEntity(int id);
 	};
 }
 
