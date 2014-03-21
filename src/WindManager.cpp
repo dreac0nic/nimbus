@@ -12,5 +12,6 @@ WindManager::~WindManager(void)
 
 bool WindManager::update(void)
 {
+
 	return true;
 }
