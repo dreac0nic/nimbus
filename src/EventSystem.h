@@ -9,6 +9,12 @@
 
 namespace Nimbus
 {
+	// An enumeration to specify generic 2D direction.
+	enum Direction
+	{
+		UP, RIGHT, DOWN, LEFT
+	};
+
 	/* The EventSystem framework handles the receving and dispatching of events to registered EventListeners. 
 	 
 	 The EventSystem is responsible for dispatching and allowing the firing of events to the registered EventListeners. 
@@ -52,7 +58,7 @@ namespace Nimbus
 		// CLASS MEMBERS --
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
 		 */
-		enum EventType { SHUTDOWN, MOUSE_CLICKED, CREATE_ENTITY, POSITION_ENTITY, TRANSLATE_ENTITY, ENTITY_MOVED };
+		enum EventType { SHUTDOWN, MOUSE_CLICKED, DIRECTION_INPUT, CREATE_ENTITY, POSITION_ENTITY, TRANSLATE_ENTITY, ENTITY_MOVED };
 		/* EVENT TYPE INFORMATION
 		 
 		 EXAMPLE_EVENT:
@@ -73,6 +79,14 @@ namespace Nimbus
 			Payload:
 				"ButtonPressed" => OIS::MouseButtonID
 				"ScreenPosition" => Ogre::Vector2
+
+		DIRECTION_INPUT
+			An event fired whenever a key is pressed to indicate a direction.
+
+			Payload:
+				"KeyPressed" => OIS::KeyCode
+				"Direction" => Nimbus::Direction // Declared in the EventSystem.h... arbitrarily
+				"DirectionVector" => Ogre::Vector2 // A two dimensional unit vector indicating the direction of the input
 
 		CREATE_ENTITY
 			The event that causes the EntityFactory to produce a new entity of given type.

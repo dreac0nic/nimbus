@@ -1,3 +1,5 @@
+#include <OgreLogManager.h>
+
 #include "Positional.h"
 
 using namespace Nimbus;
