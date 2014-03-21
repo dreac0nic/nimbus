@@ -5,6 +5,8 @@
 
 #include "Behaviour.h"
 
+#include "../EventSystem.h"
+
 namespace Nimbus
 {
 	/* Positional is a class giving the entity the ability to have a position.
@@ -19,8 +21,50 @@ namespace Nimbus
 		/* Holds the position of the entity. */
 		Ogre::Vector3 mPosition;
 
-		/* Contains the displaced vector for the last frame. */
-		Ogre::Vector3 mDisplacementVector;
+		/* Contains the rotations for the entity. */
+		Ogre::Vector3 mRotationVector;
+
+		/* Contains the facing vector for the entity. */
+		Ogre::Vector3 mFacingVector;
+
+		/* Contains the delta vector for the position vector. */
+		Ogre::Vector3 mDeltaPosition;
+
+		/* Contains the delta vector for the rotation vector. */
+		Ogre::Vector3 mDeltaRotation;
+
+		/* Contains the new vector for the facing vector.
+			(Facing vectors are never relative to each other.
+			That leads to scale issues and stuff.)
+		*/
+		Ogre::Vector3 mNewFacing;
+
+		/* Determines if a force position update is necessary. */
+		bool requireUpdate;
+
+		/* Private constructor function referred to by all the actual constructors.
+			Provides a standard method for creating an object given all the necessary parameters.
+			@param initialPosition Pretty much like it sounds. It's a Vector3.
+		*/
+		void init(Ogre::Vector3 initialPosition, Ogre::Vector3 facingDirection);
+
+	protected:
+		// Event Listeners
+
+		/** Listener for movement events.
+		*/
+		class MovementListener :
+			public EventListener
+		{
+		private:
+			Positional* parent;
+		public:
+			MovementListener(Positional* parent) { this->parent = parent; }
+			~MovementListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload);
+		}* mMovementListener;
 
 	public:
 		/* Default constructor, taking a world pointer.

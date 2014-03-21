@@ -3,6 +3,7 @@
 
 #include <OgreEntity.h>
 #include "Behaviour.h"
+#include "../EventSystem.h"
 
 namespace Nimbus
 {
@@ -11,9 +12,9 @@ namespace Nimbus
 	{
 	private:
 		Ogre::Entity* mModel;
-		Ogre::Vector3 mPosition;
+		//Ogre::Vector3 mPosition;
 		Ogre::Vector3 mScale;
-		Ogre::Vector3 mRotation;
+		//Ogre::Vector3 mRotation;
 		Ogre::SceneNode* mNode;
 
 		/* Constructor function that initializes all the necessary properties of the
@@ -46,10 +47,11 @@ namespace Nimbus
 		virtual ~Renderable(void);
 
 		// Accessor methods
-		virtual Ogre::Entity* getEntity();
-		virtual Ogre::Vector3 getPosition();
+		virtual Ogre::Entity* getModel();
 		virtual Ogre::Vector3 getScale();
-		virtual Ogre::Vector3 getRotation();
+
+		// Setter methods
+		virtual void setModel(Ogre::Entity* model);
 
 		// From: Behaviour
 		virtual void startup(void);

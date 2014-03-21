@@ -23,9 +23,7 @@ GameMode::~GameMode(void)
 }
 
 void GameMode::initialize()
-{
-	//this->mEntityFactory = new EntityFactory(this->mWorld, "../../assets/scripts/ConfigFiles.ini");
-	
+{	
 	// Create the scene manager
 	mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
 	// Create the camera

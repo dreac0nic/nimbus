@@ -5,6 +5,7 @@
 
 #include "EntityFactory.h"
 #include "./Behaviours/Renderable.h"
+#include "./Behaviours/Positional.h"
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -27,6 +28,7 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 	// Load the behaviour prototype list
 	this->mBehaviourInstances.clear();
 	this->mBehaviourInstances["Renderable"] = new Renderable("Renderable", world);
+	this->mBehaviourInstances["Positional"] = new Positional("Positional", world);
 
 	logBuilder << "(Nimbus) Loading game entity types from " << filePathsFile;
 	LogManager::getSingleton().logMessage(logBuilder.str());

@@ -14,6 +14,8 @@ Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::Set
 	Behaviour(type, world)
 {
 	std::string ogreName;
+	Vector3 scale;
+	Ogre::Entity* model;
 
 	// The way this works now is a bit different... so consider changing this.
 	if(initializingSettings->find("ogreName") != initializingSettings->end())
@@ -27,40 +29,22 @@ Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::Set
 		std::string modelPath = initializingSettings->find("model")->second;
 		std::stringstream nameStream;
 		nameStream << ogreName << this->mWorld->getCurrentId();
-		this->mModel = this->mWorld->getSceneManager()->createEntity(nameStream.str(), modelPath);
+		model = this->mWorld->getSceneManager()->createEntity(nameStream.str(), modelPath);
 	}
 
-	// Grabbing the initial position
-	if(initializingSettings->find("position") != initializingSettings->end())
-	{
-		std::string positions = (*(initializingSettings->find("position"))).second;
-		std::stringstream positionStream;
-		positionStream << positions;
-		Ogre::Real x, y, z;
-		positionStream >> x >> y >> z;
-		this->mPosition = Ogre::Vector3(x, y, z);
-	}
-
-	// Grabbing the initial position
+	// Grabbing the initial scale
 	if(initializingSettings->find("scale") != initializingSettings->end())
 	{
-		std::string scales = (*(initializingSettings->find("scale"))).second;
+		std::string scales = initializingSettings->find("scale")->second;
 		std::stringstream scaleStream;
 		scaleStream << scales;
 		Ogre::Real x, y, z;
 		scaleStream >> x >> y >> z;
-		this->mScale = Ogre::Vector3(x, y, z);
+		scale = Ogre::Vector3(x, y, z);
 	}
-
-	// Grabbing the initial position
-	if(initializingSettings->find("rotation") != initializingSettings->end())
+	else
 	{
-		std::string rotations = (*(initializingSettings->find("rotation"))).second;
-		std::stringstream rotationStream;
-		rotationStream << rotations;
-		Ogre::Real x, y, z;
-		rotationStream >> x >> y >> z;
-		this->mRotation = Ogre::Vector3(x, y, z);
+		scale = Vector3(1,1,1);
 	}
 
 	// Initialize the object
@@ -90,11 +74,15 @@ void Nimbus::Renderable::init(Ogre::Entity* model, Vector3 scale)
 
 void Nimbus::Renderable::startup(void)
 {
+	// Create and attach the scene node for the entity
 	this->mNode = mWorld->getWorldNode()->createChildSceneNode();
 	this->mNode->attachObject(this->mModel);
 
 	// Setting initial properties
 	this->mNode->setScale(mScale.x, mScale.y, mScale.z);
+
+	// Register the position update listener
+	EventSystem::getSingleton()->registerListener(mPositionListener, EventSystem::EventType::ENTITY_MOVED);
 }
 
 void Nimbus::Renderable::update(void)
@@ -135,5 +123,39 @@ Behaviour* Nimbus::Renderable::clone(int id)
 	return new Nimbus::Renderable(this, this->mWorld, id);
 }
 
+void Nimbus::Renderable::PositionListener::handleEvent(payloadmap payload)
 {
+	// Temporary vectors for storing direction and position
+	Vector3 position, facing, rotation;
+
+	int temp = *(static_cast<int*>(payload["EntityId"]));
+	
+	// Immediately return if the event is not for us
+	if(*(static_cast<int*>(payload["EntityId"])) != parent->mParentId)
+	{
+		return;
+	}
+
+	// Apply position if the position was found
+	if(payload.find("PositionVector") != payload.end())
+	{
+		position = *static_cast<Ogre::Vector3*>(payload["PositionVector"]);
+		parent->mNode->setPosition(position);
+	}
+
+	// Apply facing vector if facing vector was found
+	if(payload.find("FacingVector") != payload.end())
+	{
+		facing = *static_cast<Ogre::Vector3*>(payload["FacingVector"]);
+		parent->mNode->lookAt(facing+position, Node::TransformSpace::TS_WORLD);
+	}
+
+	// Apply rotation vector if rotation vector was found
+	if(payload.find("RotationVector") != payload.end())
+	{
+		rotation = *static_cast<Ogre::Vector3*>(payload["RotationVector"]);
+		parent->mNode->pitch(Degree(rotation.x));
+		parent->mNode->yaw(Degree(rotation.y));
+		parent->mNode->roll(Degree(rotation.z));
+	}
 }
