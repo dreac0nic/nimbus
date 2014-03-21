@@ -11,7 +11,7 @@ EventSystem::EventSystem(void)
 	EventSystem::singleton = this;
 
 	// Initialize the listener map.
-	mListeners = map<EventType, vector<EventListener*>>();
+	mListeners = map<EventType, vector<EventListener*> >();
 }
 
 EventSystem::~EventSystem(void)

@@ -11,10 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EntityFactory.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\EnvironmentManager.cpp" />
     <ClCompile Include="src\EventSystem.cpp" />
+    <ClCompile Include="src\GameEntity.cpp" />
+    <ClCompile Include="src\GameEntitySet.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
+    <ClCompile Include="src\GeneralEntityIterator.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
@@ -23,23 +27,32 @@
     <ClCompile Include="src\WindCurrent.cpp" />
     <ClCompile Include="src\WindManager.cpp" />
     <ClCompile Include="src\WindMap.cpp" />
+    <ClCompile Include="src\Renderable.cpp" />
+
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\EntityManager.h" />
-    <ClInclude Include="src\EnvironmentManager.h" />
+    <ClInclude Include="src\Behaviour.h" />
+    <ClInclude Include="src\EntityFactory.h" />
     <ClInclude Include="src\EventListener.h" />
     <ClInclude Include="src\EventSystem.h" />
+    <ClInclude Include="src\GameEntity.h" />
+    <ClInclude Include="src\GameEntitySet.h" />
+    <ClInclude Include="src\EntityManager.h" />
+    <ClInclude Include="src\EnvironmentManager.h" />
     <ClInclude Include="src\GameMode.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Manager.h" />
     <ClInclude Include="src\NimbusApplication.h" />
+    <ClInclude Include="src\Renderable.h" />
     <ClInclude Include="src\RunMode.h" />
+
     <ClInclude Include="src\TestMode.h" />
     <ClInclude Include="src\VectorMap.h" />
     <ClInclude Include="src\WindCurrent.h" />
     <ClInclude Include="src\WindManager.h" />
     <ClInclude Include="src\WindMap.h" />
+
     <ClInclude Include="src\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -1,5 +1,5 @@
 #include "NimbusApplication.h"
-#include "TestMode.h"
+#include "GameMode.h"
 #include <OgreConfigFile.h>
 #include <OgreRenderWindow.h>
 #include <OgreCamera.h>
@@ -47,7 +47,7 @@ void NimbusApplication::begin(void)
 		app->mInputManager = new InputManager();
 
 		// Create the initial run mode
-		app->mCurrentRunMode = new TestMode();
+		app->mCurrentRunMode = new GameMode();
 
 		// Start the rendering process
 		app->mRoot->addFrameListener(app);
