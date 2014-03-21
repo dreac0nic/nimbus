@@ -5,21 +5,28 @@ using namespace Nimbus;
 Nimbus::FlockSoaring::FlockSoaring(BehaviourType type, World* world):
 	Soaring(type, world)
 {
-}
-
-Nimbus::FlockSoaring::FlockSoaring(FlockSoaring* other, World* world):
-	Soaring(other, world)
-{
+	this->init();
 }
 
 Nimbus::FlockSoaring::FlockSoaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
 	Soaring(type, world, initializingSettings)
 {
+	this->init();
+}
+
+Nimbus::FlockSoaring::FlockSoaring(FlockSoaring* other, World* world, int id) :
+	Soaring(other, world, id)
+{
+	this->init();
 }
 
 Nimbus::FlockSoaring::~FlockSoaring(void)
 {
 	// DESTROY ALL OF THE THINGS
+}
+
+void Nimbus::FlockSoaring::init()
+{
 }
 
 void Nimbus::FlockSoaring::startup(void)
@@ -51,7 +58,7 @@ Behaviour* Nimbus::FlockSoaring::clone(Ogre::ConfigFile::SettingsMultiMap* initi
 	return new Nimbus::FlockSoaring(this->mBehaviourType, this->mWorld, initializingSettings);
 }
 
-Behaviour* Nimbus::FlockSoaring::clone(void)
+Behaviour* Nimbus::FlockSoaring::clone(int id)
 {
-	return new Nimbus::FlockSoaring(this, this->mWorld);
+	return new Nimbus::FlockSoaring(this, this->mWorld, id);
 }

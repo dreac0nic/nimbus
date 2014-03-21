@@ -29,18 +29,19 @@ namespace Nimbus
 		*/
 		Positional(BehaviourType type, World *world);
 
-		/* Another constructor, taking a world pointer and template.
-			@param other A Positional behaviour to base it off of.
-			@param world A pointer to the game world.
-		*/
-		Positional(Positional* other, World* world);
-
 		/* Constructor based of a set of initial settings.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 			@param intitializingSettings A map of settings used to construct the intial entity.
 		*/
 		Positional(BehaviourType type, World *world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+
+		/* Constructor taking a different behaviour and making a similar one.
+			@param other The template Positional behaviour.
+			@param world A pointer to the game world.
+			@param id The id for the parent entity.
+		*/
+		Positional(Positional* other, World* world, int id);
 
 		/* Virtual destructor for destroying things. */
 		virtual ~Positional(void);
@@ -55,11 +56,18 @@ namespace Nimbus
 		/* !! STUBBED !! Shuts down the behaviour, taking care of any major cleanup. */
 		virtual void shutdown(void);
 
+		/* Forces a position update. */
+		virtual void forceUpdate(void);
+
 		/* Duplicates the entity using the settings given.
 			Currently merely returns a pointer given by the constructor.
 		*/
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
-		virtual Behaviour* clone(void);
+
+		/* Duplicates the entity based on the current copy.
+			This is used to enable use of the prototype pattern.
+		*/
+		virtual Behaviour* clone(int id);
 	};
 }
 

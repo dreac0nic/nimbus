@@ -2,27 +2,31 @@
 
 using namespace Nimbus;
 
-Nimbus::Soaring::Soaring(BehaviourType type, World* world):
+Soaring::Soaring(BehaviourType type, World* world):
 	Positional(type, world)
 {
 }
 
-Nimbus::Soaring::Soaring(Soaring* other, World* world):
-	Positional(other, world)
-{
-}
-
-Nimbus::Soaring::Soaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
+Soaring::Soaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
 	Positional(type, world, initializingSettings)
 {
 }
 
-Nimbus::Soaring::~Soaring(void)
+Soaring::Soaring(Soaring* other, World* world, int id) :
+	Positional(other, other->mWorld, id)
+{
+}
+
+Soaring::~Soaring(void)
 {
 	// DESTROY ALL OF THE THINGS
 }
 
-void Nimbus::Soaring::startup(void)
+void Soaring::init(void)
+{
+}
+
+void Soaring::startup(void)
 {
 	// STARTUP FOR FLOCK SOARING
 	/*
@@ -30,7 +34,7 @@ void Nimbus::Soaring::startup(void)
 	*/
 }
 
-void Nimbus::Soaring::update(void)
+void Soaring::update(void)
 {
 	// UPDATE THE FLOCK SOARING
 	/*
@@ -38,7 +42,7 @@ void Nimbus::Soaring::update(void)
 	*/
 }
 
-void Nimbus::Soaring::shutdown(void)
+void Soaring::shutdown(void)
 {
 	// SUT DOWN THE FLOCK SOARING
 	/*
@@ -46,12 +50,12 @@ void Nimbus::Soaring::shutdown(void)
 	*/
 }
 
-Behaviour* Nimbus::Soaring::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Soaring::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
 {
-	return new Nimbus::Soaring(this->mBehaviourType, this->mWorld, initializingSettings);
+	return new Soaring(this->mBehaviourType, this->mWorld, initializingSettings);
 }
 
-Behaviour* Nimbus::Soaring::clone(void)
+Behaviour* Soaring::clone(int id)
 {
-	return new Nimbus::Soaring(this, this->mWorld);
+	return new Soaring(this, this->mWorld, id);
 }

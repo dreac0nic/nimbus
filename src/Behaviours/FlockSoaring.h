@@ -13,6 +13,12 @@ namespace Nimbus
 	class FlockSoaring:
 		public Soaring
 	{
+	private:
+		/* Called by the constructors to initialize the behaviour. Anything that needs to
+			be duplicated among constructors should be put in here.
+		*/
+		void init();
+
 	public:
 		/* Default constructor, taking a world pointer.
 			@param type The type of Behaviour being constructed.
@@ -20,18 +26,19 @@ namespace Nimbus
 		*/
 		FlockSoaring(BehaviourType type, World* world);
 
-		/* Another constructor, taking a template object.
-			@param other The template of the type.
-			@param world A pointer to the game world.
-		*/
-		FlockSoaring(FlockSoaring* other, World* world);
-
 		/* Constructor based of a set of initial settings.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 			@param intitializingSettings A map of settings used to construct the intial entity.
 		*/
 		FlockSoaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+
+		/* Constructor taking a different behaviour and making a similar one.
+			@param other The template FlockSoaring behaviour.
+			@param world A pointer to the game world.
+			@param id The id for the parent entity.
+		*/
+		FlockSoaring(FlockSoaring* other, World* world, int id);
 
 		/* Virtual destructor for destroying things. */
 		virtual ~FlockSoaring(void);
@@ -50,7 +57,11 @@ namespace Nimbus
 			Currently merely returns a pointer given by the constructor.
 		*/
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
-		virtual Behaviour* clone(void);
+
+		/* Duplicates the entity based on the current copy.
+			This is used to enable use of the prototype pattern.
+		*/
+		virtual Behaviour* clone(int id);
 	};
 }
 

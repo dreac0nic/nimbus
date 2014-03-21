@@ -12,6 +12,12 @@ namespace Nimbus
 	class Rainy:
 		public Behaviour
 	{
+	private:
+		/* Called by the constructors to initialize the behaviour. Anything that needs to
+			be duplicated among constructors should be put in here.
+		*/
+		void init();
+
 	public:
 		/* Default constructor, taking a world pointer.
 			@param type The type of Behaviour being constructed.
@@ -19,18 +25,19 @@ namespace Nimbus
 		*/
 		Rainy(BehaviourType type, World* world);
 
-		/* Another constructor, taking a template object.
-			@param other The template of the type.
-			@param world A pointer to the game world.
-		*/
-		Rainy(Rainy* other, World* world);
-
 		/* Constructor based of a set of initial settings.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 			@param intitializingSettings A map of settings used to construct the intial entity.
 		*/
 		Rainy(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+
+		/* Constructor based on another Rainy behaviour.
+			@param other A pointer to the other Rainy behaviour.
+			@param world A pointer to the game world.
+			@param id The id of the parent entity holding this behaviour.
+		*/
+		Rainy(Rainy* other, World* world, int id);
 
 		/* Virtual destructor for destroying things. */
 		virtual ~Rainy(void);
@@ -49,7 +56,11 @@ namespace Nimbus
 			Currently merely returns a pointer given by the constructor.
 		*/
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
-		virtual Behaviour* clone(void);
+
+		/* Duplicates the entity based on the current copy.
+			This is used to enable use of the prototype pattern.
+		*/
+		virtual Behaviour* clone(int id);
 	};
 }
 

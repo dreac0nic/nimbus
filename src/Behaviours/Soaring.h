@@ -14,6 +14,13 @@ namespace Nimbus
 	class Soaring:
 		public Positional
 	{
+	private:
+
+		/* Called by the constructors to initialize the behaviour. Anything that needs to
+			be duplicated among constructors should be put in here.
+		*/
+		void init();
+
 	public:
 		/* Default constructor, taking a world pointer.
 			@param type The type of Behaviour being constructed.
@@ -21,18 +28,19 @@ namespace Nimbus
 		*/
 		Soaring(BehaviourType type, World* world);
 
-		/* Another constructor, taking a world pointer and template.
-			@param other A Soaring behaviour to base it off of.
-			@param world A pointer to the game world.
-		*/
-		Soaring(Soaring* other, World* world);
-
 		/* Constructor based of a set of initial settings.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 			@param intitializingSettings A map of settings used to construct the intial entity.
 		*/
 		Soaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+
+		/* Constructor based on another Soaring behaviour.
+			@param other A pointer to the other Soaring behaviour.
+			@param world A pointer to the game world.
+			@param id The id of the parent entity holding this behaviour.
+		*/
+		Soaring(Soaring* other, World* world, int id);
 
 		/* Virtual destructor for destroying things. */
 		virtual ~Soaring(void);
@@ -51,7 +59,11 @@ namespace Nimbus
 			Currently merely returns a pointer given by the constructor.
 		*/
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
-		virtual Behaviour* clone(void);
+
+		/* Duplicates the entity based on the current copy.
+			This is used to enable use of the prototype pattern.
+		*/
+		virtual Behaviour* clone(int id);
 	};
 }
 

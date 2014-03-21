@@ -3,27 +3,29 @@
 using namespace Nimbus;
 using namespace Ogre;
 
-Nimbus::Positional::Positional(BehaviourType type, World* world):
+Positional::Positional(BehaviourType type, World* world):
 	Behaviour(type, world)
 {
+	this->init(Vector3::ZERO, Vector3::ZERO);
 }
 
-Nimbus::Positional::Positional(Positional* other, World* world):
-	Behaviour(other, world)
-{
-}
-
-Nimbus::Positional::Positional(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
+Positional::Positional(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
 	Behaviour(type, world, initializingSettings)
 {
 }
 
-Nimbus::Positional::~Positional(void)
+Positional::Positional(Positional* other, World* world, int id):
+	Behaviour(other, world, id)
+{
+	this->init(other->mPosition, other->mFacingVector);
+}
+
+Positional::~Positional(void)
 {
 	// DESTROY ALL OF THE THINGS
 }
 
-void Nimbus::Positional::startup(void)
+void Positional::startup(void)
 {
 	// STARTUP FOR POSITIONAL
 	this->mDisplacementVector = Vector3::ZERO;
@@ -31,7 +33,7 @@ void Nimbus::Positional::startup(void)
 	// Register event listeners.
 }
 
-void Nimbus::Positional::update(void)
+void Positional::update(void)
 {
 	// UPDATE THE POSITIONAL
 	if(this->mDisplacementVector != Vector3::ZERO) {
@@ -41,15 +43,15 @@ void Nimbus::Positional::update(void)
 	}
 }
 
-void Nimbus::Positional::shutdown(void)
+void Positional::shutdown(void)
 {
 	// SUT DOWN THE POSITIONAL STUFF
 	// Deregister event listeners.
 }
 
-Behaviour* Nimbus::Positional::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Positional::clone(int id)
 {
-	return new Nimbus::Positional(this->mBehaviourType, this->mWorld, initializingSettings);
+	return new Positional(this, this->mWorld, id);
 }
 
 Behaviour* Nimbus::Positional::clone(void)
