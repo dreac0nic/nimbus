@@ -154,7 +154,7 @@ Behaviour* Positional::clone(int id)
 	return new Positional(this, this->mWorld, id);
 }
 
-void Positional::MovementListener::handleEvent(payloadmap payload)
+void Positional::MovementListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Return as fast as possible if this event isn't for me
 	if((*static_cast<int*>(payload["EntityId"])) != this->parent->mParentId)

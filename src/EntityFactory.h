@@ -46,7 +46,7 @@ namespace Nimbus
 			virtual ~CreateEntityListener() {}
 
 			// From Nimbus::EventListener
-			virtual void handleEvent(payloadmap payload);
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		};
 
 	public:

@@ -164,7 +164,7 @@ bool NimbusApplication::loadConfiguration(void)
 	return true;
 }
 
-void NimbusApplication::ShutdownListener::handleEvent(payloadmap payload)
+void NimbusApplication::ShutdownListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	std::cerr << "Received shutdown event.\n";
 	Ogre::LogManager::getSingleton().logMessage("(Nimbus) Received shutdown event.");

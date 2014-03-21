@@ -131,7 +131,7 @@ GameEntity* Nimbus::EntityFactory::createEntity(std::string entityType)
 	return factorizedEntity;
 }
 
-void Nimbus::EntityFactory::CreateEntityListener::handleEvent(payloadmap payload)
+void Nimbus::EntityFactory::CreateEntityListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	if (payload.find("EntityType") != payload.end())
 	{

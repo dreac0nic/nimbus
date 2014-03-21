@@ -37,7 +37,7 @@ namespace Nimbus
 			PositionListener(Renderable* parent) { this->parent = parent; }
 			~PositionListener() {}
 
-			void handleEvent(payloadmap payload);
+			void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mPositionListener;
 
 	public:

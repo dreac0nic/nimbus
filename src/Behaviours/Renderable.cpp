@@ -123,7 +123,7 @@ Behaviour* Nimbus::Renderable::clone(int id)
 	return new Nimbus::Renderable(this, this->mWorld, id);
 }
 
-void Nimbus::Renderable::PositionListener::handleEvent(payloadmap payload)
+void Nimbus::Renderable::PositionListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Temporary vectors for storing direction and position
 	Vector3 position, facing, rotation;

@@ -180,7 +180,7 @@ namespace Nimbus
 		 @param
 		 type The type of Event to fire.
 		 */
-		void fireEvent(EventType type, const payloadmap& payload = payloadmap());
+		void fireEvent(EventType type, const payloadmap& payload = payloadmap(), EventListener* responder = NULL);
 	};
 }
 
