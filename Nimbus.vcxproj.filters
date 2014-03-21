@@ -1,138 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Header Files\Behaviours">
-      <UniqueIdentifier>{1a456996-0d0f-412e-a850-0b3ca03aee4f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Behaviours">
-      <UniqueIdentifier>{7a511ab5-4d87-4a7e-822a-a38d63f9815f}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="src\EntityFactory.cpp" />
+    <ClCompile Include="src\EntityManager.cpp" />
+    <ClCompile Include="src\EnvironmentManager.cpp" />
+    <ClCompile Include="src\EventSystem.cpp" />
+    <ClCompile Include="src\GameEntity.cpp" />
+    <ClCompile Include="src\GameEntitySet.cpp" />
+    <ClCompile Include="src\GameMode.cpp" />
+    <ClCompile Include="src\GeneralEntityIterator.cpp" />
+    <ClCompile Include="src\InputManager.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\NimbusApplication.cpp" />
+    <ClCompile Include="src\VectorMap.cpp" />
+    <ClCompile Include="src\WindCurrent.cpp" />
+    <ClCompile Include="src\WindManager.cpp" />
+    <ClCompile Include="src\WindMap.cpp" />
+    <ClCompile Include="src\Renderable.cpp" />
+    <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\NimbusApplication.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EventSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEntitySet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\World.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EnvironmentManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameMode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EntityManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-
-    <ClCompile Include="src\WindManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\VectorMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WindCurrent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WindMap.cpp">
-
-    <ClCompile Include="src\EntityFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Renderable.cpp">
-      <Filter>Source Files\Behaviours</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GeneralEntityIterator.cpp">
-
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\NimbusApplication.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RunMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EventListener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EventSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEntitySet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\World.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EnvironmentManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EntityManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-
-    <ClInclude Include="src\WindManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindCurrent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\VectorMap.h">
-      <Filter>Header Files</Filter>
-
-    <ClInclude Include="src\EntityFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Behaviour.h">
-      <Filter>Header Files\Behaviours</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Renderable.h">
-      <Filter>Header Files\Behaviours</Filter>
-
-    </ClInclude>
+    <ClInclude Include="src\Behaviour.h" />
+    <ClInclude Include="src\EntityFactory.h" />
+    <ClInclude Include="src\EventListener.h" />
+    <ClInclude Include="src\EventSystem.h" />
+    <ClInclude Include="src\GameEntity.h" />
+    <ClInclude Include="src\GameEntitySet.h" />
+    <ClInclude Include="src\EntityManager.h" />
+    <ClInclude Include="src\EnvironmentManager.h" />
+    <ClInclude Include="src\GameMode.h" />
+    <ClInclude Include="src\InputManager.h" />
+    <ClInclude Include="src\Manager.h" />
+    <ClInclude Include="src\NimbusApplication.h" />
+    <ClInclude Include="src\Renderable.h" />
+    <ClInclude Include="src\RunMode.h" />
+    <ClInclude Include="src\VectorMap.h" />
+    <ClInclude Include="src\WindCurrent.h" />
+    <ClInclude Include="src\WindManager.h" />
+    <ClInclude Include="src\WindMap.h" />
+    <ClInclude Include="src\World.h" />
   </ItemGroup>
 </Project>

@@ -15,6 +15,10 @@ namespace Nimbus
 		WindCurrent(void);
 		virtual ~WindCurrent(void);
 
+		// True if Current is temporary
+		// False if Current is permanent
+		bool temp;
+
 		// Stores WindCurrent strength
 		int strength;
 

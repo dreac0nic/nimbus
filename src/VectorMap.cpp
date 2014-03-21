@@ -20,6 +20,6 @@ namespace Nimbus
 
 	void VectorMap::setVector(int posx, int posy, int strx, int stry)
 	{
-		map[length * length + posy] = Ogre::Vector2(strx, stry);
+		map[length * length + posy] = Ogre::Vector2((Ogre::Real)strx, (Ogre::Real)stry);
 	}
 }
