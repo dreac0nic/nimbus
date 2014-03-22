@@ -22,28 +22,8 @@ GameMode::~GameMode(void)
 	delete this->mWorld;
 }
 
-RunMode* GameMode::run(const FrameEvent& evt)
-{
-	// Attempt to initialize the run mode
-	if(!this->initialized && !this->initialize())
-	{
-		LogManager::getSingletonPtr()->logMessage("(Nimbus) Failed to initialize RunMode");
-
-		// Terminate the application if we fail to initialize
-		return 0;
-	}
-
-	// Updating all of the entities through the manager
-	this->mEntityMan->update();
-
-	// Continue to run this runmode
-	return this;
-}
-
-bool GameMode::initialize()
-{
-	//this->mEntityFactory = new EntityFactory(this->mWorld, "../../assets/scripts/ConfigFiles.ini");
-	
+void GameMode::initialize()
+{	
 	// Create the scene manager
 	mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
 	// Create the camera
@@ -68,11 +48,15 @@ bool GameMode::initialize()
 	this->mWorld = new World(this->mSceneMgr);
 
 	// Construct the world managers
-	this->mEntityMan = new EntityManager(this->mWorld);
 	this->mEnvironmentMan = new EnvironmentManager();
+	this->mEntityMan = new EntityManager(this->mWorld);
 
 	// Configure entity types
 	this->mEntityMan->configureEntityTypes("../../assets/scripts/ConfigFiles.ini", this->mWorld);
+
+	// Initializing the managers
+	this->mEnvironmentMan->initialize();
+	this->mEntityMan->initialize();
 
 	std::map<std::string, void*> entityType;
 	entityType["EntityType"] = new std::string("Dragon");
@@ -80,8 +64,21 @@ bool GameMode::initialize()
 
 	// Adding the world root node to the actual scene
 	this->mSceneMgr->getRootSceneNode()->addChild(this->mWorld->getWorldNode());
+}
 
-	// Note that the RunMode has been initialized
-	this->initialized = true;
-	return true;
+RunMode* GameMode::run(const FrameEvent& evt)
+{
+	// Updating all of the entities through the manager
+	this->mEntityMan->update();
+
+	// Continue to run this runmode
+	return this;
+}
+
+void GameMode::pause(void)
+{
+}
+
+void GameMode::stop(void)
+{
 }

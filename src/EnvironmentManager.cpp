@@ -10,6 +10,10 @@ EnvironmentManager::~EnvironmentManager(void)
 {
 }
 
+void EnvironmentManager::initialize(void)
+{
+}
+
 bool EnvironmentManager::update(void)
 {
 	return true;
