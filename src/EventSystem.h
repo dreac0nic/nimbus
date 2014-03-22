@@ -79,7 +79,7 @@ namespace Nimbus
 			An event fired whenever the path for a wind is finished being created.
 
 			Payload:
-				"Path" => std::list<Ogre::Ray>
+				"Rays" => std::list<Ogre::Ray>
 				"Points" => std::list<Ogre::Vector2>
 
 		CREATE_ENTITY

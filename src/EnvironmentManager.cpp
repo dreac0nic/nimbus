@@ -4,6 +4,7 @@ using namespace Nimbus;
 
 EnvironmentManager::EnvironmentManager(void)
 {
+	mWindManager = new WindManager();
 }
 
 EnvironmentManager::~EnvironmentManager(void)

@@ -39,6 +39,11 @@ InputManager::InputManager(void)
 
 	// Register as a Window listener for future resize and close events
 	Ogre::WindowEventUtilities::addWindowEventListener(window, this);
+
+	// Make sure the click lists are empty
+	mCollectingPath = false;
+	mMouseRays.clear();
+	mMousePoints.clear();
 }
 
 InputManager::~InputManager(void)
@@ -82,6 +87,12 @@ bool InputManager::keyReleased(const OIS::KeyEvent& evt)
 
 bool InputManager::mouseMoved(const OIS::MouseEvent& evt)
 {
+	if (mCollectingPath)
+	{
+		mMouseRays.push_back(NimbusApplication::getCamera()->getCameraToViewportRay(
+				Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs)));
+		mMousePoints.push_back(Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs)));
+	}
 	return true;
 }
 
@@ -94,7 +105,12 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 		logstring << "The left mouse button was pressed at ("
 			<< evt.state.X.abs << ", " << evt.state.Y.abs << ")"
 			<< std::endl;
-		// Ogre::Camera::getCameraToViewportRay(Real screenx, Real screeny)
+		if (NimbusApplication::getCamera() != NULL)
+		{
+			mCollectingPath = true;
+			mMouseRays.clear();
+			mMousePoints.clear();
+		}
 	}
 	if(evt.state.buttonDown(OIS::MB_Right))
 	{
@@ -110,6 +126,14 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 
 bool InputManager::mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
 {
+	if (mCollectingPath)
+	{
+		std::map<std::string, void*> mousePath;
+		mousePath["Rays"] = &mMouseRays;
+		mousePath["Points"] = &mMousePoints;
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_PATH, mousePath);
+		mCollectingPath = false;
+	}
 	return true;
 }
 

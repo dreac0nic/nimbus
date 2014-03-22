@@ -2,6 +2,7 @@
 #define NIMBUS_ENVIRONMENTMANAGER_H
 
 #include "Manager.h"
+#include "WindManager.h"
 
 namespace Nimbus
 {
@@ -13,6 +14,10 @@ namespace Nimbus
 	class EnvironmentManager :
 		public Manager
 	{
+	private:
+		// The Wind manager
+		WindManager* mWindManager;
+
 	public:
 		EnvironmentManager(void);
 		virtual ~EnvironmentManager(void);
