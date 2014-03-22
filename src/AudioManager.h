@@ -24,11 +24,12 @@ namespace Nimbus
 		virtual void stop(AudioSourceGUID);
 		virtual void loop(AudioSourceGUID);
 		virtual void volume(AudioSourceGUID, float);
-		virtual void position(AudioSourceGUID, Ogre::Vector3);
+		virtual void position(AudioSourceGUID, &Ogre::Vector3);
 
 	public:
 		AudioManager(void);
 		virtual ~AudioManager(void);
+        virtual bool update(void);
 	}
 }
 

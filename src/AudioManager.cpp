@@ -30,6 +30,10 @@ AudioManager::volume(AudioSourceGUID id, float volume) {
     this->mAsMap[id]->setVolume(volume);
 }
 
-AudioManager::position(AudioSourceGUID id, Ogre::Vector3 position) {
-    // Officially stubbed.
+AudioManager::position(AudioSourceGUID id, Ogre::Vector3 &position) {
+    this->mAsMap[id]->setPosition(new cAudio::cVector(position->x, position->y, position->z));
+}
+
+AudioManager::update(void) {
+    // Implement this
 }
