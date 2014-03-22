@@ -3,7 +3,8 @@
 
 #include <string>
 
-#include "manager.h"
+#include "Manager.h"
+#include "EntityFactory.h"
 
 namespace Nimbus
 {
@@ -21,12 +22,41 @@ namespace Nimbus
 	class EntityManager :
 		public Manager
 	{
+	private:
+		// Member variables
+
+		/* The entity factory for the world.
+
+		This is a bit nested, but I think it makes the most sense for the factory
+		to be inside the entity manager class. If this is contrary to a previous
+		decision, just move it back.
+		*/
+		EntityFactory* mEntityFactory;
+
+		// The world object to access the entities from
+		World* mWorld;
+
 	public:
-		EntityManager(void);
+		EntityManager(World* world);
 		virtual ~EntityManager(void);
 
 		// From Nimbus::Manager
 		virtual bool update(void);
+
+		/* Configures the entity factory.
+
+		I'm trying something a bit different in order to take weight off the
+		constructor. Theoretically this could lead to switching/updating
+		the entity types midgame... might be cool.
+
+		@param entityTypesFile The file location of the entity types definition
+		file. This file contains a list of entity type names mapped to entity
+		type definition files. These files are loaded by the EntityFactory to
+		construct the prototypal entity types.
+		@param world A reference to the world because sometimes, just sometimes,
+		you need a reference to the world.
+		*/
+		void configureEntityTypes(std::string entityTypesFile, World* world);
 	};
 
 }

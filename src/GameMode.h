@@ -4,6 +4,7 @@
 #include "RunMode.h"
 #include "EnvironmentManager.h"
 #include "EntityManager.h"
+#include "EntityFactory.h"
 #include "World.h"
 
 namespace Nimbus
@@ -27,7 +28,16 @@ namespace Nimbus
 		EntityManager* mEntityMan;
 
 		// The game World
-		World* gameWorld;
+		World* mWorld;
+
+		// Ogre variables
+		Ogre::SceneManager* mSceneMgr;
+		Ogre::Camera* mCamera;
+		Ogre::Viewport* mViewport;
+
+	protected:
+		// From Nimbus::RunMode
+		virtual bool initialize();
 
 	public:
 		GameMode(void);
