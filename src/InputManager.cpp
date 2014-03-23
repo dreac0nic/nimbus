@@ -22,6 +22,10 @@ InputManager::InputManager(void)
 	window->getCustomAttribute("WINDOW", &windowHandle);
 	windowHandleString << windowHandle;
 	parameters.insert(std::make_pair(std::string("WINDOW"), windowHandleString.str()));
+    parameters.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
+    parameters.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
+    parameters.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_FOREGROUND")));
+    parameters.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_NONEXCLUSIVE")));
 
 	// Create the input system using the window handle
 	mInputManager = OIS::InputManager::createInputSystem(parameters);
@@ -89,8 +93,10 @@ bool InputManager::mouseMoved(const OIS::MouseEvent& evt)
 {
 	if (mCollectingPath)
 	{
+		// I'm not sure how safe this code is. Throwing a random zero in there probably isn't good...
 		mMouseRays.push_back(NimbusApplication::getCamera()->getCameraToViewportRay(
-				Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs)));
+				Ogre::Real(evt.state.X.abs) / NimbusApplication::getRenderWindow()->getViewport(0)->getActualWidth(),
+				Ogre::Real(evt.state.Y.abs)/ NimbusApplication::getRenderWindow()->getViewport(0)->getActualHeight()));
 		mMousePoints.push_back(Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs)));
 	}
 	return true;
@@ -110,6 +116,11 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 			mCollectingPath = true;
 			mMouseRays.clear();
 			mMousePoints.clear();
+			// I'm not sure how safe this code is. Throwing a random zero in there probably isn't good...
+			mMouseRays.push_back(NimbusApplication::getCamera()->getCameraToViewportRay(
+				Ogre::Real(evt.state.X.abs) / NimbusApplication::getRenderWindow()->getViewport(0)->getActualWidth(),
+				Ogre::Real(evt.state.Y.abs)/ NimbusApplication::getRenderWindow()->getViewport(0)->getActualHeight()));
+			mMousePoints.push_back(Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs)));
 		}
 	}
 	if(evt.state.buttonDown(OIS::MB_Right))

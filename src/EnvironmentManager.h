@@ -1,6 +1,8 @@
 #ifndef NIMBUS_ENVIRONMENTMANAGER_H
 #define NIMBUS_ENVIRONMENTMANAGER_H
 
+#include <OgreSceneManager.h>
+
 #include "Manager.h"
 #include "WindManager.h"
 
@@ -19,7 +21,7 @@ namespace Nimbus
 		WindManager* mWindManager;
 
 	public:
-		EnvironmentManager(void);
+		EnvironmentManager(Ogre::SceneManager* sceneManager);
 		virtual ~EnvironmentManager(void);
 
 		// From Nimbus::Manager
