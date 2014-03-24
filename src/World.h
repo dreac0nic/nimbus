@@ -7,6 +7,8 @@
 namespace Nimbus
 {
 	class GameEntity;
+	class GameEntitySet;
+
 	/** This class aggregates the entire world of Nimbus.
 	 
 	 All the elements that make up the world should be placed in this class.
@@ -39,7 +41,7 @@ namespace Nimbus
 		int idCounter;
 
 		// The list that keeps track of all entities currently in the world
-		std::vector<GameEntity*> mEntities;
+		GameEntitySet* mEntities;
 
 		// The scene node that contains everything
 		Ogre::SceneNode* mWorldNode;
@@ -51,7 +53,7 @@ namespace Nimbus
 
 		// Accessor methods
 		int getCurrentId();
-		std::vector<GameEntity*> getEntities() { return this->mEntities; }
+		GameEntitySet* getEntities() { return this->mEntities; }
 		void addEntity(GameEntity* entity);
 		Ogre::SceneNode* getWorldNode() { return this->mWorldNode; }
 		Ogre::SceneManager* getSceneManager() { return this->mSceneManager; }

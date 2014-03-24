@@ -2,11 +2,9 @@
 
 using namespace Nimbus;
 
-GameEntitySet::GameEntitySet(void)
+GameEntitySet::GameEntitySet(void) :
+	mEntitiesByBehaviour(), mEntitiesById(), mEntitiesByType()
 {
-	this->mEntitiesByBehaviour.clear();
-	this->mEntitiesById.clear();
-	this->mEntitiesByType.clear();
 }
 
 GameEntitySet::~GameEntitySet(void)
@@ -28,72 +26,27 @@ void GameEntitySet::addGameEntity(GameEntity* entity)
 	}
 }
 
-GameEntitySet::GeneralEntityIterator GameEntitySet::begin(GameEntityType type)
+GameEntitySet::GeneralEntityIterator GameEntitySet::beginGeneralIterator()
 {
-	if(type == "")
-	{
-		return GeneralEntityIterator(this->mEntitiesById.begin());
-	}
-
-	return GeneralEntityIterator(this->mEntitiesById.end());
+	return GeneralEntityIterator(this->mEntitiesById.begin(), &this->mEntitiesById);
 }
 
-GameEntitySet::GeneralEntityIterator GameEntitySet::end(GameEntityType type)
+GameEntitySet::GeneralEntityIterator GameEntitySet::endGeneralIterator()
 {
-	if(type == "")
-	{
-		return GeneralEntityIterator(this->mEntitiesById.end());
-	}
-
-	return GeneralEntityIterator(this->mEntitiesById.end());
+	return GeneralEntityIterator(this->mEntitiesById.end(), &this->mEntitiesById);
 }
 
-//////////
-// Iterator Definitions
-
-// General Entity Iterator
-// Designed to iterate over all entities one at a time
-
-GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(generaliterator& initial)
+std::list<GameEntity*> GameEntitySet::getEntitiesOfType(std::string type)
 {
-	this->currentEntity = initial;
+	return this->mEntitiesByType[type];
 }
 
-GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(
-	const GameEntitySet::GeneralEntityIterator& other)
+std::list<GameEntity*> GameEntitySet::getEntitiesWithBehaviour(std::string behaviour)
 {
-	this->currentEntity = other.currentEntity;
+	return this->mEntitiesByBehaviour[behaviour];
 }
 
-GameEntitySet::GeneralEntityIterator& GameEntitySet::GeneralEntityIterator::operator++()
+GameEntity* GameEntitySet::getEntity(int id)
 {
-	GeneralEntityIterator temp(*this);
-	++this->currentEntity;
-	return temp;
-}
-
-GameEntitySet::GeneralEntityIterator& GameEntitySet::GeneralEntityIterator::operator++(int junk)
-{
-	++this->currentEntity;
-	return *this;
-}
-
-GameEntity& GameEntitySet::GeneralEntityIterator::operator*()
-{
-	return *(*this->currentEntity).second;
-}
-
-GameEntity* GameEntitySet::GeneralEntityIterator::operator->()
-{
-	return (*this->currentEntity).second;
-}
-
-bool GameEntitySet::GeneralEntityIterator::operator==(const GameEntitySet::GeneralEntityIterator& rhs)
-{
-	return (*this->currentEntity).second == (*rhs.currentEntity).second;
-}
-
-bool GameEntitySet::GeneralEntityIterator::operator!=(const GameEntitySet::GeneralEntityIterator& rhs)
-{
-	return (*this->currentEntity).second != (*rhs.currentEntity).second;
+	return this->mEntitiesById[id];
 }

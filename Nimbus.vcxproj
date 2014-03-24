@@ -23,6 +23,7 @@
     <ClCompile Include="src\GameEntity.cpp" />
     <ClCompile Include="src\GameEntitySet.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
+    <ClCompile Include="src\GeneralEntityIterator.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
