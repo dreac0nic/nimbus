@@ -1,64 +1,125 @@
+#include <vector>
+
 #include "Map.h"
+#include "Tile.h"
+#include "TileEdge.h"
+#include "Corner.h"
 
 #define PI 3.1415927
 
 using namespace Nimbus;
 
-Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations){
+Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations)
+{
+
+	// Generate the number of bumps
 	bumps = (double)rand() / RAND_MAX*5 + 1;
+
+	// Generate the start angle
 	startAngle = (double)rand() / RAND_MAX * 2 * PI;
+
+	// Generate the dip angle and width
 	dipAngle = (double)rand() / RAND_MAX * 2 * PI;
 	dipWidth = (double)rand() / RAND_MAX * .5 + .2;
+
+	// Get the bounds of the map as defined by the generation object
 	bounds = *v->getPlotBounds();
+
+	// Perform lloyd relaxations to create our points for map generation
 	for (int i = 0; i < numLloydRelaxations; i++) {
+
+		// Get the points used in this relaxation
 		std::vector<Point*> *points = v->siteCoords();
+
+		// For each point in this relaxation
+		/*
 		for (int i = 0; i < points->size(); i++) {
-			std::vector<Point*> *region = v->region(points->at(i));
+
+			// Get the points in the surrounding region
+			std::vector<Point*> *region = v->region((*points)[i]);
 			double x = 0;
 			double y = 0;
+
+			// Go through each other point in the region and aggregate the x and y values
 			for (int j = 0; j < region->size(); i++) {
-				x += region->at(i)->x;
-				y += region->at(i)->y;
+				x += region[i]->x;
+				y += region[i]->y;
 			}
+
+			// Average the aggregated x and y values
 			x /= region->size();
 			y /= region->size();
-			points->at(i)->x = x;
-			points->at(i)->y = y;
+			points[i]->x = x;
+			points[i]->y = y;
 		}
+		*/
+		// C++11 niceness: for(Point* point: (*points)) {
+		 for(std::vector<Point*>::iterator it = points->begin(); it != points->end(); ++it) {
+			Point* point = *it;
+			// Initialize locals.
+			std::vector<Point*>* region = v->region(point);
+
+			double x = 0.0f;
+			double y = 0.0f;
+
+			// Go through each other point in the region and aggregate the x and y values.
+			for(Point* otherPoint: (*region)) {
+				x += otherPoint->x;
+				x += otherPoint->y;
+			}
+
+			// Average the aggregated x and y values.
+			point->x = x/region->size();
+			point->y = y/region->size();
+		}
+
+		// Create a new Voronoi generator given the new points
 		v = new Voronoi::Voronoi(points, v->getPlotBounds());
 	}
+
+	// Construct the voronoi point graph using the generator
 	buildGraph(v);
 	improveCorners();
 
+	// Modify the resulting graph to be more like a happy map object
 	assignCornerElevations();
 	assignOceanCoastAndLand();
 	redistributeElevations(landCorners());
 	assignPolygonElevations();
 
+	// Take the resulting map and make it look cool
 	calculateDownslopes();
 	createRivers();
 	assignBiomes();
 }
 
-Biome Map::getBiome(Tile *p){
+Biome Map::getBiome(Tile *p)
+{
 	//not yet implimented
 	return OCEAN;
 }
 
-Tile *Map::getTileAt(double x, double y){
+Tile *Map::getTileAt(double x, double y)
+{
 	Point p = Point(x, y);
 	Tile *tile;
 	double minDistance= Tile::deltaX + Tile::deltaY; //Will be higher than any possible value.
 
+	// For each of the tiles on the map
 	for (int i = 0; i < centers.size(); i++){
+
+		// If the tile is close enough to the given point
 		if(Voronoi::Util::closeEnough(x, centers.at(i)->loc.x, Tile::deltaX) && Voronoi::Util::closeEnough(y, centers.at(i)->loc.y, Tile::deltaY)){
+			// Check to see if the new distance is less than the current minimum
 			if(centers.at(i)->loc.distance(p) < minDistance){
+				// And keep the minimum distance
 				tile = centers.at(i);
 				minDistance = centers.at(i)->loc.distance(p) < minDistance;
 			}
 		}
 	}
 
+	// Return the closest tile
 	return tile;
 }
 
@@ -125,10 +186,10 @@ void Map::buildGraph(Voronoi::Voronoi *v){
 		edge->index = edges.size();
 		edges.insert(edges.end(), edge);
 
-		edge->v0 = makeCorner(pointCornerMap, vEdge->points->first);
-		edge->v1 = makeCorner(pointCornerMap, vEdge->points->second);
-		edge->d0 = pointCenterMap->at(dEdge->points->first);
-		edge->d1 = pointCenterMap->at(dEdge->points->second);
+		edge->v0 = makeCorner(pointCornerMap, vEdge->points.first);
+		edge->v1 = makeCorner(pointCornerMap, vEdge->points.second);
+		edge->d0 = pointCenterMap->at(dEdge->points.first);
+		edge->d1 = pointCenterMap->at(dEdge->points.second);
 
 		// Centers point to edges. Corners point to edges.
 		if (edge->d0 != NULL) {

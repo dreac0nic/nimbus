@@ -2,8 +2,8 @@
 
 using namespace Nimbus::Voronoi;
 
-std::stack<Halfedge*> *Halfedge::_pool = new std::stack<Halfedge*>;
-std::vector<Halfedge*> *Halfedge::_hash = new std::vector<Halfedge*>;
+std::stack<Halfedge*>Halfedge::_pool;
+std::vector<Halfedge*>Halfedge::_hash;
 int Halfedge::_count = 0;
 int Halfedge::_minBucket = 0;
 int Halfedge::_hashSize = 0;
@@ -27,9 +27,9 @@ Halfedge::Halfedge(Edge *edge1, LR lr){
 Halfedge::~Halfedge(){}
 
 Halfedge *Halfedge::create(Edge *edge, LR lr){
-	if (_pool->size() > 0) {
-		Halfedge *temp = _pool->top()->init(edge, lr);
-		_pool->pop();
+	if (_pool.size() > 0) {
+		Halfedge *temp = _pool.top()->init(edge, lr);
+		_pool.pop();
 		return temp;
 	} else {
 		return new Halfedge(edge, lr);
@@ -92,7 +92,7 @@ bool Halfedge::isLeftOf(Point *p){
 //////////////////Priority Queue Functions//////////////////
 
 bool Halfedge::isEmpty(int bucket){
-	return (_hash->at(bucket)->nextInPriorityQueue == NULL);
+	return (_hash.at(bucket)->nextInPriorityQueue == NULL);
 }
 
 void Halfedge::adjustMinBucket(){
@@ -115,16 +115,16 @@ void Halfedge::initQueue(double ymin, double deltay, int sqrt_nsites){
 		return;
 	}
 
-	_hash = new std::vector<Halfedge*>(_hashSize);
+	_hash.clear();
 
 	for (i = 0; i < _hashSize; ++i) {
-		_hash->at(i) = Halfedge::createDummy();
-		_hash->at(i)->nextInPriorityQueue = NULL;
+		_hash.at(i) = Halfedge::createDummy();
+		_hash.at(i)->nextInPriorityQueue = NULL;
 	}
 }
 
 void Halfedge::disposeQueue(){
-	_hash = NULL;
+	_hash.clear();
 }
 
 void Halfedge::insert(Halfedge *halfEdge){
@@ -134,7 +134,7 @@ void Halfedge::insert(Halfedge *halfEdge){
 	if (insertionBucket < _minBucket) {
 		_minBucket = insertionBucket;
 	}
-	previous = _hash->at(insertionBucket);
+	previous = _hash.at(insertionBucket);
 	while ((next = previous->nextInPriorityQueue) != NULL && (halfEdge->ystar > next->ystar || (halfEdge->ystar == next->ystar && halfEdge->vertex->getX() > next->vertex->getX()))) {
 		previous = next;
 	}
@@ -148,7 +148,7 @@ void Halfedge::remove(Halfedge *halfEdge){
 	int removalBucket = bucket(halfEdge);
 
 	if (halfEdge->vertex != NULL) {
-		previous = _hash->at(removalBucket);
+		previous = _hash.at(removalBucket);
 		while (previous->nextInPriorityQueue != halfEdge) {
 			previous = previous->nextInPriorityQueue;
 		}
@@ -176,7 +176,7 @@ bool Halfedge::empty(){
 
 Point *Halfedge::min(){
 	adjustMinBucket();
-	Halfedge *answer = _hash->at(_minBucket)->nextInPriorityQueue;
+	Halfedge *answer = _hash.at(_minBucket)->nextInPriorityQueue;
 	return new Point(answer->vertex->getX(), answer->ystar);
 }
 
@@ -184,9 +184,9 @@ Halfedge *Halfedge::extractMin(){
 	Halfedge *answer;
 
 	// get the first real Halfedge in _minBucket
-	answer = _hash->at(_minBucket)->nextInPriorityQueue;
+	answer = _hash.at(_minBucket)->nextInPriorityQueue;
 
-	_hash->at(_minBucket)->nextInPriorityQueue = answer->nextInPriorityQueue;
+	_hash.at(_minBucket)->nextInPriorityQueue = answer->nextInPriorityQueue;
 	_count--;
 	answer->nextInPriorityQueue = NULL;
 

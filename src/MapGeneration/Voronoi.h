@@ -178,7 +178,7 @@ namespace Nimbus{
 			std::vector<Point*> _vertices;
 
 		public:
-			Polygon(std::vector<Point*> vertices);
+			Polygon(std::vector<Point*> *vertices);
 			~Polygon();
 			Winding winding();
 		};
