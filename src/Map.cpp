@@ -5,10 +5,10 @@
 using namespace Nimbus;
 
 Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations){
-	bumps = rand()*5 + 1;
-	startAngle = rand() * 2 * PI;
-	dipAngle = rand() * 2 * PI;
-	dipWidth = rand() * .5 + .2;
+	bumps = (double)rand() / RAND_MAX*5 + 1;
+	startAngle = (double)rand() / RAND_MAX * 2 * PI;
+	dipAngle = (double)rand() / RAND_MAX * 2 * PI;
+	dipWidth = (double)rand() / RAND_MAX * .5 + .2;
 	bounds = *v->getPlotBounds();
 	for (int i = 0; i < numLloydRelaxations; i++) {
 		std::vector<Point*> *points = v->siteCoords();
@@ -369,7 +369,7 @@ void Map::calculateDownslopes(){
 
 void Map::createRivers(){
 	for (int i = 0; i < bounds.width / 2; i++) {
-		Corner *c = corners.at(rand()*corners.size());
+		Corner *c = corners.at((double)rand() / RAND_MAX*corners.size());
 		if (c->ocean || c->elevation < 0.3 || c->elevation > 0.9) {
 			continue;
 		}

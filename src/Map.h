@@ -16,7 +16,7 @@ namespace Nimbus{
 	class TileEdge;
 	class Map; // wars
 
-	//Temporary; fill or replace
+	//Temporary; complete or replace later
 	enum Biome{MOUNTAIN, DESERT, COAST, OCEAN};
 
 	//This is the Center class renamed to fit our terms.

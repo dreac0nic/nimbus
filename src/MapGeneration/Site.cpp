@@ -2,11 +2,11 @@
 
 using namespace Nimbus::Voronoi;
 
-std::stack<Site*> *Site::_pool = new std::stack<Site*>;
 double const Site::EPSILON = .005;
 int Site::_currentIndex=0;
 bool Site::_sorted=false;
-std::vector<Site*> *Site::_sites;
+std::stack<Site*> Site::_pool;
+std::vector<Site*> Site::_sites;
 
 Site::Site(Point *p, int index, double weight){
 	init(p, index, weight);
@@ -18,18 +18,18 @@ Site::~Site(){
 
 bool Site::operator< (const Site &other) const{
 	if (_coord.y < other._coord.y) {
-		return -1;
+		return true;
 	}
 	if (_coord.y > other._coord.y) {
-		return 1;
+		return false;
 	}
 	if (_coord.x < other._coord.x) {
-		return -1;
+		return true;
 	}
 	if (_coord.x > other._coord.x) {
-		return 1;
+		return false;
 	}
-	return 0;
+	return false;
 }
 
 Point *Site::getCoord(){
@@ -101,9 +101,9 @@ double Site::dist(Point *p){
 }
 
 Site *Site::create(Point *p, int index, double weight){
-	if (_pool->size() > 0) {
-		Site * temp= _pool->top()->init(p, index, weight);
-		_pool->pop();
+	if (_pool.size() > 0) {
+		Site * temp= _pool.top()->init(p, index, weight);
+		_pool.pop();
 		return temp;
 	} else {
 		return new Site(p, index, weight);
@@ -295,33 +295,31 @@ Site *Site::init(Point *p, int index, double weight){
 }
 
 void Site::initList(){
-	_sites = new std::vector<Site *>();
+	_sites.clear();
 	_sorted = false;
 }
 
 void Site::disposeList(){
-	if (_sites != NULL){
-		_sites->clear();
-		_sites = NULL;
-	}
+	_sites.clear();
+	delete &_sites;
 }
 
 int Site::push(Site *site){
 	_sorted = false;
-	_sites->push_back(site);
-	return _sites->size();
+	_sites.push_back(site);
+	return _sites.size();
 }
 
 int Site::getLength(){
-	return _sites->size();
+	return _sites.size();
 }
 
 Site *Site::next(){
 	if (_sorted == false) {
 		return NULL;
 	}
-	if (_currentIndex < _sites->size()) {
-		return _sites->at(_currentIndex++);
+	if (_currentIndex < _sites.size()) {
+		return _sites.at(_currentIndex++);
 	} else {
 		return NULL;
 	}
@@ -329,43 +327,43 @@ Site *Site::next(){
 
 Rectangle *Site::getSitesBounds(){
 	if (_sorted == false) {
-		std::sort(_sites->begin(), _sites->end());
+		std::sort(_sites.begin(), _sites.end());
 		_currentIndex = 0;
 		_sorted = true;
 	}
 	double xmin, xmax, ymin, ymax;
-	if (_sites->empty()) {
+	if (_sites.empty()) {
 		return new Rectangle(0, 0, 0, 0);
 	}
 	xmin = DBL_MAX;
 	xmax = FLT_MIN;
-	for (int i = 0; i < _sites->size(); i++) {
-		if (_sites->at(i)->getX() < xmin) {
-			xmin = _sites->at(i)->getX();
+	for (int i = 0; i < _sites.size(); i++) {
+		if (_sites.at(i)->getX() < xmin) {
+			xmin = _sites.at(i)->getX();
 		}
-		if (_sites->at(0)->getX() > xmax) {
-			xmax = _sites->at(0)->getX();
+		if (_sites.at(0)->getX() > xmax) {
+			xmax = _sites.at(0)->getX();
 		}
 	}
 	// here's where we assume that the sites have been sorted on y:
-	ymin = _sites->at(0)->getY();
-	ymax = _sites->at(_sites->size() - 1)->getY();
+	ymin = _sites.at(0)->getY();
+	ymax = _sites.at(_sites.size() - 1)->getY();
 
 	return new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
 }
 
 std::vector<Point *> *Site::siteCoords(){
 	std::vector<Point*> *coords = new std::vector<Point*>();
-	for (int i = 0; i < _sites->size(); i++) {
-		coords->insert(coords->end(), _sites->at(i)->getCoord());
+	for (int i = 0; i < _sites.size(); i++) {
+		coords->insert(coords->end(), _sites.at(i)->getCoord());
 	}
 	return coords;
 }
 
 std::vector< std::vector<Point *> *> *Site::regions(Rectangle * plotBounds){
 	std::vector< std::vector<Point *> *> *regions = new std::vector< std::vector<Point *> *>();
-	for (int i = 0; i < _sites->size(); i++) {
-		regions->insert(regions->end(), _sites->at(i)->region(plotBounds));
+	for (int i = 0; i < _sites.size(); i++) {
+		regions->insert(regions->end(), _sites.at(i)->region(plotBounds));
 	}
 	return regions;
 }

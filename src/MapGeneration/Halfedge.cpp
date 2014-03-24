@@ -10,16 +10,19 @@ int Halfedge::_hashSize = 0;
 double Halfedge::_ymin = 0;
 double Halfedge::_deltay = 0;
 
-Halfedge *Halfedge::init(Edge *edge, LR lr){
-	Halfedge::edge = edge;
+Halfedge *Halfedge::init(Edge *edge1, LR lr){
+	edge = edge1;
 	leftRight = lr;
 	nextInPriorityQueue = NULL;
 	vertex = NULL;
 	return this;
 }
 
-Halfedge::Halfedge(Edge *edge, LR lr){
-	init(edge, lr);
+Halfedge::Halfedge(Edge *edge1, LR lr){
+	edge = edge1;
+	leftRight = lr;
+	nextInPriorityQueue = NULL;
+	vertex = NULL;
 }
 Halfedge::~Halfedge(){}
 
@@ -37,6 +40,7 @@ Halfedge *Halfedge::createDummy(){
 	return create(NULL, LR_LEFT);
 }
 
+//I think this is broken
 bool Halfedge::isLeftOf(Point *p){
 	Site *topSite;
 	bool rightOfSite, above, fast;
@@ -105,9 +109,16 @@ void Halfedge::initQueue(double ymin, double deltay, int sqrt_nsites){
 
 	_count = 0;
 	_minBucket = 0;
-	_hash = new std::vector<Halfedge*>(_hashSize, Halfedge::createDummy());
+
+	if(_hashSize == 0){
+		std::cout << "In initQueue, _hashSize = 0";
+		return;
+	}
+
+	_hash = new std::vector<Halfedge*>(_hashSize);
 
 	for (i = 0; i < _hashSize; ++i) {
+		_hash->at(i) = Halfedge::createDummy();
 		_hash->at(i)->nextInPriorityQueue = NULL;
 	}
 }

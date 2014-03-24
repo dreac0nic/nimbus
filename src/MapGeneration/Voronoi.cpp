@@ -3,9 +3,10 @@
 using namespace Nimbus::Voronoi;
 
 void Voronoi::init(){
-	Site::initList();
-	Edge::initList(0,0,0);
+	Edge::initList(0,1,2);
 	Edge::initQueue();
+	Halfedge::initQueue(0, 1, 2);
+	Site::initList();
 }
 
 void Voronoi::addSites(std::vector<Point*> *points){
@@ -13,6 +14,7 @@ void Voronoi::addSites(std::vector<Point*> *points){
 	for (int i = 0; i < length; ++i) {
 		addSite(points->at(i), i);
 	}
+
 }
 
 void Voronoi::addSite(Point *p, int index){
@@ -77,7 +79,7 @@ void Voronoi::fortunesAlgorithm(){
 				// Step 9:
 				edge = Edge::createBisectingEdge(bottomSite, newSite);
 				//trace("new edge: " + edge);
-				_edges->insert(_edges->end() , edge);
+				_edges->push_back(edge);
 				
 				bisector = Halfedge::create(edge, LR_LEFT);
 				halfEdges->insert(halfEdges->end(), bisector);
@@ -193,6 +195,7 @@ std::vector<Edge*> *Voronoi::hullEdges(){
 }
 
 void Voronoi::init(std::vector<Point*> *points, Rectangle *plotBounds){
+	init();
 	_sitesIndexedByLocation = new std::map<Point*,Site*>();
 	addSites(points);
 	_plotBounds = plotBounds;
@@ -241,22 +244,6 @@ int Voronoi::compareByYThenX(Site *s1, Point *p1){
 	return 0;
 }
 
-int Voronoi::compareByYThenX(Site *s1, Site *s2){
-	if (s1->getY() < s2->getY()) {
-		return -1;
-	}
-	if (s1->getY() > s2->getY()) {
-		return 1;
-	}
-	if (s1->getX() < s2->getX()) {
-		return -1;
-	}
-	if (s1->getX() > s2->getX()) {
-		return 1;
-	}
-	return 0;
-}
-
 Voronoi::Voronoi(std::vector<Point*> *points, Rectangle *plotBounds){
 	init(points, plotBounds);
 	fortunesAlgorithm();
@@ -276,7 +263,7 @@ Voronoi::Voronoi(int numSites, double maxWidth, double maxHeight){
 	std::vector<Point*> *points = new std::vector<Point*>;
 
 	for (int i = 0; i < numSites; i++) {
-		points->insert(points->end(), new Point(rand() * maxWidth, rand() * maxHeight));
+		points->push_back(new Point((double)rand() / RAND_MAX * maxWidth, (double)rand() / RAND_MAX * maxHeight));
 	}
 
 	init(points, new Rectangle(0, 0, maxWidth, maxHeight));

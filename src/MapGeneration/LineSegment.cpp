@@ -7,7 +7,7 @@ LineSegment::~LineSegment(){
 }
 
 LineSegment::LineSegment(std::pair<Point*, Point*> *points){
-	LineSegment::points = points;
+	this->points = points;
 }
 
 LineSegment::LineSegment(Point *point0, Point *point1){

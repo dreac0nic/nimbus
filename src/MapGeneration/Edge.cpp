@@ -28,7 +28,6 @@ Edge *Edge::create(){
 	if (_pool.size() > 0) {
 		edge = _pool.top();
 		_pool.pop();
-		edge->init();
 	} else {
 		edge = new Edge();
 	}
@@ -72,12 +71,8 @@ Edge *Edge::createBisectingEdge(Site *site0, Site *site1){
 	return edge;
 }//end createBisectingEdge
 
-void Edge::init(){
-}
-
 Edge::Edge(){
 	_edgeIndex = _numEdges++;
-	init();
 }
 
 Edge::~Edge(){
@@ -330,6 +325,7 @@ void Edge::remove(Halfedge *halfEdge){
 	halfEdge->edgeListLeftNeighbor = halfEdge->edgeListRightNeighbor = NULL;
 }
 
+//Debugging: Has error somewhere
 Halfedge *Edge::edgeListLeftNeighbor(Point *p){
 	int i, bucket;
 	Halfedge *halfEdge;
@@ -395,14 +391,11 @@ std::vector<Edge*> *Edge::reorderBySite(std::vector<Edge*> *origEdges){
 	// we're going to reorder the edges in order of traversal
 	std::vector<bool> *done = new std::vector<bool>;
 
-	done->insert(done->begin(), n, false);
+	done->insert(done->end(), n, false);
 
 	int nDone = 0;
 
 	std::vector<Edge*> *newEdges = new std::vector<Edge*>;
-	std::vector<Edge*>::iterator newEdgesIt = newEdges->begin();
-
-	std::vector<LR>::iterator edgeOrientIt = _edgeOrientations.begin();
 
 	i = 0;
 	edge = origEdges->at(i);
@@ -425,24 +418,24 @@ std::vector<Edge*> *Edge::reorderBySite(std::vector<Edge*> *origEdges){
 
 			if (leftPoint == lastPoint) {
 				lastPoint = rightPoint;
-				edgeOrientIt = _edgeOrientations.insert(edgeOrientIt, LR_LEFT);
-				newEdgesIt = newEdges->insert(newEdgesIt, edge);
+				_edgeOrientations.push_back(LR_LEFT);
+				newEdges->push_back(edge);
 				done->at(i) = true;
 			} else if (rightPoint == firstPoint) {
 				firstPoint = leftPoint;
-				edgeOrientIt = _edgeOrientations.insert(_edgeOrientations.begin(), LR_LEFT);
+				_edgeOrientations.insert(_edgeOrientations.begin(), LR_LEFT);
 				newEdges->insert(newEdges->begin(), edge);
 				done->at(i) = true;
 			} else if (leftPoint == firstPoint) {
 				firstPoint = rightPoint;
-				edgeOrientIt = _edgeOrientations.insert(_edgeOrientations.begin(), LR_RIGHT);
-				newEdgesIt = newEdges->insert(newEdges->begin(), edge);
+				_edgeOrientations.insert(_edgeOrientations.begin(), LR_RIGHT);
+				newEdges->insert(newEdges->begin(), edge);
 
 				done->at(i) = true;
 			} else if (rightPoint == lastPoint) {
 				lastPoint = leftPoint;
-				edgeOrientIt = _edgeOrientations.insert(edgeOrientIt, LR_RIGHT);
-				newEdgesIt = newEdges->insert(newEdgesIt, edge);
+				_edgeOrientations.push_back(LR_RIGHT);
+				newEdges->push_back(edge);
 				done->at(i) = true;
 			}
 			if (done->at(i)) {
@@ -466,19 +459,16 @@ std::vector<Edge*> *Edge::reorderByVertex(std::vector<Edge*> *origEdges){
 	int nDone = 0;
 
 	std::vector<Edge*> *newEdges = new std::vector<Edge*>;
-	std::vector<Edge*>::iterator newEdgesIt = newEdges->begin();
-
-	std::vector<LR>::iterator edgeOrientIt = _edgeOrientations.begin();
 
 	i = 0;
 	edge = origEdges->at(i);
 	newEdges->at(i) = edge;
-	edgeOrientIt = _edgeOrientations.insert(edgeOrientIt, LR_LEFT);
+	_edgeOrientations.push_back(LR_LEFT);
 	Vertex *firstPoint = edge->getLeftVertex();
 	Vertex *lastPoint = edge->getRightVertex();
 
 	if (firstPoint == Vertex::VERTEX_AT_INFINITY || lastPoint == Vertex::VERTEX_AT_INFINITY) {
-		return new std::vector<Edge*>;
+		return new std::vector<Edge*>();
 	}
 
 	done->at(i) = true;
@@ -497,24 +487,24 @@ std::vector<Edge*> *Edge::reorderByVertex(std::vector<Edge*> *origEdges){
 			}
 			if (leftPoint == lastPoint) {
 				lastPoint = rightPoint;
-				edgeOrientIt = _edgeOrientations.insert(edgeOrientIt, LR_LEFT);
-				newEdgesIt = newEdges->insert(newEdgesIt, edge);
+				_edgeOrientations.push_back(LR_LEFT);
+				newEdges->push_back(edge);
 				done->at(i) = true;
 			} else if (rightPoint == firstPoint) {
 				firstPoint = leftPoint;
-				edgeOrientIt = _edgeOrientations.insert(_edgeOrientations.begin(), LR_LEFT);
+				_edgeOrientations.push_back(LR_LEFT);
 				newEdges->insert(newEdges->begin(), edge);
 				done->at(i) = true;
 			} else if (leftPoint == firstPoint) {
 				firstPoint = rightPoint;
-				edgeOrientIt = _edgeOrientations.insert(_edgeOrientations.begin(), LR_RIGHT);
-				newEdgesIt = newEdges->insert(newEdges->begin(), edge);
+				_edgeOrientations.insert(_edgeOrientations.begin(), LR_RIGHT);
+				newEdges->insert(newEdges->begin(), edge);
 
 				done->at(i) = true;
 			} else if (rightPoint == lastPoint) {
 				lastPoint = leftPoint;
-				edgeOrientIt = _edgeOrientations.insert(edgeOrientIt, LR_RIGHT);
-				newEdgesIt = newEdges->insert(newEdgesIt, edge);
+				_edgeOrientations.push_back(LR_RIGHT);
+				newEdges->push_back(edge);
 				done->at(i) = true;
 			}
 			if (done->at(i)) {

@@ -60,7 +60,6 @@ namespace Nimbus{
 			int _edgeIndex;
 			Vertex *_leftVertex;
 			Vertex *_rightVertex;
-			void init();
 			Edge();
 
 			//Edge list
@@ -126,8 +125,8 @@ namespace Nimbus{
 		*/
 		class Halfedge{
 		private:
-			static std::stack<Halfedge*> *_pool;
-			static std::vector<Halfedge*> *_hash;
+			static std::stack<Halfedge*> _pool;
+			static std::vector<Halfedge*> _hash;
 			static int _count;
 			static int _minBucket;
 			static int _hashSize;
@@ -164,7 +163,7 @@ namespace Nimbus{
 
 		class LineSegment{
 		public:
-			std::pair<Point*, Point*> *points;
+			std::pair<Point*, Point*> points;
 
 			LineSegment(Point *point0, Point *point1);
 			LineSegment(std::pair <Point*, Point*> *points);
@@ -176,10 +175,10 @@ namespace Nimbus{
 		class Polygon{
 		private:
 			double signedDoubleArea();
-			std::vector<Point*> *_vertices;
+			std::vector<Point*> _vertices;
 
 		public:
-			Polygon(std::vector<Point*> *vertices);
+			Polygon(std::vector<Point*> vertices);
 			~Polygon();
 			Winding winding();
 		};
@@ -192,12 +191,12 @@ namespace Nimbus{
 		*/
 		class Site{
 		private:
-			static std::stack<Site*> *_pool;
+			static std::stack<Site*> _pool;
 			static const double EPSILON;
 			static double compare(Site *s1, Site *s2);
 			static bool closeEnough(Point *p0, Point *p1);
 			static int check(Point *point, Rectangle *bounds);
-			static std::vector<Site*> *_sites;
+			static std::vector<Site*> _sites;
 			static int _currentIndex;
 			static bool _sorted;
 
@@ -292,7 +291,6 @@ namespace Nimbus{
 
 		public:
 			static int compareByYThenX(Site *s1, Point *p1);
-			static int compareByYThenX(Site *s1, Site *s2);
 			static void init();
 
 			Voronoi(std::vector<Point*> *points, Rectangle *plotBounds);
