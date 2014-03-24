@@ -1,9 +1,7 @@
 #ifndef NIMBUS_BEHAVIOUR_POSITIONAL_H
 #define NIMBUS_BEHAVIOUR_POSITIONAL_H
 
-// Minimizing Ogre headers
-//#include <Ogre.h>
-//#include <OgreVector3.h>
+#include <Ogre.h>
 
 #include "Behaviour.h"
 
