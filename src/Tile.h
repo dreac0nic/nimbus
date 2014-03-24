@@ -28,7 +28,56 @@ namespace Nimbus
 		/* The delta Y of the Tile class. */
 		static int deltaY;
 
-		// MEMEBER VARIABLES --
+		// CONSTRUCTORS --
+		/* Blank constructor! */
+		Tile(void);
+
+		/* Constructor given the tile's humidity,temperature,
+			ground saturation, andlocation.
+		  @param loc The location of the Tile.
+		  @param humid Tile Humidity
+		  @param temper Tile Temperature
+		  @param grnd Tile Ground Saturation
+		*/
+		Tile(double humid, double temper, double grnd, Point *loc );
+
+		/* Destructor! */
+		virtual ~Tile(void);
+		
+		// MEMBER FUNCTIONS --
+		/* Calculate box of the tile. */
+		void calculateBox(void);
+
+		/* Convert the tile to string format! */
+		void toString(void);
+		
+		/*Return humidity of a tile*/
+		double getHumidity();
+		
+		/*Returns Temperature of a tile*/
+		double getTemp();
+		
+		/*returns Ground Saturation of a tile*/
+		double getSat();
+
+		/*updates a tile's Ground Saturation,Humidity and Temperature*/
+		void updateTile();
+		
+		/*Changes type of a tile into a string and returns that string*/
+		String getType();
+		
+	private:
+	
+		
+		void setHumidity();
+		void setTemp();
+		void setSat();
+		void setType();		
+		//to include: neighbor memory of some kind
+		
+	protected:
+	
+				// MEMBER VARIABLES --
 		/* The index of this tile. */
 		int index;
 
@@ -58,35 +107,34 @@ namespace Nimbus
 
 		/* Holds this tile's elevation. */
 		double elevation;
-
-		/* Holds this tile's moisture level. */
-		double moisture;
-
-		/* Holds this tile's area. */
-		double area;
-
-		/* Holds this tile's biome. */
-		Biome biome;
-
-		// CONSTRUCTORS --
-		/* Blank constructor! */
-		Tile(void);
-
-		/* Constructor given the tile's location.
-		  @param loc The location of the Tile.
-		*/
-		Tile(Point *loc);
-
-		/* Destructor! */
-		virtual ~Tile(void);
 		
-		// MEMBER FUNCTIONS --
-		/* Calculate box of the tile. */
-		void calculateBox(void);
-
-		/* Convert the tile to string format! */
-		void toString(void);
+		/*Holds this tile's biome.*/
+		int biome;
+		
+		/*Holds this tile's humidity*/
+		double humidity;
+		
+		/*Holds this tile's temperature*/
+		double temp;
+		
+		/*Holds this tile's ground Saturation*/
+		double grndSat;
+				
+		/*Holds whether or not this tile is burning*/		
+		bool burning;
+		
+		/*Holds the limit of ground saturation before flooding*/
+		double grndSatLmt;
+		
+		
+		int tileId;
+		
+		//MEMBER FUNCTIONS
+		/*Spawning function for animals*/
+		void spawn();
 	};
+	
+	
 }
 
 #endif

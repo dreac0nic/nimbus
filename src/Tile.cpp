@@ -1,3 +1,4 @@
+
 #include "Tile.h"
 #include "Corner.h"
 
@@ -10,11 +11,13 @@ Tile::Tile()
 {
 }
 
-Tile::Tile(Point *loc)
-{
-	this->loc = *loc;
-}
 
+// create function with inputs for humidity, temperature, and ground saturation respectively
+Tile::Tile(double humid, double temper, double grnd, Point *loc )
+{
+this->loc = *loc;
+}
+	
 Tile::~Tile(void)
 {
 }
@@ -38,3 +41,62 @@ void Tile::toString(void)
 {
 	std::cout << "Tile, x:" << loc.x << ", y:" << loc.y << " " << (border? "b": "-") << (ocean? "o": "-") << (water? "w": "-") << (coast? "c": "-") << "\n";
 }
+	
+	//=======
+
+
+
+
+
+	double Tile::getHumidity()
+	{
+		return humidity;
+	}
+
+	double Tile::getTemp()
+	{
+		return temp;
+	}
+
+	double Tile::getSat()
+	{
+		return grndSat;
+	}
+
+	void Tile::setHumidity()
+	{
+		
+	}
+
+	void Tile::setTemp()
+	{
+
+	}
+
+	void Tile::setSat()
+	{
+
+	}
+
+	void Tile::updateTile()
+	{
+
+	}
+
+	void Tile::setType()
+	{
+
+	}
+
+	String Tile::getType()
+	{
+
+		return "words";
+	}
+
+	void Tile::spawn()
+	{
+
+	}
+
+
