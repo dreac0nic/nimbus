@@ -1,7 +1,10 @@
 #include "Tile.h"
 #include "Corner.h"
 
+#include <OGRE\OgreMesh.h>
+#include <OGRE\OgreSubMesh.h>
 #include <OGRE\OgreMeshManager.h>
+#include <OGRE\OgreHardwareBufferManager.h>
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -101,6 +104,55 @@ MeshPtr Tile::getMesh(void)
 
 		last = curr++; // Move along the array.
 	}
+
+	// Create a new shared set of vertices.
+	tileMesh->sharedVertexData = new VertexData();
+	tileMesh->sharedVertexData->vertexCount = vertCount;
+
+	// Create the memory footprint for our vertex data.
+	size_t offset = 0;
+	VertexDeclaration* decl = tileMesh->sharedVertexData->vertexDeclaration;
+
+	// Position and normal buffer.
+	// Setup position.
+	decl->addElement(0, offset, VET_FLOAT3, VES_POSITION);
+	offset += VertexElement::getTypeSize(VET_FLOAT3);
+
+	// Setup normal.
+	decl->addElement(0, offset, VET_FLOAT3, VES_NORMAL);
+	offset += VertexElement::getTypeSize(VET_FLOAT3);
+
+	// Allocate vertex buffer for number of vertices and vertex size.
+	HardwareVertexBufferSharedPtr vertBuff = 
+		HardwareBufferManager::getSingleton().createVertexBuffer(
+			offset,
+			tileMesh->sharedVertexData->vertexCount,
+			HardwareBuffer::HBU_STATIC_WRITE_ONLY);
+
+	// Push vertex data to the card.
+	vertBuff->writeData(0, vertBuff->getSizeInBytes(), vertices, true);
+
+	// Set the binding to the vertex buffer.
+	VertexBufferBinding* vertBind = tileMesh->sharedVertexData->vertexBufferBinding;
+	vertBind->setBinding(0, vertBuff);
+
+	// Allocate and setup an index buffer.
+	HardwareIndexBufferSharedPtr indexBuff = HardwareBufferManager::getSingleton().createIndexBuffer(
+		HardwareIndexBuffer::IT_16BIT,
+		faceCount*3,
+		HardwareBuffer::HBU_STATIC_WRITE_ONLY);
+
+	// Pushed index buffer to the graphics card.
+	indexBuff->writeData(0, indexBuff->getSizeInBytes(), faces, true);
+
+	// Finalize SubMesh
+	mesh->useSharedVertices = true;
+	mesh->indexData->indexBuffer = indexBuff;
+	mesh->indexData->indexCount = faceCount*3;
+	mesh->indexData->indexStart = 0;
+
+	// Signal that the mesh has loaded.
+	tileMesh->load();
 
 	// Deallocate the vertices and faces arrays.
 	delete[] vertices;
