@@ -2,8 +2,7 @@
 #define NIMBUS_WINDMANAGER_H
 
 #include <string>
-#include <OgreSceneManager.h>
-#include <OgreSceneQuery.h>
+#include <OgrePlane.h>
 
 #include "EventListener.h"
 #include "Manager.h"
@@ -18,7 +17,7 @@ namespace Nimbus
 	protected:
 		// Member variables
 		Ogre::SceneManager* mSceneManager;
-		Ogre::RaySceneQuery* mRaySceneQuery;
+		Ogre::Plane mWindPlane;
 
 		// Setting up the plane that will register the clicks for the wind creation
 		virtual void createClickPlane();
@@ -45,7 +44,7 @@ namespace Nimbus
 		WindManager(Ogre::SceneManager* sceneManager);
 		virtual ~WindManager(void);
 
-		virtual Ogre::RaySceneQuery* getRaySceneQuery();
+		virtual Ogre::Plane getWindPlane();
 
 		// From Nimbus::Manager
 		virtual bool update(void);

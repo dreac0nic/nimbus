@@ -93,10 +93,9 @@ bool InputManager::mouseMoved(const OIS::MouseEvent& evt)
 {
 	if (mCollectingPath)
 	{
-		// I'm not sure how safe this code is. Throwing a random zero in there probably isn't good...
 		mMouseRays.push_back(NimbusApplication::getCamera()->getCameraToViewportRay(
-				Ogre::Real(evt.state.X.abs) / NimbusApplication::getRenderWindow()->getViewport(0)->getActualWidth(),
-				Ogre::Real(evt.state.Y.abs)/ NimbusApplication::getRenderWindow()->getViewport(0)->getActualHeight()));
+				Ogre::Real(evt.state.X.abs) / Ogre::Root::getSingleton().getAutoCreatedWindow()->getWidth(),
+				Ogre::Real(evt.state.Y.abs)/ Ogre::Root::getSingleton().getAutoCreatedWindow()->getHeight()));
 		mMousePoints.push_back(Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs)));
 	}
 	return true;
@@ -116,10 +115,9 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 			mCollectingPath = true;
 			mMouseRays.clear();
 			mMousePoints.clear();
-			// I'm not sure how safe this code is. Throwing a random zero in there probably isn't good...
 			mMouseRays.push_back(NimbusApplication::getCamera()->getCameraToViewportRay(
-				Ogre::Real(evt.state.X.abs) / NimbusApplication::getRenderWindow()->getViewport(0)->getActualWidth(),
-				Ogre::Real(evt.state.Y.abs)/ NimbusApplication::getRenderWindow()->getViewport(0)->getActualHeight()));
+					Ogre::Real(evt.state.X.abs) / Ogre::Root::getSingleton().getAutoCreatedWindow()->getWidth(),
+					Ogre::Real(evt.state.Y.abs)/ Ogre::Root::getSingleton().getAutoCreatedWindow()->getHeight()));
 			mMousePoints.push_back(Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs)));
 		}
 	}

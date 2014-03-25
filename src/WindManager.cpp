@@ -1,7 +1,9 @@
 #include <list>
+#include <OgreEntity.h>
+#include <OgreMeshManager.h>
 #include <OgreRay.h>
+#include <OgreSceneManager.h>
 #include <OgreVector2.h>
-#include <OgreManualObject.h>
 
 #include "WindManager.h"
 #include "EventSystem.h"
@@ -9,10 +11,9 @@
 using namespace Nimbus;
 
 WindManager::WindManager(Ogre::SceneManager* sceneManager)
+	: mWindPlane(Ogre::Vector3::UNIT_Y, -12)
 {
 	this->mSceneManager = sceneManager;
-	this->mRaySceneQuery = mSceneManager->createRayQuery(Ogre::Ray(), Ogre::SceneManager::WORLD_GEOMETRY_TYPE_MASK);
-	this->mRaySceneQuery->setSortByDistance(true);
 
 	createClickPlane();
 
@@ -23,26 +24,23 @@ WindManager::~WindManager(void)
 {
 }
 
-// From: https://www.youtube.com/watch?v=QquD8qFUKeM
 void WindManager::createClickPlane()
 {
-	Ogre::Real planeHeight = -12;
-	Ogre::ManualObject* planeXY = mSceneManager->createManualObject("PlaneXY");
-	planeXY->begin("BaseWhiteNoLighting", Ogre::RenderOperation::OT_TRIANGLE_FAN);
-	planeXY->colour(0, 0, 1);
-	planeXY->position(Ogre::Vector3(-100, planeHeight, 0)); // Close Left
-	planeXY->position(Ogre::Vector3(100, planeHeight, 0)); // Close Right
-	planeXY->position(Ogre::Vector3(100, planeHeight, -200)); // Far Right
-	planeXY->position(Ogre::Vector3(-100, planeHeight, -200)); // Far Left
-	planeXY->end();
-	//planeXY->setVisible(false);
+	// Debug material for wind plane
+	Ogre::MaterialPtr debugWindPlaneMat = Ogre::MaterialManager::getSingleton().create("DebugWindPlane", "General");
+	debugWindPlaneMat->getTechnique(0)->getPass(0)->setAmbient(0,0,1);
 
-	mSceneManager->getRootSceneNode()->createChildSceneNode()->attachObject(planeXY);
+	// Creating the actual plane
+	Ogre::MeshManager::getSingleton().createPlane("WindPlane", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+			mWindPlane, 1500, 1500, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+	Ogre::Entity* entWindPlane = mSceneManager->createEntity("WindPlaneEntity", "WindPlane");
+	entWindPlane->setMaterialName("DebugWindPlane");
+	mSceneManager->getRootSceneNode()->createChildSceneNode()->attachObject(entWindPlane);
 }
 
-Ogre::RaySceneQuery* WindManager::getRaySceneQuery()
+Ogre::Plane WindManager::getWindPlane()
 {
-	return this->mRaySceneQuery;
+	return this->mWindPlane;
 }
 
 bool WindManager::update(void)
@@ -55,28 +53,17 @@ void WindManager::PathListener::handleEvent(payloadmap payload)
 	std::list<Ogre::Ray>* rays = (std::list<Ogre::Ray>*)payload["Rays"];
 	std::list<Ogre::Vector2>* points = (std::list<Ogre::Vector2>*)payload["Points"];
 	
-	// From: http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Raycasting+to+the+polygon+level
+	// Testing the points of collision of each of the rays
 	if (rays->size() > 0)
 	{
-		this->mContainingManager->getRaySceneQuery()->setRay(rays->front());
-		if (this->mContainingManager->getRaySceneQuery()->execute().size() <= 0)
+		std::pair<bool, Ogre::Real> result = rays->front().intersects(this->mContainingManager->getWindPlane());
+ 
+		if(result.first)
 		{
-			Ogre::LogManager::getSingleton().logMessage("Missed everything");
-			return;
+			Ogre::Vector3 point = rays->front().getPoint(result.second);
+			std::stringstream message;
+			message << "Hit at " << point.x << ", " << point.y << ", " << point.z;
+			Ogre::LogManager::getSingleton().logMessage(message.str());
 		}
 	}
-    Ogre::RaySceneQueryResult &rayQueryResult = this->mContainingManager->getRaySceneQuery()->getLastResults();
-    for (unsigned int x = 0; x < rayQueryResult.size(); x++)
-    {
-        if ((rayQueryResult[x].movable != NULL) &&
-            (rayQueryResult[x].movable->getMovableType().compare("ManualObject") == 0))
-        {
-            Ogre::ManualObject* windPlane = static_cast<Ogre::ManualObject*>(rayQueryResult[x].movable);
-			Ogre::LogManager::getSingleton().logMessage("Hit " + windPlane->getName());
-        }
-		else
-		{
-			Ogre::LogManager::getSingleton().logMessage("Hit " + rayQueryResult[x].movable->getName());
-		}
-    }
 }
