@@ -58,13 +58,14 @@ void WindManager::PathListener::handleEvent(payloadmap payload)
 	debugMarkerMat->getTechnique(0)->getPass(0)->setAmbient(1,0,0);
 	
 	// Testing the points of collision of each of the rays
-	if (rays->size() > 0)
+	std::list<Ogre::Ray>::iterator rayIter = rays->begin();
+	while (rayIter != rays->end())
 	{
-		std::pair<bool, Ogre::Real> result = rays->front().intersects(this->mContainingManager->getWindPlane());
+		std::pair<bool, Ogre::Real> result = rayIter->intersects(this->mContainingManager->getWindPlane());
  
 		if(result.first)
 		{
-			Ogre::Vector3 point = rays->front().getPoint(result.second);
+			Ogre::Vector3 point = rayIter->getPoint(result.second);
 			std::stringstream message;
 			message << "Hit at " << point.x << ", " << point.y << ", " << point.z;
 			Ogre::LogManager::getSingleton().logMessage(message.str());
@@ -82,5 +83,6 @@ void WindManager::PathListener::handleEvent(payloadmap payload)
 			testPlaneNode->attachObject(entTestPlane);
 			testPlaneNode->setPosition(Ogre::Vector3(point.x, Ogre::Real(-11.9), point.z));
 		}
+		rayIter++;
 	}
 }
