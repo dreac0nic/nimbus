@@ -31,9 +31,12 @@ namespace Nimbus
 		{
 		private:
 			WindManager* mContainingManager;
+			Ogre::SceneManager* mSceneManager;
+			int mCounter;
 
 		public:
-			PathListener(WindManager* containingManager) { this->mContainingManager = containingManager; }
+			PathListener(WindManager* containingManager, Ogre::SceneManager* sceneManager)
+				{ this->mContainingManager = containingManager; this->mSceneManager = sceneManager; mCounter = 0; }
 			virtual ~PathListener() {}
 
 			// From Nimbus::EventListener
