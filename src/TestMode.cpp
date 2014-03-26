@@ -13,6 +13,7 @@
 #include <OgreFont.h>
 #include <OgreFontManager.h>
 
+
 using namespace Nimbus;
 using namespace Ogre;
 
@@ -62,14 +63,14 @@ theOverlay->setZOrder(500);
 // Font
 Ogre::FontPtr mFont = Ogre::FontManager::getSingleton().create("Font", "General");
 mFont->setType(Ogre::FT_TRUETYPE);
-mFont->setSource("C:/Program Files (x86)/Steam/steamapps/common/The Stanley Parable/platform/vgui/fonts/times.ttf");
+mFont->setSource("../../times.ttf");
 mFont->setTrueTypeSize(32);
 mFont->setTrueTypeResolution(96);
 mFont->addCodePointRange(Ogre::Font::CodePointRange(33, 255));
 
+
 // Overlay element
-Ogre::OverlayContainer* mPanel = static_cast<Ogre::OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "ELEMENT"));
-//Ogre::OverlayElement* mElement = mOverlayMgr->createOverlayElement("OverlayElement", "ELEMENT");
+Ogre::OverlayContainer* mPanel = static_cast<Ogre::OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "PANEL"));
 mPanel->setMetricsMode(Ogre::GMM_RELATIVE);
 mPanel->setDimensions(0.5, 0.5);
 
@@ -77,17 +78,23 @@ mPanel->setDimensions(0.5, 0.5);
 Ogre::TextAreaOverlayElement* mTextArea = static_cast<Ogre::TextAreaOverlayElement*>(mOverlayMgr->createOverlayElement("TextArea", "TEXT"));
 mTextArea->setFontName("Font");
 mTextArea->setCharHeight(16);
-mTextArea->setColour(Ogre::ColourValue(0.3, 0.5, 0.3));
+mTextArea->setColour(Ogre::ColourValue(0.9, 0.9, 0.9));
+printf("%s ",mTextArea->getName());
 mTextArea->setCaption("HELLO!!!!");
 
-//mPanel->addChild(mElement);
+
 mPanel->addChild(mTextArea);
 theOverlay->add2D(mPanel);
 
+mTextArea->show();
+mPanel->show();
 theOverlay->show();
 
+
+printf("Overlay Enabled?? = %d", theOverlay->isInitialised()); 
 // Create the camera
 mCamera = mSceneMgr->createCamera("PlayerCam");
+
 
 //////////
 // Set up the camera
