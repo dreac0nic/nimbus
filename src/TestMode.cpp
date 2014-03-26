@@ -78,18 +78,35 @@ mPanel->setMaterialName( "BaseWhite" );					// This makes the menu color white
 
 // Overlay element text
 Ogre::TextAreaOverlayElement* mTextArea = static_cast<Ogre::TextAreaOverlayElement*>(mOverlayMgr->createOverlayElement("TextArea", "TEXT"));
+mTextArea->setMetricsMode(Ogre::GMM_PIXELS);
 mTextArea->setFontName("Font");
+mTextArea->setPosition(0.25, 0.25);
+mTextArea->setDimensions(0.5, 0.5);
+mTextArea->setCaption("Grignr began to reel and stagger under the blob, his chalk \n\
+white face and faltering muscles attesting to the gigantic loss \n\
+of blood.  Carthena slipped from Grignr in a death-like faint, a \n\
+morrow chilling scream upon her red rubish lips.  In final \n\
+desperation Grignr grasped the smoldering torch upon the ground \n\
+and plunged it into the reeking maw of the travestry.  A shudder \n\
+passed through the thing.  Grignr felt the blackness closing upon \n\
+his eyes, but held on with the last ebb of his rapidly waning \n\
+vitality.  He could feel its grip lessoning as a hideous gurgling \n\
+sound erupted from the writhing maw.  The jelly like mass began \n\
+to bubble like a vat of boiling tar as quavers passed up and down \n\
+its entire form.");
 mTextArea->setCharHeight(16);
-mTextArea->setColour(Ogre::ColourValue(0.9, 0.9, 0.9));
+mTextArea->setColourBottom(ColourValue(0.3, 0.5, 0.3));
+mTextArea->setColourTop(ColourValue(0.5, 0.7, 0.5));
+//mTextArea->setColour(Ogre::ColourValue(0.1, 0.1, 0.1));
 printf("%s ",mTextArea->getName());
-mTextArea->setCaption("HELLO!!!!");
 
 
-mPanel->addChild(mTextArea);
+
 theOverlay->add2D(mPanel);
+mPanel->addChild(mTextArea);
 
-mTextArea->show();
-mPanel->show();
+//mTextArea->show();
+//mPanel->show();
 theOverlay->show();
 
 
