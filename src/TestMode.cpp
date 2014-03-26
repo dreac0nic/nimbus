@@ -72,7 +72,9 @@ mFont->addCodePointRange(Ogre::Font::CodePointRange(33, 255));
 // Overlay element
 Ogre::OverlayContainer* mPanel = static_cast<Ogre::OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "PANEL"));
 mPanel->setMetricsMode(Ogre::GMM_RELATIVE);
-mPanel->setDimensions(0.5, 0.5);
+mPanel->setPosition(0.25, 0.25);						// This sets the position of the menu on the screen
+mPanel->setDimensions(0.5, 0.5);						// This sets the width and height of the menu on the screen
+mPanel->setMaterialName( "BaseWhite" );					// This makes the menu color white
 
 // Overlay element text
 Ogre::TextAreaOverlayElement* mTextArea = static_cast<Ogre::TextAreaOverlayElement*>(mOverlayMgr->createOverlayElement("TextArea", "TEXT"));
