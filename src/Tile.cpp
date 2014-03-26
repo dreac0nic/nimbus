@@ -161,3 +161,10 @@ MeshPtr Tile::getMesh(void)
 	// Return finished mesh.
 	return tileMesh;
 }
+
+bool Tile::addSubMesh(Ogre::MeshPtr& mesh)
+{
+	// Do it.
+
+	return true;
+}

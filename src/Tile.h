@@ -90,6 +90,9 @@ namespace Nimbus
 
 		/* Convert the tile into a OGRE mesh. */
 		Ogre::MeshPtr getMesh(void);
+
+		/* Add this tile as a sub-mesh to the current OGRE mesh. */
+		bool addSubMesh(Ogre::MeshPtr& mesh);
 	};
 }
 
