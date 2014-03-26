@@ -17,7 +17,8 @@ WindManager::WindManager(Ogre::SceneManager* sceneManager)
 
 	createClickPlane();
 
-	EventSystem::getSingleton()->registerListener(new PathListener(this, sceneManager), EventSystem::EventType::MOUSE_PATH);
+	EventSystem::getSingleton()->registerListener(new MouseWindListener(this, sceneManager),
+		EventSystem::EventType::MOUSE_POSITION);
 }
 
 WindManager::~WindManager(void)
@@ -35,12 +36,7 @@ void WindManager::createClickPlane()
 			mWindPlane, 1500, 1500, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
 	Ogre::Entity* entWindPlane = mSceneManager->createEntity("WindPlaneEntity", "WindPlane");
 	entWindPlane->setMaterialName("DebugWindPlane");
-	mSceneManager->getRootSceneNode()->createChildSceneNode()->attachObject(entWindPlane);
-}
-
-Ogre::Plane WindManager::getWindPlane()
-{
-	return this->mWindPlane;
+	//mSceneManager->getRootSceneNode()->createChildSceneNode()->attachObject(entWindPlane);
 }
 
 bool WindManager::update(void)
@@ -48,24 +44,25 @@ bool WindManager::update(void)
 	return true;
 }
 
-void WindManager::PathListener::handleEvent(payloadmap payload)
+void WindManager::MouseWindListener::handleEvent(payloadmap payload)
 {
-	std::list<Ogre::Ray>* rays = (std::list<Ogre::Ray>*)payload["Rays"];
-	std::list<Ogre::Vector2>* points = (std::list<Ogre::Vector2>*)payload["Points"];
+	std::string context = *(static_cast<std::string*>(payload["Context"]));
 
-	// Debug material for collision markers
-	Ogre::MaterialPtr debugMarkerMat = Ogre::MaterialManager::getSingleton().create("DebugMarkers", "General");
-	debugMarkerMat->getTechnique(0)->getPass(0)->setAmbient(1,0,0);
-	
-	// Testing the points of collision of each of the rays
-	std::list<Ogre::Ray>::iterator rayIter = rays->begin();
-	while (rayIter != rays->end())
+	if (context.compare("Wind") == 0)
 	{
-		std::pair<bool, Ogre::Real> result = rayIter->intersects(this->mContainingManager->getWindPlane());
+		Ogre::Ray* ray = static_cast<Ogre::Ray*>(payload["WorldRay"]);
+		Ogre::Vector2* screenPos = static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
+
+		// Debug material for collision markers
+		Ogre::MaterialPtr debugMarkerMat = Ogre::MaterialManager::getSingleton().create("DebugMarkers", "General");
+		debugMarkerMat->getTechnique(0)->getPass(0)->setAmbient(1,0,0);
+		
+		// Testing the ray for collision with the wind plane
+		std::pair<bool, Ogre::Real> result = ray->intersects(this->mContainingManager->mWindPlane);
  
 		if(result.first)
 		{
-			Ogre::Vector3 point = rayIter->getPoint(result.second);
+			Ogre::Vector3 point = ray->getPoint(result.second);
 			std::stringstream message;
 			message << "Hit at " << point.x << ", " << point.y << ", " << point.z;
 			Ogre::LogManager::getSingleton().logMessage(message.str());
@@ -81,8 +78,7 @@ void WindManager::PathListener::handleEvent(payloadmap payload)
 			entTestPlane->setMaterialName("DebugMarkers");
 			Ogre::SceneNode* testPlaneNode = mSceneManager->getRootSceneNode()->createChildSceneNode();
 			testPlaneNode->attachObject(entTestPlane);
-			testPlaneNode->setPosition(Ogre::Vector3(point.x, Ogre::Real(-11.9), point.z));
+			testPlaneNode->setPosition(point);
 		}
-		rayIter++;
 	}
 }

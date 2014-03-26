@@ -24,9 +24,8 @@ namespace Nimbus
 
 		// Event Listeners
 
-		/** Listens for the mouse path event
-		*/
-		class PathListener : 
+		// Listens for the wind creation events
+		class MouseWindListener : 
 			public EventListener
 		{
 		private:
@@ -35,9 +34,9 @@ namespace Nimbus
 			int mCounter;
 
 		public:
-			PathListener(WindManager* containingManager, Ogre::SceneManager* sceneManager)
+			MouseWindListener(WindManager* containingManager, Ogre::SceneManager* sceneManager)
 				{ this->mContainingManager = containingManager; this->mSceneManager = sceneManager; mCounter = 0; }
-			virtual ~PathListener() {}
+			virtual ~MouseWindListener() {}
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload);
@@ -46,8 +45,6 @@ namespace Nimbus
 	public:
 		WindManager(Ogre::SceneManager* sceneManager);
 		virtual ~WindManager(void);
-
-		virtual Ogre::Plane getWindPlane();
 
 		// From Nimbus::Manager
 		virtual bool update(void);

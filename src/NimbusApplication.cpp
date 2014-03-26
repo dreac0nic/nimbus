@@ -65,11 +65,6 @@ RenderWindow* NimbusApplication::getRenderWindow(void)
 	return app->mWindow;
 }
 
-Ogre::Camera* NimbusApplication::getCamera(void)
-{
-	return app->mCurrentRunMode->getCamera();
-}
-
 bool NimbusApplication::frameRenderingQueued(const FrameEvent& evt)
 {
 	if(mWindow->isClosed())

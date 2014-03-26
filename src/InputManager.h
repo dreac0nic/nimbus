@@ -44,11 +44,6 @@ namespace Nimbus
 		OIS::Mouse* mMouse;
 		OIS::Keyboard* mKeyboard;
 
-		// Mouse Path variables
-		bool mCollectingPath;
-		std::list<Ogre::Ray> mMouseRays;
-		std::list<Ogre::Vector2> mMousePoints;
-
 	protected:
 		// From Ogre::WindowEventListener
 		virtual void windowResized(Ogre::RenderWindow* rw);

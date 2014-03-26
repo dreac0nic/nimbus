@@ -43,11 +43,6 @@ InputManager::InputManager(void)
 
 	// Register as a Window listener for future resize and close events
 	Ogre::WindowEventUtilities::addWindowEventListener(window, this);
-
-	// Make sure the click lists are empty
-	mCollectingPath = false;
-	mMouseRays.clear();
-	mMousePoints.clear();
 }
 
 InputManager::~InputManager(void)
@@ -91,13 +86,10 @@ bool InputManager::keyReleased(const OIS::KeyEvent& evt)
 
 bool InputManager::mouseMoved(const OIS::MouseEvent& evt)
 {
-	if (mCollectingPath)
-	{
-		mMouseRays.push_back(NimbusApplication::getCamera()->getCameraToViewportRay(
-				Ogre::Real(evt.state.X.abs) / Ogre::Root::getSingleton().getAutoCreatedWindow()->getWidth(),
-				Ogre::Real(evt.state.Y.abs)/ Ogre::Root::getSingleton().getAutoCreatedWindow()->getHeight()));
-		mMousePoints.push_back(Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs)));
-	}
+	std::map<std::string, void*> mouseScreen;
+	mouseScreen["ScreenPosition"] = &Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_UPDATE, mouseScreen);
+
 	return true;
 }
 
@@ -110,16 +102,6 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 		logstring << "The left mouse button was pressed at ("
 			<< evt.state.X.abs << ", " << evt.state.Y.abs << ")"
 			<< std::endl;
-		if (NimbusApplication::getCamera() != NULL)
-		{
-			mCollectingPath = true;
-			mMouseRays.clear();
-			mMousePoints.clear();
-			mMouseRays.push_back(NimbusApplication::getCamera()->getCameraToViewportRay(
-					Ogre::Real(evt.state.X.abs) / Ogre::Root::getSingleton().getAutoCreatedWindow()->getWidth(),
-					Ogre::Real(evt.state.Y.abs)/ Ogre::Root::getSingleton().getAutoCreatedWindow()->getHeight()));
-			mMousePoints.push_back(Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs)));
-		}
 	}
 	if(evt.state.buttonDown(OIS::MB_Right))
 	{
@@ -130,19 +112,21 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 
 	std::cerr << logstring.str().c_str();
 
+	std::map<std::string, void*> mouseScreen;
+	mouseScreen["ButtonPressed"] = &id;
+	mouseScreen["ScreenPosition"] = &Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_DOWN, mouseScreen);
+
 	return true;
 }
 
 bool InputManager::mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
 {
-	if (mCollectingPath)
-	{
-		std::map<std::string, void*> mousePath;
-		mousePath["Rays"] = &mMouseRays;
-		mousePath["Points"] = &mMousePoints;
-		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_PATH, mousePath);
-		mCollectingPath = false;
-	}
+	std::map<std::string, void*> mouseScreen;
+	mouseScreen["ButtonPressed"] = &id;
+	mouseScreen["ScreenPosition"] = &Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_UP, mouseScreen);
+
 	return true;
 }
 

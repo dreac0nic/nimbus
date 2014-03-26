@@ -63,9 +63,6 @@ namespace Nimbus
 		 it will return a 0 (null).
 		 */
 		virtual RunMode* run(const Ogre::FrameEvent& evt) = 0;
-
-		// Returning the camera for access
-		Ogre::Camera* getCamera() { return mCamera; }
 	};
 }
 
