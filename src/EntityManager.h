@@ -37,36 +37,7 @@ namespace Nimbus
 		World* mWorld;
 
 		// The player entity
-		GameEntity* mPlayer;
-
-		// Stores the player entity after it is created
-		class PlayerCreatedListener :
-			public EventListener
-		{
-		private:
-			EntityManager* parent;
-		public:
-			PlayerCreatedListener(EntityManager* parent) : parent(parent) {}
-			~PlayerCreatedListener() {}
-
-			/* Payload:
-				"GameEntity" => Nimbus::GameEntity // The player entity
-			*/
-			void handleEvent(payloadmap payload, EventListener* responder = NULL);
-		}* playerCreated;
-
-		// Moves the player as appropriate from user input
-		class PlayerMovedListener :
-			public EventListener
-		{
-		private:
-			EntityManager* parent;
-		public:
-			PlayerMovedListener(EntityManager* parent) : parent(parent) {}
-			~PlayerMovedListener() {}
-
-			void handleEvent(payloadmap payload, EventListener* responder = NULL);
-		}* playerMoved;
+		GameEntity* player;
 
 	public:
 		EntityManager(World* world);

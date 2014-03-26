@@ -58,6 +58,10 @@ void GameMode::initialize()
 	this->mEnvironmentMan->initialize();
 	this->mEntityMan->initialize();
 
+	std::map<std::string, void*> entityType;
+	entityType["EntityType"] = new std::string("Dragon");
+	EventSystem::getSingleton()->fireEvent(EventSystem::CREATE_ENTITY, entityType);
+
 	// Adding the world root node to the actual scene
 	this->mSceneMgr->getRootSceneNode()->addChild(this->mWorld->getWorldNode());
 }
