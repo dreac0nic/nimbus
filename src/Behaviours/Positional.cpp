@@ -68,7 +68,8 @@ void Positional::startup(void)
 
 	// Register event listeners.
 	EventSystem::getSingleton()->registerListener(mMovementListener, EventSystem::EventType::POSITION_ENTITY);
-	EventSystem::getSingleton()->registerListener(mMovementListener, EventSystem::EventType::TRANSLATE_ENTITY);
+	EventSystem::getSingleton()->registerListener(mMovementListener, EventSystem::EventType::BEGIN_TRANSLATE_ENTITY);
+	EventSystem::getSingleton()->registerListener(mMovementListener, EventSystem::EventType::END_TRANSLATE_ENTITY);
 
 	// Force an update when things start rendering
 	this->forceUpdate();
@@ -123,8 +124,6 @@ void Positional::update(void)
 		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::ENTITY_MOVED, eventMovePayload);
 
 		// Reset the delta vectors
-		this->mDeltaPosition = Vector3::ZERO;
-		this->mDeltaRotation = Vector3::ZERO;
 		this->mNewFacing = Vector3::ZERO;
 	}
 }
@@ -134,7 +133,8 @@ void Positional::shutdown(void)
 	// SUT DOWN THE POSITIONAL STUFF
 	// Deregister event listeners.
 	EventSystem::getSingleton()->unregisterListener(mMovementListener, EventSystem::EventType::POSITION_ENTITY);
-	EventSystem::getSingleton()->unregisterListener(mMovementListener, EventSystem::EventType::TRANSLATE_ENTITY);
+	EventSystem::getSingleton()->unregisterListener(mMovementListener, EventSystem::EventType::BEGIN_TRANSLATE_ENTITY);
+	EventSystem::getSingleton()->unregisterListener(mMovementListener, EventSystem::EventType::END_TRANSLATE_ENTITY);
 }
 
 void Positional::forceUpdate(void)
@@ -162,6 +162,15 @@ void Positional::MovementListener::handleEvent(payloadmap payload, EventListener
 
 	Vector3* movementVector, *rotationVector, *facingVector;
 
+	// Check to see if this is a cancel movement event
+	if(payload.find("EndTranslate") != payload.end())
+	{
+		parent->mDeltaPosition = Vector3::ZERO;
+		parent->mDeltaRotation = Vector3::ZERO;
+
+		return;
+	}
+
 	// If the event specifies an absolute position
 	if(payload.find("PositionVector") != payload.end())
 	{
@@ -179,7 +188,7 @@ void Positional::MovementListener::handleEvent(payloadmap payload, EventListener
 		movementVector = static_cast<Ogre::Vector3*>(payload["PositionDelta"]);
 
 		// Add the delta to the current position delta as part of aggregating moves in a frame
-		parent->mDeltaPosition += *movementVector;
+		parent->mDeltaPosition = *movementVector;
 	}
 
 	// If the event specifies an absolute rotation
@@ -199,7 +208,7 @@ void Positional::MovementListener::handleEvent(payloadmap payload, EventListener
 		rotationVector = static_cast<Ogre::Vector3*>(payload["RotationDelta"]);
 
 		// Add the delta to the current rotation delta as part of aggregating rotations in a frame
-		parent->mDeltaRotation += *rotationVector;
+		parent->mDeltaRotation = *rotationVector;
 	}
 
 	// If the event specifies a facing vector

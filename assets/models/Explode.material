@@ -1,0 +1,35 @@
+// Explode genrated by blender2ogre 0.5.8
+
+material Explode 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Explode
+        {
+            ambient 1.0 0.596643328666687 0.11235648393630981 0.10000000149011612
+            diffuse 0.800000011920929 0.47731467004589234 0.08988518848844151 0.10000000149011612
+            specular 0.0 0.0 0.0 0.10000000149011612 12.5
+            emissive 0.04400000348687172 0.026252308541752978 0.004943685684970278 0.10000000149011612
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
