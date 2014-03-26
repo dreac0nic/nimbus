@@ -58,7 +58,7 @@ namespace Nimbus
 		// CLASS MEMBERS --
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
 		 */
-		enum EventType { SHUTDOWN, MOUSE_CLICKED, CREATE_ENTITY, POSITION_ENTITY, BEGIN_TRANSLATE_ENTITY, END_TRANSLATE_ENTITY, ENTITY_MOVED };
+		enum EventType { SHUTDOWN, MOUSE_CLICKED, DIRECTION_INPUT, DIRECTION_INPUT_RELEASED, CREATE_ENTITY, POSITION_ENTITY, BEGIN_TRANSLATE_ENTITY, END_TRANSLATE_ENTITY, ENTITY_MOVED };
 		/* EVENT TYPE INFORMATION
 		 
 		 EXAMPLE_EVENT:
@@ -85,6 +85,14 @@ namespace Nimbus
 
 			Payload:
 				"KeyPressed" => OIS::KeyCode
+				"Direction" => Nimbus::Direction // Declared in the EventSystem.h... arbitrarily
+				"DirectionVector" => Ogre::Vector2 // A two dimensional unit vector indicating the direction of the input
+
+		DIRECTION_INPUT_RELEASED
+			An event fired whenever a key is released that indicated a direction.
+
+			Payload:
+				"KeyReleased" => OIS::KeyCode
 				"Direction" => Nimbus::Direction // Declared in the EventSystem.h... arbitrarily
 				"DirectionVector" => Ogre::Vector2 // A two dimensional unit vector indicating the direction of the input
 

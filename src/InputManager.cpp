@@ -143,6 +143,72 @@ bool InputManager::keyPressed(const OIS::KeyEvent& evt)
 
 bool InputManager::keyReleased(const OIS::KeyEvent& evt)
 {
+	payloadmap payload;
+	OIS::KeyCode keyCode;
+	Direction direction;
+	Ogre::Vector2 directionVector;
+
+	if(evt.key == OIS::KC_UP || evt.key == OIS::KC_W || evt.key == OIS::KC_NUMPAD8)
+	{
+		// Store the input information in referencable variables
+		keyCode = evt.key;
+		direction = Direction::UP;
+		directionVector = Ogre::Vector2::UNIT_Y;
+
+		// Load the input information
+		payload["KeyReleased"] = &keyCode;
+		payload["Direction"] = &direction;
+		payload["DirectionVector"] = &directionVector;
+
+		// Fire the event
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::DIRECTION_INPUT_RELEASED, payload);
+	}
+	else if(evt.key == OIS::KC_RIGHT || evt.key == OIS::KC_D || evt.key == OIS::KC_NUMPAD6)
+	{
+		// Store the input information in referencable variables
+		keyCode = evt.key;
+		direction = Direction::RIGHT;
+		directionVector = Ogre::Vector2::UNIT_X;
+
+		// Load the input information
+		payload["KeyReleased"] = &keyCode;
+		payload["Direction"] = &direction;
+		payload["DirectionVector"] = &directionVector;
+
+		// Fire the event
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::DIRECTION_INPUT_RELEASED, payload);
+	}
+	else if(evt.key == OIS::KC_DOWN || evt.key == OIS::KC_S || evt.key == OIS::KC_NUMPAD2)
+	{
+		// Store the input information in referencable variables
+		keyCode = evt.key;
+		direction = Direction::DOWN;
+		directionVector = -1 * Ogre::Vector2::UNIT_Y;
+
+		// Load the input information
+		payload["KeyReleased"] = &keyCode;
+		payload["Direction"] = &direction;
+		payload["DirectionVector"] = &directionVector;
+
+		// Fire the event
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::DIRECTION_INPUT_RELEASED, payload);
+	}
+	else if(evt.key == OIS::KC_LEFT || evt.key == OIS::KC_A || evt.key == OIS::KC_NUMPAD4)
+	{
+		// Store the input information in referencable variables
+		keyCode = evt.key;
+		direction = Direction::LEFT;
+		directionVector = -1 * Ogre::Vector2::UNIT_X;
+
+		// Load the input information
+		payload["KeyReleased"] = &keyCode;
+		payload["Direction"] = &direction;
+		payload["DirectionVector"] = &directionVector;
+
+		// Fire the event
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::DIRECTION_INPUT_RELEASED, payload);
+	}
+
 	return true;
 }
 

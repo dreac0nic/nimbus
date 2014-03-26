@@ -30,6 +30,7 @@ void EntityManager::initialize(void)
 
 	// Register listeners
 	EventSystem::getSingleton()->registerListener(this->playerMoved, EventSystem::EventType::DIRECTION_INPUT);
+	EventSystem::getSingleton()->registerListener(this->playerMoved, EventSystem::EventType::DIRECTION_INPUT_RELEASED);
 }
 
 bool EntityManager::update(void)
@@ -67,24 +68,32 @@ void EntityManager::PlayerMovedListener::handleEvent(payloadmap payload, EventLi
 {
 	Ogre::Vector2* directionVector = NULL;
 
+	Ogre::Vector3 extraDimensionVector;
+	payloadmap movePayload;
+	GameEntityId playerId;
+
+	// Get the player id in a referencable variable
+	playerId = parent->mPlayer->getEntityId();
+
 	if(payload.find("DirectionVector") != payload.end())
 	{
-		Ogre::Vector3 extraDimensionVector;
-		payloadmap movePayload;
-		GameEntityId playerId;
-
 		// Get the directional vector
 		directionVector = static_cast<Ogre::Vector2*>(payload["DirectionVector"]);
 
 		// Convert the direction into 3d space
 		extraDimensionVector = Ogre::Vector3(directionVector->x, 0, directionVector->y);
 
-		// Get the player id in a referencable variable
-		playerId = parent->mPlayer->getEntityId();
-
 		// Send off an event to move the player
 		movePayload["EntityId"] = &playerId;
 		movePayload["PositionDelta"] = &extraDimensionVector;
-		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, movePayload);
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::BEGIN_TRANSLATE_ENTITY, movePayload);
+	}
+
+	// If the key was released, send the terminate signal
+	if(payload.find("KeyReleased") != payload.end())
+	{
+		movePayload["EntityId"] = &playerId;
+		movePayload["EndTranslate"] = NULL;
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::END_TRANSLATE_ENTITY, movePayload);
 	}
 }
