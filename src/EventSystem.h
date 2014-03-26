@@ -58,7 +58,7 @@ namespace Nimbus
 		// CLASS MEMBERS --
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
 		 */
-		enum EventType { SHUTDOWN, MOUSE_CLICKED, DIRECTION_INPUT, CREATE_ENTITY, POSITION_ENTITY, TRANSLATE_ENTITY, ENTITY_MOVED };
+		enum EventType { SHUTDOWN, MOUSE_CLICKED, CREATE_ENTITY, POSITION_ENTITY, BEGIN_TRANSLATE_ENTITY, END_TRANSLATE_ENTITY, ENTITY_MOVED };
 		/* EVENT TYPE INFORMATION
 		 
 		 EXAMPLE_EVENT:
@@ -104,7 +104,7 @@ namespace Nimbus
 														begins at the object... have fun interpretting that (optional)
 				"RotationVector" => Ogre::Vector3	// Absolute, rotation vector <pitch, yaw, roll> (optional)
 
-		TRANSLATE_ENTITY
+		BEGIN_TRANSLATE_ENTITY
 			The event that causes an entity to move from one place to another. Generally speaking, this is the more
 			appropriate event to use to cause an entity to move as it is blended with other movement during a frame
 			while PositionEntity is not blended at all.
@@ -116,6 +116,12 @@ namespace Nimbus
 				"FacingVector" => Ogre::Vector3		// Facing vector, units in world space, begins at object...
 														there is no relative facing vector... while all facing
 														vectors are relative... it's complicated (optional)
+		END_TRANSLATE_ENTITY
+			The event that causes an entity to stop moving in the given direction. Simply stops translating the entity.
+
+			Payload:
+				"EntityId" => int
+				"EndTranslate" => NULL
 
 		ENTITY_MOVED
 			The event that notifies behaviours when the position of an entity is updated.
