@@ -135,8 +135,40 @@ void Nimbus::EntityFactory::CreateEntityListener::handleEvent(payloadmap payload
 {
 	if (payload.find("EntityType") != payload.end())
 	{
+		payloadmap positionalPayload;
 		GameEntity* entity = containingFactory->createEntity(*(static_cast<string*>(payload["EntityType"])));
 		containingFactory->mWorld->addEntity(entity);
+
+		// If we are setting the position on creation
+		if(payload.find("PositionVector") != payload.end() ||
+			payload.find("FacingVector") != payload.end() ||
+			payload.find("RotationVector") != payload.end())
+		{
+			// Get the entity id
+			GameEntityId entityId = entity->getEntityId();
+			positionalPayload["EntityId"] = &entityId;
+
+			// Set an initial position vector if we have one
+			if(payload.find("PositionVector") != payload.end())
+			{
+				positionalPayload["PositionVector"] = payload["PositionVector"];
+			}
+
+			// Set an initial facing vector if we have one
+			if(payload.find("FacingVector") != payload.end())
+			{
+				positionalPayload["FacingVector"] = payload["FacingVector"];
+			}
+
+			// Set an initial rotation vector if we have one
+			if(payload.find("RotationVector") != payload.end())
+			{
+				positionalPayload["RotationVector"] = payload["RotationVector"];
+			}
+
+			// Fire the event to set the position
+			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_ENTITY, positionalPayload);
+		}
 	}
 
 	// Cleaning up any unneeded payload memory space

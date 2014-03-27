@@ -81,6 +81,10 @@ namespace Nimbus
 
 			Payload:
 				"EntityType" => std::string
+				"PositionVector" => Ogre::Vector3	// Absolute, world position (optional)
+				"FacingVector" => Ogre::Vector3		// Facing vector, units in world absolute world space,
+														begins at the object... have fun interpretting that (optional)
+				"RotationVector" => Ogre::Vector3	// Absolute, rotation vector <pitch, yaw, roll> (optional)
 
 		SOAR_ENTITY
 			The event which carries wind induced movement information. Handled by the flocking
@@ -97,7 +101,7 @@ namespace Nimbus
 				"EntityId" => int
 				"PositionVector" => Ogre::Vector3	// Absolute, world position (optional)
 				"FacingVector" => Ogre::Vector3		// Facing vector, units in world absolute world space,
-														begins at the object... have fun interpretting that (optional)
+														begins at the object (optional)
 				"RotationVector" => Ogre::Vector3	// Absolute, rotation vector <pitch, yaw, roll> (optional)
 
 		BEGIN_TRANSLATE_ENTITY
