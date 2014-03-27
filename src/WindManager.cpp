@@ -69,8 +69,15 @@ void WindManager::MouseWindListener::handleEvent(payloadmap payload, EventListen
 			message << "Hit at " << point.x << ", " << point.y << ", " << point.z;
 			Ogre::LogManager::getSingleton().logMessage(message.str());
 
+			// Create a representative arrow mesh
+			payloadmap createArrowPayload;
+			std::string type = "Arrow";
+			createArrowPayload["EntityType"] = &type;
+			createArrowPayload["PositionVector"] = &point;
+			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
+
 			// Creating the plane to show the succesful clicking test
-			std::stringstream planeName, entityName;
+			/*std::stringstream planeName, entityName;
 			Ogre::Plane testPlane(Ogre::Vector3::UNIT_Y, 0);
 			planeName << "TestPlane" << mCounter;
 			Ogre::MeshManager::getSingleton().createPlane(planeName.str(), Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -80,7 +87,7 @@ void WindManager::MouseWindListener::handleEvent(payloadmap payload, EventListen
 			entTestPlane->setMaterialName("DebugMarkers");
 			Ogre::SceneNode* testPlaneNode = mSceneManager->getRootSceneNode()->createChildSceneNode();
 			testPlaneNode->attachObject(entTestPlane);
-			testPlaneNode->setPosition(point);
+			testPlaneNode->setPosition(point);*/
 		}
 	}
 }

@@ -171,11 +171,11 @@ void Nimbus::EntityFactory::CreateEntityListener::handleEvent(payloadmap payload
 		}
 	}
 
-	// Cleaning up any unneeded payload memory space
-	payloadmap::iterator payloads = payload.begin();
+	// Cleaning up any unneeded payload memory space (why are we doing this?)
+	/*payloadmap::iterator payloads = payload.begin();
 	while (payloads != payload.end())
 	{
 		delete payloads->second;
 		payloads++;
-	}
+	}*/
 }
