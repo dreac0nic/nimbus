@@ -20,6 +20,7 @@ namespace Nimbus
 	{
 	private:
 		// Member variables
+		// *******************************************************************
 
 		// The Environment Manager
 		EnvironmentManager* mEnvironmentMan;
@@ -30,10 +31,59 @@ namespace Nimbus
 		// The game World
 		World* mWorld;
 
-		// Ogre variables
-		Ogre::SceneManager* mSceneMgr;
-		Ogre::Camera* mCamera;
-		Ogre::Viewport* mViewport;
+		// Wind path creation
+		bool mCreatingWind;
+
+		// Event Listeners
+		// *******************************************************************
+
+		// Listens for any mouse down events
+		class MouseDownListener : 
+			public EventListener
+		{
+		private:
+			GameMode* mContainingMode;
+
+		public:
+			MouseDownListener(GameMode* containingMode)
+				{ this->mContainingMode = containingMode; }
+			virtual ~MouseDownListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload);
+		};
+
+		// Listens for any mouse update events
+		class MouseUpdateListener : 
+			public EventListener
+		{
+		private:
+			GameMode* mContainingMode;
+
+		public:
+			MouseUpdateListener(GameMode* containingMode)
+				{ this->mContainingMode = containingMode; }
+			virtual ~MouseUpdateListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload);
+		};
+
+		// Listens for any mouse up events
+		class MouseUpListener : 
+			public EventListener
+		{
+		private:
+			GameMode* mContainingMode;
+
+		public:
+			MouseUpListener(GameMode* containingMode)
+				{ this->mContainingMode = containingMode; }
+			virtual ~MouseUpListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload);
+		};
 
 	public:
 		GameMode(void);

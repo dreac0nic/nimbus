@@ -22,8 +22,26 @@ GameMode::~GameMode(void)
 	delete this->mWorld;
 }
 
-void GameMode::initialize()
-{	
+RunMode* GameMode::run(const FrameEvent& evt)
+{
+	// Attempt to initialize the run mode
+	if(!this->initialized && !this->initialize())
+	{
+		LogManager::getSingletonPtr()->logMessage("(Nimbus) Failed to initialize RunMode");
+
+		// Terminate the application if we fail to initialize
+		return 0;
+	}
+
+	// Updating all of the entities through the manager
+	this->mEntityMan->update();
+
+	// Continue to run this runmode
+	return this;
+}
+
+bool GameMode::initialize()
+{
 	// Create the scene manager
 	mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
 	// Create the camera
@@ -48,8 +66,8 @@ void GameMode::initialize()
 	this->mWorld = new World(this->mSceneMgr);
 
 	// Construct the world managers
-	this->mEnvironmentMan = new EnvironmentManager();
 	this->mEntityMan = new EntityManager(this->mWorld);
+	this->mEnvironmentMan = new EnvironmentManager(this->mSceneMgr);
 
 	// Configure entity types
 	this->mEntityMan->configureEntityTypes("../../assets/scripts/ConfigFiles.ini", this->mWorld);
@@ -64,15 +82,18 @@ void GameMode::initialize()
 
 	// Adding the world root node to the actual scene
 	this->mSceneMgr->getRootSceneNode()->addChild(this->mWorld->getWorldNode());
-}
+	
+	// Listening to events for mouse
+	EventSystem::getSingleton()->registerListener(new MouseDownListener(this), EventSystem::EventType::MOUSE_DOWN);
+	EventSystem::getSingleton()->registerListener(new MouseUpdateListener(this), EventSystem::EventType::MOUSE_UPDATE);
+	EventSystem::getSingleton()->registerListener(new MouseUpListener(this), EventSystem::EventType::MOUSE_UP);
 
-RunMode* GameMode::run(const FrameEvent& evt)
-{
-	// Updating all of the entities through the manager
-	this->mEntityMan->update();
+	// Setting the wind creation to false
+	mCreatingWind = false;
 
-	// Continue to run this runmode
-	return this;
+	// Note that the RunMode has been initialized
+	this->initialized = true;
+	return true;
 }
 
 void GameMode::pause(void)
@@ -81,4 +102,31 @@ void GameMode::pause(void)
 
 void GameMode::stop(void)
 {
+}
+
+void GameMode::MouseDownListener::handleEvent(payloadmap payload)
+{
+	mContainingMode->mCreatingWind = true;
+}
+
+void GameMode::MouseUpdateListener::handleEvent(payloadmap payload)
+{
+	if (mContainingMode->mCreatingWind)
+	{
+		Ogre::Vector2* position = static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
+		Ogre::Ray ray = mContainingMode->mCamera->getCameraToViewportRay(
+			position->x / mContainingMode->mViewport->getActualWidth(),
+			position->y / mContainingMode->mViewport->getActualHeight());
+
+		std::map<std::string, void*> mousePosRay;
+		mousePosRay["Context"] = new std::string("Wind");
+		mousePosRay["ScreenPosition"] = position;
+		mousePosRay["WorldRay"] = &ray;
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION, mousePosRay);
+	}
+}
+
+void GameMode::MouseUpListener::handleEvent(payloadmap payload)
+{
+	mContainingMode->mCreatingWind = false;
 }

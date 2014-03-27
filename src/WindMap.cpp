@@ -1,33 +1,49 @@
+#include <list>
+#include <math.h>
+#include <OgreRoot.h>
+#include "VectorMap.h"
+#include "WindCurrent.h"
 #include "WindMap.h"
 
-using namespace Nimbus;
-using namespace Ogre;
-
-WindMap::WindMap(int x, int y)
+namespace Nimbus
 {
-}
+	WindMap::WindMap(int mapSizeX, int mapSizeY)
+	{
+		vectorMap = new VectorMap(mapSizeX, mapSizeY);
+	}
+	WindMap::~WindMap(void)
+	{
+	}
 
-WindMap::~WindMap()
-{
-}
+	Ogre::Vector2 WindMap::getVector(double posx, double posy)
+	{
+		double resultX;
+		double resultY;
+		int flox = (int)floor(posx);
+		int floy = (int)floor(posy);
+		Ogre::Vector2 topLeft = vectorMap->getVector(flox, floy);
+		Ogre::Vector2 botLeft = vectorMap->getVector(flox, 1 - floy);
+		Ogre::Vector2 topRight = vectorMap->getVector(flox, 1- floy);
+		Ogre::Vector2 botRight = vectorMap->getVector(flox, 1-floy);
+		double left = flox - posx + 1;
+		double top = floy - posy + 1;
+		resultX = left * top * topLeft.x + left * (1-top) * botLeft.x + (1-left) * top * topRight.x + (1-left) * (1-top) * botRight.x;
+		resultY = left * top * topLeft.y + left * (1-top) * botLeft.y + (1-left) * top * topRight.y + (1-left) * (1-top) * botRight.y;
+		
+		return Ogre::Vector2((Ogre::Real)resultX, (Ogre::Real)resultY);
+	}
 
-/* Definitely here just as a placeholder... testing only. */
-Vector2 WindMap::getVector(double x, double y)
-{
-	return Vector2::UNIT_X;
-}
+	Ogre::Vector2 WindMap::getVector(Ogre::Vector2 position)
+	{
+		return getVector(position.x, position.y);
+	}
 
-Vector2 WindMap::getVector(Vector2 position)
-{
-	return Vector2::UNIT_X;
-}
+	/*Ogre::Vector2 WindMap::getAreaAverage(double topLeftx, double topLefty, double botRightx, double botRighty)
+	{
 
-Vector2 getAreaAverage(double topX, double topY, double botX, double botY)
-{
-	return Vector2::UNIT_X;
-}
-
-Vector2 getAreaAverage(Vector2 topLeft, Vector2 botRight)
-{
-	return Vector2::UNIT_X;
+	}
+	Ogre::Vector2 WindMap::getAreaAverage(Ogre::Vector2 topLeft, Ogre::Vector2 botRight)
+	{
+		return getAreaAverage(topLeft.x, topLeft.y, botRight.x, botRight.y);
+	}*/
 }

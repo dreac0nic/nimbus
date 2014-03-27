@@ -3,6 +3,8 @@
 
 #include <list>
 #include <OgreRoot.h>
+#include "VectorMap.h"
+#include "WindCurrent.h"
 
 namespace Nimbus
 {
@@ -12,9 +14,16 @@ namespace Nimbus
 	 */
 	class WindMap
 	{
+	private:
+		// Stores two dimensional array of Vector2s
+		VectorMap* vectorMap;
+		
 	public:
 		WindMap(int mapSizeX, int mapSizeY);
 		virtual ~WindMap(void);
+
+		// Stores list of WindCurrents
+		std::list<WindCurrent> currents;
 
 		// Gets Vector2 at position, will find average vector if given non-integer numbers
 		Ogre::Vector2 getVector(double x, double y);

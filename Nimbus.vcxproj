@@ -16,6 +16,8 @@
     <ClCompile Include="src\behaviours\Rainy.cpp" />
     <ClCompile Include="src\Behaviours\Renderable.cpp" />
     <ClCompile Include="src\behaviours\Soaring.cpp" />
+    <ClCompile Include="src\GeneralEntityIterator.cpp" />
+    <ClCompile Include="src\Renderable.cpp" />
     <ClCompile Include="src\EntityFactory.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\EnvironmentManager.cpp" />
@@ -23,10 +25,12 @@
     <ClCompile Include="src\GameEntity.cpp" />
     <ClCompile Include="src\GameEntitySet.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
-    <ClCompile Include="src\GeneralEntityIterator.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
+    <ClCompile Include="src\VectorMap.cpp" />
+    <ClCompile Include="src\WindCurrent.cpp" />
+    <ClCompile Include="src\WindManager.cpp" />
     <ClCompile Include="src\WindMap.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
@@ -37,6 +41,8 @@
     <ClInclude Include="src\behaviours\Rainy.h" />
     <ClInclude Include="src\Behaviours\Renderable.h" />
     <ClInclude Include="src\behaviours\Soaring.h" />
+    <ClInclude Include="src\Behaviour.h" />
+    <ClInclude Include="src\Renderable.h" />
     <ClInclude Include="src\EntityFactory.h" />
     <ClInclude Include="src\EventListener.h" />
     <ClInclude Include="src\EventSystem.h" />
@@ -49,6 +55,9 @@
     <ClInclude Include="src\Manager.h" />
     <ClInclude Include="src\NimbusApplication.h" />
     <ClInclude Include="src\RunMode.h" />
+    <ClInclude Include="src\VectorMap.h" />
+    <ClInclude Include="src\WindCurrent.h" />
+    <ClInclude Include="src\WindManager.h" />
     <ClInclude Include="src\WindMap.h" />
     <ClInclude Include="src\World.h" />
   </ItemGroup>

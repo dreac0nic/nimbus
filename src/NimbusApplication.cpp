@@ -26,8 +26,8 @@ NimbusApplication::NimbusApplication(void):
 
 NimbusApplication::~NimbusApplication(void)
 {
-	delete mCurrentRunMode;
 	delete mInputManager;
+	delete mCurrentRunMode;
 	delete mEventSystem;
 	delete mRoot;
 }
