@@ -12,7 +12,7 @@ namespace Nimbus
 		to guide the entity's motion.
 	*/
 	class Soaring:
-		public Positional
+		public Behaviour
 	{
 	private:
 

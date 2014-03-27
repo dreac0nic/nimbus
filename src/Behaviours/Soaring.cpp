@@ -1,19 +1,20 @@
 #include "Soaring.h"
+#include <OgreVector3.h>
 
 using namespace Nimbus;
 
 Soaring::Soaring(BehaviourType type, World* world):
-	Positional(type, world)
+	Behaviour(type, world)
 {
 }
 
 Soaring::Soaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
-	Positional(type, world, initializingSettings)
+	Behaviour(type, world, initializingSettings)
 {
 }
 
 Soaring::Soaring(Soaring* other, World* world, int id) :
-	Positional(other, other->mWorld, id)
+	Behaviour(other, other->mWorld, id)
 {
 }
 
