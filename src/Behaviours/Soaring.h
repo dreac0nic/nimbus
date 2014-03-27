@@ -1,7 +1,7 @@
 #ifndef NIMBUS_BEHAVIOUR_SOARING_H
 #define NIMBUS_BEHAVIOUR_SOARING_H
 
-#include "Positional.h"
+#include "Behaviour.h"
 
 namespace Nimbus
 {

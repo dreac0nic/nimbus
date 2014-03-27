@@ -1,7 +1,10 @@
 #include "Soaring.h"
+#include "../EventSystem.h"
+#include "../WindMap.h"
 #include <OgreVector3.h>
 
 using namespace Nimbus;
+using namespace Ogre;
 
 Soaring::Soaring(BehaviourType type, World* world):
 	Behaviour(type, world)
@@ -29,7 +32,7 @@ void Soaring::init(void)
 
 void Soaring::startup(void)
 {
-	// STARTUP FOR FLOCK SOARING
+	// STARTUP FOR SOARING
 	/*
 		NO IDEA WHAT GOES HERE
 	*/
@@ -38,14 +41,21 @@ void Soaring::startup(void)
 void Soaring::update(void)
 {
 	// UPDATE THE FLOCK SOARING
-	/*
-		Update the soaring entity. Weeeee.
-	*/
+	payloadmap payload;
+
+	// Get the wind vector and convert it to a 3d vector
+	Vector2 windVector = this->mWorld->getWindMap()->getVector(Vector2(0,0));
+	Vector3 windVector3d = Vector3(windVector.x, 0, windVector.y);
+
+	// Fire off the event to let the group know this cloud's contribution
+	payload["EntityId"] = &this->mParentId;
+	payload["PositionDelta"] = &windVector3d;
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::SOAR_ENTITY, payload);
 }
 
 void Soaring::shutdown(void)
 {
-	// SUT DOWN THE FLOCK SOARING
+	// SUT DOWN THE SOARING
 	/*
 		LOLWUT
 	*/

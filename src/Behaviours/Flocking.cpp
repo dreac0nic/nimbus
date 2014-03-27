@@ -1,36 +1,40 @@
 #include "Flocking.h"
-#include "Behaviour.h"
+#include <algorithm>
 
 using namespace Nimbus;
 
-Nimbus::Flocking::Flocking(BehaviourType type, World* world):
-	Behaviour(type, world)
+Flocking::Flocking(BehaviourType type, World* world) :
+	Behaviour(type, world), componentInfluenceFactor(1.0)
 {
 	this->init();
 }
 
-Nimbus::Flocking::Flocking(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(type, world, initializingSettings)
+Flocking::Flocking(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
+	Behaviour(type, world, initializingSettings), componentInfluenceFactor(1.0)
 {
 	this->init();
 }
 
-Nimbus::Flocking::Flocking(Flocking* other, World* world, int id) :
-	Behaviour(other, world, id)
+Flocking::Flocking(Flocking* other, World* world, int id) :
+	Behaviour(other, world, id), componentInfluenceFactor(1.0)
 {
 	this->init();
 }
 
-Nimbus::Flocking::~Flocking(void)
+Flocking::~Flocking(void)
 {
 	// DESTROY ALL OF THE THINGS
+	this->mSoarListener;
 }
 
-void Nimbus::Flocking::init()
+void Flocking::init()
 {
+	this->mSoarListener = new SoarListener(this);
+
+	this->mPositionDelta = Ogre::Vector3::ZERO;
 }
 
-void Nimbus::Flocking::startup(void)
+void Flocking::startup(void)
 {
 	// STARTUP FOR FLOCK Flocking
 	/*
@@ -38,7 +42,7 @@ void Nimbus::Flocking::startup(void)
 	*/
 }
 
-void Nimbus::Flocking::update(void)
+void Flocking::update(void)
 {
 	// UPDATE THE FLOCK Flocking
 	/*
@@ -46,7 +50,7 @@ void Nimbus::Flocking::update(void)
 	*/
 }
 
-void Nimbus::Flocking::shutdown(void)
+void Flocking::shutdown(void)
 {
 	// SUT DOWN THE FLOCK Flocking
 	/*
@@ -54,12 +58,40 @@ void Nimbus::Flocking::shutdown(void)
 	*/
 }
 
-Behaviour* Nimbus::Flocking::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Flocking::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
 {
-	return new Nimbus::Flocking(this->mBehaviourType, this->mWorld, initializingSettings);
+	return new Flocking(this->mBehaviourType, this->mWorld, initializingSettings);
 }
 
-Behaviour* Nimbus::Flocking::clone(int id)
+Behaviour* Flocking::clone(int id)
 {
-	return new Nimbus::Flocking(this, this->mWorld, id);
+	return new Flocking(this, this->mWorld, id);
+}
+
+void Flocking::SoarListener::handleEvent(payloadmap payload, EventListener* responder)
+{
+	// Return if we do not have this entity id in our entity list
+	if(std::find(
+		mParent->mEntities.begin(),
+		mParent->mEntities.end(),
+		*static_cast<int*>(payload["EntityId"])) == mParent->mEntities.end())
+	{
+		return;
+	}
+
+	// Default to delta of zero
+	Ogre::Vector3 positionDelta = Ogre::Vector3::ZERO;
+
+	// Get the position delta
+	if(payload.find("PositionDelta") != payload.end())
+	{
+		positionDelta = *static_cast<Ogre::Vector3*>(payload["PositionDelta"]);
+	}
+
+	// Scale the position delta relative to the number of components
+	positionDelta.normalise();
+	positionDelta *= Ogre::Real(mParent->componentInfluenceFactor / mParent->mEntities.size());
+
+	// Aggregate the position delta of this component
+	mParent->mPositionDelta += positionDelta;
 }

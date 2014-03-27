@@ -1,23 +1,55 @@
 #ifndef NIMBUS_BEHAVIOUR_FLOCKING_H
 #define NIMBUS_BEHAVIOUR_FLOCKING_H
 
-#include "Flocking.h"
+#include "Behaviour.h"
+#include "../EventSystem.h"
+#include "../GameEntity.h"
 
 namespace Nimbus
 {
-	/* Flocking is a behaviour that implements a wind-based
-		grouped Flocking behaviour. Inheriting much of its functionality from
-		Flocking, the Flocking behaviour gives the entity the ablity to congragate
-		with other entities and float in groups before being tore apart. Q.Q
+	/* Flocking is a behaviour that implements 
+		grouped Flocking behaviour. The Flocking behaviour gives the entity
+		the ablity to congregate with other entities and float in groups
+		before being tore apart. Q.Q
 	*/
 	class Flocking:
 		public Behaviour
 	{
 	private:
+		// Arbitrary constants
+
+		// The influence factor of each component cloud (divided by the number of components on use)
+		const double componentInfluenceFactor;
+
+		// Member variables
+
+		// Delta vector aggregated from component entities
+		Ogre::Vector3 mPositionDelta;
+
+		// The list of component entities
+		std::vector<GameEntityId> mEntities;
+
 		/* Called by the constructors to initialize the behaviour. Anything that needs to
 			be duplicated among constructors should be put in here.
 		*/
 		void init();
+
+	protected:
+		/* Updates the direction of the flocking group based on the wind current from a single
+			cloud.
+		*/
+		class SoarListener :
+			public EventListener
+		{
+		private:
+			Flocking* mParent;
+
+		public:
+			SoarListener(Flocking* parent) : mParent(parent) {}
+			~SoarListener() {}
+
+			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mSoarListener;
 
 	public:
 		/* Default constructor, taking a world pointer.
