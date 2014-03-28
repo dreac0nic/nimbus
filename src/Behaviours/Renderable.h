@@ -11,7 +11,8 @@ namespace Nimbus
 		public Behaviour
 	{
 	private:
-		Ogre::Entity* mModel;
+		std::string mBaseEntityName;
+		Ogre::Entity* mOgreEntity;
 		//Ogre::Vector3 mPosition;
 		Ogre::Vector3 mScale;
 		//Ogre::Vector3 mRotation;
@@ -21,7 +22,7 @@ namespace Nimbus
 			Renderable behaviour. Called by all the constructors with the appropriate
 			parameters.
 		*/
-		void init(Ogre::Entity* model, Ogre::Vector3 scale);
+		void init(Ogre::Entity* ogreEntity, Ogre::Vector3 scale, std::string entityBaseName);
 
 	protected:
 		// Event Listeners

@@ -7,7 +7,7 @@ using namespace Nimbus;
 Nimbus::Renderable::Renderable(BehaviourType type, World* world):
 	Behaviour(type, world)
 {
-	this->init(NULL, Vector3::ZERO);
+	this->init(NULL, Vector3::ZERO, "");
 }
 
 Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::SettingsMultiMap* initializingSettings):
@@ -48,13 +48,13 @@ Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::Set
 	}
 
 	// Initialize the object
-	this->init(model, scale);
+	this->init(model, scale, ogreName);
 }
 
 Nimbus::Renderable::Renderable(Renderable* other, World* world, int id):
 	Behaviour(other, world, id)
 {
-	this->init(other->getModel(), other->getScale());
+	this->init(other->getModel(), other->getScale(), other->mBaseEntityName);
 }
 
 Nimbus::Renderable::~Renderable()
@@ -62,9 +62,20 @@ Nimbus::Renderable::~Renderable()
 	// Empty destructor
 }
 
-void Nimbus::Renderable::init(Ogre::Entity* model, Vector3 scale)
+void Nimbus::Renderable::init(Ogre::Entity* ogreEntity, Vector3 scale, std::string entityBaseName)
 {
-	this->mModel = model;
+	if(ogreEntity != NULL)
+	{
+		std::stringstream nameStream;
+		nameStream << entityBaseName << this->mWorld->getCurrentId();
+		this->mOgreEntity = this->mWorld->getSceneManager()->createEntity(nameStream.str(), ogreEntity->getMesh());
+	}
+	else
+	{
+		this->mOgreEntity = NULL;
+	}
+
+	this->mBaseEntityName = entityBaseName;
 	this->mScale = scale;
 
 	this->mParentId;
@@ -76,7 +87,7 @@ void Nimbus::Renderable::startup(void)
 {
 	// Create and attach the scene node for the entity
 	this->mNode = mWorld->getWorldNode()->createChildSceneNode();
-	this->mNode->attachObject(this->mModel);
+	this->mNode->attachObject(this->mOgreEntity);
 
 	// Setting initial properties
 	this->mNode->setScale(mScale.x, mScale.y, mScale.z);
@@ -100,12 +111,12 @@ void Nimbus::Renderable::shutdown(void)
 
 Ogre::Entity* Nimbus::Renderable::getModel()
 {
-	return this->mModel;
+	return this->mOgreEntity;
 }
 
 void Nimbus::Renderable::setModel(Ogre::Entity* model)
 {
-	this->mModel = model;
+	this->mOgreEntity = model;
 }
 
 Ogre::Vector3 Nimbus::Renderable::getScale()
