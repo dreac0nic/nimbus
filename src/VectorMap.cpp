@@ -18,7 +18,7 @@ namespace Nimbus
 		return map.at(posx * length + posy);
 	}
 
-	void VectorMap::setVector(int posx, int posy, int strx, int stry)
+	void VectorMap::setVector(int posx, int posy, double strx, double stry)
 	{
 		map[length * length + posy] = Ogre::Vector2((Ogre::Real)strx, (Ogre::Real)stry);
 	}

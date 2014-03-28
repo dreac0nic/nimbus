@@ -15,6 +15,10 @@ namespace Nimbus
 		std::vector<Ogre::Vector2> map;
 		// Stores size of one dimension of map
 		int length;
+
+		// Stores ambient wind strength for initial creation
+		//const double averageStr = 1;
+
 	public:
 		VectorMap(int xLength, int yLength);
 		virtual ~VectorMap(void);
@@ -23,7 +27,7 @@ namespace Nimbus
 		Ogre::Vector2 getVector(int posx, int posy);
 
 		// Sets Vector2 to strength (x, y) at position (x, y)
-		void setVector(int posx, int posy, int strx, int stry);
+		void setVector(int posx, int posy, double strx, double stry);
 	};
 }
 #endif

@@ -7,8 +7,8 @@
 namespace Nimbus
 {
 	/** Stores a path representing wind input
-	 Used by WindMap
-	 */
+	Used by WindMap
+	*/
 	class WindCurrent
 	{
 	public:
@@ -20,10 +20,13 @@ namespace Nimbus
 		bool temp;
 
 		// Stores WindCurrent strength
-		int strength;
+		double strength;
 
 		// Stores path's positions
 		std::list<Ogre::Vector2> path;
+
+		bool operator==(const WindCurrent &other) const;
+		bool operator!=(const WindCurrent &other) const;
 	};
 }
 #endif
