@@ -14,6 +14,11 @@ namespace Nimbus
 		// Indicates if the RunMode has been initialized.
 		bool initialized;
 
+		// Ogre variables
+		Ogre::SceneManager* mSceneMgr;
+		Ogre::Camera* mCamera;
+		Ogre::Viewport* mViewport;
+
 		/** Sets up all necessary components of the run mode.
 		 Should be called before run begins.
 		 

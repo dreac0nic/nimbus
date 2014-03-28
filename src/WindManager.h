@@ -2,8 +2,10 @@
 #define NIMBUS_WINDMANAGER_H
 
 #include <string>
+#include <OgrePlane.h>
+#include "EventListener.h"
+#include "Manager.h"
 #include "WindMap.h"
-#include "manager.h"
 
 namespace Nimbus
 {
@@ -17,8 +19,36 @@ namespace Nimbus
 	class WindManager :
 		public Manager
 	{
+	protected:
+		// Member variables
+		Ogre::SceneManager* mSceneManager;
+		Ogre::Plane mWindPlane;
+
+		// Setting up the plane that will register the clicks for the wind creation
+		virtual void createClickPlane();
+
+		// Event Listeners
+
+		// Listens for the wind creation events
+		class MouseWindListener : 
+			public EventListener
+		{
+		private:
+			WindManager* mContainingManager;
+			Ogre::SceneManager* mSceneManager;
+			int mCounter;
+
+		public:
+			MouseWindListener(WindManager* containingManager, Ogre::SceneManager* sceneManager)
+				{ this->mContainingManager = containingManager; this->mSceneManager = sceneManager; mCounter = 0; }
+			virtual ~MouseWindListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload);
+		};
+
 	public:
-		WindManager(int sizex, int sizey);
+		WindManager(Ogre::SceneManager* sceneManager, int sizex, int sizey);
 		virtual ~WindManager(void);
 
 		// Stores the game's WindMap

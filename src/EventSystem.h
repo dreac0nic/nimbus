@@ -52,14 +52,8 @@ namespace Nimbus
 		// CLASS MEMBERS --
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
 		 */
-		enum EventType { SHUTDOWN, MOUSE_CLICKED, CREATE_ENTITY };
+		enum EventType { SHUTDOWN, MOUSE_DOWN, MOUSE_UP, MOUSE_UPDATE, MOUSE_POSITION, CREATE_ENTITY };
 		/* EVENT TYPE INFORMATION
-		 
-		 EXAMPLE_EVENT:
-			This is a brief description of what the event is, when it is fired, and what generally happens during this even.
-
-			Payload:
-				"KeyName" => KeyType // Possibly a comment, if relevant
 
 		 SHUTDOWN:
 			The shutdown event is fired when a system asks the program to exit. The event will be handled by the main application 
@@ -67,12 +61,33 @@ namespace Nimbus
 
 			Payload: NONE
 
-		MOUSE_CLICKED
-			An event fired whenever a button on the mouse is clicked in our application.
+		MOUSE_DOWN
+			An event fired whenever a button on the mouse is pressed down.
 
 			Payload:
 				"ButtonPressed" => OIS::MouseButtonID
 				"ScreenPosition" => Ogre::Vector2
+
+		MOUSE_UP
+			An event fired whenever a button on the mouse is released.
+
+			Payload:
+				"ButtonPressed" => OIS::MouseButtonID
+				"ScreenPosition" => Ogre::Vector2
+
+		MOUSE_UPDATE
+			An event fired whenever the mouse moves.
+
+			Payload:
+				"ScreenPosition" => Ogre::Vector2
+
+		MOUSE_POSITION
+			An event fired whenever the mouse moves.
+
+			Payload:
+				"Context" => std::string
+				"ScreenPosition" => Ogre::Vector2
+				"WorldRay" => Ogre::Ray
 
 		CREATE_ENTITY
 			The event that causes the EntityFactory to produce a new entity of given type.
