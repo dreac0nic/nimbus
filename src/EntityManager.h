@@ -2,7 +2,9 @@
 #define NIMBUS_ENTITYMANAGER_H
 
 #include <string>
+#include <map>
 
+#include "Grid.h"
 #include "Manager.h"
 #include "EntityFactory.h"
 
@@ -74,6 +76,40 @@ namespace Nimbus
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mDestroyEventListener;
 
+		/** Handles per tick updates for all entities that cannot be handled by entities themselves.
+			
+			Performs grouping queries for cloud groups.
+		*/
+		class TickListener :
+			public EventListener
+		{
+		private:
+			EntityManager* mParent;
+
+			Ogre::Real maxGroupingDistance;
+
+			/** Groups clouds into groups as determined by the cluster algorithm.
+			*/
+			void generateCloudGroups();
+
+			/** Used to calculate the clusters of clouds. Uses a single linkage hierarchical clustering
+				algorithm based on S.C. Johnson's algorithm ("Hierarchical Clustering Schemes").
+				http://home.deib.polimi.it/matteucc/Clustering/tutorial_html/hierarchical.html
+
+				@param proximityGrid A grid object containing the proximity of defined groups relative
+									to each other.
+				@param groups A map mapping rows of the proximity grid to corresponding groups of
+							GameEntities. Will contain final groups when the function returns.
+			*/
+			void cluster(Grid<Ogre::Real>& proximityGrid, std::map<int, std::list<GameEntityId> >& groups);
+
+		public:
+			TickListener(EntityManager* parent) : mParent(parent), maxGroupingDistance(10) {}
+			virtual ~TickListener() {}
+
+			// From Nimbus::EventListener
+			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mTickListener;
 
 		class PositionResponseListener :
 			public EventListener
