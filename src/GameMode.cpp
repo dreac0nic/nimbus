@@ -36,6 +36,16 @@ RunMode* GameMode::run(const FrameEvent& evt)
 	// Updating all of the entities through the manager
 	this->mEntityMan->update();
 
+	// Update elapsed time
+	elapsedTime += evt.timeSinceLastEvent;
+
+	// Fire off a tick event if appropriate
+	if(elapsedTime >= timePerTick)
+	{
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TICK);
+		elapsedTime = 0;
+	}
+
 	// Continue to run this runmode
 	return this;
 }
@@ -90,6 +100,10 @@ void GameMode::initialize()
 
 	// Setting the wind creation to false
 	mCreatingWind = false;
+
+	// Initialize time constants
+	timePerTick = 1; // 1.0 = one tick per second
+	elapsedTime = 0;
 }
 
 void GameMode::pause(void)

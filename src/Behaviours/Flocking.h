@@ -21,12 +21,12 @@ namespace Nimbus
 		/** The influence factor of each component cloud (divided by the number of
 			components on use)
 		*/
-		double mComponentInfluenceFactor;
+		Ogre::Real mComponentInfluenceFactor;
 
 		/** The factor deciding how much the individual movement of the cloud should
 			override the group direction.
 		*/
-		double mComponentOverrideFactor;
+		Ogre::Real mComponentOverrideFactor;
 
 		// Member variables
 
@@ -39,7 +39,7 @@ namespace Nimbus
 		/** Called by the constructors to initialize the behaviour. Anything that needs to
 			be duplicated among constructors should be put in here.
 		*/
-		void init(double influenceFactor, double overrideFactor);
+		void init(Ogre::Real influenceFactor, Ogre::Real overrideFactor);
 
 	protected:
 		/** Updates the direction of the flocking group based on the wind current from a single
@@ -53,11 +53,27 @@ namespace Nimbus
 
 		public:
 			SoarListener(Flocking* parent) : mParent(parent) {}
-			~SoarListener() {}
+			virtual ~SoarListener() {}
 
 			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mSoarListener;
+
+		/** Updates the component entities' deltas. Performs any other, not-per-frame updates.
+		*/
+		class TickListener :
+			public EventListener
+		{
+		private:
+			Flocking* mParent;
+
+		public:
+			TickListener(Flocking* parent) : mParent(parent) {}
+			virtual ~TickListener() {}
+
+			// From Nimbus::EventListener
+			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mTickListener;
 
 	public:
 		/** Default constructor, taking a world pointer.

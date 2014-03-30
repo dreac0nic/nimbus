@@ -31,6 +31,12 @@ namespace Nimbus
 		// The game World
 		World* mWorld;
 
+		// Elapsed time since tick
+		Ogre::Real elapsedTime;
+
+		// The time step between each tick
+		Ogre::Real timePerTick;
+
 		// Wind path creation
 		bool mCreatingWind;
 
