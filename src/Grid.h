@@ -1,6 +1,8 @@
 #ifndef NIMBUS_GRID_H
 #define NIMBUS_GRID_H
 
+#include <vector>
+
 namespace Nimbus
 {	
 	/** Stores a grid of objects of type T.
