@@ -54,7 +54,7 @@ namespace Nimbus
 		 */
 		enum EventType { SHUTDOWN,
 			MOUSE_DOWN, MOUSE_UP, MOUSE_UPDATE, MOUSE_POSITION,
-			CREATE_ENTITY, SOAR_ENTITY,
+			CREATE_ENTITY, DESTROY_ENTITY, SOAR_ENTITY,
 			POSITION_ENTITY, BEGIN_TRANSLATE_ENTITY, END_TRANSLATE_ENTITY, ENTITY_MOVED };
 			
 		/* EVENT TYPE INFORMATION
@@ -102,6 +102,12 @@ namespace Nimbus
 				"FacingVector" => Ogre::Vector3		// Facing vector, units in world absolute world space,
 														begins at the object... have fun interpretting that (optional)
 				"RotationVector" => Ogre::Vector3	// Absolute, rotation vector <pitch, yaw, roll> (optional)
+
+		DESTROY_ENTITY
+			The event that causes an entity to be dropped from the world and destroyed. (Don't worry... it's humane.)
+
+			Payload:
+				"EntityId" => GameEntityId
 
 		SOAR_ENTITY
 			The event which carries wind induced movement information. Handled by the flocking

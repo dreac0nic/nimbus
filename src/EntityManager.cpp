@@ -14,12 +14,14 @@ EntityManager::EntityManager(World* world)
 EntityManager::~EntityManager(void)
 {
 	delete this->mCreateEntiityListener;
+	delete this->mDestroyEventListener;
 	delete this->mEntityFactory;
 }
 
 void EntityManager::initialize(void)
 {
 	EventSystem::getSingleton()->registerListener(this->mCreateEntiityListener, EventSystem::EventType::CREATE_ENTITY);
+	EventSystem::getSingleton()->registerListener(this->mDestroyEventListener, EventSystem::EventType::DESTROY_ENTITY);
 }
 
 bool EntityManager::update(void)
@@ -57,6 +59,7 @@ void EntityManager::configureEntityTypes(string entityTypesFile, World* world)
 	this->mEntityFactory = new EntityFactory(world, entityTypesFile);
 
 	this->mCreateEntiityListener = new CreateEntityListener(this->mEntityFactory, world);
+	this->mDestroyEventListener = new DestroyEntityListener(world);
 }
 
 void Nimbus::EntityManager::CreateEntityListener::handleEvent(payloadmap payload, EventListener* responder)
@@ -98,12 +101,13 @@ void Nimbus::EntityManager::CreateEntityListener::handleEvent(payloadmap payload
 			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_ENTITY, positionalPayload);
 		}
 	}
+}
 
-	// Cleaning up any unneeded payload memory space (why are we doing this?)
-	/*payloadmap::iterator payloads = payload.begin();
-	while (payloads != payload.end())
+void EntityManager::DestroyEntityListener::handleEvent(payloadmap payload, EventListener* responder)
+{
+	if(payload.find("EntityId") != payload.end())
 	{
-		delete payloads->second;
-		payloads++;
-	}*/
+		GameEntityId entityId = *static_cast<GameEntityId*>(payload["EntityId"]);
+		this->mWorld->getEntities()->removeGameEntity(entityId);
+	}
 }

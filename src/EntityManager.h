@@ -41,6 +41,8 @@ namespace Nimbus
 
 	protected:
 		// EventListeners
+
+		// Creates entities on demand
 		class CreateEntityListener : 
 			public EventListener
 		{
@@ -56,6 +58,21 @@ namespace Nimbus
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mCreateEntiityListener;
+
+		// Destroys entities on demand
+		class DestroyEntityListener :
+			public EventListener
+		{
+		private:
+			World* mWorld;
+
+		public:
+			DestroyEntityListener(World* world) : mWorld(world) {}
+			virtual ~DestroyEntityListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mDestroyEventListener;
 
 	public:
 		EntityManager(World* world);

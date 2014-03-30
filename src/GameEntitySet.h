@@ -70,6 +70,7 @@ namespace Nimbus
 		~GameEntitySet(void);
 
 		void addGameEntity(GameEntity* entity);
+		void removeGameEntity(GameEntityId id);
 
 		GeneralEntityIterator beginGeneralIterator();
 		GeneralEntityIterator endGeneralIterator();
