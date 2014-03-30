@@ -2,23 +2,43 @@
 #include <algorithm>
 
 using namespace Nimbus;
+using namespace Ogre;
 
 Flocking::Flocking(BehaviourType type, World* world) :
-	Behaviour(type, world), componentInfluenceFactor(1.0)
+	Behaviour(type, world)
 {
-	this->init();
+	this->init(1.0, 0.1);
 }
 
 Flocking::Flocking(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(type, world, initializingSettings), componentInfluenceFactor(1.0)
+	Behaviour(type, world, initializingSettings)
 {
-	this->init();
+	stringstream optionsParser;
+
+	double influenceFactor = 1.0;
+	double overrideFactor = 0.1;
+
+	// Load the influence factor for the flocking group
+	if(initializingSettings->find("influence") != initializingSettings->end())
+	{
+		optionsParser = stringstream(initializingSettings->find("influence")->second);
+		optionsParser >> influenceFactor;
+	}
+
+	// Load the override factor for the flocking group
+	if(initializingSettings->find("override") != initializingSettings->end())
+	{
+		optionsParser = stringstream(initializingSettings->find("override")->second);
+		optionsParser >> overrideFactor;
+	}
+
+	this->init(influenceFactor, overrideFactor);
 }
 
 Flocking::Flocking(Flocking* other, World* world, int id) :
-	Behaviour(other, world, id), componentInfluenceFactor(1.0)
+	Behaviour(other, world, id)
 {
-	this->init();
+	this->init(other->componentInfluenceFactor, other->componentOverrideFactor);
 }
 
 Flocking::~Flocking(void)
@@ -27,11 +47,17 @@ Flocking::~Flocking(void)
 	this->mSoarListener;
 }
 
-void Flocking::init()
+void Flocking::init(double influenceFactor, double overrideFactor)
 {
-	this->mSoarListener = new SoarListener(this);
+	// Initialize constants
+	mComponentInfluenceFactor = influenceFactor;
+	mComponentOverrideFactor = overrideFactor;
 
+	// Initial delta is zero
 	this->mPositionDelta = Ogre::Vector3::ZERO;
+
+	// Create the listener(s)
+	this->mSoarListener = new SoarListener(this);	
 }
 
 void Flocking::startup(void)
@@ -70,11 +96,14 @@ Behaviour* Flocking::clone(int id)
 
 void Flocking::SoarListener::handleEvent(payloadmap payload, EventListener* responder)
 {
+	// Get the entity id
+	GameEntityId entityId = *static_cast<GameEntityId*>(payload["EntityId"]);
+
 	// Return if we do not have this entity id in our entity list
 	if(std::find(
 		mParent->mEntities.begin(),
 		mParent->mEntities.end(),
-		*static_cast<int*>(payload["EntityId"])) == mParent->mEntities.end())
+		entityId) == mParent->mEntities.end())
 	{
 		return;
 	}
@@ -85,12 +114,16 @@ void Flocking::SoarListener::handleEvent(payloadmap payload, EventListener* resp
 	// Get the position delta
 	if(payload.find("PositionDelta") != payload.end())
 	{
+		// Get the component entity's delta
 		positionDelta = *static_cast<Ogre::Vector3*>(payload["PositionDelta"]);
-	}
 
-	// Scale the position delta relative to the number of components
-	positionDelta.normalise();
-	positionDelta *= Ogre::Real(mParent->componentInfluenceFactor / mParent->mEntities.size());
+		// Store the component delta
+		mParent->mEntities[entityId] = positionDelta;
+
+		// Scale the position delta relative to the number of components
+		positionDelta.normalise();
+		positionDelta *= Ogre::Real(mParent->mComponentInfluenceFactor / mParent->mEntities.size());
+	}
 
 	// Aggregate the position delta of this component
 	mParent->mPositionDelta += positionDelta;

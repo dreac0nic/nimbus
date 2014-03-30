@@ -16,10 +16,17 @@ namespace Nimbus
 		public Behaviour
 	{
 	private:
-		// Arbitrary constants
+		// Arbitrary constants (which aren't technically constants)
 
-		// The influence factor of each component cloud (divided by the number of components on use)
-		const double componentInfluenceFactor;
+		/** The influence factor of each component cloud (divided by the number of
+			components on use)
+		*/
+		double mComponentInfluenceFactor;
+
+		/** The factor deciding how much the individual movement of the cloud should
+			override the group direction.
+		*/
+		double mComponentOverrideFactor;
 
 		// Member variables
 
@@ -27,12 +34,12 @@ namespace Nimbus
 		Ogre::Vector3 mPositionDelta;
 
 		// The list of component entities
-		std::vector<GameEntityId> mEntities;
+		std::map<GameEntityId, Ogre::Vector3> mEntities;
 
 		/** Called by the constructors to initialize the behaviour. Anything that needs to
 			be duplicated among constructors should be put in here.
 		*/
-		void init();
+		void init(double influenceFactor, double overrideFactor);
 
 	protected:
 		/** Updates the direction of the flocking group based on the wind current from a single
@@ -48,6 +55,7 @@ namespace Nimbus
 			SoarListener(Flocking* parent) : mParent(parent) {}
 			~SoarListener() {}
 
+			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mSoarListener;
 

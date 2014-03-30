@@ -5,11 +5,8 @@
 
 namespace Nimbus
 {
-	/** Soaring is a behaviour based on the Positional behaviour.
-		This behaviour will cause the entity to float over the wind
-		currents currently calculated in the vector field. All the
-		effected vectors will be averaged into one single vector used
-		to guide the entity's motion.
+	/** Soaring allows the entity to be sensitive to wind data. It uses the SOAR_ENTITY event
+		to alert the entity which direction the wind is pushing the entity.
 	*/
 	class Soaring:
 		public Behaviour
@@ -49,14 +46,14 @@ namespace Nimbus
 		/** !! STUBBED !! Starts up the initial behaviour.*/
 		virtual void startup(void);
 
-		/** !! STUBBED !! Updates the behaviour, influencing the entity. */
+		/** Sends off a SOAR_ENTITY event to the entity's flocking group. */
 		virtual void update(void);
 
 		/** !! STUBBED !! Shuts down the behaviour, taking care of any major cleanup. */
 		virtual void shutdown(void);
 
 		/** Duplicates the entity using the settings given.
-			Currently merely returns a pointer given by the constructor.
+			@return A pointer given by the constructor.
 		*/
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
 
