@@ -8,6 +8,7 @@
 
 namespace Nimbus
 {
+	typedef int GameEntityId;
 	typedef std::string BehaviourType;
 
 	/** THE ULTIMATE STUBBINESS */
@@ -21,7 +22,7 @@ namespace Nimbus
 		BehaviourType mBehaviourType;
 
 		/** The entity Id that holds this behaviour. */
-		int mParentId;
+		GameEntityId mParentId;
 
 	public:
 		Behaviour(BehaviourType type, World* world) :

@@ -117,11 +117,10 @@ namespace Nimbus
 			 */,
 
 			SOAR_ENTITY
-			/*! The event which carries wind induced movement information. Handled by the flocking
-				group associated with the given entity.
+			/*! The event which carries wind induced movement information. Handled by the flocking group associated with the given entity.
 
 				Payload:
-					"EntityId" => int
+					"EntityId" => GameEntityId
 					"PositionDelta" => Ogre::Vector3
 			 */,
 
