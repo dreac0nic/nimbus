@@ -50,111 +50,124 @@ namespace Nimbus
 	public:
 
 		// CLASS MEMBERS --
-		/** EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
+		/*! EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
 		 */
-		enum EventType { SHUTDOWN,
-			MOUSE_DOWN, MOUSE_UP, MOUSE_UPDATE, MOUSE_POSITION,
-			CREATE_ENTITY, DESTROY_ENTITY, SOAR_ENTITY,
-			POSITION_ENTITY, BEGIN_TRANSLATE_ENTITY, END_TRANSLATE_ENTITY, ENTITY_MOVED };
+		enum EventType {
+			SHUTDOWN
+			/*! The shutdown event is fired when a system asks the program to exit. The event will be handled by the main application 
+				and will proceed to cleanly shutdown all subsystems.
+
+				Payload: NONE
+			 */,
 			
-		/** EVENT TYPE INFORMATION
+			TICK
+			/*! An event which fires at a given rate so that more expensive operations may be spaced out.
+				
+				Payload: NONE
+			 */,
 
-		 SHUTDOWN:
-			The shutdown event is fired when a system asks the program to exit. The event will be handled by the main application 
-			and will proceed to cleanly shutdown all subsystems.
+			MOUSE_DOWN
+			/*! An event fired whenever a button on the mouse is pressed down.
 
-			Payload: NONE
+				Payload:
+					"ButtonPressed" => OIS::MouseButtonID
+					"ScreenPosition" => Ogre::Vector2
+			 */,
 
-		MOUSE_DOWN
-			An event fired whenever a button on the mouse is pressed down.
+			MOUSE_UP
+			/*! An event fired whenever a button on the mouse is released.
 
-			Payload:
-				"ButtonPressed" => OIS::MouseButtonID
-				"ScreenPosition" => Ogre::Vector2
+				Payload:
+					"ButtonPressed" => OIS::MouseButtonID
+					"ScreenPosition" => Ogre::Vector2
+			 */,
 
-		MOUSE_UP
-			An event fired whenever a button on the mouse is released.
+			MOUSE_UPDATE
+			/*! An event fired whenever the mouse moves.
 
-			Payload:
-				"ButtonPressed" => OIS::MouseButtonID
-				"ScreenPosition" => Ogre::Vector2
+				Payload:
+					"ScreenPosition" => Ogre::Vector2
+			 */,
 
-		MOUSE_UPDATE
-			An event fired whenever the mouse moves.
+			MOUSE_POSITION
+			/*! An event fired whenever the mouse moves.
 
-			Payload:
-				"ScreenPosition" => Ogre::Vector2
+				Payload:
+					"Context" => std::string
+					"ScreenPosition" => Ogre::Vector2
+					"WorldRay" => Ogre::Ray
+			 */,
 
-		MOUSE_POSITION
-			An event fired whenever the mouse moves.
+			CREATE_ENTITY
+			/*! The event that causes the EntityFactory to produce a new entity of given type.
 
-			Payload:
-				"Context" => std::string
-				"ScreenPosition" => Ogre::Vector2
-				"WorldRay" => Ogre::Ray
+				Payload:
+					"EntityType" => std::string
+					"PositionVector" => Ogre::Vector3	// Absolute, world position (optional)
+					"FacingVector" => Ogre::Vector3		// Facing vector, units in world absolute world space,
+															begins at the object... have fun interpretting that (optional)
+					"RotationVector" => Ogre::Vector3	// Absolute, rotation vector <pitch, yaw, roll> (optional)
+			 */,
 
-		CREATE_ENTITY
-			The event that causes the EntityFactory to produce a new entity of given type.
+			DESTROY_ENTITY
+			/*! The event that causes an entity to be dropped from the world and destroyed. (Don't worry... it's humane.)
 
-			Payload:
-				"EntityType" => std::string
-				"PositionVector" => Ogre::Vector3	// Absolute, world position (optional)
-				"FacingVector" => Ogre::Vector3		// Facing vector, units in world absolute world space,
-														begins at the object... have fun interpretting that (optional)
-				"RotationVector" => Ogre::Vector3	// Absolute, rotation vector <pitch, yaw, roll> (optional)
+				Payload:
+					"EntityId" => GameEntityId
+			 */,
 
-		DESTROY_ENTITY
-			The event that causes an entity to be dropped from the world and destroyed. (Don't worry... it's humane.)
+			SOAR_ENTITY
+			/*! The event which carries wind induced movement information. Handled by the flocking
+				group associated with the given entity.
 
-			Payload:
-				"EntityId" => GameEntityId
+				Payload:
+					"EntityId" => int
+					"PositionDelta" => Ogre::Vector3
+			 */,
 
-		SOAR_ENTITY
-			The event which carries wind induced movement information. Handled by the flocking
-			group associated with the given entity.
+			POSITION_ENTITY
+			/*! The event that positions an entity in absolute world space. This can be useful for spawning, etc.
 
-			Payload:
-				"EntityId" => int
-				"PositionDelta" => Ogre::Vector3
+				Payload:
+					"EntityId" => int
+					"PositionVector" => Ogre::Vector3	// Absolute, world position (optional)
+					"FacingVector" => Ogre::Vector3		// Facing vector, units in world absolute world space,
+															begins at the object (optional)
+					"RotationVector" => Ogre::Vector3	// Absolute, rotation vector <pitch, yaw, roll> (optional)
+			 */,
 
-		POSITION_ENTITY
-			The event that positions an entity in absolute world space. This can be useful for spawning, etc.
+			BEGIN_TRANSLATE_ENTITY
+			/*! The event that causes an entity to move from one place to another. Generally speaking, this is the more
+				appropriate event to use to cause an entity to move as it is blended with other movement during a frame
+				while PositionEntity is not blended at all.
 
-			Payload:
-				"EntityId" => int
-				"PositionVector" => Ogre::Vector3	// Absolute, world position (optional)
-				"FacingVector" => Ogre::Vector3		// Facing vector, units in world absolute world space,
-														begins at the object (optional)
-				"RotationVector" => Ogre::Vector3	// Absolute, rotation vector <pitch, yaw, roll> (optional)
+				Payload:
+					"EntityId" => int
+					"PositionDelta" => Ogre::Vector3	// Relative position vector (optional)
+					"RotationDelta" => Ogre::Vector3	// Relative rotation vector (optional)
+					"FacingVector" => Ogre::Vector3		// Facing vector, units in world space, begins at object...
+															there is no relative facing vector... while all facing
+															vectors are relative... it's complicated (optional)
+			 */,
 
-		BEGIN_TRANSLATE_ENTITY
-			The event that causes an entity to move from one place to another. Generally speaking, this is the more
-			appropriate event to use to cause an entity to move as it is blended with other movement during a frame
-			while PositionEntity is not blended at all.
+			END_TRANSLATE_ENTITY
+			/*! The event that causes an entity to stop moving in the given direction. Simply stops translating the entity.
 
-			Payload:
-				"EntityId" => int
-				"PositionDelta" => Ogre::Vector3	// Relative position vector (optional)
-				"RotationDelta" => Ogre::Vector3	// Relative rotation vector (optional)
-				"FacingVector" => Ogre::Vector3		// Facing vector, units in world space, begins at object...
-														there is no relative facing vector... while all facing
-														vectors are relative... it's complicated (optional)
-		END_TRANSLATE_ENTITY
-			The event that causes an entity to stop moving in the given direction. Simply stops translating the entity.
+				Payload:
+					"EntityId" => int
+					"EndTranslate" => NULL
+			 */,
 
-			Payload:
-				"EntityId" => int
-				"EndTranslate" => NULL
+			ENTITY_MOVED
+			/*! The event that notifies behaviours when the position of an entity is updated.
 
-		ENTITY_MOVED
-			The event that notifies behaviours when the position of an entity is updated.
-
-			Payload:
-				"EntityId" => int
-				"PositionVector" => Ogre::Vector3	// Absolute, world position (optional)
-				"FacingVector" => Ogre::Vector3		// The direction the entity is currently facing (optional)
-				"RotationVector" => Ogre::Vector3	// The rotation <pitch, yaw, roll> vector (optional)
- 		*/
+				Payload:
+					"EntityId" => int
+					"PositionVector" => Ogre::Vector3	// Absolute, world position (optional)
+					"FacingVector" => Ogre::Vector3		// The direction the entity is currently facing (optional)
+					"RotationVector" => Ogre::Vector3	// The rotation <pitch, yaw, roll> vector (optional)
+			 */
+		};
 
 		/** Gets the singleton.
 
