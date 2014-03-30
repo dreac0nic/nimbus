@@ -3,7 +3,7 @@
 
 #include <list>
 #include <OgreRoot.h>
-#include "VectorMap.h"
+#include "Grid.h"
 #include "WindCurrent.h"
 
 namespace Nimbus
@@ -16,7 +16,7 @@ namespace Nimbus
 	{
 	private:
 		// Stores two dimensional array of Vector2s
-		VectorMap* vectorMap;
+		Grid<Ogre::Vector2>* vectorMap;
 		
 	public:
 		WindMap(int mapSizeX, int mapSizeY);

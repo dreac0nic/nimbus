@@ -81,9 +81,6 @@
     <ClCompile Include="src\WindMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\VectorMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\NimbusApplication.h">
@@ -149,10 +146,10 @@
     <ClInclude Include="src\WindManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\VectorMap.h">
+    <ClInclude Include="src\WindCurrent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\WindCurrent.h">
+    <ClInclude Include="src\Grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
