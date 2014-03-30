@@ -6,6 +6,8 @@
 #include "EntityFactory.h"
 #include "./Behaviours/Renderable.h"
 #include "./Behaviours/Positional.h"
+#include "./Behaviours/Soaring.h"
+#include "./Behaviours/Flocking.h"
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -29,6 +31,8 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 	this->mBehaviourInstances.clear();
 	this->mBehaviourInstances["Renderable"] = new Renderable("Renderable", world);
 	this->mBehaviourInstances["Positional"] = new Positional("Positional", world);
+	this->mBehaviourInstances["Soaring"] = new Soaring("Soaring", world);
+	this->mBehaviourInstances["Flocking"] = new Flocking("Flocking", world);
 
 	logBuilder << "(Nimbus) Loading game entity types from " << filePathsFile;
 	LogManager::getSingleton().logMessage(logBuilder.str());

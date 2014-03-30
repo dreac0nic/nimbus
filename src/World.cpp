@@ -12,7 +12,7 @@ World::World(Ogre::SceneManager* sceneManager)
 	this->mSceneManager = sceneManager;
 	this->mWorldNode = mSceneManager->createSceneNode();
 	this->mEntities = new GameEntitySet();
-	this->mWindMap = new WindMap(0,0);
+	this->mWindMap = new WindMap(1000,1000);
 }
 
 World::~World(void)

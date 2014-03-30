@@ -136,7 +136,7 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListene
 			position->x / mContainingMode->mViewport->getActualWidth(),
 			position->y / mContainingMode->mViewport->getActualHeight());
 
-		std::map<std::string, void*> mousePosRay;
+		payloadmap mousePosRay;
 		mousePosRay["Context"] = new std::string("Wind");
 		mousePosRay["ScreenPosition"] = position;
 		mousePosRay["WorldRay"] = &ray;
@@ -147,4 +147,11 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListene
 void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	mContainingMode->mCreatingWind = false;
+
+	payloadmap createCloud;
+	std::string type = "Cloud";
+	Vector3 position = Vector3(50, 30, -130);
+	createCloud["EntityType"] = &type;
+	createCloud["PositionVector"] = &position;
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createCloud);
 }
