@@ -15,13 +15,13 @@ namespace Nimbus
 	class EntityFactory
 	{
 	private:
-		/* Simple map that maps the entity type name read in from the
+		/** Simple map that maps the entity type name read in from the
 		 definition file to the list of behaviours specified in definition
 		 file.
 		*/
 		std::map< GameEntityType, GameEntity* > mEntityInstances;
 
-		/* Simple map that maps the behaviour type name defined by
+		/** Simple map that maps the behaviour type name defined by
 		 programmers... Attempts to kind of offset hard-coding...
 		 but at some level, I don't really see a way around the hard coding.
 		 Maybe in some universe, there is a perfect factory system that
@@ -29,7 +29,7 @@ namespace Nimbus
 		*/
 		std::map< std::string, Behaviour* > mBehaviourInstances;
 
-		/* The world that needs to be passed to behaviours. */
+		/** The world that needs to be passed to behaviours. */
 		World* mWorld;
 
 	public:
@@ -37,7 +37,7 @@ namespace Nimbus
 		~EntityFactory(void);
 
 		// Object Methods --
-		/* CreateEntity() creates a given type of entity and returns a reference
+		/** CreateEntity() creates a given type of entity and returns a reference
 		 to the created entity.
 
 		 Note: You are responsible for garbage collecting this new entity.

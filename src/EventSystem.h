@@ -9,7 +9,7 @@
 
 namespace Nimbus
 {
-	/* The EventSystem framework handles the receving and dispatching of events to registered EventListeners. 
+	/** The EventSystem framework handles the receving and dispatching of events to registered EventListeners. 
 	 
 	 The EventSystem is responsible for dispatching and allowing the firing of events to the registered EventListeners. 
 	 EventListeners are registered and deregistered via their appropriate commands. When an EventListener is registered 
@@ -50,14 +50,14 @@ namespace Nimbus
 	public:
 
 		// CLASS MEMBERS --
-		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
+		/** EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
 		 */
 		enum EventType { SHUTDOWN,
 			MOUSE_DOWN, MOUSE_UP, MOUSE_UPDATE, MOUSE_POSITION,
 			CREATE_ENTITY, DESTROY_ENTITY, SOAR_ENTITY,
 			POSITION_ENTITY, BEGIN_TRANSLATE_ENTITY, END_TRANSLATE_ENTITY, ENTITY_MOVED };
 			
-		/* EVENT TYPE INFORMATION
+		/** EVENT TYPE INFORMATION
 
 		 SHUTDOWN:
 			The shutdown event is fired when a system asks the program to exit. The event will be handled by the main application 
@@ -171,16 +171,16 @@ namespace Nimbus
 
 	public:
 		// CONSTRUCTORS
-		/* EventSystem constructor, yep!
+		/** EventSystem constructor, yep!
 		 */
 		EventSystem(void);
 
-		/* EventSystem destructor, it DESTROYS THINGS!
+		/** EventSystem destructor, it DESTROYS THINGS!
 		 */
 		virtual ~EventSystem(void);
 
 		// -- GENERAL METHODS
-		/* Used to register an EventListener to the system for a certain type of Event.
+		/** Used to register an EventListener to the system for a certain type of Event.
 		 
 		 @param
 		 listener A reference to an isntance of the listener for the Event type.
@@ -192,7 +192,7 @@ namespace Nimbus
 		 */
 		bool registerListener(EventListener* listener, EventType type);
 
-		/* Used to deregister a previously registered EventListener.
+		/** Used to deregister a previously registered EventListener.
 		 
 		  @param
 		  listener A reference to the EventListener to deregister.
@@ -202,7 +202,7 @@ namespace Nimbus
 		  */
 		void unregisterListener(EventListener* listener, EventType type);
 
-		/* Fires an Event to the EventSystem to distribute to the appropriate listeners.
+		/** Fires an Event to the EventSystem to distribute to the appropriate listeners.
 		 
 		 @param
 		 event A reference to the Event to fire.

@@ -10,7 +10,7 @@
 namespace Nimbus
 {
 	
-	/* The GameEntitySet is a class for holding all the entities in the game
+	/** The GameEntitySet is a class for holding all the entities in the game
 	world. It's main benefit and purpose is to provide custom iterators over
 	entities so that users can select specific relevant sets of entities
 	based on their component behaviours. */
@@ -23,7 +23,7 @@ namespace Nimbus
 	//private:
 		// Private iterator implementations... umm I'd like to make this private
 		
-		/* An implementation of the entity iterator that iterates over all the entities
+		/** An implementation of the entity iterator that iterates over all the entities
 		in the entity set.
 		*/
 		class GeneralEntityIterator :

@@ -34,7 +34,7 @@ bool EntityManager::update(void)
 		entity++;
 	}
 
-	/* Example of how to access entities
+	/** Example of how to access entities
 	std::list<GameEntity*> dragons = entities->getEntitiesOfType("Dragon");
 	for (std::list<GameEntity*>::iterator it = dragons.begin(); it != dragons.end(); it++)
 	{

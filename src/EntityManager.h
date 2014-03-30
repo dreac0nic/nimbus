@@ -25,7 +25,7 @@ namespace Nimbus
 	private:
 		// Member variables
 
-		/* The entity factory for the world.
+		/** The entity factory for the world.
 
 		This is a bit nested, but I think it makes the most sense for the factory
 		to be inside the entity manager class. If this is contrary to a previous
@@ -84,7 +84,7 @@ namespace Nimbus
 		virtual void pause(void);
 		virtual void stop(void);
 
-		/* Configures the entity factory.
+		/** Configures the entity factory.
 
 		I'm trying something a bit different in order to take weight off the
 		constructor. Theoretically this could lead to switching/updating

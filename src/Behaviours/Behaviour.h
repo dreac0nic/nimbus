@@ -10,17 +10,17 @@ namespace Nimbus
 {
 	typedef std::string BehaviourType;
 
-	/* THE ULTIMATE STUBBINESS */
+	/** THE ULTIMATE STUBBINESS */
 	class Behaviour
 	{
 	protected:
-		/* Handle to the world for Behavioural use. */
+		/** Handle to the world for Behavioural use. */
 		World* mWorld;
 
-		/* The type of Behaviour */
+		/** The type of Behaviour */
 		BehaviourType mBehaviourType;
 
-		/* The entity Id that holds this behaviour. */
+		/** The entity Id that holds this behaviour. */
 		int mParentId;
 
 	public:
@@ -36,7 +36,7 @@ namespace Nimbus
 		virtual void update(void) = 0;
 		virtual void shutdown(void) = 0;
 
-		/* In form with the prototype pattern, this method creates a new instance of the behaviour. (Deep copy)
+		/** In form with the prototype pattern, this method creates a new instance of the behaviour. (Deep copy)
 		Note: You are responsible for garbage collecting this behavior. */
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings) = 0;
 		virtual Behaviour* clone(int id) = 0;
