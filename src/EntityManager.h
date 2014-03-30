@@ -57,7 +57,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
-		}* mCreateEntiityListener;
+		}* mCreateEntityListener;
 
 		// Destroys entities on demand
 		class DestroyEntityListener :
@@ -73,6 +73,23 @@ namespace Nimbus
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mDestroyEventListener;
+
+
+		class PositionResponseListener :
+			public EventListener
+		{
+		private:
+			Ogre::Vector3 mPosition;
+		public:
+			PositionResponseListener() {}
+			virtual ~PositionResponseListener() {}
+
+			/** Gets the position from the query response. */
+			Ogre::Vector3 getPosition() { return this->mPosition; }
+
+			// From Nimbus::EventListener
+			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mPositionResponseListener;
 
 	public:
 		EntityManager(World* world);

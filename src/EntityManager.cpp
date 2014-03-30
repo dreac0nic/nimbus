@@ -13,14 +13,15 @@ EntityManager::EntityManager(World* world)
 
 EntityManager::~EntityManager(void)
 {
-	delete this->mCreateEntiityListener;
+	delete this->mCreateEntityListener;
 	delete this->mDestroyEventListener;
+	delete this->mPositionResponseListener;
 	delete this->mEntityFactory;
 }
 
 void EntityManager::initialize(void)
 {
-	EventSystem::getSingleton()->registerListener(this->mCreateEntiityListener, EventSystem::EventType::CREATE_ENTITY);
+	EventSystem::getSingleton()->registerListener(this->mCreateEntityListener, EventSystem::EventType::CREATE_ENTITY);
 	EventSystem::getSingleton()->registerListener(this->mDestroyEventListener, EventSystem::EventType::DESTROY_ENTITY);
 }
 
@@ -48,18 +49,23 @@ bool EntityManager::update(void)
 
 void EntityManager::pause(void)
 {
+	EventSystem::getSingleton()->unregisterListener(this->mCreateEntityListener, EventSystem::EventType::CREATE_ENTITY);
+	EventSystem::getSingleton()->unregisterListener(this->mDestroyEventListener, EventSystem::EventType::DESTROY_ENTITY);
 }
 
 void EntityManager::stop(void)
 {
+	EventSystem::getSingleton()->unregisterListener(this->mCreateEntityListener, EventSystem::EventType::CREATE_ENTITY);
+	EventSystem::getSingleton()->unregisterListener(this->mDestroyEventListener, EventSystem::EventType::DESTROY_ENTITY);
 }
 
 void EntityManager::configureEntityTypes(string entityTypesFile, World* world)
 {
 	this->mEntityFactory = new EntityFactory(world, entityTypesFile);
 
-	this->mCreateEntiityListener = new CreateEntityListener(this->mEntityFactory, world);
+	this->mCreateEntityListener = new CreateEntityListener(this->mEntityFactory, world);
 	this->mDestroyEventListener = new DestroyEntityListener(world);
+	this->mPositionResponseListener = new PositionResponseListener();
 }
 
 void Nimbus::EntityManager::CreateEntityListener::handleEvent(payloadmap payload, EventListener* responder)
@@ -109,5 +115,17 @@ void EntityManager::DestroyEntityListener::handleEvent(payloadmap payload, Event
 	{
 		GameEntityId entityId = *static_cast<GameEntityId*>(payload["EntityId"]);
 		this->mWorld->getEntities()->removeGameEntity(entityId);
+	}
+}
+
+void EntityManager::PositionResponseListener::handleEvent(payloadmap payload, EventListener* responder)
+{
+	if(payload.find("PositionVector") != payload.end())
+	{
+		this->mPosition = *static_cast<Ogre::Vector3*>(payload["PositionVector"]);
+	}
+	else
+	{
+		this->mPosition = Ogre::Vector3::ZERO;
 	}
 }

@@ -165,6 +165,19 @@ namespace Nimbus
 					"PositionVector" => Ogre::Vector3	// Absolute, world position (optional)
 					"FacingVector" => Ogre::Vector3		// The direction the entity is currently facing (optional)
 					"RotationVector" => Ogre::Vector3	// The rotation <pitch, yaw, roll> vector (optional)
+			 */,
+
+			 POSITION_QUERY
+			 /*! The event that requests about an entity's position. Quite possibly a very bad idea to use en masse...
+				which is, of course, what I intend to do (for lack of a better idea).
+
+				Payload:
+					"EntityId" => int
+
+				Responder Payload:
+					"PositionVector" => Ogre::Vector3	// Absolute, world position
+					"FacingVector" => Ogre::Vector3		// The direction the entity is currently facing
+					"RotationVector" => Ogre::Vector3	// The rotation <pitch, yaw, roll> vector
 			 */
 		};
 
