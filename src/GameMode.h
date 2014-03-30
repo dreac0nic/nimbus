@@ -51,7 +51,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
-		};
+		}* mMouseDownListener;
 
 		// Listens for any mouse update events
 		class MouseUpdateListener : 
@@ -67,7 +67,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
-		};
+		}* mMouseUpdateListener;
 
 		// Listens for any mouse up events
 		class MouseUpListener : 
@@ -83,7 +83,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
-		};
+		}* mMouseUpListener;
 
 	public:
 		GameMode(void);

@@ -12,10 +12,19 @@ using namespace Ogre;
 
 GameMode::GameMode(void)
 {
+	// Initialize the listeners
+	this->mMouseDownListener = new MouseDownListener(this);
+	this->mMouseUpdateListener = new MouseUpdateListener(this);
+	this->mMouseUpListener = new MouseUpListener(this);
 }
 
 GameMode::~GameMode(void)
 {
+	// Delete the listener objects
+	delete this->mMouseDownListener;
+	delete this->mMouseUpdateListener;
+	delete this->mMouseUpListener;
+
 	// Delete dynamic member variables... I think this is the right place for this.
 	delete this->mEntityMan;
 	delete this->mEnvironmentMan;
@@ -73,11 +82,11 @@ void GameMode::initialize()
 
 	// Adding the world root node to the actual scene
 	this->mSceneMgr->getRootSceneNode()->addChild(this->mWorld->getWorldNode());
-	
+
 	// Listening to events for mouse
-	EventSystem::getSingleton()->registerListener(new MouseDownListener(this), EventSystem::EventType::MOUSE_DOWN);
-	EventSystem::getSingleton()->registerListener(new MouseUpdateListener(this), EventSystem::EventType::MOUSE_UPDATE);
-	EventSystem::getSingleton()->registerListener(new MouseUpListener(this), EventSystem::EventType::MOUSE_UP);
+	EventSystem::getSingleton()->registerListener(this->mMouseDownListener, EventSystem::EventType::MOUSE_DOWN);
+	EventSystem::getSingleton()->registerListener(this->mMouseUpdateListener, EventSystem::EventType::MOUSE_UPDATE);
+	EventSystem::getSingleton()->registerListener(this->mMouseUpListener, EventSystem::EventType::MOUSE_UP);
 
 	// Setting the wind creation to false
 	mCreatingWind = false;
@@ -85,10 +94,18 @@ void GameMode::initialize()
 
 void GameMode::pause(void)
 {
+	// Unregister the mouse listeners
+	EventSystem::getSingleton()->unregisterListener(this->mMouseDownListener, EventSystem::EventType::MOUSE_DOWN);
+	EventSystem::getSingleton()->unregisterListener(this->mMouseUpdateListener, EventSystem::EventType::MOUSE_UPDATE);
+	EventSystem::getSingleton()->unregisterListener(this->mMouseUpListener, EventSystem::EventType::MOUSE_UP);
 }
 
 void GameMode::stop(void)
 {
+	// Unregister the mouse listeners
+	EventSystem::getSingleton()->unregisterListener(this->mMouseDownListener, EventSystem::EventType::MOUSE_DOWN);
+	EventSystem::getSingleton()->unregisterListener(this->mMouseUpdateListener, EventSystem::EventType::MOUSE_UPDATE);
+	EventSystem::getSingleton()->unregisterListener(this->mMouseUpListener, EventSystem::EventType::MOUSE_UP);
 }
 
 void GameMode::MouseDownListener::handleEvent(payloadmap payload, EventListener* responder)
