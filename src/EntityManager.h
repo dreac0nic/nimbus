@@ -39,6 +39,24 @@ namespace Nimbus
 		// The player entity
 		GameEntity* player;
 
+	protected:
+		// EventListeners
+		class CreateEntityListener : 
+			public EventListener
+		{
+		private:
+			// Reference to the factory that contains this listener
+			EntityFactory* mFactory;
+			World* mWorld;
+
+		public:
+			CreateEntityListener(EntityFactory* factory, World* world) : mFactory(factory), mWorld(world) {}
+			virtual ~CreateEntityListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mCreateEntiityListener;
+
 	public:
 		EntityManager(World* world);
 		virtual ~EntityManager(void);
