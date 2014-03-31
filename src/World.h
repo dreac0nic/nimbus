@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <OgreSceneNode.h>
+#include "WindMap.h"
 
 namespace Nimbus
 {
@@ -34,11 +35,18 @@ namespace Nimbus
 	 member variable for the root of the system so that the entire game world is
 	 aggregated by this class.
 	 */
+
 	class World
 	{
 	private:
 		// The counter for each thing that we add to the world
 		int idCounter;
+
+		// Bounds of World
+		Ogre::Vector2 worldBounds;
+
+		//Temporary worldBounds constant
+		int size;
 
 		// The list that keeps track of all entities currently in the world
 		GameEntitySet* mEntities;
@@ -50,6 +58,8 @@ namespace Nimbus
 	public:
 		World(Ogre::SceneManager* sceneManager);
 		virtual ~World(void);
+
+		WindMap windMap;
 
 		// Accessor methods
 		int getCurrentId();

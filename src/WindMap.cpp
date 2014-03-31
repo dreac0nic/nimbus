@@ -51,6 +51,19 @@ namespace Nimbus
 
 	void WindMap::setVector(double posx, double posy, double strx, double stry)
 	{
+		double resultX;
+		double resultY;
+		int flox = (int)floor(posx);
+		int floy = (int)floor(posy);
+		Ogre::Vector2 topLeft = vectorMap->getVector(flox, floy);
+		Ogre::Vector2 botLeft = vectorMap->getVector(flox, 1 - floy);
+		Ogre::Vector2 topRight = vectorMap->getVector(1 - flox, floy);
+		Ogre::Vector2 botRight = vectorMap->getVector(1 - flox, 1 - floy);
+		double left = flox - posx + 1;
+		double top = floy - posy + 1;
+		resultX = left * top * topLeft.x + left * (1-top) * botLeft.x + (1-left) * top * topRight.x + (1-left) * (1-top) * botRight.x;
+		resultY = left * top * topLeft.y + left * (1-top) * botLeft.y + (1-left) * top * topRight.y + (1-left) * (1-top) * botRight.y;
+
 		vectorMap->setVector(posx, posy, strx, stry);
 	}
 

@@ -5,6 +5,16 @@ namespace Nimbus
 {
 	VectorMap::VectorMap(int xLength, int yLength)
 	{
+		// Temporary solution
+		if(xLength < 1){
+			xLength = 1;
+		}
+		if(yLength < 1){
+			yLength = 1;
+		}
+
+
+		map = std::vector<Ogre::Vector2>();
 		map.resize(xLength * yLength);
 		length = xLength;
 	}

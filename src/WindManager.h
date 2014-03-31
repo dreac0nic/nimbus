@@ -9,10 +9,10 @@
 
 namespace Nimbus
 {
-	static const double STRENGTHTOSUBTRACT = 1;
-	static const double ORIGININFLUENCE = 0.5;
-	static const double CORNERINFLUENCE = .10355339059327;
-	static const double SIDEINFLUENCE = .1464466094073;
+	const double STRENGTHTOSUBTRACT = 1;
+	const double ORIGININFLUENCE = 0.5;
+	const double CORNERINFLUENCE = .10355339059327;
+	const double SIDEINFLUENCE = .1464466094073;
 
 	/** Takes input and Updates WindMap
 	*/
@@ -47,12 +47,13 @@ namespace Nimbus
 			virtual void handleEvent(payloadmap payload);
 		};
 
-	public:
-		WindManager(Ogre::SceneManager* sceneManager, int sizex, int sizey);
-		virtual ~WindManager(void);
-
+	private:
 		// Stores the game's WindMap
-		WindMap* windMap;
+		WindMap mWindMap;
+
+	public:
+		WindManager(Ogre::SceneManager* sceneManager, WindMap mWindMap);
+		virtual ~WindManager(void);
 
 		// From Nimbus::Manager
 		virtual bool update(void);

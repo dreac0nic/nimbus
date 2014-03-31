@@ -1,10 +1,16 @@
 #include "EnvironmentManager.h"
+#include "World.h"
+#include "WindManager.h"
 
 using namespace Nimbus;
 
 EnvironmentManager::EnvironmentManager(Ogre::SceneManager* sceneManager)
 {
-	mWindManager = new WindManager(sceneManager, 100, 100);
+	// Temporary solution
+	mWorld = new World(sceneManager);
+
+
+	mWindManager = new WindManager(sceneManager, mWorld->windMap);
 }
 
 EnvironmentManager::~EnvironmentManager(void)

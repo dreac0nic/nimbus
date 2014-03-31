@@ -12,11 +12,9 @@
 
 using namespace Nimbus;
 
-WindManager::WindManager(Ogre::SceneManager* sceneManager, int sizex, int sizey)
-	: mWindPlane(Ogre::Vector3::UNIT_Y, -12)
+WindManager::WindManager(Ogre::SceneManager* sceneManager, WindMap windMap)
+	: mWindPlane(Ogre::Vector3::UNIT_Y, -12), mWindMap(windMap)
 {
-	windMap = new WindMap(sizex, sizey);
-
 	this->mSceneManager = sceneManager;
 
 	createClickPlane();
@@ -45,11 +43,11 @@ void WindManager::createClickPlane()
 
 bool WindManager::update(void)
 {
-for(int i = 0; i < windMap->sizeX; i++)
+for(int i = 0; i < mWindMap.sizeX; i++)
 	{
-		for(int j = 0; i < windMap->sizeY; j++)
+		for(int j = 0; i < mWindMap.sizeY; j++)
 		{
-			Ogre::Vector2 currentVector = windMap->getVector(i, j);
+			Ogre::Vector2 currentVector = mWindMap.getVector(i, j);
 			Ogre::Vector2 temp;
 			double totalWindX = currentVector.x;
 			double totalWindY = currentVector.y;
@@ -58,18 +56,18 @@ for(int i = 0; i < windMap->sizeX; i++)
 			{
 				if(j != 0)
 				{
-					temp = windMap->getVector(i-1, j-1);
+					temp = mWindMap.getVector(i-1, j-1);
 					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
 					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
 				}
 
-				temp = windMap->getVector(i-1, j);
+				temp = mWindMap.getVector(i-1, j);
 				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
 				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
 
-				if(j != windMap->sizeY-1)
+				if(j != mWindMap.sizeY-1)
 				{
-					temp = windMap->getVector(i-1, j+1);
+					temp = mWindMap.getVector(i-1, j+1);
 					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
 					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
 				}
@@ -77,43 +75,43 @@ for(int i = 0; i < windMap->sizeX; i++)
 
 			if(j != 0)
 			{
-				temp = windMap->getVector(i, j-1);
+				temp = mWindMap.getVector(i, j-1);
 				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
 				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
 			}
 
-			if(j != windMap->sizeY-1)
+			if(j != mWindMap.sizeY-1)
 			{
-				temp = windMap->getVector(i, j+1);
+				temp = mWindMap.getVector(i, j+1);
 				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
 				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
 			}
 
-			if(i != windMap->sizeX-1)
+			if(i != mWindMap.sizeX-1)
 			{
 				if(j != 0)
 				{
-					temp = windMap->getVector(i+1, j-1);
+					temp = mWindMap.getVector(i+1, j-1);
 					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
 					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
 				}
 
-				temp = windMap->getVector(i+1, j);
+				temp = mWindMap.getVector(i+1, j);
 				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
 				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
 
-				if(j != windMap->sizeY-1)
+				if(j != mWindMap.sizeY-1)
 				{
-					temp = windMap->getVector(i+1, j+1);
+					temp = mWindMap.getVector(i+1, j+1);
 					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
 					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
 				}
 			}
-			windMap->setVector(i, j, totalWindX * ORIGININFLUENCE, totalWindY * ORIGININFLUENCE);
+			mWindMap.setVector(i, j, totalWindX * ORIGININFLUENCE, totalWindY * ORIGININFLUENCE);
 		}
 	}
 
-	for (WindCurrent current : windMap->currents)
+	for (WindCurrent current : mWindMap.currents)
 	{
 		double strength = current.strength;
 
@@ -122,13 +120,13 @@ for(int i = 0; i < windMap->sizeX; i++)
 
 			for(Ogre::Vector2 secondPos : current.path)
 			{
-				Ogre::Vector2 secondVec = windMap->getVector(secondPos);
+				Ogre::Vector2 secondVec = mWindMap.getVector(secondPos);
 
 				if(firstPos != Ogre::Vector2::NEGATIVE_UNIT_X){
-					Ogre::Vector2 firstVec = windMap->getVector(firstPos);
+					Ogre::Vector2 firstVec = mWindMap.getVector(firstPos);
 					Ogre::Vector2 temp = Ogre::Vector2((Ogre::Real)((secondVec.x - firstVec.x) * strength), (Ogre::Real)((secondVec.y - firstVec.y) * strength));
 
-					windMap->setVector(firstPos, temp);
+					mWindMap.setVector(firstPos, temp);
 				}
 
 				firstPos = secondPos;
@@ -138,7 +136,7 @@ for(int i = 0; i < windMap->sizeX; i++)
 			}
 		} else 
 		{
-			windMap->currents.remove(current);
+			mWindMap.currents.remove(current);
 		}
 	}
 	return true;
