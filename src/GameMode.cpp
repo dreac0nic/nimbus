@@ -24,15 +24,6 @@ GameMode::~GameMode(void)
 
 RunMode* GameMode::run(const FrameEvent& evt)
 {
-	// Attempt to initialize the run mode
-	if(!this->initialized && !this->initialize())
-	{
-		LogManager::getSingletonPtr()->logMessage("(Nimbus) Failed to initialize RunMode");
-
-		// Terminate the application if we fail to initialize
-		return 0;
-	}
-
 	// Updating all of the entities through the manager
 	this->mEntityMan->update();
 
@@ -40,7 +31,7 @@ RunMode* GameMode::run(const FrameEvent& evt)
 	return this;
 }
 
-bool GameMode::initialize()
+void GameMode::initialize()
 {
 	// Create the scene manager
 	mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
@@ -72,13 +63,17 @@ bool GameMode::initialize()
 	// Configure entity types
 	this->mEntityMan->configureEntityTypes("../../assets/scripts/ConfigFiles.ini", this->mWorld);
 
+	// Initializing the managers
+	this->mEnvironmentMan->initialize();
+	this->mEntityMan->initialize();
+
 	std::map<std::string, void*> entityType;
 	entityType["EntityType"] = new std::string("Dragon");
 	EventSystem::getSingleton()->fireEvent(EventSystem::CREATE_ENTITY, entityType);
 
 	// Adding the world root node to the actual scene
 	this->mSceneMgr->getRootSceneNode()->addChild(this->mWorld->getWorldNode());
-
+	
 	// Listening to events for mouse
 	EventSystem::getSingleton()->registerListener(new MouseDownListener(this), EventSystem::EventType::MOUSE_DOWN);
 	EventSystem::getSingleton()->registerListener(new MouseUpdateListener(this), EventSystem::EventType::MOUSE_UPDATE);
@@ -86,18 +81,22 @@ bool GameMode::initialize()
 
 	// Setting the wind creation to false
 	mCreatingWind = false;
-
-	// Note that the RunMode has been initialized
-	this->initialized = true;
-	return true;
 }
 
-void GameMode::MouseDownListener::handleEvent(payloadmap payload)
+void GameMode::pause(void)
+{
+}
+
+void GameMode::stop(void)
+{
+}
+
+void GameMode::MouseDownListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	mContainingMode->mCreatingWind = true;
 }
 
-void GameMode::MouseUpdateListener::handleEvent(payloadmap payload)
+void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	if (mContainingMode->mCreatingWind)
 	{
@@ -114,7 +113,7 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload)
 	}
 }
 
-void GameMode::MouseUpListener::handleEvent(payloadmap payload)
+void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	mContainingMode->mCreatingWind = false;
 }

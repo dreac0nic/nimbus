@@ -17,6 +17,7 @@ namespace Nimbus
 	private:
 		// Stores two dimensional array of Vector2s
 		VectorMap* vectorMap;
+		
 	public:
 		WindMap(int mapSizeX, int mapSizeY);
 		virtual ~WindMap(void);

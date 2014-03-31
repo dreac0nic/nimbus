@@ -44,8 +44,8 @@ namespace Nimbus
 			virtual ~MouseWindListener() {}
 
 			// From Nimbus::EventListener
-			virtual void handleEvent(payloadmap payload);
-		};
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mMouseWindListener;
 
 	private:
 		// Stores the game's WindMap
@@ -56,6 +56,7 @@ namespace Nimbus
 		virtual ~WindManager(void);
 
 		// From Nimbus::Manager
+		virtual void initialize(void) {}
 		virtual bool update(void);
 	};
 }

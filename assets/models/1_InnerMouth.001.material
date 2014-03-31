@@ -38,15 +38,6 @@ material 1_InnerMouth.001
                 tex_coord_set 0
                 colour_op modulate
             }
-            texture_unit 
-            {
-                texture SMPL_Head_Specular.jpg
-                tex_address_mode wrap
-                scale 1.0 1.0
-                scroll_anim 1.0 1.0 
-                tex_coord_set 0
-                colour_op modulate
-            }
         }
     }
 }

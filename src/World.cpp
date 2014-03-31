@@ -1,6 +1,7 @@
 #include "World.h"
 #include "GameEntity.h"
 #include "GameEntitySet.h"
+#include "WindMap.h"
 #include <OgreSceneManager.h>
 
 using namespace Nimbus;
@@ -12,11 +13,13 @@ World::World(Ogre::SceneManager* sceneManager):
 	this->mSceneManager = sceneManager;
 	this->mWorldNode = mSceneManager->createSceneNode();
 	this->mEntities = new GameEntitySet();
+	this->mWindMap = new WindMap(0,0);
 }
 
 World::~World(void)
 {
 	delete this->mEntities;
+	delete this->mWindMap;
 }
 
 int World::getCurrentId()

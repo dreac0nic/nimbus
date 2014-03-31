@@ -27,6 +27,7 @@ namespace Nimbus
 		virtual ~EnvironmentManager(void);
 
 		// From Nimbus::Manager
+		virtual void initialize(void);
 		virtual bool update(void);
 	};
 

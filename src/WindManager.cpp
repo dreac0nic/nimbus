@@ -19,12 +19,14 @@ WindManager::WindManager(Ogre::SceneManager* sceneManager, WindMap windMap)
 
 	createClickPlane();
 
-	EventSystem::getSingleton()->registerListener(new MouseWindListener(this, sceneManager),
+	this->mMouseWindListener = new MouseWindListener(this, sceneManager);
+	EventSystem::getSingleton()->registerListener(mMouseWindListener,
 		EventSystem::EventType::MOUSE_POSITION);
 }
 
 WindManager::~WindManager(void)
 {
+	delete this->mMouseWindListener;
 }
 
 void WindManager::createClickPlane()
@@ -142,7 +144,7 @@ for(int i = 0; i < mWindMap.sizeX; i++)
 	return true;
 }
 
-void WindManager::MouseWindListener::handleEvent(payloadmap payload)
+void WindManager::MouseWindListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	std::string context = *(static_cast<std::string*>(payload["Context"]));
 
@@ -165,8 +167,15 @@ void WindManager::MouseWindListener::handleEvent(payloadmap payload)
 			message << "Hit at " << point.x << ", " << point.y << ", " << point.z;
 			Ogre::LogManager::getSingleton().logMessage(message.str());
 
+			// Create a representative arrow mesh
+			payloadmap createArrowPayload;
+			std::string type = "Arrow";
+			createArrowPayload["EntityType"] = &type;
+			createArrowPayload["PositionVector"] = &point;
+			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
+
 			// Creating the plane to show the succesful clicking test
-			std::stringstream planeName, entityName;
+			/*std::stringstream planeName, entityName;
 			Ogre::Plane testPlane(Ogre::Vector3::UNIT_Y, 0);
 			planeName << "TestPlane" << mCounter;
 			Ogre::MeshManager::getSingleton().createPlane(planeName.str(), Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -176,7 +185,7 @@ void WindManager::MouseWindListener::handleEvent(payloadmap payload)
 			entTestPlane->setMaterialName("DebugMarkers");
 			Ogre::SceneNode* testPlaneNode = mSceneManager->getRootSceneNode()->createChildSceneNode();
 			testPlaneNode->attachObject(entTestPlane);
-			testPlaneNode->setPosition(point);
+			testPlaneNode->setPosition(point);*/
 		}
 	}
 }

@@ -9,6 +9,7 @@ namespace Nimbus
 {
 	class GameEntity;
 	class GameEntitySet;
+	class WindMap;
 
 	/** This class aggregates the entire world of Nimbus.
 	 
@@ -51,6 +52,8 @@ namespace Nimbus
 		// The list that keeps track of all entities currently in the world
 		GameEntitySet* mEntities;
 
+		WindMap* mWindMap;
+
 		// The scene node that contains everything
 		Ogre::SceneNode* mWorldNode;
 		Ogre::SceneManager* mSceneManager;
@@ -64,6 +67,7 @@ namespace Nimbus
 		// Accessor methods
 		int getCurrentId();
 		GameEntitySet* getEntities() { return this->mEntities; }
+		WindMap* getWindMap() { return this->mWindMap; }
 		void addEntity(GameEntity* entity);
 		Ogre::SceneNode* getWorldNode() { return this->mWorldNode; }
 		Ogre::SceneManager* getSceneManager() { return this->mSceneManager; }
