@@ -11,4 +11,14 @@ namespace Nimbus
 	WindCurrent::~WindCurrent(void)
 	{
 	}
+
+	bool WindCurrent::operator==(const WindCurrent &other) const
+	{
+		return other.path == path && other.strength == strength && other.temp == temp;
+	}
+
+	bool WindCurrent::operator!=(const WindCurrent &other) const
+	{
+		return !(other == *this);
+	}
 }

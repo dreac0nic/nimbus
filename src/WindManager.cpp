@@ -4,14 +4,16 @@
 #include <OgreRay.h>
 #include <OgreSceneManager.h>
 #include <OgreVector2.h>
-
 #include "WindManager.h"
 #include "EventSystem.h"
+#include "WindMap.h"
+#include "VectorMap.h"
+#include "WindCurrent.h"
 
 using namespace Nimbus;
 
-WindManager::WindManager(Ogre::SceneManager* sceneManager)
-	: mWindPlane(Ogre::Vector3::UNIT_Y, -12)
+WindManager::WindManager(Ogre::SceneManager* sceneManager, WindMap windMap)
+	: mWindPlane(Ogre::Vector3::UNIT_Y, -12), mWindMap(windMap)
 {
 	this->mSceneManager = sceneManager;
 
@@ -43,6 +45,102 @@ void WindManager::createClickPlane()
 
 bool WindManager::update(void)
 {
+for(int i = 0; i < mWindMap.sizeX; i++)
+	{
+		for(int j = 0; i < mWindMap.sizeY; j++)
+		{
+			Ogre::Vector2 currentVector = mWindMap.getVector(i, j);
+			Ogre::Vector2 temp;
+			double totalWindX = currentVector.x;
+			double totalWindY = currentVector.y;
+
+			if(i != 0)
+			{
+				if(j != 0)
+				{
+					temp = mWindMap.getVector(i-1, j-1);
+					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
+					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
+				}
+
+				temp = mWindMap.getVector(i-1, j);
+				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
+				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
+
+				if(j != mWindMap.sizeY-1)
+				{
+					temp = mWindMap.getVector(i-1, j+1);
+					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
+					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
+				}
+			}
+
+			if(j != 0)
+			{
+				temp = mWindMap.getVector(i, j-1);
+				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
+				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
+			}
+
+			if(j != mWindMap.sizeY-1)
+			{
+				temp = mWindMap.getVector(i, j+1);
+				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
+				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
+			}
+
+			if(i != mWindMap.sizeX-1)
+			{
+				if(j != 0)
+				{
+					temp = mWindMap.getVector(i+1, j-1);
+					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
+					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
+				}
+
+				temp = mWindMap.getVector(i+1, j);
+				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
+				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
+
+				if(j != mWindMap.sizeY-1)
+				{
+					temp = mWindMap.getVector(i+1, j+1);
+					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
+					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
+				}
+			}
+			mWindMap.setVector(i, j, totalWindX * ORIGININFLUENCE, totalWindY * ORIGININFLUENCE);
+		}
+	}
+
+	for (WindCurrent current : mWindMap.currents)
+	{
+		double strength = current.strength;
+
+		if(current.strength > 0){
+			Ogre::Vector2 firstPos = Ogre::Vector2::NEGATIVE_UNIT_X;
+
+			for(Ogre::Vector2 secondPos : current.path)
+			{
+				Ogre::Vector2 secondVec = mWindMap.getVector(secondPos);
+
+				if(firstPos != Ogre::Vector2::NEGATIVE_UNIT_X){
+					Ogre::Vector2 firstVec = mWindMap.getVector(firstPos);
+					Ogre::Vector2 temp = Ogre::Vector2((Ogre::Real)((secondVec.x - firstVec.x) * strength), (Ogre::Real)((secondVec.y - firstVec.y) * strength));
+
+					mWindMap.setVector(firstPos, temp);
+				}
+
+				firstPos = secondPos;
+			}
+			if(current.temp) {
+				current.strength -= STRENGTHTOSUBTRACT;
+			}
+		} else 
+		{
+			mWindMap.currents.remove(current);
+		}
+	}
 	return true;
 }
 

@@ -3,14 +3,19 @@
 
 #include <string>
 #include <OgrePlane.h>
-
 #include "EventListener.h"
 #include "Manager.h"
+#include "WindMap.h"
 
 namespace Nimbus
 {
+	const double STRENGTHTOSUBTRACT = 1;
+	const double ORIGININFLUENCE = 0.5;
+	const double CORNERINFLUENCE = .10355339059327;
+	const double SIDEINFLUENCE = .1464466094073;
+
 	/** Takes input and Updates WindMap
-	 */
+	*/
 	class WindManager :
 		public Manager
 	{
@@ -42,8 +47,12 @@ namespace Nimbus
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mMouseWindListener;
 
+	private:
+		// Stores the game's WindMap
+		WindMap mWindMap;
+
 	public:
-		WindManager(Ogre::SceneManager* sceneManager);
+		WindManager(Ogre::SceneManager* sceneManager, WindMap mWindMap);
 		virtual ~WindManager(void);
 
 		// From Nimbus::Manager

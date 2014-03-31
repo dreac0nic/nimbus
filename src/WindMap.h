@@ -25,6 +25,10 @@ namespace Nimbus
 		// Stores list of WindCurrents
 		std::list<WindCurrent> currents;
 
+		// Stores size of vectorMap
+		int sizeX;
+		int sizeY;
+
 		// Gets Vector2 at position, will find average vector if given non-integer numbers
 		Ogre::Vector2 getVector(double x, double y);
 
@@ -34,6 +38,12 @@ namespace Nimbus
 		// Gets average Vector2 in a square area
 		Ogre::Vector2 getAreaAverage(double topLeftx, double topLefty, double botRightx, double botRighty);
 		Ogre::Vector2 getAreaAverage(Ogre::Vector2 topLeft, Ogre::Vector2 botRight);
+
+		// Sets Vector2 at position to strength
+		void setVector(double posx, double posy, double strx, double stry);
+
+		// Sets Vector2 at Vector2 to vector
+		void setVector(Ogre::Vector2 position, Ogre::Vector2 strength);
 	};
 }
 #endif
