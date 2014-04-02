@@ -16,6 +16,7 @@
     <ClCompile Include="src\behaviours\Rainy.cpp" />
     <ClCompile Include="src\Behaviours\Renderable.cpp" />
     <ClCompile Include="src\behaviours\Soaring.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\GeneralEntityIterator.cpp" />
     <ClCompile Include="src\EntityFactory.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
@@ -41,7 +42,7 @@
     <ClInclude Include="src\Behaviours\Renderable.h" />
     <ClInclude Include="src\behaviours\Soaring.h" />
     <ClInclude Include="src\Behaviour.h" />
-    <ClInclude Include="src\Renderable.h" />
+    <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\EntityFactory.h" />
     <ClInclude Include="src\EventListener.h" />
     <ClInclude Include="src\EventSystem.h" />
