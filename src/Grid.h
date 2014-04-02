@@ -2,6 +2,8 @@
 #define NIMBUS_GRID_H
 
 #include <vector>
+#include <sstream>
+#include <cassert>
 
 namespace Nimbus
 {	
@@ -42,6 +44,9 @@ namespace Nimbus
 		*/
 		T get(int posx, int posy)
 		{
+			// Assert that the index is within the grid size
+			assert((size_t)(posx * xLength + posy) <= grid.size());
+
 			return grid[posx * xLength + posy];
 		}
 
@@ -52,6 +57,9 @@ namespace Nimbus
 		*/
 		void set(int posx, int posy, T value)
 		{
+			// Assert that the index is within the grid size
+			assert((size_t)(posx * xLength + posy) <= grid.size());
+
 			grid[posx * xLength + posy] = value;
 		}
 
@@ -69,6 +77,26 @@ namespace Nimbus
 		int getYDimension()
 		{
 			return yLength;
+		}
+
+		/** Uses the component element's capability to be written to a stream
+			to construct a string representation of the Grid object.
+			@return A string representation of the Grid object.
+		*/
+		std::string str()
+		{
+			stringstream returnString;
+
+			for(size_t y = 0; y < this->getYDimension(); ++y)
+			{
+				for(size_t x = 0; x < this->getXDimension(); ++x)
+				{
+					returnString << this->get(x, y) << " ";
+				}
+				returnString << endl;
+			}
+
+			return returnString.str();
 		}
 	};
 }
