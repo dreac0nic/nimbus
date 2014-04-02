@@ -1,0 +1,5 @@
+<map id="Nimbus::WindManager" name="Nimbus::WindManager">
+<area shape="rect" id="node2" href="$class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="5,91,128,117"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html" title="Nimbus::WindManager\l::MouseWindListener" alt="" coords="153,83,308,125"/>
+<area shape="rect" id="node4" href="$class_nimbus_1_1_event_listener.html" title="Nimbus::EventListener" alt="" coords="155,5,307,32"/>
+</map>

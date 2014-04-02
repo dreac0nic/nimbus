@@ -1,0 +1,4 @@
+<map id="Nimbus::GameMode::pause" name="Nimbus::GameMode::pause">
+<area shape="rect" id="node2" href="$class_nimbus_1_1_event_system.html#a57874808edce83ec2aade2d9d02678f0" title="Nimbus::EventSystem\l::getSingleton" alt="" coords="238,5,389,46"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_event_system.html#ae20fb87df21fb731adb1b4af01620c08" title="Nimbus::EventSystem\l::unregisterListener" alt="" coords="238,70,389,111"/>
+</map>

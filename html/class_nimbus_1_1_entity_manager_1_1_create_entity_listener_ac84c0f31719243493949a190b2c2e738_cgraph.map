@@ -1,0 +1,6 @@
+<map id="Nimbus::EntityManager::CreateEntityListener::handleEvent" name="Nimbus::EntityManager::CreateEntityListener::handleEvent">
+<area shape="rect" id="node2" href="$class_nimbus_1_1_game_entity.html#ad32915604ad6fd3e97ba9234b57b4738" title="Nimbus::GameEntity\l::getEntityId" alt="" coords="218,5,361,46"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_event_system.html#a57874808edce83ec2aade2d9d02678f0" title="Nimbus::EventSystem\l::getSingleton" alt="" coords="214,70,365,111"/>
+<area shape="rect" id="node4" href="$class_nimbus_1_1_event_system.html#a0e20b8928a8f1ccc9de1844759af2370" title="Nimbus::EventSystem\l::fireEvent" alt="" coords="214,135,365,177"/>
+<area shape="rect" id="node5" href="$class_nimbus_1_1_event_listener.html#a933245851c999fda088e2c873f6a3afa" title="Nimbus::EventListener\l::handleEvent" alt="" coords="213,201,365,242"/>
+</map>

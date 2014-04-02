@@ -1,0 +1,9 @@
+<map id="Nimbus::EventSystem::getSingleton" name="Nimbus::EventSystem::getSingleton">
+<area shape="rect" id="node2" href="$class_nimbus_1_1_entity_manager.html#a0873d15a1637d6fa5e8f571dcca3c2f5" title="Nimbus::EntityManager\l::initialize" alt="" coords="225,5,383,46"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_entity_manager_1_1_create_entity_listener.html#ac84c0f31719243493949a190b2c2e738" title="Nimbus::EntityManager\l::CreateEntityListener\l::handleEvent" alt="" coords="225,71,383,127"/>
+<area shape="rect" id="node4" href="$class_nimbus_1_1_game_mode.html#a9f16984e347ee2378ba576f3522a9e86" title="Nimbus::GameMode::run" alt="" coords="221,151,387,177"/>
+<area shape="rect" id="node5" href="$class_nimbus_1_1_game_mode.html#a5f6a221b458b07440f62b3bb029172b0" title="Nimbus::GameMode::initialize" alt="" coords="206,201,402,228"/>
+<area shape="rect" id="node6" href="$class_nimbus_1_1_game_mode.html#a323d8257668bb83ab5c41962563e0f9b" title="Nimbus::GameMode::pause" alt="" coords="212,252,396,279"/>
+<area shape="rect" id="node7" href="$class_nimbus_1_1_game_mode.html#aa52782c322c02e7ad91101a6d22023a4" title="Nimbus::GameMode::stop" alt="" coords="217,303,391,329"/>
+<area shape="rect" id="node8" href="$class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html#ae00d59438516438ddd7d0e5113424309" title="Nimbus::WindManager\l::MouseWindListener\l::handleEvent" alt="" coords="227,353,381,409"/>
+</map>
