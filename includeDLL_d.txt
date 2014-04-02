@@ -1,3 +1,0 @@
-OgreMain_d.dll
-OIS_d.dll
-RenderSystem_GL_d.dll

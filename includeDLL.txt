@@ -1,2 +1,0 @@
-OgreMain.dll
-OIS.dll
