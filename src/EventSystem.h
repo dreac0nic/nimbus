@@ -18,26 +18,6 @@ namespace Nimbus
 	 The Events will be fired using EventSystem's functions. These events will be evaluated and distributed to their 
 	 registered events.
 
-	 THOUGHTS ON EVENT EXPANSION
-	 ===========================
-
-	 One problem raised with the events is how events are expanded across many entities. For example, if EntityA 
-	 wants to know when EntityB moves, there are two possible scenarios.
-
-	 An event type is created for the explicit EntityB, meaning that there are individual event types for each entity 
-	 existing in the world. For example, EntityBMovedEvent is now a type. Which means that EntityAMovedEvent is also a type 
-	 and so and so forth for every entity existing. This could be extrapolated to all different types of situations where events 
-	 are used, meaning there could literally be thousands of events. To top this off, how are event types handled and how do different 
-	 types know about different events.
-
-	 EntityA listens to EVERY EntityMoved event and evaluated whether or not it is EntityB. This means that EntityA is constantly getting called 
-	 for every EntityMoved event fired by every Entity. The obvious problem is the fact taht all these entities possibly listening for EntityMoved 
-	 events are firing off all the time. Oh the chaos!
-
-	 The primary suggested solution to this issue is to provide a filter (presumably a map data type) containing specific information on the event 
-	 that the listener is looking for. For example, the payload may be carrying a key pointing to which entity that it wants to hear an event from. 
-	 The filter would then be used to eliminate any unnecesary events, without calling the appropriate listener.
-
 	 All hail the glorious helix fossil.
 
 	 */
