@@ -50,7 +50,7 @@ void GameMode::initialize()
 		Real(mViewport->getActualWidth()) / Real(mViewport->getActualHeight()));
 	// Set the ambient light
 	mSceneMgr->setAmbientLight(ColourValue(0.5, 0.5, 0.5));
-	
+
 	// Construct the game world (truthfully this should be done by the menu probably...
 	//     this would allow for game configuration and loading... of maybe we
 	//     should have a loading game mode.
@@ -73,7 +73,7 @@ void GameMode::initialize()
 
 	// Adding the world root node to the actual scene
 	this->mSceneMgr->getRootSceneNode()->addChild(this->mWorld->getWorldNode());
-	
+
 	// Listening to events for mouse
 	EventSystem::getSingleton()->registerListener(new MouseDownListener(this), EventSystem::EventType::MOUSE_DOWN);
 	EventSystem::getSingleton()->registerListener(new MouseUpdateListener(this), EventSystem::EventType::MOUSE_UPDATE);
@@ -93,7 +93,11 @@ void GameMode::stop(void)
 
 void GameMode::MouseDownListener::handleEvent(payloadmap payload, EventListener* responder)
 {
+	payloadmap termPayload;
+
 	mContainingMode->mCreatingWind = true;
+
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_START, termPayload);
 }
 
 void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
@@ -109,11 +113,15 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListene
 		mousePosRay["Context"] = new std::string("Wind");
 		mousePosRay["ScreenPosition"] = position;
 		mousePosRay["WorldRay"] = &ray;
-		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION, mousePosRay);
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_UPDATE, mousePosRay);
 	}
 }
 
 void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* responder)
 {
+	payloadmap termPayload;
+
 	mContainingMode->mCreatingWind = false;
+
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_END, termPayload);
 }

@@ -19,14 +19,24 @@ WindManager::WindManager(Ogre::SceneManager* sceneManager, WindMap windMap)
 
 	createClickPlane();
 
-	this->mMouseWindListener = new MouseWindListener(this, sceneManager);
-	EventSystem::getSingleton()->registerListener(mMouseWindListener,
-		EventSystem::EventType::MOUSE_POSITION);
+	this->mMouseWindUpdateListener = new MouseWindUpdateListener(this);
+	EventSystem::getSingleton()->registerListener(mMouseWindUpdateListener,
+		EventSystem::EventType::MOUSE_POSITION_UPDATE);
+
+	this->mMouseWindStartListener = new MouseWindStartListener(this);
+	EventSystem::getSingleton()->registerListener(mMouseWindStartListener,
+		EventSystem::EventType::MOUSE_POSITION_START);
+
+	this->mMouseWindEndListener = new MouseWindEndListener(this);
+	EventSystem::getSingleton()->registerListener(mMouseWindEndListener,
+		EventSystem::EventType::MOUSE_POSITION_END);
 }
 
 WindManager::~WindManager(void)
 {
-	delete this->mMouseWindListener;
+	delete this->mMouseWindUpdateListener;
+	delete this->mMouseWindStartListener;
+	delete this->mMouseWindEndListener;
 }
 
 void WindManager::createClickPlane()
@@ -37,7 +47,7 @@ void WindManager::createClickPlane()
 
 	// Creating the actual plane
 	Ogre::MeshManager::getSingleton().createPlane("WindPlane", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-			mWindPlane, 1500, 1500, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+		mWindPlane, 1500, 1500, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
 	Ogre::Entity* entWindPlane = mSceneManager->createEntity("WindPlaneEntity", "WindPlane");
 	entWindPlane->setMaterialName("DebugWindPlane");
 	//mSceneManager->getRootSceneNode()->createChildSceneNode()->attachObject(entWindPlane);
@@ -45,7 +55,7 @@ void WindManager::createClickPlane()
 
 bool WindManager::update(void)
 {
-for(int i = 0; i < mWindMap.sizeX; i++)
+	for(int i = 0; i < mWindMap.sizeX; i++)
 	{
 		for(int j = 0; i < mWindMap.sizeY; j++)
 		{
@@ -144,7 +154,17 @@ for(int i = 0; i < mWindMap.sizeX; i++)
 	return true;
 }
 
-void WindManager::MouseWindListener::handleEvent(payloadmap payload, EventListener* responder)
+void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventListener* responder)
+{
+	mContainingManager->tempCurrent = WindCurrent();
+}
+
+void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventListener* responder)
+{
+	mContainingManager->mWindMap.currents.push_back(mContainingManager->tempCurrent);
+}
+
+void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	std::string context = *(static_cast<std::string*>(payload["Context"]));
 
@@ -156,13 +176,16 @@ void WindManager::MouseWindListener::handleEvent(payloadmap payload, EventListen
 		// Debug material for collision markers
 		Ogre::MaterialPtr debugMarkerMat = Ogre::MaterialManager::getSingleton().create("DebugMarkers", "General");
 		debugMarkerMat->getTechnique(0)->getPass(0)->setAmbient(1,0,0);
-		
+
 		// Testing the ray for collision with the wind plane
 		std::pair<bool, Ogre::Real> result = ray->intersects(this->mContainingManager->mWindPlane);
- 
+
 		if(result.first)
 		{
 			Ogre::Vector3 point = ray->getPoint(result.second);
+
+			mContainingManager->tempCurrent.path.push_back(Ogre::Vector2(point.x, point.z));
+
 			std::stringstream message;
 			message << "Hit at " << point.x << ", " << point.y << ", " << point.z;
 			Ogre::LogManager::getSingleton().logMessage(message.str());
@@ -179,7 +202,7 @@ void WindManager::MouseWindListener::handleEvent(payloadmap payload, EventListen
 			Ogre::Plane testPlane(Ogre::Vector3::UNIT_Y, 0);
 			planeName << "TestPlane" << mCounter;
 			Ogre::MeshManager::getSingleton().createPlane(planeName.str(), Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-					testPlane, 15, 15, 2, 2, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+			testPlane, 15, 15, 2, 2, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
 			entityName << "TestPlaneEntity" << mCounter++;
 			Ogre::Entity* entTestPlane = mSceneManager->createEntity(entityName.str(), planeName.str());
 			entTestPlane->setMaterialName("DebugMarkers");

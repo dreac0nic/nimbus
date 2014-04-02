@@ -53,7 +53,8 @@ namespace Nimbus
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
 		 */
 		enum EventType { SHUTDOWN,
-			MOUSE_DOWN, MOUSE_UP, MOUSE_UPDATE, MOUSE_POSITION,
+			MOUSE_DOWN, MOUSE_UP, MOUSE_UPDATE, MOUSE_POSITION_UPDATE,
+			MOUSE_POSITION_START, MOUSE_POSITION_END,
 			CREATE_ENTITY, SOAR_ENTITY,
 			POSITION_ENTITY, BEGIN_TRANSLATE_ENTITY, END_TRANSLATE_ENTITY, ENTITY_MOVED };
 			
@@ -85,7 +86,23 @@ namespace Nimbus
 			Payload:
 				"ScreenPosition" => Ogre::Vector2
 
-		MOUSE_POSITION
+		MOUSE_POSITION_UPDATE
+			An event fired whenever the mouse moves.
+
+			Payload:
+				"Context" => std::string
+				"ScreenPosition" => Ogre::Vector2
+				"WorldRay" => Ogre::Ray
+
+		MOUSE_POSITION_START
+			An event fired whenever the mouse moves.
+
+			Payload:
+				"Context" => std::string
+				"ScreenPosition" => Ogre::Vector2
+				"WorldRay" => Ogre::Ray
+
+		MOUSE_POSITION_END
 			An event fired whenever the mouse moves.
 
 			Payload:
