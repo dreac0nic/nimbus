@@ -1,11 +1,20 @@
 #include "TestMode.h"
+
+#include <math.h>
+
 #include <OgreRoot.h>
+#include <OgreVector2.h>
 #include <OgreRenderWindow.h>
 #include <OgreEntity.h>
 #include <OgreCamera.h>
 #include <OgreViewport.h>
 #include <OgreSceneManager.h>
+
 #include "NimbusApplication.h"
+
+#include "Map.h"
+#include "Corner.h"
+#include "Tile.h"
 
 using namespace Nimbus;
 using namespace Ogre;
