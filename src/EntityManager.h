@@ -38,8 +38,8 @@ namespace Nimbus
 		// The world object to access the entities from
 		World* mWorld;
 
-		// The player entity
-		GameEntity* player;
+		/// The cloud groups list. Probably bad design. Todo: fix it.
+		std::map<int, GameEntityId> cloudGroups;
 
 	protected:
 		// EventListeners

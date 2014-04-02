@@ -204,10 +204,13 @@ void EntityManager::TickListener::generateCloudGroups()
 
 			// Store the other side of the grid as well
 			proximityGrid.set(y, x, proximityGrid.get(x, y));
+
+			// Compare to the next cloud
+			++compareCloudPosition;
 		}
 
 		// Go to the next cloud
-		++currentCloud;
+		++currentCloudPosition;
 	}
 
 	// Begin the cluster algorithm
@@ -227,6 +230,39 @@ void EntityManager::TickListener::generateCloudGroups()
 		logger << endl;
 	}
 	Ogre::LogManager::getSingleton().logMessage(logger.str());
+
+	// Update the appropriate cloud group
+	payloadmap groupUpdatePayload;
+	GameEntityId groupEntityId;
+	for(map<int, list<GameEntityId> >::iterator it = groups.begin(); it != groups.end(); ++it)
+	{
+		payloadmap updateCloudGroupPayload;
+
+		// If there is not currently a cloud group for this number, create it
+		if(mParent->cloudGroups.find(it->first) == mParent->cloudGroups.end())
+		{
+			// Load a create payload
+			payloadmap createCloudGroupPayload;
+			string type = "CloudGroup"; // Hmm... hard code much?
+			createCloudGroupPayload["EntityType"] = &type;
+
+			// Fire the event with a catch responder
+			EventSystem::getSingleton()->fireEvent(
+				EventSystem::EventType::CREATE_ENTITY,
+				createCloudGroupPayload,
+				mParent->mCatchEntityListener);
+
+			// Get the new entity's id and store it
+			mParent->cloudGroups[it->first] = mParent->mCatchEntityListener->getEntityId();
+		}
+
+		// Load the update event payload
+		updateCloudGroupPayload["EntityId"] = &mParent->cloudGroups[it->first];
+		updateCloudGroupPayload["EntityList"] = &it->second;
+
+		// Fire off the update event
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::FLOCK_UPDATE, updateCloudGroupPayload);
+	}
 }
 
 void EntityManager::TickListener::cluster(Grid<float>& proximityGrid, map<int, list<GameEntityId> >& groups)
@@ -241,7 +277,8 @@ void EntityManager::TickListener::cluster(Grid<float>& proximityGrid, map<int, l
 	{
 		for(int y = 0; y < x; ++y)
 		{
-			if(proximityGrid.get(x, y) < proximityGrid.get(minX, minY) && proximityGrid.get(x,y) > 0)
+			if(minX == minY ||
+				(proximityGrid.get(x, y) < proximityGrid.get(minX, minY) && proximityGrid.get(x,y) > 0))
 			{
 				minX = x;
 				minY = y;
@@ -251,14 +288,20 @@ void EntityManager::TickListener::cluster(Grid<float>& proximityGrid, map<int, l
 
 	// If there are no clusters close enough together,
 	// or all clouds have been clustered, then we are done
-	if(proximityGrid.get(minX, minY) > maxGroupingDistance ||
-		proximityGrid.getXDimension() <= 1)
+	if(//proximityGrid.getXDimension() == proximityGrid.getYDimension() ||
+		proximityGrid.getXDimension() <= 1 ||
+		proximityGrid.get(minX, minY) > maxGroupingDistance)
 	{
 		return;
 	}
 
+	// If equal, no switch is necessary
+	if(minY == minX)
+	{
+		return;
+	}
 	// Make sure that minX < minY
-	if(minY < minX)
+	else if(minY < minX)
 	{
 		int temp = minY;
 		minY = minX;
