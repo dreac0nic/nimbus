@@ -44,6 +44,13 @@ namespace Nimbus
 		 */
 		static Ogre::RenderWindow* getRenderWindow(void);
 
+		/** Gets the Ogre::Camera for the current RunMode.
+
+		 @return
+		 A pointer to the Ogre::Camera of the current RunMode.
+		 */
+		static Ogre::Camera* getCamera(void);
+
 	private:
 		// Member Variables
 
@@ -89,7 +96,7 @@ namespace Nimbus
 			virtual ~ShutdownListener() {}
 
 			// From Nimbus::EventListener
-			virtual void handleEvent(payloadmap payload);
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		};
 
 	public:

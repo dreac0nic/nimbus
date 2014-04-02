@@ -26,7 +26,7 @@ namespace Nimbus
 		 @param
 		 payload A C++ STL map using a string key and a void* for data storage.
 		 */
-		virtual void handleEvent(payloadmap payload) = 0;
+		virtual void handleEvent(payloadmap payload, EventListener* responder = NULL) = 0;
 	};
 }
 

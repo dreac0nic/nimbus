@@ -6,7 +6,7 @@
 #include <map>
 
 #include "GameEntity.h"
-#include "Behaviour.h"
+#include "./Behaviours/Behaviour.h"
 #include "EventListener.h"
 #include "EventSystem.h"
 
@@ -46,7 +46,7 @@ namespace Nimbus
 			virtual ~CreateEntityListener() {}
 
 			// From Nimbus::EventListener
-			virtual void handleEvent(payloadmap payload);
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		};
 
 	public:

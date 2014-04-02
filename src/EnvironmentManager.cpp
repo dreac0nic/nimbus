@@ -2,11 +2,16 @@
 
 using namespace Nimbus;
 
-EnvironmentManager::EnvironmentManager(void)
+EnvironmentManager::EnvironmentManager(Ogre::SceneManager* sceneManager)
 {
+	mWindManager = new WindManager(sceneManager);
 }
 
 EnvironmentManager::~EnvironmentManager(void)
+{
+}
+
+void EnvironmentManager::initialize(void)
 {
 }
 
