@@ -1,0 +1,9 @@
+<map id="Nimbus::EntityManager" name="Nimbus::EntityManager">
+<area shape="rect" id="node2" href="$class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="237,5,361,32"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_entity_manager_1_1_tick_listener.html" title="Nimbus::EntityManager\l::TickListener" alt="" coords="219,57,378,98"/>
+<area shape="rect" id="node4" href="$class_nimbus_1_1_event_listener.html" title="Nimbus::EventListener" alt="" coords="5,195,157,221"/>
+<area shape="rect" id="node5" href="$class_nimbus_1_1_entity_manager_1_1_create_entity_listener.html" title="Nimbus::EntityManager\l::CreateEntityListener" alt="" coords="219,122,378,163"/>
+<area shape="rect" id="node6" href="$class_nimbus_1_1_entity_manager_1_1_position_response_listener.html" title="Nimbus::EntityManager\l::PositionResponseListener" alt="" coords="208,187,389,229"/>
+<area shape="rect" id="node7" href="$class_nimbus_1_1_entity_manager_1_1_destroy_entity_listener.html" title="Nimbus::EntityManager\l::DestroyEntityListener" alt="" coords="219,253,378,294"/>
+<area shape="rect" id="node8" href="$class_nimbus_1_1_entity_manager_1_1_catch_entity_listener.html" title="Nimbus::EntityManager\l::CatchEntityListener" alt="" coords="219,318,378,359"/>
+</map>
