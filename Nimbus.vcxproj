@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AudioManager.cpp" />
     <ClCompile Include="src\behaviours\FlockSoaring.cpp" />
     <ClCompile Include="src\behaviours\Positional.cpp" />
     <ClCompile Include="src\behaviours\Rainy.cpp" />
@@ -30,6 +31,8 @@
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\AudioManager.h" />
     <ClInclude Include="src\behaviours\Behaviour.h" />
     <ClInclude Include="src\behaviours\FlockSoaring.h" />
     <ClInclude Include="src\behaviours\Positional.h" />
@@ -49,6 +52,9 @@
     <ClInclude Include="src\NimbusApplication.h" />
     <ClInclude Include="src\RunMode.h" />
     <ClInclude Include="src\World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Nimbus.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD12D565-5AB0-44A1-BAAD-B6B8B690D9F7}</ProjectGuid>
@@ -91,12 +97,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)ogre\boost;$(SolutionDir)ogre\include\OIS;$(SolutionDir)ogre\include\OGRE\Overlay;$(SolutionDir)ogre\include\OGRE;$(SolutionDir)ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)caudio\cAudio\Headers;$(SolutionDir)caudio\cAudio\include;$(SolutionDir)ogre\boost;$(SolutionDir)ogre\include\OIS;$(SolutionDir)ogre\include\OGRE\Overlay;$(SolutionDir)ogre\include\OGRE;$(SolutionDir)ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)ogre\lib\debug;$(SolutionDir)ogre\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)caudio\cAudio\Debug;$(SolutionDir)ogre\lib\debug;$(SolutionDir)ogre\boost\lib;$(SolutionDir)caudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;cAudio_d.lib%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>$(ProjectDir)CopyFileList.exe includeDLL_d.txt $(ProjectDir)ogre\bin\$(Configuration)\ $(ProjectDir)Build\$(Configuration)\</Command>

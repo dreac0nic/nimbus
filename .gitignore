@@ -17,3 +17,5 @@ ogre/*
 
 # VIM
 *.swf
+
+*.vcxproj*

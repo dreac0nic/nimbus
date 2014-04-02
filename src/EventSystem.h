@@ -52,7 +52,7 @@ namespace Nimbus
 		// CLASS MEMBERS --
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
 		 */
-		enum EventType { SHUTDOWN, MOUSE_CLICKED, CREATE_ENTITY, POSITION_ENTITY, TRANSLATE_ENTITY, ENTITY_MOVED };
+		enum EventType { SHUTDOWN, MOUSE_CLICKED, CREATE_ENTITY, POSITION_ENTITY, TRANSLATE_ENTITY, ENTITY_MOVED, PLAY_SOUND };
 		/* EVENT TYPE INFORMATION
 		 
 		 EXAMPLE_EVENT:
@@ -111,7 +111,16 @@ namespace Nimbus
 				"PositionVector" => Ogre::Vector3	// Absolute, world position (optional)
 				"FacingVector" => Ogre::Vector3		// The direction the entity is currently facing (optional)
 				"RotationVector" => Ogre::Vector3	// The rotation <pitch, yaw, roll> vector (optional)
- 		*/
+ 		
+		PLAY_SOUND
+			"The event that" is a poor way to start these sentences, so I'm starting in a different way!
+			This event notifies audiomanager to play sounds linked to a behavior or user interface element.
+
+			Payload:
+				"SoundName" => std::string					// Filename (minus the extension) of the soundbite
+				"PositionDelta" => Ogre::Vector3	// Relative position vector (optional)
+		
+		*/
 
 		/** Gets the singleton.
 

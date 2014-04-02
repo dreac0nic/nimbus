@@ -72,6 +72,9 @@
     <ClCompile Include="src\GeneralEntityIterator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\AudioManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\NimbusApplication.h">
@@ -131,5 +134,16 @@
     <ClInclude Include="src\Behaviours\Renderable.h">
       <Filter>Header Files\Behaviours</Filter>
     </ClInclude>
+    <ClInclude Include="src\AudioManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Nimbus.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
