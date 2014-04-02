@@ -19,10 +19,16 @@ using namespace Ogre;
 
 TestMode::TestMode(void)
 {
+	this->keyListener = new KeyListener();
+
+	EventSystem::getSingleton()->registerListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
 }
 
 TestMode::~TestMode(void)
 {
+	EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
+
+	delete this->keyListener;
 }
 
 RunMode* TestMode::run(const FrameEvent& evt)
@@ -138,4 +144,12 @@ light->setPosition(20, 80, 50);
 // Note that the RunMode has been initialized
 this->initialized = true;
 return true;
+}
+
+void TestMode::KeyListener::handleEvent(payloadmap payload)
+{
+	OIS::KeyCode keyCode = *static_cast<OIS::KeyCode*>(payload["KeyCode"]);
+	bool keyReleased = *static_cast<bool*>(payload["KeyReleased"]);
+
+	// Do stuff!
 }
