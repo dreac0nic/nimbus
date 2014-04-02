@@ -48,7 +48,7 @@ void Tile::toString(void)
 MeshPtr Tile::getMesh(void)
 {
 	// Create the overall mesh.
-	MeshPtr tileMesh = MeshManager::getSingleton().createManual("tileName", "mapTiles"); // Fix name issues. tileName not repeatable.
+	MeshPtr tileMesh = MeshManager::getSingleton().createManual("tileName", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME); // Fix name issues. tileName not repeatable.
 
 	// Create the submesh for this mesh.
 	SubMesh* mesh = tileMesh->createSubMesh();
