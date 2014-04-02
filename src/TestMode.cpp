@@ -73,6 +73,8 @@ bool TestMode::initialize()
 	mCamera->setAspectRatio(
 		Real(mViewport->getActualWidth()) / Real(mViewport->getActualHeight()));
 
+	mCamera->setPolygonMode(Ogre::PM_WIREFRAME);
+
 	// Load the dragon
 	dragon = mSceneMgr->createEntity("Dragon", "dragon.mesh");
 	dragonNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
