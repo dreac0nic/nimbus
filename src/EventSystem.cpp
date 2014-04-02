@@ -1,4 +1,5 @@
 #include "EventSystem.h"
+#include <vector>
 
 using namespace std;
 using namespace Nimbus;
@@ -44,7 +45,9 @@ void EventSystem::unregisterListener(EventListener* listener, EventType type)
 
 void EventSystem::fireEvent(EventType type, const payloadmap& payload, EventListener* responder)
 {
-	for(vector<EventListener*>::iterator i = mListeners[type].begin(); i != mListeners[type].end(); ++i) {
+	vector<EventListener*> temp = mListeners[type];
+
+	for(std::vector<EventListener*>::iterator i = temp.begin(); i != temp.end(); ++i) {
 		(*i)->handleEvent(payload, responder); // OH MY GOODNESS TEH SCIENCE
 	}
 }
