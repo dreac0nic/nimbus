@@ -66,19 +66,15 @@ namespace Nimbus
 		
 		/*Changes type of a tile into a string and returns that string*/
 		std::string getType();
+
+		/*Returns location of a point*/
+//		Point getLoc();
+
+		/*Returns boarder of a point*/
+//		std::vector<TileEdge*> getBorders();
 		
-	//private:
-	
-		
-		void setHumidity(double humi);
-		void setTemp(double temp);
-		void setSat(double grnd);
-		void setType();		
-		//to include: neighbor memory of some kind
-		
-	protected:
-	
-				// MEMBER VARIABLES --
+
+		//MEMBER VARIABLES
 		/* The index of this tile. */
 		int index;
 
@@ -108,9 +104,26 @@ namespace Nimbus
 
 		/* Holds this tile's elevation. */
 		double elevation;
-		
+
 		/*Holds this tile's biome.*/
 		int biome;
+
+	//private:
+	
+		
+		void setHumidity(double humi);
+		void setTemp(double temp);
+		void setSat(double grnd);
+		void setType();		
+		//to include: neighbor memory of some kind
+		
+	protected:
+	
+				// MEMBER VARIABLES --
+
+
+		
+
 		
 		/*Holds this tile's humidity*/
 		double humidity;

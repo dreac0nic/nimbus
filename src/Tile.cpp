@@ -2,6 +2,9 @@
 #include "Tile.h"
 #include "Corner.h"
 
+#include <vector>
+
+using namespace std;
 using namespace Nimbus;
 
 int Tile::deltaX = 0;
@@ -86,6 +89,12 @@ void Tile::toString(void)
 	{
 		//Needs to recieve tiles neighbors
 		// Will call all set functions
+		for(vector<Tile*>::iterator it; it != this->neighbors.end(); it++)
+		{
+			Tile* tempTile = *it;// Pointer on neighbor tile
+
+			if(tempTile->water) cout << "IT IS WATER!!!" << endl;
+		}
 	}
 
 	void Tile::setType()
