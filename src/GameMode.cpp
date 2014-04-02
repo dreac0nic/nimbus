@@ -24,15 +24,6 @@ GameMode::~GameMode(void)
 
 RunMode* GameMode::run(const FrameEvent& evt)
 {
-	// Attempt to initialize the run mode
-	if(!this->initialized && !this->initialize())
-	{
-		LogManager::getSingletonPtr()->logMessage("(Nimbus) Failed to initialize RunMode");
-
-		// Terminate the application if we fail to initialize
-		return 0;
-	}
-
 	// Updating all of the entities through the manager
 	this->mEntityMan->update();
 
@@ -40,7 +31,7 @@ RunMode* GameMode::run(const FrameEvent& evt)
 	return this;
 }
 
-bool GameMode::initialize()
+void GameMode::initialize()
 {
 	// Create the scene manager
 	mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
@@ -90,10 +81,6 @@ bool GameMode::initialize()
 
 	// Setting the wind creation to false
 	mCreatingWind = false;
-
-	// Note that the RunMode has been initialized
-	this->initialized = true;
-	return true;
 }
 
 void GameMode::pause(void)
@@ -104,12 +91,12 @@ void GameMode::stop(void)
 {
 }
 
-void GameMode::MouseDownListener::handleEvent(payloadmap payload)
+void GameMode::MouseDownListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	mContainingMode->mCreatingWind = true;
 }
 
-void GameMode::MouseUpdateListener::handleEvent(payloadmap payload)
+void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	if (mContainingMode->mCreatingWind)
 	{
@@ -126,7 +113,7 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload)
 	}
 }
 
-void GameMode::MouseUpListener::handleEvent(payloadmap payload)
+void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	mContainingMode->mCreatingWind = false;
 }

@@ -50,7 +50,7 @@ namespace Nimbus
 			virtual ~MouseDownListener() {}
 
 			// From Nimbus::EventListener
-			virtual void handleEvent(payloadmap payload);
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		};
 
 		// Listens for any mouse update events
@@ -66,7 +66,7 @@ namespace Nimbus
 			virtual ~MouseUpdateListener() {}
 
 			// From Nimbus::EventListener
-			virtual void handleEvent(payloadmap payload);
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		};
 
 		// Listens for any mouse up events
@@ -82,7 +82,7 @@ namespace Nimbus
 			virtual ~MouseUpListener() {}
 
 			// From Nimbus::EventListener
-			virtual void handleEvent(payloadmap payload);
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		};
 
 	public:

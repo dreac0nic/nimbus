@@ -53,7 +53,7 @@ namespace Nimbus
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
 		 */
 		enum EventType { SHUTDOWN,
-			MOUSE_DOWN, MOUSE_UP, MOUSE_UPDATE, MOUSE_POSITION
+			MOUSE_DOWN, MOUSE_UP, MOUSE_UPDATE, MOUSE_POSITION,
 			CREATE_ENTITY, SOAR_ENTITY,
 			POSITION_ENTITY, BEGIN_TRANSLATE_ENTITY, END_TRANSLATE_ENTITY, ENTITY_MOVED };
 			

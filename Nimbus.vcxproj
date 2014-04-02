@@ -17,7 +17,6 @@
     <ClCompile Include="src\Behaviours\Renderable.cpp" />
     <ClCompile Include="src\behaviours\Soaring.cpp" />
     <ClCompile Include="src\GeneralEntityIterator.cpp" />
-    <ClCompile Include="src\Renderable.cpp" />
     <ClCompile Include="src\EntityFactory.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\EnvironmentManager.cpp" />

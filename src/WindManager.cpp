@@ -17,12 +17,14 @@ WindManager::WindManager(Ogre::SceneManager* sceneManager)
 
 	createClickPlane();
 
-	EventSystem::getSingleton()->registerListener(new MouseWindListener(this, sceneManager),
+	this->mMouseWindListener = new MouseWindListener(this, sceneManager);
+	EventSystem::getSingleton()->registerListener(mMouseWindListener,
 		EventSystem::EventType::MOUSE_POSITION);
 }
 
 WindManager::~WindManager(void)
 {
+	delete this->mMouseWindListener;
 }
 
 void WindManager::createClickPlane()
@@ -44,7 +46,7 @@ bool WindManager::update(void)
 	return true;
 }
 
-void WindManager::MouseWindListener::handleEvent(payloadmap payload)
+void WindManager::MouseWindListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	std::string context = *(static_cast<std::string*>(payload["Context"]));
 

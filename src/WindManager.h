@@ -39,14 +39,15 @@ namespace Nimbus
 			virtual ~MouseWindListener() {}
 
 			// From Nimbus::EventListener
-			virtual void handleEvent(payloadmap payload);
-		};
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mMouseWindListener;
 
 	public:
 		WindManager(Ogre::SceneManager* sceneManager);
 		virtual ~WindManager(void);
 
 		// From Nimbus::Manager
+		virtual void initialize(void) {}
 		virtual bool update(void);
 	};
 }
