@@ -12,10 +12,14 @@ Tile::Tile()
 }
 
 
-// create function with inputs for humidity, temperature, and ground saturation respectively
-Tile::Tile(double humid, double temper, double grnd, Point *loc )
+// create function with inputs for humidity, temperature, ground saturation, Point, and elevation respectively
+Tile::Tile(double humid, double temper, double grnd, Point *loc, double elev)
 {
 this->loc = *loc;
+humidity = humid;
+temp = temper;
+grndSat = grnd;
+elevation = elev;
 }
 	
 Tile::~Tile(void)
@@ -63,34 +67,38 @@ void Tile::toString(void)
 		return grndSat;
 	}
 
-	void Tile::setHumidity()
+	void Tile::setHumidity(double humi)
 	{
-		
+		humidity = humi;
 	}
 
-	void Tile::setTemp()
+	void Tile::setTemp(double temper)
 	{
-
+		temp= temper;
 	}
 
-	void Tile::setSat()
+	void Tile::setSat(double grnd)
 	{
-
+		grndSat= grnd;
 	}
 
 	void Tile::updateTile()
 	{
-
+		//Needs to recieve tiles neighbors
+		// Will call all set functions
 	}
 
 	void Tile::setType()
 	{
-
+		//Biome Number
+		//Barren = 1;Sand = 2;Savanna = 3; Plains = 4; Tundra = 5;Tropical 6
+		//Temperate = 7; Taiga = 8; Oceans = 9; 
+		// Artic = 10; Rivers = 11; Lakes = 12; *these are extra
+		biome= 1;
 	}
 
-	String Tile::getType()
+	std::string Tile::getType()
 	{
-
 		return "words";
 	}
 

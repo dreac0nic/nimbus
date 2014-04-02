@@ -5,6 +5,7 @@
 
 #include <OGRE/OgreVector2.h>
 
+
 namespace Nimbus
 {
 	//Temporary; fill or replace
@@ -39,7 +40,7 @@ namespace Nimbus
 		  @param temper Tile Temperature
 		  @param grnd Tile Ground Saturation
 		*/
-		Tile(double humid, double temper, double grnd, Point *loc );
+		Tile(double humid, double temper, double grnd, Point *loc, double elev);
 
 		/* Destructor! */
 		virtual ~Tile(void);
@@ -64,14 +65,14 @@ namespace Nimbus
 		void updateTile();
 		
 		/*Changes type of a tile into a string and returns that string*/
-		String getType();
+		std::string getType();
 		
-	private:
+	//private:
 	
 		
-		void setHumidity();
-		void setTemp();
-		void setSat();
+		void setHumidity(double humi);
+		void setTemp(double temp);
+		void setSat(double grnd);
 		void setType();		
 		//to include: neighbor memory of some kind
 		
