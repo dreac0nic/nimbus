@@ -18,6 +18,19 @@ namespace Nimbus
 		// From Nimbus::RunMode
 		virtual bool initialize();
 
+		/** Listens for the key event
+		*/
+		class KeyListener : 
+			public EventListener
+		{
+		public:
+			KeyListener() {}
+			virtual ~KeyListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload);
+		} *keyListener;
+
 	public:
 		/** Creates a TestMode type run mode.
 		 */
