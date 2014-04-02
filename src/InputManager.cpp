@@ -69,7 +69,7 @@ bool InputManager::keyPressed(const OIS::KeyEvent& evt)
 
 	bool tempReleased = false;
 
-	keyEvent["KeyID"] = (void*)&(evt.key);
+	keyEvent["KeyCode"] = (void*)&(evt.key);
 	keyEvent["KeyReleased"] = &tempReleased;
 
 	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::KEY_PRESS, keyEvent);
@@ -92,7 +92,7 @@ bool InputManager::keyReleased(const OIS::KeyEvent& evt)
 
 	bool tempReleased = true;
 
-	keyEvent["KeyID"] = (void*)&(evt.key);
+	keyEvent["KeyCode"] = (void*)&(evt.key);
 	keyEvent["KeyReleased"] = &tempReleased;
 
 	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::KEY_PRESS, keyEvent);
