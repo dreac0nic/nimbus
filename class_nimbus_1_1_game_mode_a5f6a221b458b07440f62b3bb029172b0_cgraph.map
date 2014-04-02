@@ -1,6 +1,0 @@
-<map id="Nimbus::GameMode::initialize" name="Nimbus::GameMode::initialize">
-<area shape="rect" id="node2" href="$class_nimbus_1_1_nimbus_application.html#aafb928d6f5f7ec3fb62d165fb1b7f47a" title="Nimbus::NimbusApplication\l::getRenderWindow" alt="" coords="251,5,434,46"/>
-<area shape="rect" id="node3" href="$class_nimbus_1_1_event_system.html#a57874808edce83ec2aade2d9d02678f0" title="Nimbus::EventSystem\l::getSingleton" alt="" coords="267,70,418,111"/>
-<area shape="rect" id="node4" href="$class_nimbus_1_1_event_system.html#a0e20b8928a8f1ccc9de1844759af2370" title="Nimbus::EventSystem\l::fireEvent" alt="" coords="267,135,418,177"/>
-<area shape="rect" id="node5" href="$class_nimbus_1_1_event_system.html#a7fa6ee1b8f59befa9fb964178b343f98" title="Nimbus::EventSystem\l::registerListener" alt="" coords="267,201,418,242"/>
-</map>

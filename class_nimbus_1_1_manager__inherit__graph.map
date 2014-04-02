@@ -1,6 +1,0 @@
-<map id="Nimbus::Manager" name="Nimbus::Manager">
-<area shape="rect" id="node2" href="$class_nimbus_1_1_entity_manager.html" title="Nimbus::EntityManager" alt="" coords="197,5,355,32"/>
-<area shape="rect" id="node3" href="$class_nimbus_1_1_environment_manager.html" title="Nimbus::EnvironmentManager" alt="" coords="179,56,373,83"/>
-<area shape="rect" id="node4" href="$class_nimbus_1_1_input_manager.html" title="Nimbus::InputManager" alt="" coords="200,107,352,133"/>
-<area shape="rect" id="node5" href="$class_nimbus_1_1_wind_manager.html" title="Nimbus::WindManager" alt="" coords="199,157,353,184"/>
-</map>
