@@ -14,6 +14,7 @@ EntityManager::EntityManager(World* world)
 EntityManager::~EntityManager(void)
 {
 	delete this->mCreateEntityListener;
+	delete this->mCatchEntityListener;
 	delete this->mDestroyEventListener;
 	delete this->mTickListener;
 	delete this->mPositionResponseListener;
@@ -68,6 +69,7 @@ void EntityManager::configureEntityTypes(string entityTypesFile, World* world)
 	this->mEntityFactory = new EntityFactory(world, entityTypesFile);
 
 	this->mCreateEntityListener = new CreateEntityListener(this->mEntityFactory, world);
+	this->mCatchEntityListener = new CatchEntityListener();
 	this->mDestroyEventListener = new DestroyEntityListener(world);
 	this->mTickListener = new TickListener(this);
 	this->mPositionResponseListener = new PositionResponseListener();
@@ -111,6 +113,28 @@ void Nimbus::EntityManager::CreateEntityListener::handleEvent(payloadmap payload
 			// Fire the event to set the position
 			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_ENTITY, positionalPayload);
 		}
+
+		// If there is a responder, send a response
+		if(responder != NULL)
+		{
+			// Set up necessary payload variables
+			payloadmap responderPayload;
+			GameEntityId entityId = entity->getEntityId();
+
+			// Load the payload
+			responderPayload["EntityId"] = &entityId;
+
+			// Fire off the response
+			responder->handleEvent(responderPayload);
+		}
+	}
+}
+
+void EntityManager::CatchEntityListener::handleEvent(payloadmap payload, EventListener* responder)
+{
+	if(payload.find("EntityId") != payload.end())
+	{
+		this->mEntityId = *static_cast<GameEntityId*>(payload["EntityId"]);
 	}
 }
 

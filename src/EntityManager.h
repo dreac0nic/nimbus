@@ -44,7 +44,7 @@ namespace Nimbus
 	protected:
 		// EventListeners
 
-		// Creates entities on demand
+		/** Creates entities on demand */
 		class CreateEntityListener : 
 			public EventListener
 		{
@@ -61,7 +61,30 @@ namespace Nimbus
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mCreateEntityListener;
 
-		// Destroys entities on demand
+		/** Responder for catching created entities.
+
+			Designed solely as a responder, not a listener.
+		*/
+		class CatchEntityListener :
+			public EventListener
+		{
+		private:
+			GameEntityId mEntityId;
+
+		public:
+			CatchEntityListener() {}
+			virtual ~CatchEntityListener() {}
+
+			/** Gets the associated entity id
+				@return The contained game entity id
+			*/
+			GameEntityId getEntityId() { return this->mEntityId; }
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mCatchEntityListener;
+
+		/** Destroys entities on demand */
 		class DestroyEntityListener :
 			public EventListener
 		{
