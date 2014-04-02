@@ -1,10 +1,12 @@
 #include "Tile.h"
 #include "Corner.h"
 
+#include <OGRE\OgreRoot.h>
 #include <OGRE\OgreMesh.h>
 #include <OGRE\OgreSubMesh.h>
 #include <OGRE\OgreMeshManager.h>
 #include <OGRE\OgreHardwareBufferManager.h>
+#include <OGRE\OgreResourceGroupManager.h>
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -87,6 +89,14 @@ MeshPtr Tile::getMesh(void)
 		vertices[index++] = norm.z;
 	}
 
+	// Define vertices color
+	RenderSystem* rs = Root::getSingleton().getRenderSystem();
+	RGBA* colors = new RGBA[vertCount];
+	RGBA* pColor = colors;
+
+	for(int i = 0; i < vertCount; ++i)
+		rs->convertColourValue(ColourValue(1.0f, 0.0f, 0.0f), pColor++);
+
 	// Define the triangles
 	int faceCount = vertCount - 1; // Face count = vertCount - cent;
 	int center = 0;
@@ -135,6 +145,23 @@ MeshPtr Tile::getMesh(void)
 	// Set the binding to the vertex buffer.
 	VertexBufferBinding* vertBind = tileMesh->sharedVertexData->vertexBufferBinding;
 	vertBind->setBinding(0, vertBuff);
+
+	// Setup color information
+	offset = 0;
+	decl->addElement(1, offset, VET_COLOUR, VES_DIFFUSE);
+	offset += VertexElement::getTypeSize(VET_COLOUR);
+
+	// Setup the hardware buffer for color.
+	vertBuff = HardwareBufferManager::getSingleton().createVertexBuffer(
+			offset,
+			tileMesh->sharedVertexData->vertexCount,
+			HardwareBuffer::HBU_STATIC_WRITE_ONLY);
+
+	// Push color data to the card.
+	vertBuff->writeData(0, vertBuff->getSizeInBytes(), colors, true);
+
+	// Set vertex buffer binding so that buffer 1 is the color buffer.
+	vertBind->setBinding(1, vertBuff);
 
 	// Allocate and setup an index buffer.
 	HardwareIndexBufferSharedPtr indexBuff = HardwareBufferManager::getSingleton().createIndexBuffer(
