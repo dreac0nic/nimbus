@@ -75,6 +75,22 @@ namespace Nimbus
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mTickListener;
 
+		/** Updates the component entity list for this group. Called whenever groups are
+			recalculated.
+		*/
+		class UpdateListener :
+			public EventListener
+		{
+		private:
+			Flocking* mParent;
+		public:
+			UpdateListener(Flocking* parent) : mParent(parent) {}
+			virtual ~UpdateListener() {}
+
+			// From Nimbus::EventListener
+			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mUpdateListener;
+
 	public:
 		/** Default constructor, taking a world pointer.
 			@param type The type of Behaviour being constructed.

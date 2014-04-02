@@ -87,6 +87,9 @@ namespace Nimbus
 					"FacingVector" => Ogre::Vector3		// Facing vector, units in world absolute world space,
 															begins at the object... have fun interpretting that (optional)
 					"RotationVector" => Ogre::Vector3	// Absolute, rotation vector <pitch, yaw, roll> (optional)
+
+				Responder Payload:
+					"EntityId" => GameEntityId
 			 */,
 
 			DESTROY_ENTITY
@@ -158,6 +161,14 @@ namespace Nimbus
 					"PositionVector" => Ogre::Vector3	// Absolute, world position
 					"FacingVector" => Ogre::Vector3		// The direction the entity is currently facing
 					"RotationVector" => Ogre::Vector3	// The rotation <pitch, yaw, roll> vector
+			 */,
+
+			 FLOCK_UPDATE
+			 /*! The event which lets a Flocking behaviour know it's new entity list.
+				
+				Payload:
+					"EntityId" => GameEntityId
+					"EntityList" => list<GameEntityId>
 			 */
 		};
 
