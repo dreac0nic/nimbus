@@ -52,7 +52,7 @@ namespace Nimbus
 		// CLASS MEMBERS --
 		/* EventType represents the type of event being fired or handled. These enumerations will be added to as the application expands.
 		 */
-		enum EventType { SHUTDOWN, MOUSE_CLICKED };
+		enum EventType { SHUTDOWN, MOUSE_CLICKED, KEY_PRESS };
 		/* EVENT TYPE INFORMATION
 		 
 		 EXAMPLE_EVENT:

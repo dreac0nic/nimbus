@@ -64,6 +64,16 @@ bool InputManager::keyPressed(const OIS::KeyEvent& evt)
 
 	std::cerr << logstring.str().c_str();
 
+	// Send key pressed event!
+	std::map<std::string, void*> keyEvent;
+
+	bool tempReleased = false;
+
+	keyEvent["KeyID"] = (void*)&(evt.key);
+	keyEvent["KeyReleased"] = &tempReleased;
+
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::KEY_PRESS, keyEvent);
+
 	// Hack to close the application when the user presses escape because we don't
 	// have a proper event system yet
 	if(evt.key == OIS::KC_ESCAPE)
@@ -77,6 +87,16 @@ bool InputManager::keyPressed(const OIS::KeyEvent& evt)
 
 bool InputManager::keyReleased(const OIS::KeyEvent& evt)
 {
+	// Send key released event!
+	std::map<std::string, void*> keyEvent;
+
+	bool tempReleased = true;
+
+	keyEvent["KeyID"] = (void*)&(evt.key);
+	keyEvent["KeyReleased"] = &tempReleased;
+
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::KEY_PRESS, keyEvent);
+
 	return true;
 }
 
