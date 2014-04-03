@@ -21,7 +21,7 @@ namespace Nimbus
 	protected:
         static void create(AudioSourceGUID, std::string);
 		virtual void start(AudioSourceGUID, const bool& = false);
-		virtual void start(AudioSourceGUID, Ogre::Vector3, const bool& = false);
+		virtual void start(AudioSourceGUID, Ogre::Vector3*, const bool& = false);
 		virtual void stop(AudioSourceGUID);
 		virtual void loop(AudioSourceGUID, const bool& = true);
 		virtual void volume(AudioSourceGUID, float);
@@ -45,7 +45,9 @@ namespace Nimbus
 		AudioManager(void);
 		virtual ~AudioManager(void);
         virtual bool update(void);
-	}
+	};
 }
+
+cAudio::cVector3 fromOgreVector(Ogre::Vector3*);
 
 #endif
