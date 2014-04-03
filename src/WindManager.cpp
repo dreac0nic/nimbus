@@ -74,7 +74,7 @@ void WindManager::MouseWindListener::handleEvent(payloadmap payload, EventListen
 			Ogre::Plane testPlane(Ogre::Vector3::UNIT_Y, 0);
 			planeName << "TestPlane" << mCounter;
 			Ogre::MeshManager::getSingleton().createPlane(planeName.str(), Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-					testPlane, 15, 15, 2, 2, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+					testPlane, 2, 2, 2, 2, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
 			entityName << "TestPlaneEntity" << mCounter++;
 			Ogre::Entity* entTestPlane = mSceneManager->createEntity(entityName.str(), planeName.str());
 			entTestPlane->setMaterialName("DebugMarkers");
