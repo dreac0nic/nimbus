@@ -97,7 +97,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)caudio\cAudio\Headers;$(SolutionDir)caudio\cAudio\include;$(SolutionDir)ogre\boost;$(SolutionDir)ogre\include\OIS;$(SolutionDir)ogre\include\OGRE\Overlay;$(SolutionDir)ogre\include\OGRE;$(SolutionDir)ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)caudio\include;$(SolutionDir)caudio\cAudio\Headers;$(SolutionDir)caudio\cAudio\include;$(SolutionDir)ogre\boost;$(SolutionDir)ogre\include\OIS;$(SolutionDir)ogre\include\OGRE\Overlay;$(SolutionDir)ogre\include\OGRE;$(SolutionDir)ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
