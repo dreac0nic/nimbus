@@ -57,7 +57,7 @@ bool WindManager::update(void)
 {
 	for(int i = 0; i < mWindMap.sizeX; i++)
 	{
-		for(int j = 0; i < mWindMap.sizeY; j++)
+		for(int j = 0; j < mWindMap.sizeY; j++)
 		{
 			Ogre::Vector2 currentVector = mWindMap.getVector(i, j);
 			Ogre::Vector2 temp;

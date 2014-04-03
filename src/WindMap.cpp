@@ -27,9 +27,21 @@ namespace Nimbus
 		int floy = (int)floor(posy);
 
 		Ogre::Vector2 topLeft = vectorMap->getVector(flox, floy);
-		Ogre::Vector2 botLeft = vectorMap->getVector(flox, 1 - floy);
-		Ogre::Vector2 topRight = vectorMap->getVector(1 - flox, floy);
-		Ogre::Vector2 botRight = vectorMap->getVector(1 - flox, 1 - floy);
+		Ogre::Vector2 botLeft = Ogre::Vector2(0, 0);
+		if (1 + floy < sizeY)
+		{
+			botLeft = vectorMap->getVector(flox, 1 + floy);
+		}
+		Ogre::Vector2 topRight = Ogre::Vector2(0, 0);
+		if (1 + flox < sizeX)
+		{
+			topRight = vectorMap->getVector(1 + flox, floy);
+		}
+		Ogre::Vector2 botRight = Ogre::Vector2(0, 0);
+		if (1 + flox < sizeX && 1 + floy < sizeY)
+		{
+			botRight = vectorMap->getVector(1 + flox, 1 + floy);
+		}
 
 		double left = flox - posx + 1;
 		double top = floy - posy + 1;
@@ -69,9 +81,21 @@ namespace Nimbus
 		int floy = (int)floor(posy);
 
 		Ogre::Vector2 topLeft = vectorMap->getVector(flox, floy);
-		Ogre::Vector2 botLeft = vectorMap->getVector(flox, 1 - floy);
-		Ogre::Vector2 topRight = vectorMap->getVector(1 - flox, floy);
-		Ogre::Vector2 botRight = vectorMap->getVector(1 - flox, 1 - floy);
+		Ogre::Vector2 botLeft = Ogre::Vector2(0, 0);
+		if (1 + floy < sizeY)
+		{
+			botLeft = vectorMap->getVector(flox, 1 + floy);
+		}
+		Ogre::Vector2 topRight = Ogre::Vector2(0, 0);
+		if (1 + flox < sizeX)
+		{
+			topRight = vectorMap->getVector(1 + flox, floy);
+		}
+		Ogre::Vector2 botRight = Ogre::Vector2(0, 0);
+		if (1 + flox < sizeX && 1 + floy < sizeY)
+		{
+			botRight = vectorMap->getVector(1 + flox, 1 + floy);
+		}
 
 		double left = flox - posx + 1;
 		double top = floy - posy + 1;
@@ -86,9 +110,18 @@ namespace Nimbus
 		resultY4 = (1-left) * (1-top) * stry + botRight.y;
 
 		vectorMap->setVector(flox, floy, resultX1, resultY1);
-		vectorMap->setVector(flox, 1 + floy, resultX2, resultY2);
-		vectorMap->setVector(1 + flox, floy, resultX3, resultY3);
-		vectorMap->setVector(1 + flox, 1 + floy, resultX4, resultY4);
+		if (1 + floy < sizeY)
+		{
+			vectorMap->setVector(flox, 1 + floy, resultX2, resultY2);
+		}
+		if (1 + flox < sizeX)
+		{
+			vectorMap->setVector(1 + flox, floy, resultX3, resultY3);
+		}
+		if (1 + flox < sizeX && 1 + floy < sizeY)
+		{
+			vectorMap->setVector(1 + flox, 1 + floy, resultX4, resultY4);
+		}
 	}
 
 	void WindMap::setVector(Ogre::Vector2 position, Ogre::Vector2 strength)
