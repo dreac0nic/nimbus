@@ -1,8 +1,8 @@
 #include "GameMode.h"
+#include "Camera.h"
 #include <OgreRoot.h>
 #include <OgreRenderWindow.h>
 #include <OgreEntity.h>
-#include <OgreCamera.h>
 #include <OgreViewport.h>
 #include <OgreSceneManager.h>
 #include "NimbusApplication.h"
@@ -29,10 +29,14 @@ GameMode::~GameMode(void)
 	delete this->mEntityMan;
 	delete this->mEnvironmentMan;
 	delete this->mWorld;
+	delete this->mCamera;
 }
 
 RunMode* GameMode::run(const FrameEvent& evt)
 {
+	// Update the camera... without this line, the camera, oddly, wasn't updating... wonder why?...
+	this->mCamera->update();
+
 	// Updating all of the entities through the manager
 	this->mEntityMan->update();
 
@@ -54,19 +58,11 @@ void GameMode::initialize()
 {
 	// Create the scene manager
 	mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
-	// Create the camera
-	mCamera = mSceneMgr->createCamera("PlayerCam");
+	
+	// Initialize the camera
+	mCamera = new Camera();
+	mCamera->initialize(mSceneMgr);
 
-	// Hardcoding some things for now
-	// Position the camera
-	mCamera->setPosition(Vector3(0, 50, 80));
-	mCamera->lookAt(Vector3(0, 0, -100));
-	mCamera->setNearClipDistance(5);
-	// Add a viewport for the camera
-	mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
-	// Correct the aspect ratio of the camera
-	mCamera->setAspectRatio(
-		Real(mViewport->getActualWidth()) / Real(mViewport->getActualHeight()));
 	// Set the ambient light
 	mSceneMgr->setAmbientLight(ColourValue(0.5, 0.5, 0.5));
 	
@@ -132,15 +128,39 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListene
 	if (mContainingMode->mCreatingWind)
 	{
 		Ogre::Vector2* position = static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
-		Ogre::Ray ray = mContainingMode->mCamera->getCameraToViewportRay(
-			position->x / mContainingMode->mViewport->getActualWidth(),
-			position->y / mContainingMode->mViewport->getActualHeight());
+		Ogre::Ray ray = mContainingMode->mCamera->getCamera()->getCameraToViewportRay(
+			position->x / mContainingMode->mCamera->getViewport()->getActualWidth(),
+			position->y / mContainingMode->mCamera->getViewport()->getActualHeight());
 
 		payloadmap mousePosRay;
 		mousePosRay["Context"] = new std::string("Wind");
 		mousePosRay["ScreenPosition"] = position;
 		mousePosRay["WorldRay"] = &ray;
 		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION, mousePosRay);
+	}
+
+	// Look for edge events
+	if(payload.find("ScreenPosition") != payload.end())
+	{
+		Ogre::Vector2* position = static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
+
+		// If within a screen threshold
+		if(position->x < Camera::getScreenThreshold()*2 ||
+			position->x > (mContainingMode->mCamera->getViewport()->getActualWidth() - Camera::getScreenThreshold())*2 ||
+			position->y < Camera::getScreenThreshold()*2 ||
+			position->y > (mContainingMode->mCamera->getViewport()->getActualHeight() - Camera::getScreenThreshold()*2))
+		{
+			// Initialize payload values
+			payloadmap mousePosPayload;
+			std::string context = "Screen";
+
+			// Store values in the payload
+			mousePosPayload["Context"] = &context;
+			mousePosPayload["ScreenPosition"] = position;
+
+			// Fire the event
+			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION, mousePosPayload);
+		}
 	}
 }
 

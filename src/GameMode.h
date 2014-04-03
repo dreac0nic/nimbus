@@ -6,6 +6,7 @@
 #include "EntityManager.h"
 #include "EntityFactory.h"
 #include "World.h"
+#include "Camera.h"
 
 namespace Nimbus
 {
@@ -21,6 +22,8 @@ namespace Nimbus
 	private:
 		// Member variables
 		// *******************************************************************
+
+		Camera* mCamera;
 
 		// The Environment Manager
 		EnvironmentManager* mEnvironmentMan;
