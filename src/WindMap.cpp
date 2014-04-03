@@ -9,10 +9,11 @@ namespace Nimbus
 {
 	WindMap::WindMap(int mapSizeX, int mapSizeY)
 	{
-		sizeX = mapSizeX;
-		sizeY = mapSizeY;
+		sizeX = mapSizeX / 100;
+		sizeY = mapSizeY / 100;
 		vectorMap = new VectorMap(sizeX, sizeY);
 	}
+
 	WindMap::~WindMap(void)
 	{
 	}

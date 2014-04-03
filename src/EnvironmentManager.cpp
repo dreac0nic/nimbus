@@ -9,7 +9,6 @@ EnvironmentManager::EnvironmentManager(Ogre::SceneManager* sceneManager)
 	// Temporary solution
 	mWorld = new World(sceneManager);
 
-
 	mWindManager = new WindManager(sceneManager, mWorld->windMap);
 }
 

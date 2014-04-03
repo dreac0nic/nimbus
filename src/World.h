@@ -46,9 +46,6 @@ namespace Nimbus
 		// Bounds of World
 		Ogre::Vector2 worldBounds;
 
-		//Temporary worldBounds constant
-		int size;
-
 		// The list that keeps track of all entities currently in the world
 		GameEntitySet* mEntities;
 

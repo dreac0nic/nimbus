@@ -7,7 +7,7 @@
 using namespace Nimbus;
 
 World::World(Ogre::SceneManager* sceneManager):
-	size(5000), worldBounds((Ogre::Real)size, (Ogre::Real)size), windMap((int)(worldBounds.x), (int)(worldBounds.y))
+	worldBounds(Ogre::Real(5000), Ogre::Real(5000)), windMap((int)(worldBounds.x), (int)(worldBounds.y))
 {
 	idCounter = 0;
 	this->mSceneManager = sceneManager;
