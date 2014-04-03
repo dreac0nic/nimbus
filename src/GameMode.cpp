@@ -26,6 +26,7 @@ RunMode* GameMode::run(const FrameEvent& evt)
 {
 	// Updating all of the entities through the manager
 	this->mEntityMan->update();
+	mEnvironmentMan->update();
 
 	// Continue to run this runmode
 	return this;

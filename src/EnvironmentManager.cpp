@@ -23,5 +23,6 @@ void EnvironmentManager::initialize(void)
 
 bool EnvironmentManager::update(void)
 {
+	mWindManager->update();
 	return true;
 }

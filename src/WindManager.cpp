@@ -123,16 +123,18 @@ bool WindManager::update(void)
 		}
 	}
 
-	for (WindCurrent current : mWindMap.currents)
+	std::list<WindCurrent>::iterator current = mWindMap.currents.begin();
+	while (current != mWindMap.currents.end())
 	{
-		double strength = current.strength;
+		double strength = current->strength;
 
-		if(current.strength > 0){
+		if(current->strength > 0){
 			Ogre::Vector2 firstPos = Ogre::Vector2::NEGATIVE_UNIT_X;
 
-			for(Ogre::Vector2 secondPos : current.path)
+			std::list<Ogre::Vector2>::iterator secondPos = current->path.begin();
+			while (secondPos != current->path.end())
 			{
-				Ogre::Vector2 secondVec = mWindMap.getVector(secondPos);
+				Ogre::Vector2 secondVec = mWindMap.getVector(*secondPos);
 
 				if(firstPos != Ogre::Vector2::NEGATIVE_UNIT_X){
 					Ogre::Vector2 firstVec = mWindMap.getVector(firstPos);
@@ -141,14 +143,16 @@ bool WindManager::update(void)
 					mWindMap.setVector(firstPos, temp);
 				}
 
-				firstPos = secondPos;
+				firstPos = *secondPos;
+				++current;
 			}
-			if(current.temp) {
-				current.strength -= STRENGTHTOSUBTRACT;
+			if(current->temp) {
+				current->strength -= STRENGTHTOSUBTRACT;
 			}
+			++current;
 		} else 
 		{
-			mWindMap.currents.remove(current);
+			current = this->mWindMap.currents.erase(current);
 		}
 	}
 	return true;

@@ -1,5 +1,6 @@
 #include <OgreRoot.h>
 #include "VectorMap.h"
+#include "EventSystem.h"
 
 namespace Nimbus
 {
@@ -13,9 +14,21 @@ namespace Nimbus
 			yLength = 1;
 		}
 
-
 		map = std::vector<Ogre::Vector2>();
-		map.resize(xLength * yLength);
+		for(int i = 0; i < xLength; i++)
+		{
+			for(int j = 0; j < yLength; j++)
+			{
+				map.push_back(Ogre::Vector2(0,0));
+				// Create a representative arrow mesh
+				payloadmap createArrowPayload;
+				std::string type = "Arrow";
+				createArrowPayload["EntityType"] = &type;
+				createArrowPayload["PositionVector"] = new Ogre::Vector3((Ogre::Real)i, (Ogre::Real)-12, (Ogre::Real)j);
+				EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
+			}
+		}
+		
 		length = xLength;
 	}
 
