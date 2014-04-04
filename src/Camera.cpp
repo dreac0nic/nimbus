@@ -140,36 +140,26 @@ void Nimbus::Camera::MousePositionListener::handleEvent(payloadmap payload, Even
 		Vector2 screenPosition = *static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
 		Vector3 accelerationVector = Vector3::ZERO;
 
-		std::cout << "I'z a cow ";
-
 		// Going left
 		if(screenPosition.x < threshold)
 		{
 			accelerationVector -= Vector3::UNIT_X;
-
-			std::cout << "goin leftz\n";
 		}
 		// Going right
 		else if(screenPosition.x > mParent->mViewport->getActualWidth() - threshold)
 		{
 			accelerationVector += Vector3::UNIT_X;
-
-			std::cout << "goin right\n";
 		}
 		
 		// Going up
 		if(screenPosition.y < threshold)
 		{
 			accelerationVector -= Vector3::UNIT_Z;
-
-			std::cout << "goin up\n";
 		}
 		// Going down
 		else if(screenPosition.y > mParent->mViewport->getActualHeight() - threshold)
 		{
 			accelerationVector += Vector3::UNIT_Z;
-
-			std::cout << "goin down\n";
 		}
 
 		if(accelerationVector == Vector3::ZERO)

@@ -8,7 +8,9 @@
 #include "GameEntity.h"
 
 namespace Nimbus
-{	
+{
+	//int VECTORMAPTOWORLDRATIO = 250;
+
 	/** Stores an array of 2D-Vectors
 	 Used by WindMap
 	 */
