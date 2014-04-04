@@ -16,6 +16,17 @@ WindMap::~WindMap(void)
 {
 }
 
+Ogre::Vector2 WindMap::getWindVector(Ogre::Real x, Ogre::Real y)
+{
+	return this->mVectorMap->get(x, y);
+}
+
+Ogre::Vector2 WindMap::getWindVector(Ogre::Vector2 position)
+{
+	return this->mVectorMap->get(position.x, position.y);
+}
+
+/*
 Ogre::Vector2 WindMap::getVector(double posx, double posy)
 {
 	double resultX;
@@ -54,17 +65,17 @@ Ogre::Vector2 WindMap::getVector(Ogre::Vector2 position)
 {
 	return getVector(position.x/250, position.y/250);
 }
+*/
 
-Ogre::Vector2 WindMap::getAreaAverage(double topLeftx, double topLefty, double botRightx, double botRighty)
+Ogre::Vector2 getAverageWindVector(Ogre::Real topLeftx, Ogre::Real topLefty, Ogre::Real botRightx, Ogre::Real botRighty)
 {
-	// Placeholder functionality... replace asap
-	return getVector(topLeftx, topLefty);
-}
-Ogre::Vector2 WindMap::getAreaAverage(Ogre::Vector2 topLeft, Ogre::Vector2 botRight)
-{
-	return getAreaAverage(topLeft.x, topLeft.y, botRight.x, botRight.y);
 }
 
+Ogre::Vector2 getAverageWindVector(Ogre::Vector2 topLeft, Ogre::Vector2 botRight)
+{
+}
+
+/*
 void WindMap::setVector(double posx, double posy, double strx, double stry)
 {
 	double resultX1;
@@ -132,3 +143,4 @@ void WindMap::updateArrows()
 {
 	vectorMap->updateArrows();
 }
+*/
