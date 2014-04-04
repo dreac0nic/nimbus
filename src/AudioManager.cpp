@@ -2,16 +2,16 @@
 #include "NimbusApplication.h"
 
 Nimbus::AudioManager::AudioManager(void) {
-    this->mSoundManager = cAudio::createAudioManager(true);
+	this->mSoundManager = cAudio::createAudioManager(true);
 }
 
-Nimbus::AudioManager::~AudioManager(void) {
+Nimbus::AudioManager::~AudioManager(void) {                                                                                                                                                                     
     this->mSoundManager->shutDown();
     cAudio::destroyAudioManager(this->mSoundManager);
 }
 
 void Nimbus::AudioManager::create(AudioSourceGUID id, std::string path) {
-	AudioManager::mAsMap[id] = AudioManager::mSoundManager->create("music", path.c_str(), true);
+	this->mAsMap[id] = this->mSoundManager->create("music", path.c_str(), true);
 }
 
 void Nimbus::AudioManager::start(AudioSourceGUID id, const bool& loop) {

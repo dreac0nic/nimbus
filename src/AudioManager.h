@@ -15,11 +15,11 @@ namespace Nimbus
 		public Manager
 	{
 	private:
-		static cAudio::IAudioManager *mSoundManager;
-		static AudioSourceMap mAsMap;
+		cAudio::IAudioManager *mSoundManager;
+		AudioSourceMap mAsMap;
 
 	protected:
-        static void create(AudioSourceGUID, std::string);
+        virtual void create(AudioSourceGUID, std::string);
 		virtual void start(AudioSourceGUID, const bool& = false);
 		virtual void start(AudioSourceGUID, Ogre::Vector3*, const bool& = false);
 		virtual void stop(AudioSourceGUID);
