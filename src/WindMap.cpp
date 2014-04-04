@@ -9,8 +9,8 @@ namespace Nimbus
 {
 	WindMap::WindMap(int mapSizeX, int mapSizeY)
 	{
-		sizeX = mapSizeX / 250;
-		sizeY = mapSizeY / 250;
+		sizeX = mapSizeX / 250;// / VECTORMAPTOWORLDRATIO;
+		sizeY = mapSizeY / 250;// / VECTORMAPTOWORLDRATIO;
 	}
 
 	WindMap::~WindMap(void)
