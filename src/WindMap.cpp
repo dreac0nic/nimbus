@@ -46,12 +46,14 @@ Ogre::Vector2 WindMap::getWindVector(Ogre::Vector2 position)
 	return this->mVectorMap->get(position.x, position.y);
 }
 
-Ogre::Vector2 getAverageWindVector(Ogre::Real topLeftx, Ogre::Real topLefty, Ogre::Real botRightx, Ogre::Real botRighty)
+Ogre::Vector2 WindMap::getAverageWindVector(Ogre::Real topLeftx, Ogre::Real topLefty, Ogre::Real botRightx, Ogre::Real botRighty)
 {
+
 }
 
-Ogre::Vector2 getAverageWindVector(Ogre::Vector2 topLeft, Ogre::Vector2 botRight)
+Ogre::Vector2 WindMap::getAverageWindVector(Ogre::Vector2 topLeft, Ogre::Vector2 botRight)
 {
+
 }
 
 std::list<WindCurrent*>* WindMap::getWindCurrents()
