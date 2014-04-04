@@ -27,10 +27,12 @@ namespace Nimbus
 		
 	public:
 		/** Creates a basic wind map.
+			@param worldSize The size of the world in world distance.
+				Right now assumes everything to be square... could change
 			@param resolution The resolution of the vector map in terms of world coordinates.
 				This value is the world distance between each wind vector in the vector map.
 		*/
-		WindMap(Ogre::Real resolution);
+		WindMap(Ogre::Real worldSize, Ogre::Real resolution);
 		virtual ~WindMap(void);
 
 		/** Recalculates the vector map based on the current list of wind currents.
