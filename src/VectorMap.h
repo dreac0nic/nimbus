@@ -64,6 +64,8 @@ namespace Nimbus
 		// Sets Vector2 to strength (x, y) at position (x, y)
 		void setVector(int posx, int posy, double strx, double stry);
 
+		void updateArrows();
+
 		GameEntityId getArrowId(int posx, int posy);
 	};
 }

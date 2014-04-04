@@ -54,9 +54,34 @@ namespace Nimbus
 		map[tempx * length + tempy] = Ogre::Vector2(Ogre::Real(strx), Ogre::Real(stry));
 	}
 
+	void VectorMap::updateArrows()
+	{
+		// The payload variables
+		payloadmap positionPayload;
+		GameEntityId entityId;
+
+		// Preload the pointer to the entity id
+		positionPayload["EntityId"] = &entityId;
+
+		for(int x = 0; x < this->length; ++x)
+		{
+			for(int y = 0; y < this->length; ++y)
+			{
+				// Update the entity id
+				entityId = arrows->get(x, y);
+
+				// Get and load the corresponding wind vector
+				positionPayload["FacingVector"] = &this->map[x*length + y];
+
+				// Fire off the event
+				EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_ENTITY, positionPayload);
+			}
+		}
+	}
+
 	GameEntityId VectorMap::getArrowId(int posx, int posy)
 	{
-		return this->arrows->get(posx, posy);
+		return this->arrows->get(posx / 250, posy / 250);
 	}
 
 	void VectorMap::CatchEntityListener::handleEvent(payloadmap payload, EventListener* responder)

@@ -31,6 +31,10 @@ WindManager::WindManager(Ogre::SceneManager* sceneManager, World* world)
 	this->mMouseWindEndListener = new MouseWindEndListener(this);
 	EventSystem::getSingleton()->registerListener(mMouseWindEndListener,
 		EventSystem::EventType::MOUSE_POSITION_END);
+
+	this->mTickListener = new TickListener(this);
+	EventSystem::getSingleton()->registerListener(mTickListener,
+		EventSystem::EventType::TICK);
 }
 
 WindManager::~WindManager(void)
@@ -38,6 +42,7 @@ WindManager::~WindManager(void)
 	delete this->mMouseWindUpdateListener;
 	delete this->mMouseWindStartListener;
 	delete this->mMouseWindEndListener;
+	delete this->mTickListener;
 }
 
 void WindManager::createClickPlane()
@@ -58,6 +63,7 @@ bool WindManager::update(void)
 {
 	WindMap mWindMap = *this->mWorld->getWindMap();
 
+	// Smooth current wind vectors
 	for(int i = 0; i < mWindMap.sizeX; i++)
 	{
 		for(int j = 0; j < mWindMap.sizeY; j++)
@@ -126,6 +132,7 @@ bool WindManager::update(void)
 		}
 	}
 
+	// Factor in wind currents
 	std::list<WindCurrent>::iterator current = mWindMap.currents.begin();
 	while (current != mWindMap.currents.end())
 	{
@@ -158,6 +165,7 @@ bool WindManager::update(void)
 			current = mWindMap.currents.erase(current);
 		}
 	}
+
 	return true;
 }
 
@@ -205,4 +213,9 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
 		}
 	}
+}
+
+void WindManager::TickListener::handleEvent(payloadmap payload, EventListener* responder)
+{
+	mParent->mWorld->getWindMap()->updateArrows();
 }
