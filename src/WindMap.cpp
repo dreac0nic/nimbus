@@ -23,6 +23,10 @@ WindMap::~WindMap(void)
 {
 }
 
+void WindMap::update(void)
+{
+}
+
 void WindMap::addWindCurrent(WindCurrent* windCurrent)
 {
 	this->mCurrents.push_back(windCurrent);
@@ -30,20 +34,31 @@ void WindMap::addWindCurrent(WindCurrent* windCurrent)
 
 void WindMap::removeWindCurrent(WindCurrent* windCurrent)
 {
+	// Get an iterator for the given wind current
 	std::list<WindCurrent*>::iterator toDelete =
 		find(this->mCurrents.begin(), this->mCurrents.end(), windCurrent);
 
-	this->mCurrents.erase(toDelete);
+	// If we've found te wind current
+	if(toDelete != this->mCurrents.end())
+	{
+		// Delete the wind current
+		this->mCurrents.erase(toDelete);
+	}
 }
 
 Ogre::Vector2 WindMap::getWindVector(Ogre::Real x, Ogre::Real y)
 {
-	return this->mVectorMap->get(x, y);
+	int xPos, yPos;
+
+	xPos = (int) floor(x / mResolution);
+	yPos = (int) floor(y / mResolution);
+
+	return this->mVectorMap->get(xPos, yPos);
 }
 
 Ogre::Vector2 WindMap::getWindVector(Ogre::Vector2 position)
 {
-	return this->mVectorMap->get(position.x, position.y);
+	return getWindVector(position.x, position.y);
 }
 
 Ogre::Vector2 getAverageWindVector(Ogre::Real topLeftx, Ogre::Real topLefty, Ogre::Real botRightx, Ogre::Real botRighty)
