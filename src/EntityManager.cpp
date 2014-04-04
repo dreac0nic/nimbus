@@ -101,6 +101,19 @@ void Nimbus::EntityManager::CreateEntityListener::handleEvent(payloadmap payload
 			// Fire the event to set the position
 			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_ENTITY, positionalPayload);
 		}
+
+		if(responder != NULL)
+		{
+			// Create the entity ID payload variables
+			payloadmap entityIdPayload;
+			GameEntityId entityId = entity->getEntityId();
+
+			// Store the id in the payload
+			entityIdPayload["EntityId"] = &entityId;
+
+			// Call the responder
+			responder->handleEvent(entityIdPayload);
+		}
 	}
 }
 

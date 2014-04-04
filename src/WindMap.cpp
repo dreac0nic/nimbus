@@ -10,7 +10,6 @@ namespace Nimbus
 	{
 		sizeX = mapSizeX / 250;
 		sizeY = mapSizeY / 250;
-		vectorMap = new Grid<Ogre::Vector2>(mapSizeX, mapSizeY);
 
 		// Initialize the vector map
 		/*for(int x = 0; x < vectorMap->getXDimension(); ++x)
