@@ -121,7 +121,7 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListene
 
 		// If within a screen threshold
 		if(position->x < Camera::getScreenThreshold()*2 ||
-			position->x > (mContainingMode->mCamera->getViewport()->getActualWidth() - Camera::getScreenThreshold())*2 ||
+			position->x > (mContainingMode->mCamera->getViewport()->getActualWidth() - Camera::getScreenThreshold()*2) ||
 			position->y < Camera::getScreenThreshold()*2 ||
 			position->y > (mContainingMode->mCamera->getViewport()->getActualHeight() - Camera::getScreenThreshold()*2))
 		{
