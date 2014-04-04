@@ -152,13 +152,10 @@
     <ClInclude Include="src\WindManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\VectorMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\WindCurrent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Behaviour.h">
+    <ClInclude Include="src\Grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
 

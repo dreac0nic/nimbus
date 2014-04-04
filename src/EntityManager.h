@@ -25,7 +25,7 @@ namespace Nimbus
 	private:
 		// Member variables
 
-		/* The entity factory for the world.
+		/** The entity factory for the world.
 
 		This is a bit nested, but I think it makes the most sense for the factory
 		to be inside the entity manager class. If this is contrary to a previous
@@ -39,6 +39,41 @@ namespace Nimbus
 		// The player entity
 		GameEntity* player;
 
+	protected:
+		// EventListeners
+
+		// Creates entities on demand
+		class CreateEntityListener : 
+			public EventListener
+		{
+		private:
+			// Reference to the factory that contains this listener
+			EntityFactory* mFactory;
+			World* mWorld;
+
+		public:
+			CreateEntityListener(EntityFactory* factory, World* world) : mFactory(factory), mWorld(world) {}
+			virtual ~CreateEntityListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mCreateEntiityListener;
+
+		// Destroys entities on demand
+		class DestroyEntityListener :
+			public EventListener
+		{
+		private:
+			World* mWorld;
+
+		public:
+			DestroyEntityListener(World* world) : mWorld(world) {}
+			virtual ~DestroyEntityListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mDestroyEventListener;
+
 	public:
 		EntityManager(World* world);
 		virtual ~EntityManager(void);
@@ -49,7 +84,7 @@ namespace Nimbus
 		virtual void pause(void);
 		virtual void stop(void);
 
-		/* Configures the entity factory.
+		/** Configures the entity factory.
 
 		I'm trying something a bit different in order to take weight off the
 		constructor. Theoretically this could lead to switching/updating

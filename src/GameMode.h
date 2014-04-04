@@ -34,6 +34,12 @@ namespace Nimbus
 		// The game World
 		World* mWorld;
 
+		// Elapsed time since tick
+		Ogre::Real elapsedTime;
+
+		// The time step between each tick
+		Ogre::Real timePerTick;
+
 		// Wind path creation
 		bool mCreatingWind;
 
@@ -54,7 +60,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
-		};
+		}* mMouseDownListener;
 
 		// Listens for any mouse update events
 		class MouseUpdateListener : 
@@ -70,7 +76,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
-		};
+		}* mMouseUpdateListener;
 
 		// Listens for any mouse up events
 		class MouseUpListener : 
@@ -86,7 +92,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
-		};
+		}* mMouseUpListener;
 
 	public:
 		GameMode(void);

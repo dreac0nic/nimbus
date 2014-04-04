@@ -18,7 +18,7 @@ namespace Nimbus
 		//Ogre::Vector3 mRotation;
 		Ogre::SceneNode* mNode;
 
-		/* Constructor function that initializes all the necessary properties of the
+		/** Constructor function that initializes all the necessary properties of the
 			Renderable behaviour. Called by all the constructors with the appropriate
 			parameters.
 		*/
@@ -27,7 +27,7 @@ namespace Nimbus
 	protected:
 		// Event Listeners
 
-		/* An event listener for catching position updates from the positional behaviour.
+		/** An event listener for catching position updates from the positional behaviour.
 		*/
 		class PositionListener :
 			public EventListener

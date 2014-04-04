@@ -12,10 +12,19 @@ using namespace Ogre;
 
 GameMode::GameMode(void)
 {
+	// Initialize the listeners
+	this->mMouseDownListener = new MouseDownListener(this);
+	this->mMouseUpdateListener = new MouseUpdateListener(this);
+	this->mMouseUpListener = new MouseUpListener(this);
 }
 
 GameMode::~GameMode(void)
 {
+	// Delete the listener objects
+	delete this->mMouseDownListener;
+	delete this->mMouseUpdateListener;
+	delete this->mMouseUpListener;
+
 	// Delete dynamic member variables... I think this is the right place for this.
 	delete this->mEntityMan;
 	delete this->mEnvironmentMan;
@@ -31,6 +40,16 @@ RunMode* GameMode::run(const FrameEvent& evt)
 	// Updating all of the entities through the manager
 	this->mEntityMan->update();
 	mEnvironmentMan->update();
+
+	// Update elapsed time
+	elapsedTime += evt.timeSinceLastEvent;
+
+	// Fire off a tick event if appropriate
+	if(elapsedTime >= timePerTick)
+	{
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TICK);
+		elapsedTime = 0;
+	}
 
 	// Continue to run this runmode
 	return this;
@@ -73,20 +92,32 @@ void GameMode::initialize()
 	this->mSceneMgr->getRootSceneNode()->addChild(this->mWorld->getWorldNode());
 
 	// Listening to events for mouse
-	EventSystem::getSingleton()->registerListener(new MouseDownListener(this), EventSystem::EventType::MOUSE_DOWN);
-	EventSystem::getSingleton()->registerListener(new MouseUpdateListener(this), EventSystem::EventType::MOUSE_UPDATE);
-	EventSystem::getSingleton()->registerListener(new MouseUpListener(this), EventSystem::EventType::MOUSE_UP);
+	EventSystem::getSingleton()->registerListener(this->mMouseDownListener, EventSystem::EventType::MOUSE_DOWN);
+	EventSystem::getSingleton()->registerListener(this->mMouseUpdateListener, EventSystem::EventType::MOUSE_UPDATE);
+	EventSystem::getSingleton()->registerListener(this->mMouseUpListener, EventSystem::EventType::MOUSE_UP);
 
 	// Setting the wind creation to false
 	mCreatingWind = false;
+
+	// Initialize time constants
+	timePerTick = 1; // 1.0 = one tick per second
+	elapsedTime = 0;
 }
 
 void GameMode::pause(void)
 {
+	// Unregister the mouse listeners
+	EventSystem::getSingleton()->unregisterListener(this->mMouseDownListener, EventSystem::EventType::MOUSE_DOWN);
+	EventSystem::getSingleton()->unregisterListener(this->mMouseUpdateListener, EventSystem::EventType::MOUSE_UPDATE);
+	EventSystem::getSingleton()->unregisterListener(this->mMouseUpListener, EventSystem::EventType::MOUSE_UP);
 }
 
 void GameMode::stop(void)
 {
+	// Unregister the mouse listeners
+	EventSystem::getSingleton()->unregisterListener(this->mMouseDownListener, EventSystem::EventType::MOUSE_DOWN);
+	EventSystem::getSingleton()->unregisterListener(this->mMouseUpdateListener, EventSystem::EventType::MOUSE_UPDATE);
+	EventSystem::getSingleton()->unregisterListener(this->mMouseUpListener, EventSystem::EventType::MOUSE_UP);
 }
 
 void GameMode::MouseDownListener::handleEvent(payloadmap payload, EventListener* responder)
