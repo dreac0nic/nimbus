@@ -67,7 +67,7 @@ MeshPtr Tile::getMesh(void)
 	vertices[index++] = this->loc.y;
 
 	// Add center normal to second vector second.
-	Vector3 norm = Vector3::UNIT_Y;
+	Vector3 norm = -Vector3::UNIT_Y;
 
 	vertices[index++] = norm.x;
 	vertices[index++] = norm.y;
@@ -82,11 +82,15 @@ MeshPtr Tile::getMesh(void)
 		vertices[index++] = vec.z;
 
 		// Add the normal for the next point to the array.
-		Vector3 norm = Vector3::UNIT_Y; // Fake normal vector.
+		Vector3 norm = -Vector3::UNIT_Y; // Fake normal vector.
 
 		vertices[index++] = norm.x;
 		vertices[index++] = norm.y;
 		vertices[index++] = norm.z;
+	}
+
+	for(int i = 0; i < vertCount; ++i) {
+		std::cout << "v[" << i << "]: " << (float)vertices[i*vertCount + 0] << ", " << (float)vertices[i*vertCount + 1] << ", " << (float)vertices[i*vertCount + 2] << "; n: " << (float)vertices[i*vertCount + 3] << ", " << (float)vertices[i*vertCount + 4] << ", " << (float)vertices[i*vertCount + 5] << std::endl;
 	}
 
 	// Define vertices color
@@ -99,20 +103,32 @@ MeshPtr Tile::getMesh(void)
 
 	// Define the triangles
 	int faceCount = vertCount - 1; // Face count = vertCount - cent;
+	std::cout << "Faces: " << faceCount << " [" << faceCount*3 << "]" << std::endl;
 	int center = 0;
 	int last = 1;
 	int curr = 2;
 
 	unsigned short* faces = new unsigned short[faceCount*3];
 
+	index = 0;
+
 	for(size_t i = 0; i < faceCount; ++i) {
 		assert(last < vertCount && curr < vertCount); // Panic check.
 
-		faces[i]   = center;
-		faces[++i] = curr;
-		faces[++i] = last;
+		std::cout << "Face " << i << ": ";
+
+		std::cout << center << " [" << index << "], ";
+		faces[index++] = center;
+
+		std::cout << curr << " [" << index << "], ";
+		faces[index++] = curr;
+
+		std::cout << last << " [" << index << "]" << std::endl;
+		faces[index++] = last;
 
 		last = curr++; // Move along the array.
+
+		if(curr >= vertCount) curr = 1;
 	}
 
 	// Create a new shared set of vertices.
@@ -178,6 +194,10 @@ MeshPtr Tile::getMesh(void)
 	mesh->indexData->indexCount = faceCount*3;
 	mesh->indexData->indexStart = 0;
 
+    /// Set bounding information (for culling)
+    tileMesh->_setBounds(AxisAlignedBox(-5,-5,-5,5,5,5));
+    tileMesh->_setBoundingSphereRadius(Math::Sqrt(3*5*5));
+
 	// Signal that the mesh has loaded.
 	tileMesh->load();
 
@@ -206,7 +226,7 @@ bool Tile::addSubMesh(Ogre::MeshPtr& mesh)
 	vertices[index++] = this->loc.y;
 
 	// Add center normal to second vector second.
-	Vector3 norm = Vector3::UNIT_Y;
+	Vector3 norm = -Vector3::UNIT_Y;
 
 	vertices[index++] = norm.x;
 	vertices[index++] = norm.y;
