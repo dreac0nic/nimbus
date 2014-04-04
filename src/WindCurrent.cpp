@@ -9,7 +9,8 @@ using namespace Ogre;
 WindCurrent::WindCurrent(Real strength, bool temporary) :
 	mStrength(strength),
 	mTemporary(temporary),
-	mPath()
+	mPath(),
+	mTimeAlive(0)
 {
 }
 

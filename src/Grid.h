@@ -33,6 +33,14 @@ namespace Nimbus
 		{
 		}
 
+		/** Initializes the entire grid to the given value.
+			@param value The value to which the entire grid should be initialized.
+		*/
+		void initialize(T value)
+		{
+			grid.assign(grid.begin(), grid.end(), value);
+		}
+
 		/** Gets element from location (x, y)
 			@param posx The x position of the element
 			@param posy The y position of the element
