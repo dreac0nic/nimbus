@@ -1,5 +1,6 @@
 #include <list>
 #include <math.h>
+#include <algorithm>
 #include <OgreRoot.h>
 #include "WindCurrent.h"
 #include "WindMap.h"
@@ -10,10 +11,29 @@ WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution) :
 	mResolution(resolution),
 	mCurrents()
 {
+	// Calculate vector map size
+	int vectorMapWidth = (int)floor(worldSize / resolution);
+	int vectorMapHeight = (int)floor(worldSize / resolution);
+
+	// Initialize the vector map
+	this->mVectorMap = new Grid<Ogre::Vector2>(vectorMapWidth, vectorMapHeight);
 }
 
 WindMap::~WindMap(void)
 {
+}
+
+void WindMap::addWindCurrent(WindCurrent* windCurrent)
+{
+	this->mCurrents.push_back(windCurrent);
+}
+
+void WindMap::removeWindCurrent(WindCurrent* windCurrent)
+{
+	std::list<WindCurrent*>::iterator toDelete =
+		find(this->mCurrents.begin(), this->mCurrents.end(), windCurrent);
+
+	this->mCurrents.erase(toDelete);
 }
 
 Ogre::Vector2 WindMap::getVector(double posx, double posy)
@@ -131,4 +151,9 @@ void WindMap::setVector(Ogre::Vector2 position, Ogre::Vector2 strength)
 void WindMap::updateArrows()
 {
 	vectorMap->updateArrows();
+}
+
+std::list<WindCurrent*>* WindMap::getWindCurrents()
+{
+	return &this->mCurrents;
 }

@@ -23,7 +23,7 @@ namespace Nimbus
 		Grid<Ogre::Vector2>* mVectorMap;
 
 		/** The list of wind currents which currently affect the wind map. */
-		std::list<WindCurrent> mCurrents;
+		std::list<WindCurrent*> mCurrents;
 		
 	public:
 		/** Creates a basic wind map.
@@ -76,7 +76,7 @@ namespace Nimbus
 
 		/** Gets the current list of wind currents.
 		*/
-		std::list<WindCurrent>* getWindCurrents();
+		std::list<WindCurrent*>* getWindCurrents();
 	};
 }
 #endif
