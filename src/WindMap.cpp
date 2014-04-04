@@ -60,3 +60,7 @@ std::list<WindCurrent*>* WindMap::getWindCurrents()
 {
 	return &this->mCurrents;
 }
+
+void WindMap::update(void)
+{
+}
