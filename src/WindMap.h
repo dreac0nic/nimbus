@@ -48,6 +48,8 @@ namespace Nimbus
 
 		// Sets Vector2 at Vector2 to vector
 		void setVector(Ogre::Vector2 position, Ogre::Vector2 strength);
+
+		void updateArrows();
 	};
 }
 #endif

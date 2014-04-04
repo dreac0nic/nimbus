@@ -143,4 +143,9 @@ namespace Nimbus
 	{
 		setVector(position.x, position.y, strength.x, strength.y);
 	}
+
+	void WindMap::updateArrows()
+	{
+		vectorMap->updateArrows();
+	}
 }

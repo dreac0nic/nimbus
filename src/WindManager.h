@@ -83,6 +83,22 @@ namespace Nimbus
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mMouseWindEndListener;
 
+		/** Used for things like periodic updates, namely super expensive ones like updating the arrows
+		*/
+		class TickListener :
+			public EventListener
+		{
+		private:
+			WindManager* mParent;
+
+		public:
+			TickListener(WindManager* parent) : mParent(parent) {}
+			virtual ~TickListener() {}
+
+			// From Nimbus::EventListener
+			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mTickListener;
+
 	private:
 		// Stores the game's WindMap
 		//WindMap mWindMap;
