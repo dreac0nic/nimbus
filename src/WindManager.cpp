@@ -177,7 +177,7 @@ bool WindManager::update(void)
 void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	mContainingManager->tempCurrent = WindCurrent();
-	mContainingManager->tempCurrent.strength = 10;
+	mContainingManager->tempCurrent.strength = 1;
 }
 
 void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventListener* responder)

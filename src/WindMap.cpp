@@ -68,7 +68,7 @@ namespace Nimbus
 
 	Ogre::Vector2 WindMap::getVector(Ogre::Vector2 position)
 	{
-		return getVector(position.x, position.y);
+		return getVector(position.x/250, position.y/250);
 	}
 
 	Ogre::Vector2 WindMap::getAreaAverage(double topLeftx, double topLefty, double botRightx, double botRighty)

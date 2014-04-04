@@ -91,5 +91,5 @@ namespace Nimbus
 		{
 			this->mEntityId = *static_cast<GameEntityId*>(payload["EntityId"]);
 		}
-	} 
+	}
 }

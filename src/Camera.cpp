@@ -36,7 +36,7 @@ Nimbus::Camera::~Camera()
 
 void Nimbus::Camera::initialize(SceneManager* sceneMgr)
 {
-	initialize(sceneMgr, &Vector3(0, 50, 80), &Vector3(0,0,-100));
+	initialize(sceneMgr, &Vector3(0, 50, 80), &Vector3(0,0,0));
 }
 
 void Nimbus::Camera::initialize(SceneManager* sceneMgr, Vector3* position, Vector3* facingVector)
