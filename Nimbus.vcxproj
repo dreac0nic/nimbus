@@ -97,12 +97,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)caudio\include;$(SolutionDir)caudio\cAudio\Headers;$(SolutionDir)caudio\cAudio\include;$(SolutionDir)ogre\boost;$(SolutionDir)ogre\include\OIS;$(SolutionDir)ogre\include\OGRE\Overlay;$(SolutionDir)ogre\include\OGRE;$(SolutionDir)ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)caudio\include;$(SolutionDir)caudio\cAudio\include;$(SolutionDir)caudio\cAudio\Headers;$(SolutionDir)ogre\boost;$(SolutionDir)ogre\include\OIS;$(SolutionDir)ogre\include\OGRE\Overlay;$(SolutionDir)ogre\include\OGRE;$(SolutionDir)ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)caudio\cAudio\Debug;$(SolutionDir)ogre\lib\debug;$(SolutionDir)ogre\boost\lib;$(SolutionDir)caudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;cAudio_d.lib%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)caudio\cAudio\Debug;$(SolutionDir)ogre\lib\debug;$(SolutionDir)ogre\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;cAudio_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>$(ProjectDir)CopyFileList.exe includeDLL_d.txt $(ProjectDir)ogre\bin\$(Configuration)\ $(ProjectDir)Build\$(Configuration)\</Command>
