@@ -60,6 +60,7 @@ bool WindManager::update(void)
 
 	for(int i = 0; i < mWindMap.sizeX; i++)
 	{
+		std::stringstream message;
 		for(int j = 0; j < mWindMap.sizeY; j++)
 		{
 			Ogre::Vector2 currentVector = mWindMap.getVector(i, j);
@@ -122,8 +123,12 @@ bool WindManager::update(void)
 					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
 				}
 			}
+			
+			message << "[(" << i << "," << j << "),(" << totalWindX * ORIGININFLUENCE << "," << totalWindY * ORIGININFLUENCE << ")]; ";
+
 			mWindMap.setVector(i, j, totalWindX * ORIGININFLUENCE, totalWindY * ORIGININFLUENCE);
 		}
+		Ogre::LogManager::getSingleton().logMessage(message.str());
 	}
 
 	std::list<WindCurrent>::iterator current = mWindMap.currents.begin();
@@ -164,6 +169,7 @@ bool WindManager::update(void)
 void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	mContainingManager->tempCurrent = WindCurrent();
+	mContainingManager->tempCurrent.strength = 10;
 }
 
 void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventListener* responder)
@@ -193,9 +199,9 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 
 			mContainingManager->tempCurrent.path.push_back(Ogre::Vector2(point.x, point.z));
 
-			std::stringstream message;
+			/*std::stringstream message;
 			message << "Hit at " << point.x << ", " << point.y << ", " << point.z;
-			Ogre::LogManager::getSingleton().logMessage(message.str());
+			Ogre::LogManager::getSingleton().logMessage(message.str());*/
 
 			// Create a representative arrow mesh
 			payloadmap createArrowPayload;
