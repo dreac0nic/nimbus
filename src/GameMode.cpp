@@ -63,6 +63,7 @@ void GameMode::initialize()
 	// Initializing the managers
 	this->mEnvironmentMan->initialize();
 	this->mEntityMan->initialize();
+	this->mWorld->Initialize();
 
 	std::map<std::string, void*> entityType;
 	entityType["EntityType"] = new std::string("Dragon");
@@ -133,7 +134,7 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListene
 			mousePosPayload["ScreenPosition"] = position;
 
 			// Fire the event
-			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION, mousePosPayload);
+			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_UPDATE, mousePosPayload);
 		}
 	}
 }

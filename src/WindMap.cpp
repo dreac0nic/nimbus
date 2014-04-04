@@ -9,13 +9,17 @@ namespace Nimbus
 {
 	WindMap::WindMap(int mapSizeX, int mapSizeY)
 	{
-		sizeX = mapSizeX / 100;
-		sizeY = mapSizeY / 100;
-		vectorMap = new VectorMap(sizeX, sizeY);
+		sizeX = mapSizeX / 250;
+		sizeY = mapSizeY / 250;
 	}
 
 	WindMap::~WindMap(void)
 	{
+	}
+
+	void WindMap::Initialize()
+	{
+		vectorMap = new VectorMap(sizeX, sizeY);
 	}
 
 	Ogre::Vector2 WindMap::getVector(double posx, double posy)

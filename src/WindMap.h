@@ -22,6 +22,9 @@ namespace Nimbus
 		WindMap(int mapSizeX, int mapSizeY);
 		virtual ~WindMap(void);
 
+		// Set up VectorMap
+		void Initialize(void);
+
 		// Stores list of WindCurrents
 		std::list<WindCurrent> currents;
 

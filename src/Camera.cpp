@@ -22,9 +22,9 @@ Nimbus::Camera::Camera() :
 	mFacing(Vector3::ZERO),
 	mPositionDelta(Vector3::ZERO),
 	slowDown(0),
-	accelerationFactor(0.2),
-	accelerationMax(5.0),
-	essentiallyZero(0.1)
+	accelerationFactor((Ogre::Real)0.2),
+	accelerationMax((Ogre::Real)5.0),
+	essentiallyZero((Ogre::Real)0.1)
 {
 	this->mMousePositionListener = new MousePositionListener(this);
 }
@@ -69,7 +69,7 @@ void Nimbus::Camera::initialize(SceneManager* sceneMgr, Vector3* position, Vecto
 	// Register the render window listener
 	WindowEventUtilities::addWindowEventListener(NimbusApplication::getRenderWindow(), this);
 
-	EventSystem::getSingleton()->registerListener(this->mMousePositionListener, EventSystem::EventType::MOUSE_POSITION);
+	EventSystem::getSingleton()->registerListener(this->mMousePositionListener, EventSystem::EventType::MOUSE_POSITION_UPDATE);
 }
 
 void Nimbus::Camera::update(void)

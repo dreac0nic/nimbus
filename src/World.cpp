@@ -22,6 +22,11 @@ World::~World(void)
 	delete this->mWindMap;
 }
 
+void World::Initialize()
+{
+	mWindMap->Initialize();
+}
+
 int World::getCurrentId()
 {
 	return idCounter++;

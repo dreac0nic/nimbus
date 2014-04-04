@@ -9,11 +9,12 @@
 #include "WindMap.h"
 #include "VectorMap.h"
 #include "WindCurrent.h"
+#include "World.h"
 
 using namespace Nimbus;
 
-WindManager::WindManager(Ogre::SceneManager* sceneManager, WindMap* windMap)
-	: mWindPlane(Ogre::Vector3::UNIT_Y, -12), mWindMap(*windMap)
+WindManager::WindManager(Ogre::SceneManager* sceneManager, World* world)
+	: mWindPlane(Ogre::Vector3::UNIT_Y, -12), mWorld(world)// mWindMap(*mWorld->getWindMap())
 {
 	this->mSceneManager = sceneManager;
 
@@ -55,6 +56,8 @@ void WindManager::createClickPlane()
 
 bool WindManager::update(void)
 {
+	WindMap mWindMap = *this->mWorld->getWindMap();
+
 	for(int i = 0; i < mWindMap.sizeX; i++)
 	{
 		for(int j = 0; j < mWindMap.sizeY; j++)
@@ -152,7 +155,7 @@ bool WindManager::update(void)
 			++current;
 		} else 
 		{
-			current = this->mWindMap.currents.erase(current);
+			current = mWindMap.currents.erase(current);
 		}
 	}
 	return true;
@@ -165,7 +168,7 @@ void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventL
 
 void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	mContainingManager->mWindMap.currents.push_back(mContainingManager->tempCurrent);
+	mContainingManager->mWorld->getWindMap()->currents.push_back(mContainingManager->tempCurrent);
 }
 
 void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, EventListener* responder)

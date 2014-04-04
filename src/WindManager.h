@@ -7,6 +7,7 @@
 #include "Manager.h"
 #include "WindMap.h"
 #include "WindCurrent.h"
+#include "World.h"
 
 namespace Nimbus
 {
@@ -84,10 +85,11 @@ namespace Nimbus
 
 	private:
 		// Stores the game's WindMap
-		WindMap mWindMap;
+		//WindMap mWindMap;
+		World* mWorld;
 
 	public:
-		WindManager(Ogre::SceneManager* sceneManager, WindMap* mWindMap);
+		WindManager(Ogre::SceneManager* sceneManager, World* world);
 		virtual ~WindManager(void);
 
 		// From Nimbus::Manager

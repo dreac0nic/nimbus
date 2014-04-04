@@ -18,7 +18,7 @@ namespace Nimbus
 				payloadmap createArrowPayload;
 				std::string type = "Arrow";
 				createArrowPayload["EntityType"] = &type;
-				Ogre::Vector3 pos = Ogre::Vector3(Ogre::Real(i), Ogre::Real(-12), Ogre::Real(j));
+				Ogre::Vector3 pos = Ogre::Vector3(Ogre::Real(i * 250), Ogre::Real(-12), Ogre::Real(j * 250));
 				createArrowPayload["PositionVector"] = &pos;
 				EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
 			}

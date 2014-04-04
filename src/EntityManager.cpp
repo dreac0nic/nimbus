@@ -16,6 +16,7 @@ EntityManager::~EntityManager(void)
 	delete this->mEntityFactory;
 }
 
+// Ensures world is initialized only after EntityManager is prepared
 void EntityManager::initialize(void)
 {
 }
