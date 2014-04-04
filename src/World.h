@@ -59,8 +59,6 @@ namespace Nimbus
 		World(Ogre::SceneManager* sceneManager);
 		virtual ~World(void);
 
-		WindMap windMap;
-
 		// Accessor methods
 		int getCurrentId();
 		GameEntitySet* getEntities() { return this->mEntities; }

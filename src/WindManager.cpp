@@ -12,8 +12,8 @@
 
 using namespace Nimbus;
 
-WindManager::WindManager(Ogre::SceneManager* sceneManager, WindMap windMap)
-	: mWindPlane(Ogre::Vector3::UNIT_Y, -12), mWindMap(windMap)
+WindManager::WindManager(Ogre::SceneManager* sceneManager, WindMap* windMap)
+	: mWindPlane(Ogre::Vector3::UNIT_Y, -12), mWindMap(*windMap)
 {
 	this->mSceneManager = sceneManager;
 

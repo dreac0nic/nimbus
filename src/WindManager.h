@@ -87,7 +87,7 @@ namespace Nimbus
 		WindMap mWindMap;
 
 	public:
-		WindManager(Ogre::SceneManager* sceneManager, WindMap mWindMap);
+		WindManager(Ogre::SceneManager* sceneManager, WindMap* mWindMap);
 		virtual ~WindManager(void);
 
 		// From Nimbus::Manager

@@ -23,7 +23,7 @@ namespace Nimbus
 		World* mWorld;
 
 	public:
-		EnvironmentManager(Ogre::SceneManager* sceneManager);
+		EnvironmentManager(Ogre::SceneManager* sceneManager, World* world);
 		virtual ~EnvironmentManager(void);
 
 		// From Nimbus::Manager

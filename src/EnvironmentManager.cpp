@@ -4,12 +4,11 @@
 
 using namespace Nimbus;
 
-EnvironmentManager::EnvironmentManager(Ogre::SceneManager* sceneManager)
+EnvironmentManager::EnvironmentManager(Ogre::SceneManager* sceneManager, World* world)
 {
-	// Temporary solution
-	mWorld = new World(sceneManager);
+	mWorld = world;
 
-	mWindManager = new WindManager(sceneManager, mWorld->windMap);
+	mWindManager = new WindManager(sceneManager, mWorld->getWindMap());
 }
 
 EnvironmentManager::~EnvironmentManager(void)

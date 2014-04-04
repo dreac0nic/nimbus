@@ -59,7 +59,7 @@ void GameMode::initialize()
 
 	// Construct the world managers
 	this->mEntityMan = new EntityManager(this->mWorld);
-	this->mEnvironmentMan = new EnvironmentManager(this->mSceneMgr);
+	this->mEnvironmentMan = new EnvironmentManager(this->mSceneMgr, this->mWorld);
 
 	// Configure entity types
 	this->mEntityMan->configureEntityTypes("../../assets/scripts/ConfigFiles.ini", this->mWorld);
