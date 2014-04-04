@@ -21,7 +21,7 @@ namespace Nimbus
 		bool mTemporary;
 
 		/// The amount of time the wind current has existed
-		int timeAlive;
+		int mTimeAlive;
 
 		/// The strength of the wind current
 		Ogre::Real mStrength;
