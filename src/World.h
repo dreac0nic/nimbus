@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <OgreSceneNode.h>
-#include "WindMap.h"
 
 namespace Nimbus
 {

@@ -3,8 +3,9 @@
 
 #include <list>
 #include <OgreRoot.h>
-#include "VectorMap.h"
+#include "Grid.h"
 #include "WindCurrent.h"
+#include "VectorMap.h"
 
 namespace Nimbus
 {

@@ -9,7 +9,7 @@ namespace Nimbus
 	// Typedef defining the payload type of an event
 	typedef std::map<std::string, void*> payloadmap;
 
-	/* EventListener is a pure virtual class outlining a class that handles specific events.
+	/** EventListener is a pure virtual class outlining a class that handles specific events.
 	 
 	 The idea behind EventListener being pure virtual means that any object can create
 	 its own subclass of EventListenter, providing handling for their own specific events.
@@ -19,7 +19,7 @@ namespace Nimbus
 	class EventListener
 	{
 	public:
-		/* handleEvent is called when the listener is required to handle an event.
+		/** handleEvent is called when the listener is required to handle an event.
 		 This function should be overridden and implemented in order to handle the specific
 		 event this handler is destined to handle.
 

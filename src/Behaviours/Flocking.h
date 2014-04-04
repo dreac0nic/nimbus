@@ -7,7 +7,7 @@
 
 namespace Nimbus
 {
-	/* Flocking is a behaviour that implements 
+	/** Flocking is a behaviour that implements 
 		grouped Flocking behaviour. The Flocking behaviour gives the entity
 		the ablity to congregate with other entities and float in groups
 		before being tore apart. Q.Q
@@ -16,10 +16,17 @@ namespace Nimbus
 		public Behaviour
 	{
 	private:
-		// Arbitrary constants
+		// Arbitrary constants (which aren't technically constants)
 
-		// The influence factor of each component cloud (divided by the number of components on use)
-		const double componentInfluenceFactor;
+		/** The influence factor of each component cloud (divided by the number of
+			components on use)
+		*/
+		Ogre::Real mComponentInfluenceFactor;
+
+		/** The factor deciding how much the individual movement of the cloud should
+			override the group direction.
+		*/
+		Ogre::Real mComponentOverrideFactor;
 
 		// Member variables
 
@@ -27,15 +34,15 @@ namespace Nimbus
 		Ogre::Vector3 mPositionDelta;
 
 		// The list of component entities
-		std::vector<GameEntityId> mEntities;
+		std::map<GameEntityId, Ogre::Vector3> mEntities;
 
-		/* Called by the constructors to initialize the behaviour. Anything that needs to
+		/** Called by the constructors to initialize the behaviour. Anything that needs to
 			be duplicated among constructors should be put in here.
 		*/
-		void init();
+		void init(Ogre::Real influenceFactor, Ogre::Real overrideFactor);
 
 	protected:
-		/* Updates the direction of the flocking group based on the wind current from a single
+		/** Updates the direction of the flocking group based on the wind current from a single
 			cloud.
 		*/
 		class SoarListener :
@@ -46,51 +53,68 @@ namespace Nimbus
 
 		public:
 			SoarListener(Flocking* parent) : mParent(parent) {}
-			~SoarListener() {}
+			virtual ~SoarListener() {}
 
+			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mSoarListener;
 
+		/** Updates the component entities' deltas. Performs any other, not-per-frame updates.
+		*/
+		class TickListener :
+			public EventListener
+		{
+		private:
+			Flocking* mParent;
+
+		public:
+			TickListener(Flocking* parent) : mParent(parent) {}
+			virtual ~TickListener() {}
+
+			// From Nimbus::EventListener
+			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mTickListener;
+
 	public:
-		/* Default constructor, taking a world pointer.
+		/** Default constructor, taking a world pointer.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 		*/
 		Flocking(BehaviourType type, World* world);
 
-		/* Constructor based of a set of initial settings.
+		/** Constructor based of a set of initial settings.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 			@param intitializingSettings A map of settings used to construct the intial entity.
 		*/
 		Flocking(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
 
-		/* Constructor taking a different behaviour and making a similar one.
+		/** Constructor taking a different behaviour and making a similar one.
 			@param other The template Flocking behaviour.
 			@param world A pointer to the game world.
 			@param id The id for the parent entity.
 		*/
 		Flocking(Flocking* other, World* world, int id);
 
-		/* Virtual destructor for destroying things. */
+		/** Virtual destructor for destroying things. */
 		virtual ~Flocking(void);
 
 		// From: Behaviour
-		/* !! STUBBED !! Starts up the initial behaviour.*/
+		/** !! STUBBED !! Starts up the initial behaviour.*/
 		virtual void startup(void);
 
-		/* !! STUBBED !! Updates the behaviour, influencing the entity. */
+		/** !! STUBBED !! Updates the behaviour, influencing the entity. */
 		virtual void update(void);
 
-		/* !! STUBBED !! Shuts down the behaviour, taking care of any major cleanup. */
+		/** !! STUBBED !! Shuts down the behaviour, taking care of any major cleanup. */
 		virtual void shutdown(void);
 
-		/* Duplicates the entity using the settings given.
+		/** Duplicates the entity using the settings given.
 			Currently merely returns a pointer given by the constructor.
 		*/
 		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
 
-		/* Duplicates the entity based on the current copy.
+		/** Duplicates the entity based on the current copy.
 			This is used to enable use of the prototype pattern.
 		*/
 		virtual Behaviour* clone(int id);

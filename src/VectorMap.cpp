@@ -6,6 +6,10 @@ namespace Nimbus
 {
 	VectorMap::VectorMap(int xLength, int yLength)
 	{
+		this->mCatchEntityListener = new CatchEntityListener();
+
+		this->arrows = new Grid<GameEntityId>(xLength, yLength);
+
 		int tempx = xLength;// / VECTORMAPTOWORLDRATIO;
 		int tempy = yLength;// / VECTORMAPTOWORLDRATIO;
 
@@ -22,7 +26,10 @@ namespace Nimbus
 				createArrowPayload["EntityType"] = &type;
 				Ogre::Vector3 pos = Ogre::Vector3(Ogre::Real(i * 250), Ogre::Real(-12), Ogre::Real(j * 250));
 				createArrowPayload["PositionVector"] = &pos;
-				EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
+				EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload, this->mCatchEntityListener);
+
+				// Store the arrow id that we just created in the corresponding grid location
+				arrows->set(i, j, this->mCatchEntityListener->getEntityId());
 			}
 		}
 		
@@ -46,4 +53,18 @@ namespace Nimbus
 		int tempy = posy / 250;// / VECTORMAPTOWORLDRATIO;
 		map[tempx * length + tempy] = Ogre::Vector2(Ogre::Real(strx), Ogre::Real(stry));
 	}
+
+	GameEntityId VectorMap::getArrowId(int posx, int posy)
+	{
+		return this->arrows->get(posx, posy);
+	}
+
+	void VectorMap::CatchEntityListener::handleEvent(payloadmap payload, EventListener* responder)
+	{
+
+		if(payload.find("EntityId") != payload.end())
+		{
+			this->mEntityId = *static_cast<GameEntityId*>(payload["EntityId"]);
+		}
+	} 
 }
