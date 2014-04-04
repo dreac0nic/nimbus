@@ -11,8 +11,8 @@
 
 namespace Nimbus
 {
-	const double STRENGTHTOSUBTRACT = 1;
-	const double ORIGININFLUENCE = 0.5;
+	const double STRENGTHTOSUBTRACT = 0.033333333333;
+	const double ORIGININFLUENCE = 0.016666666667;
 	const double CORNERINFLUENCE = .10355339059327;
 	const double SIDEINFLUENCE = .1464466094073;
 

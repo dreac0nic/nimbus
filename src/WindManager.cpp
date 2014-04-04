@@ -142,17 +142,17 @@ bool WindManager::update(void)
 			std::list<Ogre::Vector2>::iterator secondPos = current->path.begin();
 			while (secondPos != current->path.end())
 			{
-				Ogre::Vector2 secondVec = mWindMap.getVector(*secondPos);
-
 				if(firstPos != Ogre::Vector2::NEGATIVE_UNIT_X){
-					Ogre::Vector2 firstVec = mWindMap.getVector(firstPos);
-					Ogre::Vector2 temp = Ogre::Vector2((Ogre::Real)((secondVec.x - firstVec.x) * strength), (Ogre::Real)((secondVec.y - firstVec.y) * strength));
+					Ogre::Vector2 temp = (*secondPos - firstPos) * Ogre::Real(strength);
 
-					mWindMap.setVector(firstPos, temp);
+					if(mWindMap.getVector(firstPos).length() < temp.length())
+					{
+						mWindMap.setVector(firstPos, temp);
+					}
 				}
 
 				firstPos = *secondPos;
-				++current;
+				++secondPos;
 			}
 			if(current->temp) {
 				current->strength -= STRENGTHTOSUBTRACT;
