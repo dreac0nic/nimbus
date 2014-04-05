@@ -19,13 +19,14 @@ namespace Nimbus
 		World* mWorld;
 		Ogre::SceneManager* mSceneManager;
 		Ogre::Plane mWindPlane;
-
-	protected:
+		
 		// Setting up the plane that will register the clicks for the wind creation
 		virtual void createClickPlane();
 
+	protected:
 		// Event Listeners
 
+		// ********************************************************************
 		// Listens for the wind update events
 		class MouseWindUpdateListener : 
 			public EventListener
@@ -42,6 +43,7 @@ namespace Nimbus
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mMouseWindUpdateListener;
 
+		// ********************************************************************
 		// Listens for the wind current creation events
 		class MouseWindStartListener : 
 			public EventListener
@@ -58,6 +60,7 @@ namespace Nimbus
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mMouseWindStartListener;
 
+		// ********************************************************************
 		// Listens for the wind current completion events
 		class MouseWindEndListener : 
 			public EventListener
@@ -74,6 +77,7 @@ namespace Nimbus
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mMouseWindEndListener;
 
+		// ********************************************************************
 		/** Used for things like periodic updates, namely super expensive ones like updating the arrows
 		*/
 		class TickListener :
