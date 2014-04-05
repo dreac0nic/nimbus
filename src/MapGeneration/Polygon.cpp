@@ -1,4 +1,4 @@
-#include "Voronoi.h"
+#include "Polygon.h"
 
 using namespace Nimbus::Voronoi;
 

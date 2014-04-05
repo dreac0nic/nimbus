@@ -1,3 +1,4 @@
+#include "Rectangle.h"
 #include "Voronoi.h"
 
 using namespace Nimbus::Voronoi;
