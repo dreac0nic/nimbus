@@ -83,8 +83,8 @@ void WindMap::update(void)
 
 				// Store the scaled delta vector (excuse my [gl]OOP and math)
 				pendingInfluenceVectors.get(
-				cornerCoordinates[corner].x,
-				cornerCoordinates[corner].y).push_back(
+				(int)cornerCoordinates[corner].x,
+				(int)cornerCoordinates[corner].y).push_back(
 					(1 - cornerDistance[corner].length() / this->mAlphaVector.length()) * deltaVector);
 			}
 		}
@@ -110,7 +110,7 @@ void WindMap::update(void)
 			}
 
 			// Calculate the average scaled delta vector
-			averageWindVector /= pendingInfluenceVectors.get(x,y).size();
+			averageWindVector /= Ogre::Real(pendingInfluenceVectors.get(x,y).size());
 
 			// Average the scaled delta vector average and the previous value, storing it back into the vector map
 			this->mVectorMap->set(x,y,
@@ -216,8 +216,4 @@ Ogre::Vector2 WindMap::getAverageWindVector(Ogre::Vector2 topLeft, Ogre::Vector2
 std::list<WindCurrent*>* WindMap::getWindCurrents()
 {
 	return &this->mCurrents;
-}
-
-void WindMap::update(void)
-{
 }

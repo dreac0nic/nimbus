@@ -73,6 +73,7 @@ void WindManager::createClickPlane()
 bool WindManager::update(void)
 {
 	// Yay! Stub!
+	return true;
 }
 
 void WindManager::addPoint(Ogre::Vector2& newPosition)
