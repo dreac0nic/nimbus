@@ -132,6 +132,7 @@ void WindMap::removeWindCurrent(WindCurrent* windCurrent)
 	if(toDelete != this->mCurrents.end())
 	{
 		// Delete the wind current
+		delete *toDelete;
 		this->mCurrents.erase(toDelete);
 	}
 }
