@@ -46,6 +46,16 @@ WindManager::~WindManager(void)
 	delete this->mTickListener;
 }
 
+void createArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
+{
+	// Create a representative arrow mesh
+	payloadmap createArrowPayload;
+	std::string type = "Arrow";
+	createArrowPayload["EntityType"] = &type;
+	createArrowPayload["PositionVector"] = &origin;
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
+}
+
 void WindManager::createClickPlane()
 {
 	// Debug material for wind plane
@@ -111,38 +121,109 @@ std::list<Ogre::Vector2> WindManager::subdivideCurrent(Ogre::Vector2 current)
 	return subdivideList;
 }
 
+Ogre::Vector2 WindManager::getCollisionPoint(Ogre::Ray* collisionRay)
+{
+	std::pair<bool, Ogre::Real> collision = collisionRay->intersects(this->mWindPlane);
+
+	if (!collision.first) {
+		return Ogre::Vector2::ZERO;
+	} else {
+		Ogre::Vector3 collisionVector = collisionRay->getPoint(collision.second);
+		return Ogre::Vector2(collisionVector.x, collisionVector.z);
+	}
+}
+
+void WindManager::generateCurrent(void)
+{
+	// Stub!
+}
+
+void WindManager::generateCurrent(int numVectors)
+{
+	// Stub!
+}
+
+void WindManager::generateCurrent(int numVectors, Ogre::Vector2 startingPosition)
+{
+	// Stub!
+}
+
 void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	// In here, we create a new currentPosition and set it to null. We also call our first
-	// addPoint. Each time this is called, we create a new WindCurrent.
+	// In here, we create a new currentPosition and set it to click position.
+	// We also call our first addPoint. Each time this is called, we create a new WindCurrent.
+	if (payload.find("Context") != payload.end()) {
+		if (*(static_cast<std::string*>(payload["Context"])) != std::string("Wind")) {
+			return;
+		}
+	}
+
+	if (payload.find("WorldRay") != payload.end()) {
+		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
+
+		// These two constants are DEBUG VALUES. These need to change! They
+		// will be determined by user input.
+		const int STRENGTH = 10;
+		const bool TEMPORARY = true;
+
+		mParent->mWindCurrent = new WindCurrent(STRENGTH, TEMPORARY);
+		mParent->addPoint(this->mParent->getCollisionPoint(worldRay));
+	}
 }
 
-void WindManager::generateCurrent(void)
+void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	// Stub!
+	// In this function, we call our final addPoint and then send off our WindCurrent
+	// to the WindMap to handle. We also delete mCurrentPosition and set it to NULL.
+	if (payload.find("Context") != payload.end()) {
+		if (*(static_cast<std::string*>(payload["Context"])) != std::string("Wind")) {
+			return;
+		}
+	}
+
+	if (payload.find("WorldRay") != payload.end()) {
+		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
+
+		// These two constants are DEBUG VALUES. These need to change! They
+		// will be determined by user input.
+		const int STRENGTH = 10;
+		const bool TEMPORARY = true;
+
+		mParent->addPoint(this->mParent->getCollisionPoint(worldRay));
+	}
+
+	// Send off our wind current!
+	mParent->mWorld->getWindMap()->addWindCurrent(mParent->mWindCurrent);
+
+	// Clean up mCurrentPosition
+	delete mParent->mCurrentPosition;
+	mParent->mCurrentPosition = NULL;
 }
 
-void WindManager::generateCurrent(int numVectors)
+void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	// Stub!
+	// The only thing this function needs to do is call addPoint.
+	if (payload.find("Context") != payload.end()) {
+		if (*(static_cast<std::string*>(payload["Context"])) != std::string("Wind")) {
+			return;
+		}
+	}
+
+	if (payload.find("WorldRay") != payload.end()) {
+		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
+
+		// These two constants are DEBUG VALUES. These need to change! They
+		// will be determined by user input.
+		const int STRENGTH = 10;
+		const bool TEMPORARY = true;
+
+		mParent->addPoint(this->mParent->getCollisionPoint(worldRay));
+	}
 }
 
-void WindManager::generateCurrent(int numVectors, Ogre::Vector2 startingPosition)
+void WindManager::TickListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Stub!
-}
-
-void WindManager::generateCurrent(void)
-{
-	// Stub!
-}
-
-void WindManager::generateCurrent(int numVectors)
-{
-	// Stub!
-}
-
-void WindManager::generateCurrent(int numVectors, Ogre::Vector2 startingPosition)
-{
-	// Stub!
+	// This will be calling the windmap update in the future.
+	// It may also be creating random wind currents in the future.
 }
