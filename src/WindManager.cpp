@@ -13,8 +13,9 @@
 
 using namespace Nimbus;
 
-WindManager::WindManager(Ogre::SceneManager* sceneManager, World* world)
-	: mWindPlane(Ogre::Vector3::UNIT_Y, -12), mWorld(world)// mWindMap(*mWorld->getWindMap())
+WindManager::WindManager(Ogre::SceneManager* sceneManager, World* world) :
+	mWindPlane(Ogre::Vector3::UNIT_Y, -12),
+	mWorld(world)
 {
 	this->mSceneManager = sceneManager;
 
@@ -64,119 +65,23 @@ bool WindManager::update(void)
 	// Yay! Stub!
 }
 
-bool oldUpdate(void)
+void WindManager::addPoint(Ogre::Vector2& newPosition)
 {
-	WindMap mWindMap = *this->mWorld->getWindMap();
-
-	// Smooth current wind vectors
-	for(int i = 0; i < mWindMap.sizeX; i++)
+	// If we havent't started making a wind current yet
+	if(mCurrentPosition != NULL)
 	{
-		std::stringstream message;
-		for(int j = 0; j < mWindMap.sizeY; j++)
-		{
-			Ogre::Vector2 currentVector = mWindMap.getVector(i, j);
-			Ogre::Vector2 temp;
-			double totalWindX = currentVector.x;
-			double totalWindY = currentVector.y;
+		// Calculate the delta between the new position and the previous position
+		Ogre::Vector2 deltaVector = newPosition - *mCurrentPosition;
 
-			if(i != 0)
-			{
-				if(j != 0)
-				{
-					temp = mWindMap.getVector(i-1, j-1);
-					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
-					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
-				}
+		// Add the new point to the wind current
+		this->mWindCurrent->addPoint(*mCurrentPosition, deltaVector);
 
-				temp = mWindMap.getVector(i-1, j);
-				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
-				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
-
-				if(j != mWindMap.sizeY-1)
-				{
-					temp = mWindMap.getVector(i-1, j+1);
-					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
-					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
-				}
-			}
-
-			if(j != 0)
-			{
-				temp = mWindMap.getVector(i, j-1);
-				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
-				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
-			}
-
-			if(j != mWindMap.sizeY-1)
-			{
-				temp = mWindMap.getVector(i, j+1);
-				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
-				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
-			}
-
-			if(i != mWindMap.sizeX-1)
-			{
-				if(j != 0)
-				{
-					temp = mWindMap.getVector(i+1, j-1);
-					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
-					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
-				}
-
-				temp = mWindMap.getVector(i+1, j);
-				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
-				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
-
-				if(j != mWindMap.sizeY-1)
-				{
-					temp = mWindMap.getVector(i+1, j+1);
-					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
-					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
-				}
-			}
-			
-			message << "[(" << i << "," << j << "),(" << totalWindX * ORIGININFLUENCE << "," << totalWindY * ORIGININFLUENCE << ")]; ";
-
-			mWindMap.setVector(i, j, totalWindX * ORIGININFLUENCE, totalWindY * ORIGININFLUENCE);
-		}
-		Ogre::LogManager::getSingleton().logMessage(message.str());
+		// Keep the memory clean... hopefully this doesn't have unexpected consequences (jinx!)
+		delete mCurrentPosition;
 	}
 
-	// Factor in wind currents
-	std::list<WindCurrent>::iterator current = mWindMap.currents.begin();
-	while (current != mWindMap.currents.end())
-	{
-		double strength = current->strength;
-
-		if(current->strength > 0){
-			Ogre::Vector2 firstPos = Ogre::Vector2::NEGATIVE_UNIT_X;
-
-			std::list<Ogre::Vector2>::iterator secondPos = current->path.begin();
-			while (secondPos != current->path.end())
-			{
-				if(firstPos != Ogre::Vector2::NEGATIVE_UNIT_X){
-					Ogre::Vector2 temp = (*secondPos - firstPos) * Ogre::Real(strength);
-
-					if(mWindMap.getVector(firstPos).length() < temp.length())
-					{
-						mWindMap.setVector(firstPos, temp);
-					}
-				}
-
-				firstPos = *secondPos;
-				++secondPos;
-			}
-			if(current->temp) {
-				current->strength -= STRENGTHTOSUBTRACT;
-			}
-			++current;
-		} else 
-		{
-			current = mWindMap.currents.erase(current);
-		}
-	}
-
-	return true;
+	// Update the current position, because we're dynamic
+	mCurrentPosition = &newPosition;
 }
 
 void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventListener* responder)

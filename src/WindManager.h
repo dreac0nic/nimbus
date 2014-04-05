@@ -27,13 +27,19 @@ namespace Nimbus
 		Ogre::Plane mWindPlane;
 
 		/** The last position stored for creating a wind current. */
-		Ogre::Vector2 mCurrentPosition;
+		Ogre::Vector2* mCurrentPosition;
 
 		/** The wind current being constructed. */
-		WindCurrent mWindCurrent;
+		WindCurrent* mWindCurrent;
 		
-		// Setting up the plane that will register the clicks for the wind creation
+		/// Setting up the plane that will register the clicks for the wind creation
 		virtual void createClickPlane();
+
+		/** Adds a new position to the wind current being built.
+			@param newPosition The next point to add to our wind current
+				(aka the location of the mouse)
+		*/
+		void addPoint(Ogre::Vector2& newPosition);
 
 	protected:
 		// Event Listeners
