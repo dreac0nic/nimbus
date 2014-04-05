@@ -16,17 +16,29 @@ namespace Nimbus
 	{
 	private:
 		// Member variables
+
+		/** A reference to the game world... it's useful sometimes. */
 		World* mWorld;
+
+		/** The Ogre scene manager. */
 		Ogre::SceneManager* mSceneManager;
+
+		/** The wind plane used for collision with the mouse rays. */
 		Ogre::Plane mWindPlane;
 
-	protected:
+		/** The last position stored for creating a wind current. */
+		Ogre::Vector2 mCurrentPosition;
+
+		/** The wind current being constructed. */
+		WindCurrent mWindCurrent;
+
 		// Setting up the plane that will register the clicks for the wind creation
 		virtual void createClickPlane();
 
+	protected:
 		// Event Listeners
 
-		// Listens for the wind update events
+		/// Listens for the wind update events
 		class MouseWindUpdateListener : 
 			public EventListener
 		{
@@ -42,7 +54,7 @@ namespace Nimbus
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mMouseWindUpdateListener;
 
-		// Listens for the wind current creation events
+		/// Listens for the wind current creation events
 		class MouseWindStartListener : 
 			public EventListener
 		{
