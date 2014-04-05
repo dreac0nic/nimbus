@@ -29,9 +29,9 @@ void WindCurrent::incrementTimer()
 	this->mTimeAlive++;
 }
 
-pathList WindCurrent::getPath()
+pathList* WindCurrent::getPath()
 {
-	return this->mPath;
+	return &this->mPath;
 }
 
 Real WindCurrent::getStrength()

@@ -82,7 +82,6 @@ void GameMode::initialize()
 	// Initializing the managers
 	this->mEnvironmentMan->initialize();
 	this->mEntityMan->initialize();
-	this->mWorld->Initialize();
 
 	std::map<std::string, void*> entityType;
 	entityType["EntityType"] = new std::string("Dragon");

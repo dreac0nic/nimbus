@@ -19,6 +19,9 @@ namespace Nimbus
 		/** The resolution of the vector map grid. */
 		Ogre::Real mResolution;
 
+		/** Arbitrary vector used to define the dimensions of a wind grid tile. */
+		Ogre::Vector2 mAlphaVector;
+
 		/** The vector grid to represent wind strength and direction. */
 		Grid<Ogre::Vector2>* mVectorMap;
 

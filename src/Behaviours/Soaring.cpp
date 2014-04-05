@@ -44,7 +44,7 @@ void Soaring::update(void)
 	payloadmap payload;
 
 	// Get the wind vector and convert it to a 3d vector
-	Vector2 windVector = this->mWorld->getWindMap()->getVector(Vector2(0,0));
+	Vector2 windVector = this->mWorld->getWindMap()->getWindVector(Vector2(0,0));
 	Vector3 windVector3d = Vector3(windVector.x, 0, windVector.y);
 
 	// Fire off the event to let the group know this cloud's contribution
