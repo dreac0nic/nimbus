@@ -22,6 +22,9 @@ namespace Nimbus
 		/** Arbitrary vector used to define the dimensions of a wind grid tile. */
 		Ogre::Vector2 mAlphaVector;
 
+		/** Factor determining how persistent our vector map should be between updates. */
+		Ogre::Real mPersistenceFactor;
+
 		/** The vector grid to represent wind strength and direction. */
 		Grid<Ogre::Vector2>* mVectorMap;
 
