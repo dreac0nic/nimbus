@@ -149,11 +149,14 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListene
 	{
 		Ogre::Vector2* position = static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
 
+		// Not using this for now, because if our mouse skips outside of the threshold
+		// into the middle of the screen, the camera continues to move. To combat this,
+		// we are going to pass all mouse events to our camera.
 		// If within a screen threshold
-		if(position->x < Camera::getScreenThreshold()*2 ||
+		/*if(position->x < Camera::getScreenThreshold()*2 ||
 			position->x > (mContainingMode->mCamera->getViewport()->getActualWidth() - Camera::getScreenThreshold()*2) ||
 			position->y < Camera::getScreenThreshold()*2 ||
-			position->y > (mContainingMode->mCamera->getViewport()->getActualHeight() - Camera::getScreenThreshold()*2))
+			position->y > (mContainingMode->mCamera->getViewport()->getActualHeight() - Camera::getScreenThreshold()*2))*/
 		{
 			// Initialize payload values
 			payloadmap mousePosPayload;
