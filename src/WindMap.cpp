@@ -88,6 +88,9 @@ void WindMap::update(void)
 					(1 - cornerDistance[corner].length() / this->mAlphaVector.length()) * deltaVector);
 			}
 		}
+
+		// Increment the life timer for the wind current
+		(*current)->incrementTimer();
 	}
 
 	// For the each of the pending influence vectors
@@ -113,6 +116,19 @@ void WindMap::update(void)
 			this->mVectorMap->set(x,y,
 				(1- this->mPersistenceFactor) * averageWindVector +
 				(this->mPersistenceFactor) * this->mVectorMap->get(x,y));
+		}
+	}
+
+	// Delete any expired wind currents
+	for(std::list<WindCurrent*>::iterator current = this->mCurrents.begin(); current != this->mCurrents.end(); ++current)
+	{
+		// Temporary currents last 10 seconds (as per GDD... hey it was actually useful guys!)
+		if((*current)->isTemporary() && (*current)->getTimeAlive() > 10)
+		{
+			// Delete the wind current
+			delete *current;
+
+			current = this->mCurrents.erase(current);
 		}
 	}
 }

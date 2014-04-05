@@ -77,7 +77,7 @@ bool WindManager::update(void)
 
 void WindManager::addPoint(Ogre::Vector2& newPosition)
 {
-	// If we havent't started making a wind current yet
+	// If we've already started creating the wind current
 	if(mCurrentPosition != NULL)
 	{
 		// Calculate the delta between the new position and the previous position
@@ -223,7 +223,15 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 
 void WindManager::TickListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	// Stub!
+	// Arbitrary value to decide if we should add random currents... tends to be negative, ergo not generating currents
+	int randomCurrents = rand() % 15 - 10;
+
 	// This will be calling the windmap update in the future.
+	this->mParent->mWorld->getWindMap()->update();
+
 	// It may also be creating random wind currents in the future.
+	while(randomCurrents > 0)
+	{
+		mParent->generateCurrent();
+	}
 }
