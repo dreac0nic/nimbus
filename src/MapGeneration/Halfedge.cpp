@@ -1,4 +1,4 @@
-#include "Voronoi.h"
+#include "Halfedge.h"
 
 using namespace Nimbus::Voronoi;
 
@@ -46,7 +46,7 @@ bool Halfedge::isLeftOf(Point *p){
 	bool rightOfSite, above, fast;
 	double dxp, dyp, dxs, t1, t2, t3, yl;
 
-	topSite = edge->getRightSite();
+	topSite = this->edge->getRightSite();
 	rightOfSite = p->x > topSite->getX();
 	if (rightOfSite && leftRight == LR_LEFT) {
 		return true;
@@ -116,6 +116,7 @@ void Halfedge::initQueue(double ymin, double deltay, int sqrt_nsites){
 	}
 
 	_hash.clear();
+	_hash.assign(_hashSize, NULL);
 
 	for (i = 0; i < _hashSize; ++i) {
 		_hash.at(i) = Halfedge::createDummy();

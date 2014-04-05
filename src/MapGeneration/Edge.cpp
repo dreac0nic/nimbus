@@ -1,4 +1,4 @@
-#include "Voronoi.h"
+#include "Edge.h"
 
 using namespace Nimbus::Voronoi;
 
@@ -349,8 +349,9 @@ Halfedge *Edge::edgeListLeftNeighbor(Point *p){
 			}
 		}
 	}
+	// Note: This halfEdge is not guaranteed to be set. In fact, it only has a left neighbor!
 	/* Now search linear list of halfedges for the correct one */
-	if (halfEdge == _leftEnd || (halfEdge != _rightEnd && halfEdge->isLeftOf(p))) {
+	if (halfEdge == _leftEnd || (halfEdge != _rightEnd && p != NULL && halfEdge->isLeftOf(p))) {
 		do {
 			halfEdge = halfEdge->edgeListRightNeighbor;
 		} while (halfEdge != _rightEnd && halfEdge->isLeftOf(p));

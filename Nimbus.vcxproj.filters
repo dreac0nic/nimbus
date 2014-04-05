@@ -119,5 +119,26 @@
     <ClInclude Include="src\TileEdge.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
+    <ClInclude Include="src\Edge.h">
+      <Filter>Header Files\MapGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rectangle.h">
+      <Filter>Header Files\MapGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Halfedge.h">
+      <Filter>Header Files\MapGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LineSegment.h">
+      <Filter>Header Files\MapGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Polygon.h">
+      <Filter>Header Files\MapGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Site.h">
+      <Filter>Header Files\MapGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vertex.h">
+      <Filter>Header Files\MapGeneration</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

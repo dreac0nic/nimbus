@@ -32,17 +32,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Corner.h" />
+    <ClInclude Include="src\Edge.h" />
     <ClInclude Include="src\EventListener.h" />
     <ClInclude Include="src\EventSystem.h" />
+    <ClInclude Include="src\Halfedge.h" />
     <ClInclude Include="src\InputManager.h" />
+    <ClInclude Include="src\LineSegment.h" />
     <ClInclude Include="src\Manager.h" />
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\MapGeneration\Voronoi.h" />
     <ClInclude Include="src\NimbusApplication.h" />
+    <ClInclude Include="src\Polygon.h" />
+    <ClInclude Include="src\Rectangle.h" />
     <ClInclude Include="src\RunMode.h" />
+    <ClInclude Include="src\Site.h" />
     <ClInclude Include="src\TestMode.h" />
     <ClInclude Include="src\Tile.h" />
     <ClInclude Include="src\TileEdge.h" />
+    <ClInclude Include="src\Vertex.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD12D565-5AB0-44A1-BAAD-B6B8B690D9F7}</ProjectGuid>
