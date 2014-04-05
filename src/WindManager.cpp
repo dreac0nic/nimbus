@@ -83,6 +83,11 @@ void WindManager::addPoint(Ogre::Vector2& newPosition)
 		// Calculate the delta between the new position and the previous position
 		Ogre::Vector2 deltaVector = newPosition - *mCurrentPosition;
 
+		// Create the arrow facing in the direction of the created current
+		createArrow(
+			Ogre::Vector3(mCurrentPosition->x, 12, mCurrentPosition->y),
+			Ogre::Vector3(deltaVector.x, 12, deltaVector.y));
+
 		// Add the new point to the wind current
 		this->mWindCurrent->addPoint(*mCurrentPosition, deltaVector);
 
@@ -94,12 +99,14 @@ void WindManager::addPoint(Ogre::Vector2& newPosition)
 	mCurrentPosition = &newPosition;
 }
 
-std::list<Ogre::Vector2> WindManager::subdivideCurrent(Ogre::Vector2 current)
+std::list<Ogre::Vector2> WindManager::subdivideCurrent(Ogre::Vector2 origin, Ogre::Vector2 current)
 {
 	// The list for storing the subdivided vector
 	std::list<Ogre::Vector2> subdivideList;
 
 	Ogre::Vector2 subVector;
+
+	subdivideList.push_back(origin);
 
 	// While the wind current vector is too long
 	while(current.length() > this->mWorld->getWindMap()->getAlphaVector().length())
@@ -107,15 +114,15 @@ std::list<Ogre::Vector2> WindManager::subdivideCurrent(Ogre::Vector2 current)
 		// Calculate the subvector to the size of the alpha vector
 		subVector = current.normalisedCopy() * this->mWorld->getWindMap()->getAlphaVector().length();
 
+		// Move the origin forward to the end of the next subvector
+		origin += subVector;
+
 		// Store the found subvector in the subdivision list
-		subdivideList.push_back(subVector);
+		subdivideList.push_back(origin + subVector);
 
 		// Cut off the subVector
 		current = current - subVector;
 	}
-
-	// Store the final segment too short to be subdivided
-	subdivideList.push_back(current);
 
 	// Return the subdivided wind current vector
 	return subdivideList;

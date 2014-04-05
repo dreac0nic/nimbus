@@ -44,9 +44,10 @@ namespace Nimbus
 		/** Subdivides the given wind current vector into a list of alpha length (or less) separated
 			vectors representing delta subarrays' positions. This is used so that we hit all wind
 			vectors along the current path in the grid map.
+			@param origin The origin of the wind current vector.
 			@param current The wind current vector to subdivide.
 		*/
-		std::list<Ogre::Vector2> subdivideCurrent(Ogre::Vector2 current);
+		std::list<Ogre::Vector2> subdivideCurrent(Ogre::Vector2 origin, Ogre::Vector2 current);
 
 		/** Generates a new random current with a random number of points 
 			along a random path at a random starting position.
