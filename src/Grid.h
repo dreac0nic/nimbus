@@ -38,7 +38,7 @@ namespace Nimbus
 		*/
 		void initialize(T value)
 		{
-			grid.assign(grid.begin(), grid.end(), value);
+			grid.assign(xLength * yLength, value);
 		}
 
 		/** Gets element from location (x, y)

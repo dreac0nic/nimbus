@@ -174,7 +174,7 @@ void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventL
 		const int STRENGTH = 10;
 		const bool TEMPORARY = true;
 
-		mParent->mWindCurrent = new WindCurrent(STRENGTH, TEMPORARY);
+		mParent->mWindCurrent = new WindCurrent(Ogre::Real(STRENGTH), TEMPORARY);
 		mParent->addPoint(this->mParent->getCollisionPoint(worldRay));
 	}
 }

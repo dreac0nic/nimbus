@@ -199,16 +199,16 @@ Ogre::Vector2 WindMap::getAverageWindVector(Ogre::Vector2 topLeft, Ogre::Vector2
 	// Get all vectors on the windmap between topLeft and botRight
 	for (int x = ceil(topLeft.x / mResolution) * mResolution; x < floor(botRight.x / mResolution) * mResolution; x+=mResolution) {
 		for (int y = floor(topLeft.y / mResolution) * mResolution; y < ceil(botRight.y / mResolution) * mResolution; y+=mResolution) {
-			vectorList.push_back(getWindVector(x, y));
+			vectorList.push_back(getWindVector(Ogre::Real(x), Ogre::Real(y)));
 		}
 	}
 
-	for (int i = 0; i < vectorList.size(); i++)
+	for (size_t i = 0; i < vectorList.size(); i++)
 	{
 		averageVector += vectorList.at(i);
 	}
 
-	averageVector /= vectorList.size();
+	averageVector /= Ogre::Real(vectorList.size());
 
 	return averageVector;
 }
