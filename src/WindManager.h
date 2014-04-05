@@ -55,13 +55,16 @@ namespace Nimbus
 
 		/** Generates a new random current with a given number of points
 			along a random path at a random starting position.
+			@param numVectors The number of vectors to generate for this current
 		*/
-		void generateCurrent(int);
+		void generateCurrent(int numVectors);
 
 		/** Generates a new random current with a given number of points
 			along a random path at a given starting position.
+			@param numVectors The number of vectors to generate for this current
+			@param startingPosition The origin point to start this current at
 		*/
-		void generateCurrent(int, Ogre::Vector2);
+		void generateCurrent(int numVectors, Ogre::Vector2 startingPosition);
 
 	protected:
 		// Event Listeners
