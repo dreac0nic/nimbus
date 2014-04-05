@@ -14,11 +14,13 @@ namespace Nimbus
 	class WindManager :
 		public Manager
 	{
-	protected:
+	private:
 		// Member variables
+		World* mWorld;
 		Ogre::SceneManager* mSceneManager;
 		Ogre::Plane mWindPlane;
 
+	protected:
 		// Setting up the plane that will register the clicks for the wind creation
 		virtual void createClickPlane();
 
@@ -87,11 +89,6 @@ namespace Nimbus
 			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mTickListener;
-
-	private:
-		// Stores the game's WindMap
-		//WindMap mWindMap;
-		World* mWorld;
 
 	public:
 		WindManager(Ogre::SceneManager* sceneManager, World* world);

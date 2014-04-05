@@ -61,6 +61,11 @@ void WindManager::createClickPlane()
 
 bool WindManager::update(void)
 {
+	// Yay! Stub!
+}
+
+bool oldUpdate(void)
+{
 	WindMap mWindMap = *this->mWorld->getWindMap();
 
 	// Smooth current wind vectors
@@ -176,52 +181,21 @@ bool WindManager::update(void)
 
 void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	mContainingManager->tempCurrent = WindCurrent();
-	mContainingManager->tempCurrent.strength = 1;
+	// Stub!
 }
 
 void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	mContainingManager->mWorld->getWindMap()->currents.push_back(mContainingManager->tempCurrent);
+	// Stub!
 }
 
 void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	std::string context = *(static_cast<std::string*>(payload["Context"]));
-
-	if (context.compare("Wind") == 0)
-	{
-		Ogre::Ray* ray = static_cast<Ogre::Ray*>(payload["WorldRay"]);
-		Ogre::Vector2* screenPos = static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
-
-		// Debug material for collision markers
-		Ogre::MaterialPtr debugMarkerMat = Ogre::MaterialManager::getSingleton().create("DebugMarkers", "General");
-		debugMarkerMat->getTechnique(0)->getPass(0)->setAmbient(1,0,0);
-
-		// Testing the ray for collision with the wind plane
-		std::pair<bool, Ogre::Real> result = ray->intersects(this->mContainingManager->mWindPlane);
-
-		if(result.first)
-		{
-			Ogre::Vector3 point = ray->getPoint(result.second);
-
-			mContainingManager->tempCurrent.path.push_back(Ogre::Vector2(point.x, point.z));
-
-			/*std::stringstream message;
-			message << "Hit at " << point.x << ", " << point.y << ", " << point.z;
-			Ogre::LogManager::getSingleton().logMessage(message.str());*/
-
-			// Create a representative arrow mesh
-			payloadmap createArrowPayload;
-			std::string type = "Arrow";
-			createArrowPayload["EntityType"] = &type;
-			createArrowPayload["PositionVector"] = &point;
-			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
-		}
-	}
+	// Stub!
 }
 
 void WindManager::TickListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	mParent->mWorld->getWindMap()->updateArrows();
+	// Stub!
+	// This will be calling the windmap update in the future.
 }
