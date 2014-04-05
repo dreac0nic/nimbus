@@ -64,138 +64,26 @@ bool WindManager::update(void)
 	// Yay! Stub!
 }
 
-bool oldUpdate(void)
-{
-	WindMap mWindMap = *this->mWorld->getWindMap();
-
-	// Smooth current wind vectors
-	for(int i = 0; i < mWindMap.sizeX; i++)
-	{
-		std::stringstream message;
-		for(int j = 0; j < mWindMap.sizeY; j++)
-		{
-			Ogre::Vector2 currentVector = mWindMap.getVector(i, j);
-			Ogre::Vector2 temp;
-			double totalWindX = currentVector.x;
-			double totalWindY = currentVector.y;
-
-			if(i != 0)
-			{
-				if(j != 0)
-				{
-					temp = mWindMap.getVector(i-1, j-1);
-					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
-					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
-				}
-
-				temp = mWindMap.getVector(i-1, j);
-				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
-				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
-
-				if(j != mWindMap.sizeY-1)
-				{
-					temp = mWindMap.getVector(i-1, j+1);
-					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
-					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
-				}
-			}
-
-			if(j != 0)
-			{
-				temp = mWindMap.getVector(i, j-1);
-				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
-				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
-			}
-
-			if(j != mWindMap.sizeY-1)
-			{
-				temp = mWindMap.getVector(i, j+1);
-				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
-				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
-			}
-
-			if(i != mWindMap.sizeX-1)
-			{
-				if(j != 0)
-				{
-					temp = mWindMap.getVector(i+1, j-1);
-					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
-					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
-				}
-
-				temp = mWindMap.getVector(i+1, j);
-				totalWindX += (temp.x - currentVector.x) * SIDEINFLUENCE;
-				totalWindY += (temp.y - currentVector.y) * SIDEINFLUENCE;
-
-				if(j != mWindMap.sizeY-1)
-				{
-					temp = mWindMap.getVector(i+1, j+1);
-					totalWindX += (temp.x - currentVector.x) * CORNERINFLUENCE;
-					totalWindY += (temp.y - currentVector.y) * CORNERINFLUENCE;
-				}
-			}
-			
-			message << "[(" << i << "," << j << "),(" << totalWindX * ORIGININFLUENCE << "," << totalWindY * ORIGININFLUENCE << ")]; ";
-
-			mWindMap.setVector(i, j, totalWindX * ORIGININFLUENCE, totalWindY * ORIGININFLUENCE);
-		}
-		Ogre::LogManager::getSingleton().logMessage(message.str());
-	}
-
-	// Factor in wind currents
-	std::list<WindCurrent>::iterator current = mWindMap.currents.begin();
-	while (current != mWindMap.currents.end())
-	{
-		double strength = current->strength;
-
-		if(current->strength > 0){
-			Ogre::Vector2 firstPos = Ogre::Vector2::NEGATIVE_UNIT_X;
-
-			std::list<Ogre::Vector2>::iterator secondPos = current->path.begin();
-			while (secondPos != current->path.end())
-			{
-				if(firstPos != Ogre::Vector2::NEGATIVE_UNIT_X){
-					Ogre::Vector2 temp = (*secondPos - firstPos) * Ogre::Real(strength);
-
-					if(mWindMap.getVector(firstPos).length() < temp.length())
-					{
-						mWindMap.setVector(firstPos, temp);
-					}
-				}
-
-				firstPos = *secondPos;
-				++secondPos;
-			}
-			if(current->temp) {
-				current->strength -= STRENGTHTOSUBTRACT;
-			}
-			++current;
-		} else 
-		{
-			current = mWindMap.currents.erase(current);
-		}
-	}
-
-	return true;
-}
-
 void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	// Stub!
+	// In here, we create a new currentPosition and set it to null. We also call our first
+	// addPoint. Each time this is called, we create a new WindCurrent.
 }
 
 void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	// Stub!
+	// In this function, we call our final addPoint and then send off our WindCurrent
+	// to the WindMap to handle. We also delete mCurrentPosition and set it to NULL.
 }
 
 void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	// Stub!
+	// The only thing this function needs to do is call addPoint.
 }
 
 void WindManager::TickListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Stub!
 	// This will be calling the windmap update in the future.
+	// It may also be creating random wind currents in the future.
 }
