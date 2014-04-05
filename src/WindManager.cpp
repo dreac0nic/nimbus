@@ -18,7 +18,7 @@ WindManager::WindManager(Ogre::SceneManager* sceneManager, World* world) :
 	mWorld(world)
 {
 	this->mSceneManager = sceneManager;
-	this->mCurrentPosition = NULL;
+	this->mCurrentPosition = Ogre::Vector2::ZERO;
 
 	createClickPlane();
 
@@ -80,25 +80,22 @@ bool WindManager::update(void)
 void WindManager::addPoint(Ogre::Vector2& newPosition)
 {
 	// If we've already started creating the wind current
-	if(mCurrentPosition != NULL)
+	if(mCurrentPosition != Ogre::Vector2::ZERO)
 	{
 		// Calculate the delta between the new position and the previous position
-		Ogre::Vector2 deltaVector = newPosition - *mCurrentPosition;
+		Ogre::Vector2 deltaVector = newPosition - mCurrentPosition;
 
 		// Create the arrow facing in the direction of the created current
 		createArrow(
-			Ogre::Vector3(mCurrentPosition->x, 12, mCurrentPosition->y),
-			Ogre::Vector3(deltaVector.x, 12, deltaVector.y));
+			Ogre::Vector3(mCurrentPosition.x, 0, mCurrentPosition.y),
+			Ogre::Vector3(deltaVector.x, 0, deltaVector.y));
 
 		// Add the new point to the wind current
-		this->mWindCurrent->addPoint(*mCurrentPosition, deltaVector);
-
-		// Keep the memory clean... hopefully this doesn't have unexpected consequences (jinx!)
-		delete mCurrentPosition;
+		this->mWindCurrent->addPoint(mCurrentPosition, deltaVector);
 	}
 
 	// Update the current position, because we're dynamic
-	mCurrentPosition = &newPosition;
+	mCurrentPosition = newPosition;
 }
 
 std::list<Ogre::Vector2> WindManager::subdivideCurrent(Ogre::Vector2 origin, Ogre::Vector2 current)
@@ -192,14 +189,14 @@ void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventLis
 
 	if (payload.find("WorldRay") != payload.end()) {
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
-		Ogre::Vector2 clickDelta = mParent->getCollisionPoint(worldRay) - *mParent->mCurrentPosition;
+		Ogre::Vector2 clickDelta = mParent->getCollisionPoint(worldRay) - mParent->mCurrentPosition;
 
 		// These two constants are DEBUG VALUES. These need to change! They
 		// will be determined by user input.
 		const int STRENGTH = 10;
 		const bool TEMPORARY = true;
 
-		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(*mParent->mCurrentPosition, clickDelta);
+		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(mParent->mCurrentPosition, clickDelta);
 		for (std::list<Ogre::Vector2>::iterator itr = currentVectorList.begin(); itr != currentVectorList.end(); ++itr)
 		{
 			mParent->addPoint(*itr);
@@ -209,9 +206,7 @@ void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventLis
 	// Send off our wind current!
 	mParent->mWorld->getWindMap()->addWindCurrent(mParent->mWindCurrent);
 
-	// Clean up mCurrentPosition
-	delete mParent->mCurrentPosition;
-	mParent->mCurrentPosition = NULL;
+	mParent->mCurrentPosition = Ogre::Vector2::ZERO;
 }
 
 void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
@@ -225,14 +220,14 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 
 	if (payload.find("WorldRay") != payload.end()) {
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
-		Ogre::Vector2 clickDelta = mParent->getCollisionPoint(worldRay) - *mParent->mCurrentPosition;
+		Ogre::Vector2 clickDelta = mParent->getCollisionPoint(worldRay) - mParent->mCurrentPosition;
 
 		// These two constants are DEBUG VALUES. These need to change! They
 		// will be determined by user input.
 		const int STRENGTH = 10;
 		const bool TEMPORARY = true;
 
-		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(*mParent->mCurrentPosition, clickDelta);
+		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(mParent->mCurrentPosition, clickDelta);
 		for (std::list<Ogre::Vector2>::iterator itr = currentVectorList.begin(); itr != currentVectorList.end(); ++itr)
 		{
 			mParent->addPoint(*itr);

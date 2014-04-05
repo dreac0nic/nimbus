@@ -14,11 +14,12 @@ enum Corner {
 	TOP_LEFT = 0, TOP_RIGHT, BOTTOM_RIGHT, BOTTOM_LEFT
 };
 
-WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution) :
+WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offset) :
 	mResolution(resolution),
 	mAlphaVector(Ogre::Vector2(resolution, resolution)),
 	mPersistenceFactor(.5),
-	mCurrents()
+	mCurrents(),
+	mOffset(offset)
 {
 	// Calculate vector map size
 	int vectorMapWidth = (int)floor(worldSize / resolution + .5);
@@ -67,7 +68,7 @@ void WindMap::update(void)
 			cornerDistance.assign(4, Ogre::Vector2::ZERO);
 
 			// Get the approximate position of the wind influence vector in terms of the vector map (rather than in world coordinates)
-			tempDistance = positionVector / this->mResolution;
+			tempDistance = (positionVector + this->mOffset) / this->mResolution;
 
 			// Calculate the corner coordinates
 			cornerCoordinates[Corner::TOP_LEFT] = Ogre::Vector2(floor(tempDistance.x), floor(tempDistance.y));
@@ -162,8 +163,8 @@ Ogre::Vector2 WindMap::getWindVector(Ogre::Real x, Ogre::Real y)
 	int xPos, yPos;
 
 	// Rounding, we do it (there's no round function...)
-	xPos = (int) floor(x / mResolution + .5);
-	yPos = (int) floor(y / mResolution + .5);
+	xPos = (int) floor((x + mOffset.x) / mResolution + .5);
+	yPos = (int) floor((y + mOffset.y) / mResolution + .5);
 
 	return this->mVectorMap->get(xPos, yPos);
 }

@@ -30,6 +30,9 @@ namespace Nimbus
 
 		/** The list of wind currents which currently affect the wind map. */
 		std::list<WindCurrent*> mCurrents;
+
+		/** Offset to world center based on world size. */
+		Ogre::Vector2 mOffset;
 		
 	public:
 		/** Creates a basic wind map.
@@ -37,8 +40,9 @@ namespace Nimbus
 				Right now assumes everything to be square... could change
 			@param resolution The resolution of the vector map in terms of world coordinates.
 				This value is the world distance between each wind vector in the vector map.
+			@param offset The offset to the center of the map.
 		*/
-		WindMap(Ogre::Real worldSize, Ogre::Real resolution);
+		WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offset);
 		virtual ~WindMap(void);
 
 		/** Recalculates the vector map based on the current list of wind currents.

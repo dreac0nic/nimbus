@@ -27,7 +27,7 @@ namespace Nimbus
 		Ogre::Plane mWindPlane;
 
 		/** The last position stored for creating a wind current. */
-		Ogre::Vector2* mCurrentPosition;
+		Ogre::Vector2 mCurrentPosition;
 
 		/** The wind current being constructed. */
 		WindCurrent* mWindCurrent;
