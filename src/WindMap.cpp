@@ -35,7 +35,7 @@ WindMap::~WindMap(void)
 void WindMap::update(void)
 {
 	// Grid to store influence vectors
-	Grid<std::vector<Ogre::Vector2> > pendingInfluenceVectors(this->mVectorMap->getXDimension(), this->mVectorMap->getYDimension());
+	Grid<std::vector<Ogre::Vector2>> pendingInfluenceVectors(this->mVectorMap->getXDimension(), this->mVectorMap->getYDimension());
 
 	// Coordinates of the corners
 	std::vector<Ogre::Vector2> cornerCoordinates;
@@ -111,10 +111,9 @@ void WindMap::update(void)
 				averageWindVector += *vectorList;
 			}
 
-			if(pendingInfluenceVectors.get(x,y).size() != 0)
-			{
+			if (tempList.size() != 0) {
 				// Calculate the average scaled delta vector
-				averageWindVector /= Ogre::Real(pendingInfluenceVectors.get(x,y).size());
+				averageWindVector /= Ogre::Real(tempList.size());
 
 				// Average the scaled delta vector average and the previous value, storing it back into the vector map
 				this->mVectorMap->set(x,y,
@@ -180,18 +179,18 @@ Ogre::Vector2 WindMap::getAverageWindVector(Ogre::Real topLeftx, Ogre::Real topL
 	Ogre::Vector2 averageVector = Ogre::Vector2::ZERO;
 
 	// Get all vectors on the windmap between topLeft and botRight
-	for (int x = ceil(topLeftx / mResolution) * mResolution; x < floor(botRightx / mResolution) * mResolution; x+=mResolution) {
-		for (int y = floor(topLefty / mResolution) * mResolution; y < ceil(botRighty / mResolution) * mResolution; y+=mResolution) {
-			vectorList.push_back(getWindVector(x, y));
+	for (int x = (int)(ceil(topLeftx / mResolution) * mResolution); x < (int)(floor(botRightx / mResolution) * mResolution); x+=(int)mResolution) {
+		for (int y = (int)(floor(topLefty / mResolution) * mResolution); y < (int)(ceil(botRighty / mResolution) * mResolution); y+=(int)mResolution) {
+			vectorList.push_back(getWindVector(Ogre::Real(x), Ogre::Real(y)));
 		}
 	}
 
-	for (int i = 0; i < vectorList.size(); i++)
+	for (size_t i = 0; i < vectorList.size(); i++)
 	{
 		averageVector += vectorList.at(i);
 	}
 
-	averageVector /= vectorList.size();
+	averageVector /= Ogre::Real(vectorList.size());
 
 	return averageVector;
 }
@@ -202,8 +201,8 @@ Ogre::Vector2 WindMap::getAverageWindVector(Ogre::Vector2 topLeft, Ogre::Vector2
 	Ogre::Vector2 averageVector = Ogre::Vector2::ZERO;
 
 	// Get all vectors on the windmap between topLeft and botRight
-	for (int x = ceil(topLeft.x / mResolution) * mResolution; x < floor(botRight.x / mResolution) * mResolution; x+=mResolution) {
-		for (int y = floor(topLeft.y / mResolution) * mResolution; y < ceil(botRight.y / mResolution) * mResolution; y+=mResolution) {
+	for (int x = (int)(ceil(topLeft.x / mResolution) * mResolution); x < (int)(floor(botRight.x / mResolution) * mResolution); x+=(int)mResolution) {
+		for (int y = (int)(floor(topLeft.y / mResolution) * mResolution); y < (int)(ceil(botRight.y / mResolution) * mResolution); y+=(int)mResolution) {
 			vectorList.push_back(getWindVector(Ogre::Real(x), Ogre::Real(y)));
 		}
 	}
