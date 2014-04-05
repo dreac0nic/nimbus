@@ -1,20 +1,13 @@
 #ifndef NIMBUS_WINDMANAGER_H
 #define NIMBUS_WINDMANAGER_H
 
-#include <string>
-#include <OgrePlane.h>
-#include "EventListener.h"
+#include "EventSystem.h"
 #include "Manager.h"
 #include "WindMap.h"
-#include "WindCurrent.h"
 #include "World.h"
 
 namespace Nimbus
 {
-	const double STRENGTHTOSUBTRACT = 0.033333333333;
-	const double ORIGININFLUENCE = 0.016666666667;
-	const double CORNERINFLUENCE = .10355339059327;
-	const double SIDEINFLUENCE = .1464466094073;
 
 	/** Takes input and Updates WindMap
 	*/
@@ -25,7 +18,6 @@ namespace Nimbus
 		// Member variables
 		Ogre::SceneManager* mSceneManager;
 		Ogre::Plane mWindPlane;
-		WindCurrent tempCurrent;
 
 		// Setting up the plane that will register the clicks for the wind creation
 		virtual void createClickPlane();
@@ -37,46 +29,43 @@ namespace Nimbus
 			public EventListener
 		{
 		private:
-			WindManager* mContainingManager;
-			int mCounter;
+			WindManager* mParent;
 
 		public:
-			MouseWindUpdateListener(WindManager* containingManager)
-				{ this->mContainingManager = containingManager; mCounter = 0; }
+			MouseWindUpdateListener(WindManager* parent)
+				{ this->mParent = parent; }
 			virtual ~MouseWindUpdateListener() {}
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mMouseWindUpdateListener;
 
-		// Listens for the wind creation events
+		// Listens for the wind current creation events
 		class MouseWindStartListener : 
 			public EventListener
 		{
 		private:
-			WindManager* mContainingManager;
-			int mCounter;
+			WindManager* mParent;
 
 		public:
 			MouseWindStartListener(WindManager* containingManager)
-				{ this->mContainingManager = containingManager; mCounter = 0; }
+				{ this->mParent = containingManager; }
 			virtual ~MouseWindStartListener() {}
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mMouseWindStartListener;
 
-		// Listens for the wind creation events
+		// Listens for the wind current completion events
 		class MouseWindEndListener : 
 			public EventListener
 		{
 		private:
-			WindManager* mContainingManager;
-			int mCounter;
+			WindManager* mParent;
 
 		public:
 			MouseWindEndListener(WindManager* containingManager)
-				{ this->mContainingManager = containingManager; mCounter = 0; }
+				{ this->mParent = containingManager; }
 			virtual ~MouseWindEndListener() {}
 
 			// From Nimbus::EventListener
@@ -113,4 +102,5 @@ namespace Nimbus
 		virtual bool update(void);
 	};
 }
+
 #endif
