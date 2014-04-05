@@ -101,21 +101,26 @@ void WindMap::update(void)
 			// Reset the average wind vector to zero
 			averageWindVector = Ogre::Vector2::ZERO;
 
+			std::vector<Ogre::Vector2> tempList = pendingInfluenceVectors.get(x,y);
+
 			// Sum all scaled delta vectors
-			for(std::vector<Ogre::Vector2>::iterator vectorList = pendingInfluenceVectors.get(x,y).begin();
-				vectorList != pendingInfluenceVectors.get(x,y).end();
+			for(std::vector<Ogre::Vector2>::iterator vectorList = tempList.begin();
+				vectorList != tempList.end();
 				++vectorList)
 			{
 				averageWindVector += *vectorList;
 			}
 
-			// Calculate the average scaled delta vector
-			averageWindVector /= Ogre::Real(pendingInfluenceVectors.get(x,y).size());
+			if(pendingInfluenceVectors.get(x,y).size() != 0)
+			{
+				// Calculate the average scaled delta vector
+				averageWindVector /= Ogre::Real(pendingInfluenceVectors.get(x,y).size());
 
-			// Average the scaled delta vector average and the previous value, storing it back into the vector map
-			this->mVectorMap->set(x,y,
-				(1- this->mPersistenceFactor) * averageWindVector +
-				(this->mPersistenceFactor) * this->mVectorMap->get(x,y));
+				// Average the scaled delta vector average and the previous value, storing it back into the vector map
+				this->mVectorMap->set(x,y,
+					(1- this->mPersistenceFactor) * averageWindVector +
+					(this->mPersistenceFactor) * this->mVectorMap->get(x,y));
+			}
 		}
 	}
 

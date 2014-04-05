@@ -224,13 +224,18 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 
 	if (payload.find("WorldRay") != payload.end()) {
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
+		Ogre::Vector2 clickDelta =  mParent->getCollisionPoint(worldRay) - *mParent->mCurrentPosition;
 
 		// These two constants are DEBUG VALUES. These need to change! They
 		// will be determined by user input.
 		const int STRENGTH = 10;
 		const bool TEMPORARY = true;
 
-		mParent->addPoint(this->mParent->getCollisionPoint(worldRay));
+		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(*mParent->mCurrentPosition, clickDelta);
+		for (std::list<Ogre::Vector2>::iterator itr = currentVectorList.begin(); itr != currentVectorList.end(); ++itr)
+		{
+			mParent->addPoint(*itr);
+		}
 	}
 }
 
@@ -245,6 +250,10 @@ void WindManager::TickListener::handleEvent(payloadmap payload, EventListener* r
 	// It may also be creating random wind currents in the future.
 	while(randomCurrents > 0)
 	{
+		// Generate a random current
 		mParent->generateCurrent();
+
+		// Decrement the number of random currents needed
+		randomCurrents--;
 	}
 }
