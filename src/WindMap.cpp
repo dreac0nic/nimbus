@@ -63,12 +63,46 @@ Ogre::Vector2 WindMap::getWindVector(Ogre::Vector2 position)
 
 Ogre::Vector2 WindMap::getAverageWindVector(Ogre::Real topLeftx, Ogre::Real topLefty, Ogre::Real botRightx, Ogre::Real botRighty)
 {
+	std::vector<Ogre::Vector2> vectorList;
+	Ogre::Vector2 averageVector = Ogre::Vector2::ZERO;
 
+	// Get all vectors on the windmap between topLeft and botRight
+	for (int x = ceil(topLeftx / mResolution) * mResolution; x < floor(botRightx / mResolution) * mResolution; x+=mResolution) {
+		for (int y = floor(topLefty / mResolution) * mResolution; y < ceil(botRighty / mResolution) * mResolution; y+=mResolution) {
+			vectorList.push_back(getWindVector(x, y));
+		}
+	}
+
+	for (int i = 0; i < vectorList.size(); i++)
+	{
+		averageVector += vectorList.at(i);
+	}
+
+	averageVector /= vectorList.size();
+
+	return averageVector;
 }
 
 Ogre::Vector2 WindMap::getAverageWindVector(Ogre::Vector2 topLeft, Ogre::Vector2 botRight)
 {
+	std::vector<Ogre::Vector2> vectorList;
+	Ogre::Vector2 averageVector = Ogre::Vector2::ZERO;
 
+	// Get all vectors on the windmap between topLeft and botRight
+	for (int x = ceil(topLeft.x / mResolution) * mResolution; x < floor(botRight.x / mResolution) * mResolution; x+=mResolution) {
+		for (int y = floor(topLeft.y / mResolution) * mResolution; y < ceil(botRight.y / mResolution) * mResolution; y+=mResolution) {
+			vectorList.push_back(getWindVector(x, y));
+		}
+	}
+
+	for (int i = 0; i < vectorList.size(); i++)
+	{
+		averageVector += vectorList.at(i);
+	}
+
+	averageVector /= vectorList.size();
+
+	return averageVector;
 }
 
 std::list<WindCurrent*>* WindMap::getWindCurrents()
