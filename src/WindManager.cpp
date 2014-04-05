@@ -18,6 +18,7 @@ WindManager::WindManager(Ogre::SceneManager* sceneManager, World* world) :
 	mWorld(world)
 {
 	this->mSceneManager = sceneManager;
+	this->mCurrentPosition = NULL;
 
 	createClickPlane();
 
@@ -191,7 +192,7 @@ void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventLis
 
 	if (payload.find("WorldRay") != payload.end()) {
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
-		Ogre::Vector2 clickDelta =  mParent->getCollisionPoint(worldRay) - *mParent->mCurrentPosition;
+		Ogre::Vector2 clickDelta = mParent->getCollisionPoint(worldRay) - *mParent->mCurrentPosition;
 
 		// These two constants are DEBUG VALUES. These need to change! They
 		// will be determined by user input.
@@ -224,7 +225,7 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 
 	if (payload.find("WorldRay") != payload.end()) {
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
-		Ogre::Vector2 clickDelta =  mParent->getCollisionPoint(worldRay) - *mParent->mCurrentPosition;
+		Ogre::Vector2 clickDelta = mParent->getCollisionPoint(worldRay) - *mParent->mCurrentPosition;
 
 		// These two constants are DEBUG VALUES. These need to change! They
 		// will be determined by user input.

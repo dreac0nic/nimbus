@@ -139,7 +139,7 @@ void GameMode::MouseDownListener::handleEvent(payloadmap payload, EventListener*
 
 	mContainingMode->mCreatingWind = true;
 
-	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_START/*, termPayload*/);
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_START, mousePosRay);
 }
 
 void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
@@ -206,5 +206,5 @@ void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* r
 
 	mContainingMode->mCreatingWind = false;
 
-	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_END, termPayload);
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_END, mousePosRay);
 }
