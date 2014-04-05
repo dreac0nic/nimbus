@@ -9,11 +9,12 @@ using namespace Nimbus;
 
 WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution) :
 	mResolution(resolution),
+	mAlphaVector(Ogre::Vector2(resolution, resolution)),
 	mCurrents()
 {
 	// Calculate vector map size
-	int vectorMapWidth = (int)floor(worldSize / resolution);
-	int vectorMapHeight = (int)floor(worldSize / resolution);
+	int vectorMapWidth = (int)floor(worldSize / resolution + .5);
+	int vectorMapHeight = (int)floor(worldSize / resolution + .5);
 
 	// Initialize the vector map
 	this->mVectorMap = new Grid<Ogre::Vector2>(vectorMapWidth, vectorMapHeight);
@@ -50,8 +51,9 @@ Ogre::Vector2 WindMap::getWindVector(Ogre::Real x, Ogre::Real y)
 {
 	int xPos, yPos;
 
-	xPos = (int) floor(x / mResolution);
-	yPos = (int) floor(y / mResolution);
+	// Rounding, we do it (there's no round function...)
+	xPos = (int) floor(x / mResolution + .5);
+	yPos = (int) floor(y / mResolution + .5);
 
 	return this->mVectorMap->get(xPos, yPos);
 }

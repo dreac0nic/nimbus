@@ -51,7 +51,7 @@ namespace Nimbus
 			
 			@return A pathList object containing the path of the wind current.
 		*/
-		pathList getPath();
+		pathList* getPath();
 
 		/** Gets the strength of this wind current.
 			
