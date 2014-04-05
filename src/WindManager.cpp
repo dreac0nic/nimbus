@@ -107,3 +107,18 @@ void WindManager::TickListener::handleEvent(payloadmap payload, EventListener* r
 	// This will be calling the windmap update in the future.
 	// It may also be creating random wind currents in the future.
 }
+
+void WindManager::generateCurrent(void)
+{
+	// Stub!
+}
+
+void WindManager::generateCurrent(int numVectors)
+{
+	// Stub!
+}
+
+void WindManager::generateCurrent(int numVectors, Ogre::Vector2 startingPosition)
+{
+	// Stub!
+}

@@ -41,6 +41,21 @@ namespace Nimbus
 		*/
 		void addPoint(Ogre::Vector2& newPosition);
 
+		/** Generates a new random current with a random number of points 
+			along a random path at a random starting position.
+		*/
+		void generateCurrent(void);
+
+		/** Generates a new random current with a given number of points
+			along a random path at a random starting position.
+		*/
+		void generateCurrent(int);
+
+		/** Generates a new random current with a given number of points
+			along a random path at a given starting position.
+		*/
+		void generateCurrent(int, Ogre::Vector2);
+
 	protected:
 		// Event Listeners
 
