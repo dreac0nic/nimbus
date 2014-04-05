@@ -83,6 +83,11 @@ namespace Nimbus
 		/** Gets the current list of wind currents.
 		*/
 		std::list<WindCurrent*>* getWindCurrents();
+
+		/** Unexpectedly gets the alpha vector.
+			@return A vector, that's the alpha vector. I bet you weren't expecting that...
+		*/
+		Ogre::Vector2 getAlphaVector() { return this->mAlphaVector; }
 	};
 }
 #endif

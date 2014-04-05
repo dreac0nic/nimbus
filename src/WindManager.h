@@ -41,6 +41,13 @@ namespace Nimbus
 		*/
 		void addPoint(Ogre::Vector2& newPosition);
 
+		/** Subdivides the given wind current vector into a list of alpha length (or less) separated
+			vectors representing delta subarrays' positions. This is used so that we hit all wind
+			vectors along the current path in the grid map.
+			@param current The wind current vector to subdivide.
+		*/
+		std::list<Ogre::Vector2> subdivideCurrent(Ogre::Vector2 current);
+
 	protected:
 		// Event Listeners
 

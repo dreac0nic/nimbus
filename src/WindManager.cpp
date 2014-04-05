@@ -84,6 +84,33 @@ void WindManager::addPoint(Ogre::Vector2& newPosition)
 	mCurrentPosition = &newPosition;
 }
 
+std::list<Ogre::Vector2> WindManager::subdivideCurrent(Ogre::Vector2 current)
+{
+	// The list for storing the subdivided vector
+	std::list<Ogre::Vector2> subdivideList;
+
+	Ogre::Vector2 subVector;
+
+	// While the wind current vector is too long
+	while(current.length() > this->mWorld->getWindMap()->getAlphaVector().length())
+	{
+		// Calculate the subvector to the size of the alpha vector
+		subVector = current.normalisedCopy() * this->mWorld->getWindMap()->getAlphaVector().length();
+
+		// Store the found subvector in the subdivision list
+		subdivideList.push_back(subVector);
+
+		// Cut off the subVector
+		current = current - subVector;
+	}
+
+	// Store the final segment too short to be subdivided
+	subdivideList.push_back(current);
+
+	// Return the subdivided wind current vector
+	return subdivideList;
+}
+
 void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Stub!
