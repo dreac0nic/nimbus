@@ -13,8 +13,9 @@
 
 using namespace Nimbus;
 
-WindManager::WindManager(Ogre::SceneManager* sceneManager, World* world)
-	: mWindPlane(Ogre::Vector3::UNIT_Y, -12), mWorld(world)// mWindMap(*mWorld->getWindMap())
+WindManager::WindManager(Ogre::SceneManager* sceneManager, World* world) :
+	mWindPlane(Ogre::Vector3::UNIT_Y, -12),
+	mWorld(world)
 {
 	this->mSceneManager = sceneManager;
 
@@ -62,6 +63,25 @@ void WindManager::createClickPlane()
 bool WindManager::update(void)
 {
 	// Yay! Stub!
+}
+
+void WindManager::addPoint(Ogre::Vector2& newPosition)
+{
+	// If we havent't started making a wind current yet
+	if(mCurrentPosition != NULL)
+	{
+		// Calculate the delta between the new position and the previous position
+		Ogre::Vector2 deltaVector = newPosition - *mCurrentPosition;
+
+		// Add the new point to the wind current
+		this->mWindCurrent->addPoint(*mCurrentPosition, deltaVector);
+
+		// Keep the memory clean... hopefully this doesn't have unexpected consequences (jinx!)
+		delete mCurrentPosition;
+	}
+
+	// Update the current position, because we're dynamic
+	mCurrentPosition = &newPosition;
 }
 
 void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventListener* responder)
