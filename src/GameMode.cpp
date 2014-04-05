@@ -121,11 +121,16 @@ void GameMode::stop(void)
 
 void GameMode::MouseDownListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	payloadmap termPayload;
+	// Let's not send a payload for now. This is dependent on the
+	// input development and user interface development to continue.
+	// payloadmap termPayload;
+	// We need to know what was clicked and who should know about it.
+	// That means input delegation to send to overlays/user interface,
+	// wind, or whatnot.
 
 	mContainingMode->mCreatingWind = true;
 
-	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_START, termPayload);
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_START/*, termPayload*/);
 }
 
 void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
