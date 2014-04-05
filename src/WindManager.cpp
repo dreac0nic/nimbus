@@ -113,21 +113,39 @@ std::list<Ogre::Vector2> WindManager::subdivideCurrent(Ogre::Vector2 current)
 
 void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	// Stub!
+	// In here, we create a new currentPosition and set it to null. We also call our first
+	// addPoint. Each time this is called, we create a new WindCurrent.
 }
 
 void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	// Stub!
+	// In this function, we call our final addPoint and then send off our WindCurrent
+	// to the WindMap to handle. We also delete mCurrentPosition and set it to NULL.
 }
 
 void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
 {
-	// Stub!
+	// The only thing this function needs to do is call addPoint.
 }
 
 void WindManager::TickListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Stub!
 	// This will be calling the windmap update in the future.
+	// It may also be creating random wind currents in the future.
+}
+
+void WindManager::generateCurrent(void)
+{
+	// Stub!
+}
+
+void WindManager::generateCurrent(int numVectors)
+{
+	// Stub!
+}
+
+void WindManager::generateCurrent(int numVectors, Ogre::Vector2 startingPosition)
+{
+	// Stub!
 }

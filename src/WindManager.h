@@ -48,6 +48,21 @@ namespace Nimbus
 		*/
 		std::list<Ogre::Vector2> subdivideCurrent(Ogre::Vector2 current);
 
+		/** Generates a new random current with a random number of points 
+			along a random path at a random starting position.
+		*/
+		void generateCurrent(void);
+
+		/** Generates a new random current with a given number of points
+			along a random path at a random starting position.
+		*/
+		void generateCurrent(int);
+
+		/** Generates a new random current with a given number of points
+			along a random path at a given starting position.
+		*/
+		void generateCurrent(int, Ogre::Vector2);
+
 	protected:
 		// Event Listeners
 
