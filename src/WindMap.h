@@ -5,7 +5,8 @@
 #include <OgreRoot.h>
 #include "Grid.h"
 #include "WindCurrent.h"
-#include "VectorMap.h"
+#include "EventSystem.h"
+#include "GameEntity.h"
 
 namespace Nimbus
 {
@@ -33,6 +34,38 @@ namespace Nimbus
 
 		/** Offset to world center based on world size. */
 		Ogre::Vector2 mOffset;
+
+		/** A grid for storing the entity ids of arrows for showing the wind map. */
+		Grid<GameEntityId>* mArrowGrid;
+
+		/** Creates an arrow grid for the wind map.
+		*/
+		void createArrowGrid();
+
+		/** Updates the arrow grid.
+		*/
+		void updateArrowGrid();
+
+	protected:
+		// Event listener
+
+		/** Catches the id of a created arrow. */
+		class ArrowCatcher :
+			public EventListener
+		{
+		private:
+			GameEntityId entityId;
+
+		public:
+			ArrowCatcher() : entityId(0) {}
+			virtual ~ArrowCatcher() {}
+
+			/** Gets the entity id returned from the event. */
+			GameEntityId getEntityId() { return entityId; }
+
+			// Form Nimbus::EventListener
+			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mArrowCatcher;
 		
 	public:
 		/** Creates a basic wind map.

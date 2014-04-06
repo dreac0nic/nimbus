@@ -2,7 +2,6 @@
 #include <math.h>
 #include <algorithm>
 #include <OgreRoot.h>
-#include "WindCurrent.h"
 #include "WindMap.h"
 
 using namespace Nimbus;
@@ -25,18 +24,26 @@ WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offs
 	int vectorMapWidth = (int)floor(worldSize / resolution + .5);
 	int vectorMapHeight = (int)floor(worldSize / resolution + .5);
 
-	// Initialize the vector map
+	// Initialize the vector map to the correct size and to zero vectors
 	this->mVectorMap = new Grid<Ogre::Vector2>(vectorMapWidth, vectorMapHeight);
+	this->mVectorMap->initialize(Ogre::Vector2::ZERO);
+
+	// Create the arrow catcher listener
+	this->mArrowCatcher = new ArrowCatcher();
+
+	this->mArrowGrid = NULL;
 }
 
 WindMap::~WindMap(void)
 {
+	delete this->mVectorMap;
+	delete this->mArrowCatcher;
 }
 
 void WindMap::update(void)
 {
 	// Grid to store influence vectors
-	Grid<std::vector<Ogre::Vector2>> pendingInfluenceVectors(this->mVectorMap->getXDimension(), this->mVectorMap->getYDimension());
+	Grid<std::vector<Ogre::Vector2>*> pendingInfluenceVectors(this->mVectorMap->getXDimension(), this->mVectorMap->getYDimension());
 
 	// Coordinates of the corners
 	std::vector<Ogre::Vector2> cornerCoordinates;
@@ -51,7 +58,13 @@ void WindMap::update(void)
 	Ogre::Vector2 averageWindVector;
 
 	// Initialize the pending influence vectors grid
-	pendingInfluenceVectors.initialize(std::vector<Ogre::Vector2>());
+	for(int x = 0; x < pendingInfluenceVectors.getXDimension(); ++x)
+	{
+		for(int y = 0; y < pendingInfluenceVectors.getYDimension(); ++y)
+		{
+			pendingInfluenceVectors.set(x,y, new std::vector<Ogre::Vector2>());
+		}
+	}
 
 	// Go through each wind current
 	for(std::list<WindCurrent*>::iterator current = this->mCurrents.begin(); current != this->mCurrents.end(); ++current)
@@ -85,7 +98,7 @@ void WindMap::update(void)
 				// Store the scaled delta vector (excuse my [gl]OOP and math)
 				pendingInfluenceVectors.get(
 				(int)cornerCoordinates[corner].x,
-				(int)cornerCoordinates[corner].y).push_back(
+				(int)cornerCoordinates[corner].y)->push_back(
 					(1 - cornerDistance[corner].length() / this->mAlphaVector.length()) * deltaVector);
 			}
 		}
@@ -102,19 +115,19 @@ void WindMap::update(void)
 			// Reset the average wind vector to zero
 			averageWindVector = Ogre::Vector2::ZERO;
 
-			std::vector<Ogre::Vector2> tempList = pendingInfluenceVectors.get(x,y);
+			std::vector<Ogre::Vector2>* tempList = pendingInfluenceVectors.get(x,y);
 
 			// Sum all scaled delta vectors
-			for(std::vector<Ogre::Vector2>::iterator vectorList = tempList.begin();
-				vectorList != tempList.end();
+			for(std::vector<Ogre::Vector2>::iterator vectorList = tempList->begin();
+				vectorList != tempList->end();
 				++vectorList)
 			{
 				averageWindVector += *vectorList;
 			}
 
-			if (tempList.size() != 0) {
+			if (tempList->size() != 0) {
 				// Calculate the average scaled delta vector
-				averageWindVector /= Ogre::Real(tempList.size());
+				averageWindVector /= Ogre::Real(tempList->size());
 
 				// Average the scaled delta vector average and the previous value, storing it back into the vector map
 				this->mVectorMap->set(x,y,
@@ -136,6 +149,20 @@ void WindMap::update(void)
 			current = this->mCurrents.erase(current);
 		}
 	}
+
+	// Create the arrow grid if necessary
+	if(this->mArrowGrid == NULL)
+	{
+		createArrowGrid();
+	}
+	// Otherwise, update the arrows
+	else
+	{
+		updateArrowGrid();
+	}
+
+	// Erase all allocated lists
+	pendingInfluenceVectors.erase();
 }
 
 void WindMap::addWindCurrent(WindCurrent* windCurrent)
@@ -221,4 +248,82 @@ Ogre::Vector2 WindMap::getAverageWindVector(Ogre::Vector2 topLeft, Ogre::Vector2
 std::list<WindCurrent*>* WindMap::getWindCurrents()
 {
 	return &this->mCurrents;
+}
+
+void WindMap::createArrowGrid()
+{
+	payloadmap createArrowPayload;
+	std::string type = "BlueArrow";
+	Ogre::Vector3 position;
+
+	createArrowPayload["EntityType"] = &type;
+	createArrowPayload["PositionVector"] = &position;
+
+	// Create the arrow grid
+	mArrowGrid = new Grid<GameEntityId>(this->mVectorMap->getXDimension(), this->mVectorMap->getYDimension());
+
+	// Initialize the grid to entity ids of 0
+	mArrowGrid->initialize(0);
+
+	// Create the arrows
+	for(int x = 0; x < mArrowGrid->getXDimension(); ++x)
+	{
+		for(int y = 0; y < mArrowGrid->getYDimension(); ++y)
+		{
+			// Calculate the position of the arrow
+			position = this->mResolution * Ogre::Vector3(x, 0, y) - Ogre::Vector3(mOffset.x , 0, mOffset.y);
+
+			// Create an arrow and capture the arrow id
+			EventSystem::getSingleton()->fireEvent(
+				EventSystem::EventType::CREATE_ENTITY,
+				createArrowPayload,
+				this->mArrowCatcher);
+
+			// Store the entity id in the correct location
+			mArrowGrid->set(x, y, this->mArrowCatcher->getEntityId());
+		}
+	}
+
+	// Update the arrow grid facing vectors
+	updateArrowGrid();
+}
+
+void WindMap::updateArrowGrid()
+{
+	// The update payload
+	payloadmap updateArrowPayload;
+	GameEntityId entityId;
+	Ogre::Vector2 faceVector;
+	Ogre::Vector3 face3dVector;
+
+	// Preload the update payload
+	updateArrowPayload["EntityId"] = &entityId;
+	updateArrowPayload["FacingVector"] = &face3dVector;
+
+	// Update the facing position of each arrow
+	for(int x = 0; x < this->mArrowGrid->getXDimension(); ++x)
+	{
+		for(int y = 0; y < this->mArrowGrid->getYDimension(); ++y)
+		{
+			// Get the id of the arrow to update
+			entityId = this->mArrowGrid->get(x, y);
+
+			// Get the corresponding wind direction of the arrow
+			faceVector = this->mVectorMap->get(x, y);
+
+			// Convert the wind direction to 3d
+			face3dVector = Ogre::Vector3(faceVector.x, 0, faceVector.y);
+
+			// Send the position update event
+			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_ENTITY, updateArrowPayload);
+		}
+	}
+}
+
+void WindMap::ArrowCatcher::handleEvent(payloadmap payload, EventListener* responder)
+{
+	if(payload.find("EntityId") != payload.end())
+	{
+		this->entityId = *static_cast<GameEntityId*>(payload["EntityId"]);
+	}
 }

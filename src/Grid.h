@@ -41,6 +41,14 @@ namespace Nimbus
 			grid.assign(xLength * yLength, value);
 		}
 
+		/** Erases all the elements in the grid
+			(though it may not delete them if they're pointers)
+		*/
+		void erase()
+		{
+			grid.clear();
+		}
+
 		/** Gets element from location (x, y)
 			@param posx The x position of the element
 			@param posy The y position of the element
