@@ -13,6 +13,8 @@
 
 using namespace Nimbus;
 
+enum ArrowType {RED, BLUE};
+
 WindManager::WindManager(Ogre::SceneManager* sceneManager, World* world) :
 	mWindPlane(Ogre::Vector3::UNIT_Y, -12),
 	mWorld(world)
@@ -47,34 +49,33 @@ WindManager::~WindManager(void)
 	delete this->mTickListener;
 }
 
-void createRedArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
+void createArrow(Ogre::Vector3 origin, Ogre::Vector3 facing, ArrowType arrow)
 {
-	// Debug output
-	std::cerr << "RED:  origin(" << origin.x << ", " << origin.z << "), "
-		<< "facing(" << facing.x << ", " << facing.z << ")\n";
-
 	// Create a representative arrow mesh
 	payloadmap createArrowPayload;
-	std::string type = "Arrow";
+
+	// Choose what kind of arrow we're creating
+	std::string type;
+	switch(arrow) {
+	case ArrowType::BLUE:
+		type = "BlueArrow";
+		break;
+	case ArrowType::RED:
+		type = "Arrow";
+		break;
+	}
+
 	createArrowPayload["EntityType"] = &type;
 	createArrowPayload["PositionVector"] = &origin;
 	createArrowPayload["FacingVector"] = &facing;
-	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
-}
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);}
 
-void createBlueArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
+void createArrow(Ogre::Vector2 origin, Ogre::Vector2 facing, ArrowType arrow)
 {
-	// Debug output
-	std::cerr << "BLUE: origin(" << origin.x << ", " << origin.z << "), "
-		<< "facing(" << facing.x << ", " << facing.z << ")\n";
+	Ogre::Vector3 origin3d = Ogre::Vector3(origin.x, (arrow == ArrowType::RED) ? -12 : -10, origin.y);
+	Ogre::Vector3 facing3d = Ogre::Vector3(origin.x, 0, origin.y);
 
-	// Create a representative arrow mesh
-	payloadmap createArrowPayload;
-	std::string type = "BlueArrow";
-	createArrowPayload["EntityType"] = &type;
-	createArrowPayload["PositionVector"] = &origin;
-	createArrowPayload["FacingVector"] = &facing;
-	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
+	createArrow(origin3d, facing3d, arrow);
 }
 
 void WindManager::createClickPlane()
