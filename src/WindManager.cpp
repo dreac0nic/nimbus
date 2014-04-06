@@ -72,7 +72,7 @@ void createArrow(Ogre::Vector3 origin, Ogre::Vector3 facing, ArrowType arrow)
 
 void createArrow(Ogre::Vector2 origin, Ogre::Vector2 facing, ArrowType arrow)
 {
-	Ogre::Vector3 origin3d = Ogre::Vector3(origin.x, (arrow == ArrowType::RED) ? -12 : -10, origin.y);
+	Ogre::Vector3 origin3d = Ogre::Vector3(origin.x, (arrow == ArrowType::RED) ? -12.0f : -10.0f, origin.y);
 	Ogre::Vector3 facing3d = Ogre::Vector3(facing.x, 0, facing.y);
 
 	createArrow(origin3d, facing3d, arrow);
