@@ -16,7 +16,7 @@ enum Corner {
 WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offset, Ogre::Real minimumCurrentLength) :
 	mResolution(resolution),
 	mAlphaVector(Ogre::Vector2(resolution, resolution)),
-	mPersistenceFactor(.5),
+	mPersistenceFactor(.7),
 	mCurrents(),
 	mOffset(offset),
 	mMinimumCurrentLength(minimumCurrentLength)
