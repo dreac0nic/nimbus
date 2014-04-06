@@ -54,6 +54,18 @@ void createArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
 	std::string type = "Arrow";
 	createArrowPayload["EntityType"] = &type;
 	createArrowPayload["PositionVector"] = &origin;
+	createArrowPayload["FacingVector"] = &facing;
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
+}
+
+void createBlueArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
+{
+	// Create a representative arrow mesh
+	payloadmap createArrowPayload;
+	std::string type = "BlueArrow";
+	createArrowPayload["EntityType"] = &type;
+	createArrowPayload["PositionVector"] = &origin;
+	createArrowPayload["FacingVector"] = &facing;
 	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createArrowPayload);
 }
 
@@ -86,9 +98,9 @@ void WindManager::addPoint(Ogre::Vector2& newPosition)
 		Ogre::Vector2 deltaVector = newPosition - mCurrentPosition;
 
 		// Create the arrow facing in the direction of the created current
-		createArrow(
+		/*createArrow(
 			Ogre::Vector3(mCurrentPosition.x, 0, mCurrentPosition.y),
-			Ogre::Vector3(deltaVector.x, 0, deltaVector.y));
+			Ogre::Vector3(deltaVector.x, 0, deltaVector.y));//*/
 
 		// Add the new point to the wind current
 		this->mWindCurrent->addPoint(mCurrentPosition, deltaVector);
@@ -135,6 +147,8 @@ Ogre::Vector2 WindManager::getCollisionPoint(Ogre::Ray* collisionRay)
 		return Ogre::Vector2::ZERO;
 	} else {
 		Ogre::Vector3 collisionVector = collisionRay->getPoint(collision.second);
+
+		createBlueArrow(collisionVector, Ogre::Vector3::ZERO);
 		return Ogre::Vector2(collisionVector.x, collisionVector.z);
 	}
 }
