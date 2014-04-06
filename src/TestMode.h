@@ -2,6 +2,7 @@
 #define TESTMODE_H
 
 #include "RunMode.h"
+#include "EventSystem.h"
 
 namespace Nimbus
 {
