@@ -13,7 +13,7 @@
 #include <OgreFont.h>
 #include <OgreFontManager.h>
 
-using namespace Nimbus;
+using namespace Nimbus; 
 using namespace Ogre;
 
 TestMode::TestMode(void)
