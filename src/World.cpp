@@ -13,7 +13,7 @@ World::World(Ogre::SceneManager* sceneManager):
 	this->mSceneManager = sceneManager;
 	this->mWorldNode = mSceneManager->createSceneNode();
 	this->mEntities = new GameEntitySet();
-	this->mWindMap = new WindMap(worldBounds.x, 50.0F /* 50 is an arbitrary debug value. CHANGE THIS. */, worldBounds/2.0F);
+	this->mWindMap = new WindMap(worldBounds.x, 50.0F /* 50 is an arbitrary debug value. CHANGE THIS. */, worldBounds/2.0F, 5.0f);
 }
 
 World::~World(void)
