@@ -49,6 +49,10 @@ WindManager::~WindManager(void)
 
 void createArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
 {
+	// Debug output
+	std::cerr << "origin(" << origin.x << ", " << origin.z << "), "
+		<< "facing(" << facing.x << ", " << facing.z << ")\n";
+
 	// Create a representative arrow mesh
 	payloadmap createArrowPayload;
 	std::string type = "Arrow";
@@ -149,6 +153,7 @@ Ogre::Vector2 WindManager::getCollisionPoint(Ogre::Ray* collisionRay)
 		Ogre::Vector3 collisionVector = collisionRay->getPoint(collision.second);
 
 		createBlueArrow(collisionVector, Ogre::Vector3::ZERO);
+
 		return Ogre::Vector2(collisionVector.x, collisionVector.z);
 	}
 }
