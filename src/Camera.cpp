@@ -23,7 +23,7 @@ Nimbus::Camera::Camera() :
 	mPositionDelta(Vector3::ZERO),
 	slowDown(0),
 	accelerationFactor((Ogre::Real)0.2),
-	accelerationMax((Ogre::Real)5.0),
+	accelerationMax((Ogre::Real)0.5),
 	essentiallyZero((Ogre::Real)0.1)
 {
 	this->mMousePositionListener = new MousePositionListener(this);
@@ -36,7 +36,7 @@ Nimbus::Camera::~Camera()
 
 void Nimbus::Camera::initialize(SceneManager* sceneMgr)
 {
-	initialize(sceneMgr, &Vector3(0, 50, 80), &Vector3(0,0,0));
+	initialize(sceneMgr, &Vector3(0, 300, 0), &Vector3(0,-300,0));
 }
 
 void Nimbus::Camera::initialize(SceneManager* sceneMgr, Vector3* position, Vector3* facingVector)
