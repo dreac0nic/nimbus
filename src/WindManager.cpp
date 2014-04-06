@@ -64,6 +64,7 @@ void createRedArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
 
 void createBlueArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
 {
+	// Debug output
 	std::cerr << "BLUE: origin(" << origin.x << ", " << origin.z << "), "
 		<< "facing(" << facing.x << ", " << facing.z << ")\n";
 
@@ -107,15 +108,10 @@ void WindManager::addPoint(Ogre::Vector2& newPosition)
 		Ogre::Vector2 deltaVector = newPosition - mCurrentPosition;
 
 		// Create the arrow facing in the direction of the created current
-<<<<<<< HEAD
 		/*createRedArrow(
 			Ogre::Vector3(mCurrentPosition.x, 0, mCurrentPosition.y),
 			Ogre::Vector3(deltaVector.x, 0, deltaVector.y));//*/
-=======
-		/*createArrow(
-			Ogre::Vector3(mCurrentPosition.x, -12, mCurrentPosition.y),
-			Ogre::Vector3(deltaVector.x, -12, deltaVector.y));//*/
->>>>>>> 9de502bde2f1bbfc22d1b65aa4f287645e50b067
+		createBlueArrow(Ogre::Vector3(newPosition.x , -12, newPosition.y), 50*Ogre::Vector3::UNIT_Z);
 
 		// Add the new point to the wind current
 		this->mWindCurrent->addPoint(mCurrentPosition, deltaVector);
@@ -148,6 +144,7 @@ std::list<Ogre::Vector2> WindManager::subdivideCurrent(Ogre::Vector2 origin, Ogr
 		current -= subVector;
 	}
 
+	// Add the final point of the wind current
 	subdivideList.push_back(origin + current);
 
 	// Return the subdivided wind current vector
@@ -162,8 +159,6 @@ Ogre::Vector2 WindManager::getCollisionPoint(Ogre::Ray* collisionRay)
 		return Ogre::Vector2::ZERO;
 	} else {
 		Ogre::Vector3 collisionVector = collisionRay->getPoint(collision.second);
-
-		createBlueArrow(collisionVector, Ogre::Vector3::ZERO);
 
 		return Ogre::Vector2(collisionVector.x, collisionVector.z);
 	}
@@ -205,7 +200,9 @@ void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventL
 		// with deleting them.
 
 		mParent->mWindCurrent = new WindCurrent(Ogre::Real(STRENGTH), TEMPORARY);
-		mParent->addPoint(this->mParent->getCollisionPoint(worldRay));
+
+		Ogre::Vector2 collisionPoint = this->mParent->getCollisionPoint(worldRay);
+		mParent->addPoint(collisionPoint);
 	}
 }
 
@@ -221,13 +218,12 @@ void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventLis
 
 	if (payload.find("WorldRay") != payload.end()) {
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
-		Ogre::Vector2 clickDelta = mParent->getCollisionPoint(worldRay) - mParent->mCurrentPosition;
+		Ogre::Vector2 collisionPoint = this->mParent->getCollisionPoint(worldRay);
+		Ogre::Vector2 clickDelta = collisionPoint - mParent->mCurrentPosition;
 
 		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(mParent->mCurrentPosition, clickDelta);
 		for (std::list<Ogre::Vector2>::iterator itr = currentVectorList.begin(); itr != currentVectorList.end(); ++itr)
 		{
-			createRedArrow(Ogre::Vector3(mParent->mCurrentPosition.x, -10, mParent->mCurrentPosition.y), Ogre::Vector3::ZERO);
-			std::cerr << "Add point at (" << itr->x << ", " << itr->y << ")\n";
 			mParent->addPoint(*itr);
 		}
 	}
@@ -249,13 +245,18 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 
 	if (payload.find("WorldRay") != payload.end()) {
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
-		Ogre::Vector2 clickDelta = mParent->getCollisionPoint(worldRay) - mParent->mCurrentPosition;
+		Ogre::Vector2 collisionPoint = this->mParent->getCollisionPoint(worldRay);
+		Ogre::Vector2 clickDelta = collisionPoint - mParent->mCurrentPosition;
+
+		std::cout << std::endl;
+		std::cout << "(" << collisionPoint.x << ", " << collisionPoint.y << ") - (" << mParent->mCurrentPosition.x << ", " << mParent->mCurrentPosition.y << ")\n";
+		std::cout << "ClickDelta: (" << clickDelta.x <<", " << clickDelta.y <<")\n";
+
+		createRedArrow(Ogre::Vector3(collisionPoint.x, -10, collisionPoint.y), Ogre::Vector3(clickDelta.x, 0, clickDelta.y));
 
 		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(mParent->mCurrentPosition, clickDelta);
 		for (std::list<Ogre::Vector2>::iterator itr = currentVectorList.begin(); itr != currentVectorList.end(); ++itr)
 		{
-			createRedArrow(Ogre::Vector3(mParent->mCurrentPosition.x, -10, mParent->mCurrentPosition.y), Ogre::Vector3::ZERO);
-			std::cerr << "Add point at (" << itr->x << ", " << itr->y << ")\n";
 			mParent->addPoint(*itr);
 		}
 	}
