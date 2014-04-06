@@ -21,7 +21,7 @@ WindCurrent::~WindCurrent(void)
 void WindCurrent::addPoint(Vector2 position, Vector2 influence)
 {
 	// Add the pair to the path list
-	this->mPath.push_back(std::pair<Ogre::Vector2, Ogre::Vector2>(position, influence));
+	this->mPath.push_back(positionedVector(position, influence));
 }
 
 void WindCurrent::incrementTimer()
@@ -37,6 +37,17 @@ pathList* WindCurrent::getPath()
 Real WindCurrent::getStrength()
 {
 	return this->mStrength;
+}
+
+Real WindCurrent::length()
+{
+	Real length = 0.0F;
+
+	for (pathList::iterator itr = this->mPath.begin(); itr != this->mPath.end(); ++itr) {
+		length += itr->second.length();
+	}
+
+	return length;
 }
 
 bool WindCurrent::isTemporary()

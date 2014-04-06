@@ -32,6 +32,9 @@ namespace Nimbus
 		/** The list of wind currents which currently affect the wind map. */
 		std::list<WindCurrent*> mCurrents;
 
+		/** The minimum length this wind map accepts as valid for new wind currents. */
+		Ogre::Real mMinimumCurrentLength;
+
 		/** Offset to world center based on world size. */
 		Ogre::Vector2 mOffset;
 
@@ -74,8 +77,9 @@ namespace Nimbus
 			@param resolution The resolution of the vector map in terms of world coordinates.
 				This value is the world distance between each wind vector in the vector map.
 			@param offset The offset to the center of the map.
+			@param minimumCurrentLength The minimum length of a current accepted by the map.
 		*/
-		WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offset);
+		WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offset, Ogre::Real minimumCurrentLength);
 		virtual ~WindMap(void);
 
 		/** Recalculates the vector map based on the current list of wind currents.
@@ -83,6 +87,8 @@ namespace Nimbus
 		void update(void);
 
 		/** Adds a wind current to the wind current list.
+			Any wind current shorter than mMinimumCurrentLength will not be added and
+			an entry will be written to the log.
 			@param windCurrent A pointer to the wind current which should be added to the wind map.
 		*/
 		void addWindCurrent(WindCurrent* windCurrent);

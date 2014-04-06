@@ -6,10 +6,16 @@
 
 namespace Nimbus
 {
+	/** Type for a vector containing a non-zero origin.
+		First vector contains origin, second vector contains
+		both wind magnitude and direction.
+	*/
+	typedef std::pair<Ogre::Vector2, Ogre::Vector2> positionedVector;
+
 	/** Type for storing a wind current path.
 		Contains both position and direction/influence.
 	*/
-	typedef std::list<std::pair<Ogre::Vector2, Ogre::Vector2> > pathList;
+	typedef std::list<positionedVector> pathList;
 
 	/** Stores a path representing wind input
 		Used by WindMap
@@ -58,6 +64,12 @@ namespace Nimbus
 			@return An Ogre::Real representing the strength of the wind current.
 		*/
 		Ogre::Real getStrength();
+
+		/** Gets the length of the wind current.
+
+			@return An Ogre::Real sum of the current's contained vector lengths.
+		*/
+		Ogre::Real length();
 
 		/** True, then temporary, false, then permanent.
 

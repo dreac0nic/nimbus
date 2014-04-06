@@ -13,12 +13,13 @@ enum Corner {
 	TOP_LEFT = 0, TOP_RIGHT, BOTTOM_RIGHT, BOTTOM_LEFT
 };
 
-WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offset) :
+WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offset, Ogre::Real minimumCurrentLength) :
 	mResolution(resolution),
 	mAlphaVector(Ogre::Vector2(resolution, resolution)),
 	mPersistenceFactor(.5),
 	mCurrents(),
-	mOffset(offset)
+	mOffset(offset),
+	mMinimumCurrentLength(minimumCurrentLength)
 {
 	// Calculate vector map size
 	int vectorMapWidth = (int)floor(worldSize / resolution + .5);
@@ -167,6 +168,22 @@ void WindMap::update(void)
 
 void WindMap::addWindCurrent(WindCurrent* windCurrent)
 {
+	// Don't add the wind current if it's too short.
+	if (windCurrent->length() <= this->mMinimumCurrentLength)
+	{
+		std::stringstream truncatedCurrent;
+		truncatedCurrent << "[NIMBUS]: " << "Wind current too short! Truncated current.\n"
+			<< "(detail) " << "length: " << windCurrent->length() << "\n"
+			<< "(detail) " << "current data: ";
+		for (pathList::iterator itr = windCurrent->getPath()->begin(); itr != windCurrent->getPath()->end(); ++itr)
+		{
+			truncatedCurrent << "(" << itr->second.x << ", " << itr->second.y << ") ";
+		}
+		truncatedCurrent << "\n";
+		Ogre::LogManager::getSingleton().logMessage(truncatedCurrent.str());
+		return;
+	}
+
 	this->mCurrents.push_back(windCurrent);
 }
 
