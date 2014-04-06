@@ -107,9 +107,15 @@ void WindManager::addPoint(Ogre::Vector2& newPosition)
 		Ogre::Vector2 deltaVector = newPosition - mCurrentPosition;
 
 		// Create the arrow facing in the direction of the created current
+<<<<<<< HEAD
 		/*createRedArrow(
 			Ogre::Vector3(mCurrentPosition.x, 0, mCurrentPosition.y),
 			Ogre::Vector3(deltaVector.x, 0, deltaVector.y));//*/
+=======
+		/*createArrow(
+			Ogre::Vector3(mCurrentPosition.x, -12, mCurrentPosition.y),
+			Ogre::Vector3(deltaVector.x, -12, deltaVector.y));//*/
+>>>>>>> 9de502bde2f1bbfc22d1b65aa4f287645e50b067
 
 		// Add the new point to the wind current
 		this->mWindCurrent->addPoint(mCurrentPosition, deltaVector);
