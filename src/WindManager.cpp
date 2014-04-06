@@ -110,7 +110,7 @@ void WindManager::addPoint(Ogre::Vector2& newPosition)
 		if(deltaVector != Ogre::Vector2::ZERO)
 		{
 			// Create the arrow facing in the direction of the created current
-			createArrow(newPosition, deltaVector, ArrowType::RED);
+			createArrow(mCurrentPosition, deltaVector, ArrowType::RED);
 
 			// Add the new point to the wind current
 			this->mWindCurrent->addPoint(mCurrentPosition, deltaVector);
@@ -201,6 +201,7 @@ void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventL
 
 		mParent->mWindCurrent = new WindCurrent(Ogre::Real(STRENGTH), TEMPORARY);
 
+		// Create the first mouseDown point and add it to our current.
 		Ogre::Vector2 collisionPoint = this->mParent->getCollisionPoint(worldRay);
 		mParent->addPoint(collisionPoint);
 	}
@@ -224,6 +225,7 @@ void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventLis
 		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(mParent->mCurrentPosition, clickDelta);
 		for (std::list<Ogre::Vector2>::iterator itr = currentVectorList.begin(); itr != currentVectorList.end(); ++itr)
 		{
+			// Add each point along our path to the wind current in construction
 			mParent->addPoint(*itr);
 		}
 	}
@@ -251,6 +253,7 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(mParent->mCurrentPosition, clickDelta);
 		for (std::list<Ogre::Vector2>::iterator itr = currentVectorList.begin(); itr != currentVectorList.end(); ++itr)
 		{
+			// Add each point along our path to the wind current in construction
 			mParent->addPoint(*itr);
 		}
 	}

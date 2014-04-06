@@ -36,6 +36,8 @@ namespace Nimbus
 		virtual void createClickPlane();
 
 		/** Adds a new position to the wind current being built.
+			Note: It is considered invalid to add a point that exists outside of
+			the wind map.
 			@param newPosition The next point to add to our wind current
 				(aka the location of the mouse)
 		*/
@@ -48,6 +50,11 @@ namespace Nimbus
 			@param current The wind current vector to subdivide.
 		*/
 		std::list<Ogre::Vector2> subdivideCurrent(Ogre::Vector2 origin, Ogre::Vector2 current);
+
+		/** Resizes a given vector such that its length does not exceed
+			mResolution in either axis
+		*/
+		Ogre::Vector2 boundWindVector(Ogre::Vector2 *vector);
 
 		/** Generates a new random current with a random number of points 
 			along a random path at a random starting position.
