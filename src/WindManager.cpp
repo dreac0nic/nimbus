@@ -47,11 +47,11 @@ WindManager::~WindManager(void)
 	delete this->mTickListener;
 }
 
-void createArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
+void createRedArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
 {
 	// Debug output
-	std::cerr << "origin(" << origin.x << ", " << origin.z << "), "
-		<< "facing(" << facing.x << ", " << facing.z << ")\n";
+	/*std::cerr << "red origin(" << origin.x << ", " << origin.z << "), "
+		<< "facing(" << facing.x << ", " << facing.z << ")\n";//*/
 
 	// Create a representative arrow mesh
 	payloadmap createArrowPayload;
@@ -64,6 +64,10 @@ void createArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
 
 void createBlueArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
 {
+	// Debug output
+	/*std::cerr << "blue origin(" << origin.x << ", " << origin.z << "), "
+		<< "facing(" << facing.x << ", " << facing.z << ")\n";//*/
+
 	// Create a representative arrow mesh
 	payloadmap createArrowPayload;
 	std::string type = "BlueArrow";
@@ -95,6 +99,8 @@ bool WindManager::update(void)
 
 void WindManager::addPoint(Ogre::Vector2& newPosition)
 {
+	std::cerr << "newPos: (" << newPosition.x << ", " << newPosition.y << ")\n";
+
 	// If we've already started creating the wind current
 	if(mCurrentPosition != Ogre::Vector2::ZERO)
 	{
@@ -102,7 +108,7 @@ void WindManager::addPoint(Ogre::Vector2& newPosition)
 		Ogre::Vector2 deltaVector = newPosition - mCurrentPosition;
 
 		// Create the arrow facing in the direction of the created current
-		/*createArrow(
+		/*createRedArrow(
 			Ogre::Vector3(mCurrentPosition.x, 0, mCurrentPosition.y),
 			Ogre::Vector3(deltaVector.x, 0, deltaVector.y));//*/
 
@@ -121,8 +127,6 @@ std::list<Ogre::Vector2> WindManager::subdivideCurrent(Ogre::Vector2 origin, Ogr
 
 	Ogre::Vector2 subVector;
 
-	subdivideList.push_back(origin);
-
 	// While the wind current vector is too long
 	while(current.length() > this->mWorld->getWindMap()->getAlphaVector().length())
 	{
@@ -133,11 +137,13 @@ std::list<Ogre::Vector2> WindManager::subdivideCurrent(Ogre::Vector2 origin, Ogr
 		origin += subVector;
 
 		// Store the found subvector in the subdivision list
-		subdivideList.push_back(origin + subVector);
+		subdivideList.push_back(origin);
 
 		// Cut off the subVector
-		current = current - subVector;
+		current -= subVector;
 	}
+
+	subdivideList.push_back(origin + current);
 
 	// Return the subdivided wind current vector
 	return subdivideList;
@@ -218,11 +224,13 @@ void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventLis
 		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(mParent->mCurrentPosition, clickDelta);
 		for (std::list<Ogre::Vector2>::iterator itr = currentVectorList.begin(); itr != currentVectorList.end(); ++itr)
 		{
+			createRedArrow(Ogre::Vector3(mParent->mCurrentPosition.x, -10, mParent->mCurrentPosition.y), Ogre::Vector3::ZERO);
+			std::cerr << "Add point at (" << itr->x << ", " << itr->y << ")\n";
 			mParent->addPoint(*itr);
 		}
 	}
 
-	// Send off our wind current!
+	// Send off our wind currnt!
 	mParent->mWorld->getWindMap()->addWindCurrent(mParent->mWindCurrent);
 
 	mParent->mCurrentPosition = Ogre::Vector2::ZERO;
@@ -249,6 +257,8 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(mParent->mCurrentPosition, clickDelta);
 		for (std::list<Ogre::Vector2>::iterator itr = currentVectorList.begin(); itr != currentVectorList.end(); ++itr)
 		{
+			createRedArrow(Ogre::Vector3(mParent->mCurrentPosition.x, -10, mParent->mCurrentPosition.y), Ogre::Vector3::ZERO);
+			std::cerr << "Add point at (" << itr->x << ", " << itr->y << ")\n";
 			mParent->addPoint(*itr);
 		}
 	}
