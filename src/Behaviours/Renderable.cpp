@@ -157,6 +157,7 @@ void Nimbus::Renderable::PositionListener::handleEvent(payloadmap payload, Event
 	// Apply facing vector if facing vector was found
 	if(payload.find("FacingVector") != payload.end())
 	{
+		position = parent->mNode->getPosition();
 		facing = *static_cast<Ogre::Vector3*>(payload["FacingVector"]);
 		parent->mNode->lookAt(facing+position, Node::TransformSpace::TS_WORLD);
 	}

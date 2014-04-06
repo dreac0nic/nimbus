@@ -50,7 +50,7 @@ WindManager::~WindManager(void)
 void createArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
 {
 	// Debug output
-	std::cerr << "origin(" << origin.x << ", " << origin.z << "), "
+	std::cerr << "RED:  origin(" << origin.x << ", " << origin.z << "), "
 		<< "facing(" << facing.x << ", " << facing.z << ")\n";
 
 	// Create a representative arrow mesh
@@ -64,6 +64,9 @@ void createArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
 
 void createBlueArrow(Ogre::Vector3 origin, Ogre::Vector3 facing)
 {
+	std::cerr << "BLUE: origin(" << origin.x << ", " << origin.z << "), "
+		<< "facing(" << facing.x << ", " << facing.z << ")\n";
+
 	// Create a representative arrow mesh
 	payloadmap createArrowPayload;
 	std::string type = "BlueArrow";
@@ -103,8 +106,8 @@ void WindManager::addPoint(Ogre::Vector2& newPosition)
 
 		// Create the arrow facing in the direction of the created current
 		/*createArrow(
-			Ogre::Vector3(mCurrentPosition.x, 0, mCurrentPosition.y),
-			Ogre::Vector3(deltaVector.x, 0, deltaVector.y));//*/
+			Ogre::Vector3(mCurrentPosition.x, -12, mCurrentPosition.y),
+			Ogre::Vector3(deltaVector.x, -12, deltaVector.y));//*/
 
 		// Add the new point to the wind current
 		this->mWindCurrent->addPoint(mCurrentPosition, deltaVector);
