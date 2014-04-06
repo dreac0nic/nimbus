@@ -100,22 +100,21 @@ bool WindManager::update(void)
 
 void WindManager::addPoint(Ogre::Vector2& newPosition)
 {
-	std::cerr << "newPos: (" << newPosition.x << ", " << newPosition.y << ")\n";
-
 	// If we've already started creating the wind current
 	if(mCurrentPosition != Ogre::Vector2::ZERO)
 	{
 		// Calculate the delta between the new position and the previous position
 		Ogre::Vector2 deltaVector = newPosition - mCurrentPosition;
 
-		// Create the arrow facing in the direction of the created current
-		/*createRedArrow(
-			Ogre::Vector3(mCurrentPosition.x, 0, mCurrentPosition.y),
-			Ogre::Vector3(deltaVector.x, 0, deltaVector.y));//*/
-		createBlueArrow(Ogre::Vector3(newPosition.x , -12, newPosition.y), 50*Ogre::Vector3::UNIT_Z);
+		// Only add the new position if the delta isn't zero
+		if(deltaVector != Ogre::Vector2::ZERO)
+		{
+			// Create the arrow facing in the direction of the created current
+			createArrow(newPosition, deltaVector, ArrowType::RED);
 
-		// Add the new point to the wind current
-		this->mWindCurrent->addPoint(mCurrentPosition, deltaVector);
+			// Add the new point to the wind current
+			this->mWindCurrent->addPoint(mCurrentPosition, deltaVector);
+		}
 	}
 
 	// Update the current position, because we're dynamic
@@ -248,12 +247,6 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
 		Ogre::Vector2 collisionPoint = this->mParent->getCollisionPoint(worldRay);
 		Ogre::Vector2 clickDelta = collisionPoint - mParent->mCurrentPosition;
-
-		std::cout << std::endl;
-		std::cout << "(" << collisionPoint.x << ", " << collisionPoint.y << ") - (" << mParent->mCurrentPosition.x << ", " << mParent->mCurrentPosition.y << ")\n";
-		std::cout << "ClickDelta: (" << clickDelta.x <<", " << clickDelta.y <<")\n";
-
-		createRedArrow(Ogre::Vector3(collisionPoint.x, -10, collisionPoint.y), Ogre::Vector3(clickDelta.x, 0, clickDelta.y));
 
 		std::list<Ogre::Vector2> currentVectorList = mParent->subdivideCurrent(mParent->mCurrentPosition, clickDelta);
 		for (std::list<Ogre::Vector2>::iterator itr = currentVectorList.begin(); itr != currentVectorList.end(); ++itr)
