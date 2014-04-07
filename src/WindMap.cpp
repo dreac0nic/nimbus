@@ -13,6 +13,10 @@ enum Corner {
 	TOP_LEFT = 0, TOP_RIGHT, BOTTOM_RIGHT, BOTTOM_LEFT
 };
 
+float round(float x) {
+	return floor(x + 0.5);
+}
+
 WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offset, Ogre::Real minimumCurrentLength) :
 	mResolution(resolution),
 	mAlphaVector(Ogre::Vector2(resolution, resolution)),
@@ -22,8 +26,8 @@ WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offs
 	mMinimumCurrentLength(minimumCurrentLength)
 {
 	// Calculate vector map size
-	int vectorMapWidth = (int)floor(worldSize / resolution + .5);
-	int vectorMapHeight = (int)floor(worldSize / resolution + .5);
+	int vectorMapWidth = (int)round(worldSize / resolution);
+	int vectorMapHeight = (int)round(worldSize / resolution);
 
 	// Initialize the vector map to the correct size and to zero vectors
 	this->mVectorMap = new Grid<Ogre::Vector2>(vectorMapWidth, vectorMapHeight);
@@ -207,8 +211,8 @@ Ogre::Vector2 WindMap::getWindVector(Ogre::Real x, Ogre::Real y)
 	int xPos, yPos;
 
 	// Rounding, we do it (there's no round function...)
-	xPos = (int) floor((x + mOffset.x) / mResolution + .5);
-	yPos = (int) floor((y + mOffset.y) / mResolution + .5);
+	xPos = (int) round((x + mOffset.x) / mResolution);
+	yPos = (int) round((y + mOffset.y) / mResolution);
 
 	return this->mVectorMap->get(xPos, yPos);
 }
