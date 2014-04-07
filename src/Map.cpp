@@ -9,6 +9,8 @@
 #include "TileEdge.h"
 #include "Corner.h"
 
+#include "MapGeneration\Edge.h"
+
 #define PI 3.1415927
 
 using namespace Nimbus;

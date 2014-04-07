@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Edge.h"
+#include "Voronoi.h"
 
 namespace Nimbus
 {

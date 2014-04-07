@@ -1,6 +1,11 @@
 #ifndef NIMBUS_SITE_H
 #define NIMBUS_SITE_H
 
+#include <stack>
+#include <vector>
+
+#include "Voronoi.h"
+
 namespace Nimbus
 {
 	namespace Voronoi

@@ -1,6 +1,8 @@
 #ifndef NIMBUS_LINESEGMENT_H
 #define NIMBUS_LINESEGMENT_H
 
+#include "Voronoi.h"
+
 namespace Nimbus
 {
 	namespace Voronoi

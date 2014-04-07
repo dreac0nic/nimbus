@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include "Voronoi.h"
+
 namespace Nimbus
 {
 	namespace Voronoi

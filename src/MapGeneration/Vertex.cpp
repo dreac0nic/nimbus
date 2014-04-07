@@ -1,4 +1,5 @@
-#include "Voronoi.h"
+#include "Vertex.h"
+#include "Halfedge.h"
 
 using namespace Nimbus::Voronoi;
 

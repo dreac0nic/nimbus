@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Map.h"
 #include "MapGeneration\Voronoi.h"
+#include "MapGeneration\Edge.h"
+#include "MapGeneration\Halfedge.h"
 
 using namespace Nimbus::Voronoi;
 

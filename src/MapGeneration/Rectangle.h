@@ -1,6 +1,8 @@
 #ifndef NIMBUS_RECTANGLE_H
 #define NIMBUS_RECTANGLE_H
 
+#include "Voronoi.h"
+
 /**	Helper class for bounding box.
 	Capable of checking whether a point is inside a box.
 */

@@ -1,4 +1,10 @@
-#include "Voronoi.h"
+#include "Edge.h"
+#include "Halfedge.h"
+#include "LineSegment.h"
+#include "Polygon.h"
+#include "Rectangle.h"
+#include "Site.h"
+#include "Vertex.h"
 
 using namespace Nimbus::Voronoi;
 

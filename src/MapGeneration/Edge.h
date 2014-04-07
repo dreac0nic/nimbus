@@ -9,6 +9,7 @@
 #include "Rectangle.h"
 #include "Site.h"
 #include "Vertex.h"
+#include "Voronoi.h"
 
 namespace Nimbus
 {

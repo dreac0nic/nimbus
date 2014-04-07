@@ -7,6 +7,7 @@
 
 #include "Tile.h"
 #include "MapGeneration/Voronoi.h"
+#include "MapGeneration/Rectangle.h"
 
 namespace Nimbus
 {

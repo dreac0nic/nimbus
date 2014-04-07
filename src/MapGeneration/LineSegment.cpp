@@ -1,7 +1,6 @@
-#include "Voronoi.h"
+#include "LineSegment.h"
 
 using namespace Nimbus::Voronoi;
-
 
 LineSegment::~LineSegment(){
 }
