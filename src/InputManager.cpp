@@ -23,6 +23,19 @@ InputManager::InputManager(void)
 	windowHandleString << windowHandle;
 	parameters.insert(std::make_pair(std::string("WINDOW"), windowHandleString.str()));
 
+	//TESTING FOR MOUSE CURSOR!
+	#if defined OIS_WIN32_PLATFORM
+		parameters.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
+		parameters.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
+		parameters.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_FOREGROUND")));
+		parameters.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_NONEXCLUSIVE")));
+    #elif defined OIS_LINUX_PLATFORM
+		parameters.insert(std::make_pair(std::string("x11_mouse_grab"), std::string("false")));
+		parameters.insert(std::make_pair(std::string("x11_mouse_hide"), std::string("false")));
+		parameters.insert(std::make_pair(std::string("x11_keyboard_grab"), std::string("false")));
+		parameters.insert(std::make_pair(std::string("XAutoRepeatOn"), std::string("true")));
+		#endif
+
 	// Create the input system using the window handle
 	mInputManager = OIS::InputManager::createInputSystem(parameters);
 
@@ -112,12 +125,14 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 	if(evt.state.buttonDown(OIS::MB_Left))
 	{
 		logstring << "The left mouse button was pressed at ("
+			//<< evt.state.X.rel << ", " << evt.state.Y.rel << ")"
 			<< evt.state.X.abs << ", " << evt.state.Y.abs << ")"
 			<< std::endl;
 	}
 	if(evt.state.buttonDown(OIS::MB_Right))
 	{
 		logstring << "The right mouse button was pressed at ("
+			//<< evt.state.X.rel << ", " << evt.state.Y.rel << ")"
 			<< evt.state.X.abs << ", " << evt.state.Y.abs << ")"
 			<< std::endl;
 	}
