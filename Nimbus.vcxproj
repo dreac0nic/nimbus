@@ -75,7 +75,7 @@
       <AdditionalDependencies>OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>$(ProjectDir)CopyFileList.exe includeDLL_d.txt $(ProjectDir)ogre\bin\$(Configuration)\ $(ProjectDir)Build\$(Configuration)\</Command>
+      <Command>REM $(ProjectDir)CopyFileList.exe includeDLL_d.txt $(ProjectDir)ogre\bin\$(Configuration)\ $(ProjectDir)Build\$(Configuration)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
