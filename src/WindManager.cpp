@@ -61,7 +61,7 @@ void createArrow(Ogre::Vector3 origin, Ogre::Vector3 facing, ArrowType arrow)
 		type = "BlueArrow";
 		break;
 	case ArrowType::RED:
-		type = "Arrow";
+		type = "RedArrow";
 		break;
 	}
 

@@ -42,7 +42,7 @@ namespace Nimbus
 	protected:
 		// EventListeners
 
-		// Creates entities on demand
+		/** Creates entities on demand */
 		class CreateEntityListener : 
 			public EventListener
 		{
@@ -57,9 +57,9 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
-		}* mCreateEntiityListener;
+		}* mCreateEntityListener;
 
-		// Destroys entities on demand
+		/** Destroys entities on demand */
 		class DestroyEntityListener :
 			public EventListener
 		{
