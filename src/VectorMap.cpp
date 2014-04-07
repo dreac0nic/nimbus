@@ -22,7 +22,7 @@ namespace Nimbus
 
 				// Create a representative arrow mesh
 				payloadmap createArrowPayload;
-				std::string type = "Arrow";
+				std::string type = "RedArrow";
 				createArrowPayload["EntityType"] = &type;
 				Ogre::Vector3 pos = Ogre::Vector3(Ogre::Real(i * 250), Ogre::Real(-12), Ogre::Real(j * 250));
 				createArrowPayload["PositionVector"] = &pos;

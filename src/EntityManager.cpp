@@ -13,7 +13,7 @@ EntityManager::EntityManager(World* world)
 
 EntityManager::~EntityManager(void)
 {
-	delete this->mCreateEntiityListener;
+	delete this->mCreateEntityListener;
 	delete this->mDestroyEventListener;
 	delete this->mEntityFactory;
 }
@@ -21,7 +21,7 @@ EntityManager::~EntityManager(void)
 // Ensures world is initialized only after EntityManager is prepared
 void EntityManager::initialize(void)
 {
-	EventSystem::getSingleton()->registerListener(this->mCreateEntiityListener, EventSystem::EventType::CREATE_ENTITY);
+	EventSystem::getSingleton()->registerListener(this->mCreateEntityListener, EventSystem::EventType::CREATE_ENTITY);
 	EventSystem::getSingleton()->registerListener(this->mDestroyEventListener, EventSystem::EventType::DESTROY_ENTITY);
 }
 
@@ -59,7 +59,7 @@ void EntityManager::configureEntityTypes(string entityTypesFile, World* world)
 {
 	this->mEntityFactory = new EntityFactory(world, entityTypesFile);
 
-	this->mCreateEntiityListener = new CreateEntityListener(this->mEntityFactory, world);
+	this->mCreateEntityListener = new CreateEntityListener(this->mEntityFactory, world);
 	this->mDestroyEventListener = new DestroyEntityListener(world);
 }
 
