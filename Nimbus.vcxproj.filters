@@ -119,25 +119,25 @@
     <ClInclude Include="src\TileEdge.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
-    <ClInclude Include="src\Edge.h">
+    <ClInclude Include="src\MapGeneration\Edge.h">
       <Filter>Header Files\MapGeneration</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rectangle.h">
+    <ClInclude Include="src\MapGeneration\Halfedge.h">
       <Filter>Header Files\MapGeneration</Filter>
     </ClInclude>
-    <ClInclude Include="src\Halfedge.h">
+    <ClInclude Include="src\MapGeneration\LineSegment.h">
       <Filter>Header Files\MapGeneration</Filter>
     </ClInclude>
-    <ClInclude Include="src\LineSegment.h">
+    <ClInclude Include="src\MapGeneration\Polygon.h">
       <Filter>Header Files\MapGeneration</Filter>
     </ClInclude>
-    <ClInclude Include="src\Polygon.h">
+    <ClInclude Include="src\MapGeneration\Rectangle.h">
       <Filter>Header Files\MapGeneration</Filter>
     </ClInclude>
-    <ClInclude Include="src\Site.h">
+    <ClInclude Include="src\MapGeneration\Site.h">
       <Filter>Header Files\MapGeneration</Filter>
     </ClInclude>
-    <ClInclude Include="src\Vertex.h">
+    <ClInclude Include="src\MapGeneration\Vertex.h">
       <Filter>Header Files\MapGeneration</Filter>
     </ClInclude>
   </ItemGroup>
