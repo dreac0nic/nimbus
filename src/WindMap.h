@@ -131,6 +131,11 @@ namespace Nimbus
 			@return A vector, that's the alpha vector. I bet you weren't expecting that...
 		*/
 		Ogre::Vector2 getAlphaVector() { return this->mAlphaVector; }
+
+		/** Gets the offset of the wind map to the center of the wind map
+			@return A Vector2 pointing to the center of the wind map
+		*/
+		Ogre::Vector2 getOffset() { return this->mOffset; }
 	};
 }
 #endif

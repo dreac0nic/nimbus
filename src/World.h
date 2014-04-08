@@ -65,6 +65,7 @@ namespace Nimbus
 		void addEntity(GameEntity* entity);
 		Ogre::SceneNode* getWorldNode() { return this->mWorldNode; }
 		Ogre::SceneManager* getSceneManager() { return this->mSceneManager; }
+		Ogre::Vector2 getWorldBounds() { return this->worldBounds; } 
 	};
 
 }

@@ -101,7 +101,14 @@ bool WindManager::update(void)
 
 void WindManager::addPoint(Ogre::Vector2& newPosition)
 {
-
+	// Don't add the point if it exists outside world bounds.
+	if (newPosition.x > mWorld->getWorldBounds().x - mWorld->getWindMap()->getOffset().x
+		|| newPosition.x < mWorld->getWindMap()->getOffset().x - mWorld->getWorldBounds().x
+		|| newPosition.y > mWorld->getWorldBounds().y - mWorld->getWindMap()->getOffset().y
+		|| newPosition.y < mWorld->getWindMap()->getOffset().y - mWorld->getWorldBounds().y)
+	{
+		return;
+	}
 
 	// If we've already started creating the wind current
 	if(mCurrentPosition != Ogre::Vector2::ZERO)
