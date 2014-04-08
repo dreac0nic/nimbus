@@ -46,6 +46,7 @@ bool Halfedge::isLeftOf(Point *p){
 	bool rightOfSite, above, fast;
 	double dxp, dyp, dxs, t1, t2, t3, yl;
 
+	//getRightSite creates an access violation b/c edge is NULL
 	topSite = edge->getRightSite();
 	rightOfSite = p->x > topSite->getX();
 	if (rightOfSite && leftRight == LR_LEFT) {
@@ -118,7 +119,7 @@ void Halfedge::initQueue(double ymin, double deltay, int sqrt_nsites){
 	_hash.clear();
 
 	for (i = 0; i < _hashSize; ++i) {
-		_hash.at(i) = Halfedge::createDummy();
+		_hash.push_back(Halfedge::createDummy());
 		_hash.at(i)->nextInPriorityQueue = NULL;
 	}
 }

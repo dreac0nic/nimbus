@@ -54,8 +54,8 @@ Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations)
 		}
 		*/
 		// C++11 niceness: for(Point* point: (*points)) {
-		 for(std::vector<Point*>::iterator it = points->begin(); it != points->end(); ++it) {
-			Point* point = *it;
+		 for(Point* point: (*points)) {
+
 			// Initialize locals.
 			std::vector<Point*>* region = v->region(point);
 
@@ -386,6 +386,8 @@ std::vector<Corner*> *Map::landCorners(){
 	return list;
 }
 
+
+
 void Map::redistributeElevations(std::vector<Corner*> *landcorners){
 	std::sort(landcorners->begin(), landcorners->end());
 
@@ -430,7 +432,7 @@ void Map::calculateDownslopes(){
 
 void Map::createRivers(){
 	for (int i = 0; i < bounds.width / 2; i++) {
-		Corner *c = corners.at((double)rand() / RAND_MAX*corners.size());
+		Corner *c = corners.at((double)rand() / RAND_MAX * corners.size());
 		if (c->ocean || c->elevation < 0.3 || c->elevation > 0.9) {
 			continue;
 		}

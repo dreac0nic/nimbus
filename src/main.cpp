@@ -30,7 +30,6 @@ int main(int argc, char* argv[])
 	double width = 600;
 	double height = 600;
 	int numsites = 3000;
-	std:: vector<Point*> points;
 	srand(94870395729);
 
 	Voronoi v = Voronoi(numsites, width, height);

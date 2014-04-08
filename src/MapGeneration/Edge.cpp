@@ -19,7 +19,7 @@ int Edge::_hashSize = 0;
 bool Edge::operator< (const Edge &other) const{
 	double length0 = _sites.at(LR_LEFT)->getCoord()->distance(*(_sites.at(LR_RIGHT)->getCoord()));
 	double length1 = other._sites.at(LR_LEFT)->getCoord()->distance(*(other._sites.at(LR_RIGHT)->getCoord()));
-	
+
 	return length0 < length1;
 }
 
@@ -73,6 +73,7 @@ Edge *Edge::createBisectingEdge(Site *site0, Site *site1){
 
 Edge::Edge(){
 	_edgeIndex = _numEdges++;
+	_sites.clear();
 }
 
 Edge::~Edge(){
@@ -278,9 +279,9 @@ Halfedge *Edge::getHash(int b){
 		return NULL;
 	}
 	halfEdge = _hash.at(b);
-	if (halfEdge != NULL && halfEdge->edge == Edge::DELETED) {
+	if (halfEdge != NULL && halfEdge->edge != NULL && halfEdge->edge == Edge::DELETED) {
 		/* Hash table points to deleted halfedge.  Patch as necessary. */
-		_hash.at(b) = NULL;
+		delete _hash.at(b);
 		// still can't dispose halfEdge yet!
 		return NULL;
 	} else {
@@ -290,14 +291,15 @@ Halfedge *Edge::getHash(int b){
 
 void Edge::initList(double xmin, double deltax, int sqrt_nsites){
 	if(sqrt_nsites == 0) {
-		sqrt_nsites = 1;
+		std::cout << "Edge list: sqrt_nsites = 0";
 	}
 
 	_xmin = xmin;
 	_deltax = deltax;
 	_hashSize = 2 * sqrt_nsites;
-
-	_hash.resize(_hashSize);
+	
+	_hash.clear();
+	_hash.resize(_hashSize, NULL);
 
 	// two dummy Halfedges:
 	_leftEnd = Halfedge::createDummy();
@@ -389,9 +391,9 @@ std::vector<Edge*> *Edge::reorderBySite(std::vector<Edge*> *origEdges){
 	int n = origEdges->size();
 	Edge *edge;
 	// we're going to reorder the edges in order of traversal
-	std::vector<bool> *done = new std::vector<bool>;
+	std::vector<bool> done;
 
-	done->insert(done->end(), n, false);
+	done.insert(done.end(), n, false);
 
 	int nDone = 0;
 
@@ -404,12 +406,12 @@ std::vector<Edge*> *Edge::reorderBySite(std::vector<Edge*> *origEdges){
 	Site *firstPoint = edge->getLeftSite();
 	Site *lastPoint = edge->getRightSite();
 
-	done->at(i) = true;
+	done.at(i) = true;
 	++nDone;
 
 	while (nDone < n) {
 		for (i = 1; i < n; ++i) {
-			if (done->at(i)) {
+			if (done.at(i)) {
 				continue;
 			}
 			edge = origEdges->at(i);
@@ -420,25 +422,25 @@ std::vector<Edge*> *Edge::reorderBySite(std::vector<Edge*> *origEdges){
 				lastPoint = rightPoint;
 				_edgeOrientations.push_back(LR_LEFT);
 				newEdges->push_back(edge);
-				done->at(i) = true;
+				done.at(i) = true;
 			} else if (rightPoint == firstPoint) {
 				firstPoint = leftPoint;
 				_edgeOrientations.insert(_edgeOrientations.begin(), LR_LEFT);
 				newEdges->insert(newEdges->begin(), edge);
-				done->at(i) = true;
+				done.at(i) = true;
 			} else if (leftPoint == firstPoint) {
 				firstPoint = rightPoint;
 				_edgeOrientations.insert(_edgeOrientations.begin(), LR_RIGHT);
 				newEdges->insert(newEdges->begin(), edge);
 
-				done->at(i) = true;
+				done.at(i) = true;
 			} else if (rightPoint == lastPoint) {
 				lastPoint = leftPoint;
 				_edgeOrientations.push_back(LR_RIGHT);
 				newEdges->push_back(edge);
-				done->at(i) = true;
+				done.at(i) = true;
 			}
-			if (done->at(i)) {
+			if (done.at(i)) {
 				++nDone;
 			}
 		}
@@ -452,9 +454,9 @@ std::vector<Edge*> *Edge::reorderByVertex(std::vector<Edge*> *origEdges){
 	int n = origEdges->size();
 	Edge *edge;
 	// we're going to reorder the edges in order of traversal
-	std::vector<bool> *done = new std::vector<bool>;
+	std::vector<bool> done;
 
-	done->insert(done->begin(), n, false);
+	done.insert(done.begin(), n, false);
 
 	int nDone = 0;
 
@@ -471,12 +473,12 @@ std::vector<Edge*> *Edge::reorderByVertex(std::vector<Edge*> *origEdges){
 		return new std::vector<Edge*>();
 	}
 
-	done->at(i) = true;
+	done.at(i) = true;
 	++nDone;
 
 	while (nDone < n) {
 		for (i = 1; i < n; ++i) {
-			if (done->at(i)) {
+			if (done.at(i)) {
 				continue;
 			}
 			edge = origEdges->at(i);
@@ -489,25 +491,25 @@ std::vector<Edge*> *Edge::reorderByVertex(std::vector<Edge*> *origEdges){
 				lastPoint = rightPoint;
 				_edgeOrientations.push_back(LR_LEFT);
 				newEdges->push_back(edge);
-				done->at(i) = true;
+				done.at(i) = true;
 			} else if (rightPoint == firstPoint) {
 				firstPoint = leftPoint;
 				_edgeOrientations.push_back(LR_LEFT);
 				newEdges->insert(newEdges->begin(), edge);
-				done->at(i) = true;
+				done.at(i) = true;
 			} else if (leftPoint == firstPoint) {
 				firstPoint = rightPoint;
 				_edgeOrientations.insert(_edgeOrientations.begin(), LR_RIGHT);
 				newEdges->insert(newEdges->begin(), edge);
 
-				done->at(i) = true;
+				done.at(i) = true;
 			} else if (rightPoint == lastPoint) {
 				lastPoint = leftPoint;
 				_edgeOrientations.push_back(LR_RIGHT);
 				newEdges->push_back(edge);
-				done->at(i) = true;
+				done.at(i) = true;
 			}
-			if (done->at(i)) {
+			if (done.at(i)) {
 				++nDone;
 			}
 		}

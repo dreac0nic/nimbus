@@ -60,7 +60,6 @@ namespace Nimbus{
 			int _edgeIndex;
 			Vertex *_leftVertex;
 			Vertex *_rightVertex;
-			Edge();
 
 			//Edge list
 			static double _deltax;
@@ -85,6 +84,7 @@ namespace Nimbus{
 
 			static Edge *createBisectingEdge(Site *site0, Site *site1);
 			double a, b, c;
+			Edge(); //This is public for testing only.  It doesn't need to be called but isn't necessarially dangerous to use.
 			~Edge();
 			void clipVertices(Rectangle *bounds);
 			LineSegment *delaunayLine();

@@ -316,7 +316,7 @@ int Site::getLength(){
 
 Site *Site::next(){
 	if (_sorted == false) {
-		return NULL;
+		std::cout << "Sites have not been sorted";
 	}
 	if (_currentIndex < _sites.size()) {
 		return _sites.at(_currentIndex++);
@@ -325,9 +325,13 @@ Site *Site::next(){
 	}
 }
 
+struct compareSites {
+			bool operator ()(Site *lhs, Site *rhs) {return *lhs < *rhs; }
+		};
+
 Rectangle *Site::getSitesBounds(){
 	if (_sorted == false) {
-		std::sort(_sites.begin(), _sites.end());
+		std::sort(_sites.begin(), _sites.end(), compareSites());
 		_currentIndex = 0;
 		_sorted = true;
 	}
@@ -341,8 +345,8 @@ Rectangle *Site::getSitesBounds(){
 		if (_sites.at(i)->getX() < xmin) {
 			xmin = _sites.at(i)->getX();
 		}
-		if (_sites.at(0)->getX() > xmax) {
-			xmax = _sites.at(0)->getX();
+		if (_sites.at(i)->getX() > xmax) {
+			xmax = _sites.at(i)->getX();
 		}
 	}
 	// here's where we assume that the sites have been sorted on y:

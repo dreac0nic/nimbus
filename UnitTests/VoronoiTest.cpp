@@ -121,10 +121,10 @@ TEST_CLASS(LineSegmentTest)
 
 		LineSegment line1(&p1, &p2);
 
-		Assert::IsTrue(line1.points->first == &p1);
-		Assert::IsTrue(line1.points->second == &p2);
-		Assert::IsFalse(line1.points->first == &p2);
-		Assert::IsFalse(line1.points->second == &p1);
+		Assert::IsTrue(line1.points.first == &p1);
+		Assert::IsTrue(line1.points.second == &p2);
+		Assert::IsFalse(line1.points.first == &p2);
+		Assert::IsFalse(line1.points.second == &p1);
 	}
 
 	TEST_METHOD(compareTest)
@@ -153,4 +153,6 @@ TEST_CLASS(HalfEdgeTest){
 
 		Assert::IsTrue(edge1 == he1.edge);
 	}
+
+
 };

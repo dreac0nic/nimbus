@@ -18,7 +18,7 @@ void Voronoi::addSites(std::vector<Point*> *points){
 }
 
 void Voronoi::addSite(Point *p, int index){
-	double weight = rand() * 100;
+	double weight = (double)rand() / RAND_MAX * 100;
 	Site *site = Site::create(p, index, weight);
 	Site::push(site);
 	_sitesIndexedByLocation->insert(std::pair<Point*,Site*>(p, site));
@@ -324,7 +324,8 @@ Site *Voronoi::rightRegion(Halfedge *he, Site *bottomMostSite){
 	if (edge == NULL) {
 		return bottomMostSite;
 	}
-	return edge->site((LR)(he->leftRight+1%2));
+	LR value = (LR)(((he->leftRight)+1)%2);
+	return edge->site(value);
 }
 
 std::vector<Point*> *Voronoi::neighborSitesForSite(Point *coord){
