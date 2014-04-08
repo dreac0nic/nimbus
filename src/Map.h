@@ -88,6 +88,9 @@ namespace Nimbus
 		/** Mystical function of converting stuff to yarn.
 		*/
 		void toString();
+
+		/** Convert the map into an OGRE mesh for rendering! */
+		Ogre::MeshPtr getMesh(void);
 	};
 }
 

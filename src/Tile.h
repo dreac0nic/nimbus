@@ -5,6 +5,7 @@
 
 #include <OGRE/OgreVector2.h>
 
+
 namespace Nimbus
 {
 	//Temporary; fill or replace
@@ -86,6 +87,12 @@ namespace Nimbus
 
 		/* Convert the tile to string format! */
 		void toString(void);
+
+		/* Convert the tile into a OGRE mesh. */
+		Ogre::MeshPtr getMesh(void);
+
+		/* Add this tile as a sub-mesh to the current OGRE mesh. */
+		bool addSubMesh(Ogre::MeshPtr& mesh);
 	};
 }
 

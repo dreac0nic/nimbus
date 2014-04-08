@@ -1,5 +1,9 @@
 #include <vector>
 
+#include <OGRE\OgreMesh.h>
+#include <OGRE\OgreSubMesh.h>
+#include <OGRE\OgreMeshManager.h>
+
 #include "Map.h"
 #include "Tile.h"
 #include "TileEdge.h"
@@ -465,4 +469,18 @@ void Map::assignBiomes(){
 	for (int i = 0; i < centers.size(); i++) {
 		centers.at(i)->biome = getBiome(centers.at(i));
 	}
+}
+
+Ogre::MeshPtr Map::getMesh(void)
+{
+	// Create overall mesh.
+	Ogre::MeshPtr mapMesh = Ogre::MeshManager::getSingleton().createManual("terrainMap", "map"); // Watch out for collision issues.
+
+	// Iterate over all tiles and add them to the mapMesh.
+	for(std::vector<Tile*>::iterator it = this->centers.begin(); it != this->centers.end(); ++it) {
+		(*it)->addSubMesh(mapMesh);
+	}
+
+	// Return the mapMesh
+	return mapMesh;
 }
