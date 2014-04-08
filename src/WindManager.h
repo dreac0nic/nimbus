@@ -31,6 +31,9 @@ namespace Nimbus
 
 		/** The wind current being constructed. */
 		WindCurrent* mWindCurrent;
+
+		/** Minimum distance that the wind manager accepts as a valid vector. */
+		Ogre::Vector2 mEssentiallyZero;
 		
 		/// Setting up the plane that will register the clicks for the wind creation
 		virtual void createClickPlane();
@@ -59,20 +62,20 @@ namespace Nimbus
 		/** Generates a new random current with a random number of points 
 			along a random path at a random starting position.
 		*/
-		void generateCurrent(void);
+		WindCurrent generateCurrent(void);
 
 		/** Generates a new random current with a given number of points
 			along a random path at a random starting position.
 			@param numVectors The number of vectors to generate for this current
 		*/
-		void generateCurrent(int numVectors);
+		WindCurrent generateCurrent(int numVectors);
 
 		/** Generates a new random current with a given number of points
 			along a random path at a given starting position.
 			@param numVectors The number of vectors to generate for this current
 			@param startingPosition The origin point to start this current at
 		*/
-		void generateCurrent(int numVectors, Ogre::Vector2 startingPosition);
+		WindCurrent generateCurrent(int numVectors, Ogre::Vector2 startingPosition);
 
 		/** Get the position of the collision of a mouse click ray
 			across our wind plane
@@ -152,7 +155,7 @@ namespace Nimbus
 		}* mTickListener;
 
 	public:
-		WindManager(Ogre::SceneManager* sceneManager, World* world);
+		WindManager(Ogre::SceneManager* sceneManager, World* world, Ogre::Real beta);
 		virtual ~WindManager(void);
 
 		// From Nimbus::Manager

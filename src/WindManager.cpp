@@ -15,9 +15,10 @@ using namespace Nimbus;
 
 enum ArrowType {RED, BLUE};
 
-WindManager::WindManager(Ogre::SceneManager* sceneManager, World* world) :
+WindManager::WindManager(Ogre::SceneManager* sceneManager, World* world, Ogre::Real beta) :
 	mWindPlane(Ogre::Vector3::UNIT_Y, -12),
-	mWorld(world)
+	mWorld(world),
+	mEssentiallyZero(beta)
 {
 	this->mSceneManager = sceneManager;
 	this->mCurrentPosition = Ogre::Vector2::ZERO;
@@ -100,6 +101,8 @@ bool WindManager::update(void)
 
 void WindManager::addPoint(Ogre::Vector2& newPosition)
 {
+
+
 	// If we've already started creating the wind current
 	if(mCurrentPosition != Ogre::Vector2::ZERO)
 	{
@@ -107,13 +110,15 @@ void WindManager::addPoint(Ogre::Vector2& newPosition)
 		Ogre::Vector2 deltaVector = newPosition - mCurrentPosition;
 
 		// Only add the new position if the delta isn't zero
-		if(deltaVector != Ogre::Vector2::ZERO)
+		if(deltaVector.length() > mEssentiallyZero.length())
 		{
 			// Create the arrow facing in the direction of the created current
 			createArrow(mCurrentPosition, deltaVector, ArrowType::RED);
 
 			// Add the new point to the wind current
 			this->mWindCurrent->addPoint(mCurrentPosition, deltaVector);
+		} else {
+			return;
 		}
 	}
 
@@ -164,19 +169,32 @@ Ogre::Vector2 WindManager::getCollisionPoint(Ogre::Ray* collisionRay)
 	}
 }
 
-void WindManager::generateCurrent(void)
+WindCurrent WindManager::generateCurrent(void)
 {
-	// Stub!
+	WindCurrent w = WindCurrent(rand() % 10);
+	int numVectors = rand() % 8 + 3;
+
+	/*Ogre::Vector2 point = Ogre::Vector2(Ogre::Real(rand() % mWorld->getWindMap()->mOffset), Ogre::real)
+
+	while (numVectors > 0) {
+
+	}*/
+
+	return w;
 }
 
-void WindManager::generateCurrent(int numVectors)
+WindCurrent WindManager::generateCurrent(int numVectors)
 {
 	// Stub!
+
+	return WindCurrent(0);
 }
 
-void WindManager::generateCurrent(int numVectors, Ogre::Vector2 startingPosition)
+WindCurrent WindManager::generateCurrent(int numVectors, Ogre::Vector2 startingPosition)
 {
 	// Stub!
+
+	return WindCurrent(0);
 }
 
 void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventListener* responder)

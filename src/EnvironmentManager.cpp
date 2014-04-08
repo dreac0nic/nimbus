@@ -8,7 +8,7 @@ EnvironmentManager::EnvironmentManager(Ogre::SceneManager* sceneManager, World* 
 {
 	mWorld = world;
 
-	mWindManager = new WindManager(sceneManager, mWorld);
+	mWindManager = new WindManager(sceneManager, mWorld, mWorld->getWindMap()->getAlphaVector().length() / 7.0F);
 }
 
 EnvironmentManager::~EnvironmentManager(void)
