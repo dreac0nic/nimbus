@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Wind">
       <UniqueIdentifier>{ce5b95d0-bd60-40ab-a5df-ec0983f7ba59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Voronoi">
+      <UniqueIdentifier>{ba97c96c-4117-456b-9d80-58778b193428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Voronoi">
+      <UniqueIdentifier>{a47338ee-c7b5-4af3-b387-d7abc78d0e4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -92,6 +98,39 @@
     </ClCompile>
     <ClCompile Include="src\VectorMap.cpp">
       <Filter>Source Files\Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Edge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Halfedge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\LineSegment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Polygon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Rectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Site.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Vertex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MapGeneration\Voronoi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Voronoi.cpp">
+      <Filter>Source Files\Voronoi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +208,15 @@
     </ClInclude>
     <ClInclude Include="src\WindMap.h">
       <Filter>Header Files\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MapGeneration\Voronoi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Voronoi.h">
+      <Filter>Header Files\Voronoi</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
