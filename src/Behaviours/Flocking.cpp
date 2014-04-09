@@ -99,7 +99,7 @@ void Flocking::SoarListener::handleEvent(payloadmap payload, EventListener* resp
 {
 	// Get the entity id
 	GameEntityId entityId = *static_cast<GameEntityId*>(payload["EntityId"]);
-
+	
 	// Return if we do not have this entity id in our entity list
 	if(mParent->mEntities.find(entityId) == mParent->mEntities.end())
 	{
@@ -151,7 +151,7 @@ void Flocking::TickListener::handleEvent(payloadmap payload, EventListener* resp
 		// Change the translation vector of the entity based on the new direction
 		translatePayload["EntityId"] = &entityId;
 		translatePayload["PositionDelta"] = &delta;
-		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::BEGIN_TRANSLATE_ENTITY, translatePayload);
+		this->mEntityEventSystem->fireEvent(EventSystem::EventType::BEGIN_TRANSLATE_ENTITY, translatePayload);
 	}
 }
 
