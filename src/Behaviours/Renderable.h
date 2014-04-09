@@ -42,9 +42,9 @@ namespace Nimbus
 		}* mPositionListener;
 
 	public:
-		Renderable(BehaviourType type, World *world);
-		Renderable(BehaviourType type, World *world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
-		Renderable(Renderable* other, World* world, int id);
+		Renderable(BehaviourType type, World *world, EventSystem* eventSystem);
+		Renderable(BehaviourType type, World *world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem);
+		Renderable(Renderable* other, World* world, int id, EventSystem* eventSystem);
 		virtual ~Renderable(void);
 
 		// Accessor methods

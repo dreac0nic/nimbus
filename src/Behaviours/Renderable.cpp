@@ -4,14 +4,14 @@
 using namespace Ogre;
 using namespace Nimbus;
 
-Nimbus::Renderable::Renderable(BehaviourType type, World* world):
-	Behaviour(type, world)
+Nimbus::Renderable::Renderable(BehaviourType type, World* world, EventSystem* eventSystem):
+	Behaviour(type, world, eventSystem)
 {
 	this->init(NULL, Vector3::ZERO, "");
 }
 
-Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(type, world)
+Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem):
+	Behaviour(type, world, eventSystem)
 {
 	std::string ogreName;
 	Vector3 scale;
@@ -51,8 +51,8 @@ Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::Set
 	this->init(model, scale, ogreName);
 }
 
-Nimbus::Renderable::Renderable(Renderable* other, World* world, int id):
-	Behaviour(other, world, id)
+Nimbus::Renderable::Renderable(Renderable* other, World* world, int id, EventSystem* eventSystem):
+	Behaviour(other, world, id, eventSystem)
 {
 	this->init(other->getModel(), other->getScale(), other->mBaseEntityName);
 }
