@@ -24,13 +24,16 @@ namespace Nimbus
 		/** The entity Id that holds this behaviour. */
 		GameEntityId mParentId;
 
+		/** The event system for the entity. */
+		EventSystem* mEntityEventSystem;
+
 	public:
-		Behaviour(BehaviourType type, World* world) :
-			mWorld(world), mBehaviourType(type) {}
-		Behaviour(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings) :
-			mWorld(world), mBehaviourType(type) {}
-		Behaviour(Behaviour* other, World* world, int id) :
-			mWorld(world), mBehaviourType(other->mBehaviourType), mParentId(id) {}
+		Behaviour(BehaviourType type, World* world, EventSystem* eventSystem) :
+			mWorld(world), mBehaviourType(type), mEntityEventSystem(eventSystem) {}
+		Behaviour(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem) :
+			mWorld(world), mBehaviourType(type), mEntityEventSystem(eventSystem) {}
+		Behaviour(Behaviour* other, World* world, int id, EventSystem* eventSystem) :
+			mWorld(world), mBehaviourType(other->mBehaviourType), mParentId(id), mEntityEventSystem(eventSystem) {}
 		virtual ~Behaviour(void) {}
 
 		virtual void startup(void) = 0;
