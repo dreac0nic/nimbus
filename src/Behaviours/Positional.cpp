@@ -145,14 +145,14 @@ void Positional::forceUpdate(void)
 	this->requireUpdate = true;
 }
 
-Behaviour* Positional::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Positional::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem)
 {
-	return new Positional(this->mBehaviourType, this->mWorld, initializingSettings);
+	return new Positional(this->mBehaviourType, this->mWorld, initializingSettings, eventSystem);
 }
 
-Behaviour* Positional::clone(int id)
+Behaviour* Positional::clone(int id, EventSystem* eventSystem)
 {
-	return new Positional(this, this->mWorld, id);
+	return new Positional(this, this->mWorld, id, eventSystem);
 }
 
 void Positional::MovementListener::handleEvent(payloadmap payload, EventListener* responder)

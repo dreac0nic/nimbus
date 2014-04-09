@@ -61,12 +61,12 @@ void Soaring::shutdown(void)
 	*/
 }
 
-Behaviour* Soaring::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Soaring::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem)
 {
-	return new Soaring(this->mBehaviourType, this->mWorld, initializingSettings);
+	return new Soaring(this->mBehaviourType, this->mWorld, initializingSettings, eventSystem);
 }
 
-Behaviour* Soaring::clone(int id)
+Behaviour* Soaring::clone(int id, EventSystem* eventSystem)
 {
-	return new Soaring(this, this->mWorld, id);
+	return new Soaring(this, this->mWorld, id, eventSystem);
 }
