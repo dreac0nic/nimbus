@@ -87,14 +87,36 @@ void Tile::toString(void)
 
 	void Tile::updateTile()
 	{
+		double tempGrnd=0,tempTemp=0,tempHumi=0;
 		//Needs to recieve tiles neighbors
 		// Will call all set functions
 		for(vector<Tile*>::iterator it; it != this->neighbors.end(); it++)
 		{
 			Tile* tempTile = *it;// Pointer on neighbor tile
-
-			if(tempTile->water) cout << "IT IS WATER!!!" << endl;
+			tempGrnd= tempGrnd + tempTile->getSat();
+			tempTemp= tempTemp + tempTile->getTemp();
+			tempHumi= tempHumi + tempTile->getHumidity();
+			//if(tempTile->water) cout << "IT IS WATER!!!" << endl;
 		}
+
+		tempGrnd = tempGrnd/this->neighbors.size;
+		tempTemp = tempTemp/this->neighbors.size;
+		tempHumi = tempHumi/this->neighbors.size;
+
+		if(tempGrnd >grndSat)
+		{grndSat = grndSat +((tempGrnd - grndSat)/2);}
+		if(tempGrnd <grndSat)
+		{grndSat = grndSat -((grndSat - tempGrnd)/2);}
+		if(tempTemp >temp)
+		{temp = temp +((tempTemp - temp)/2);}
+		if(tempTemp <temp)
+		{temp = temp -((temp - tempTemp/2));}
+		if(tempHumi >humidity)
+		{humidity = humidity +((tempHumi - humidity)/2);}
+		if(tempHumi <humidity)
+		{humidity = humidity -((humidity - tempHumi)/2);}
+
+
 	}
 
 	void Tile::setType()
@@ -103,12 +125,43 @@ void Tile::toString(void)
 		//Barren = 1;Sand = 2;Savanna = 3; Plains = 4; Tundra = 5;Tropical 6
 		//Temperate = 7; Taiga = 8; Oceans = 9; 
 		// Artic = 10; Rivers = 11; Lakes = 12; *these are extra
+		
 		biome= 1;
+
+		//low 33-;med 34-66; high = 67+
+
+
+
 	}
 
 	std::string Tile::getType()
 	{
-		return "words";
+		string toReturn;
+
+		switch (biome){
+		case 1: toReturn= "Barren";
+			break;
+		case 2: toReturn= "Sand";
+			break;
+		case 3: toReturn= "Savanna";
+			break;
+			case 4: toReturn= "Plains";
+			break;
+			case 5: toReturn= "Tundra";
+			break;
+			case 6: toReturn= "Tropical";
+			break;
+			case 7: toReturn= "Temperate";
+			break;
+			case 8: toReturn= "Taiga";
+			break;
+			case 9: toReturn= "Oceans";
+			break;
+			case 10: toReturn= "Artic";
+			break;
+
+		}
+		return toReturn;
 	}
 
 	void Tile::spawn()
