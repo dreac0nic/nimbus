@@ -83,22 +83,25 @@ namespace Nimbus
 		/** Default constructor, taking a world pointer.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
+			@param eventSystem A pointer to the parent entity's event system.
 		*/
-		Positional(BehaviourType type, World *world);
+		Positional(BehaviourType type, World *world, EventSystem* eventSystem);
 
 		/** Constructor based of a set of initial settings.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 			@param intitializingSettings A map of settings used to construct the intial entity.
+			@param eventSystem A pointer to the parent entity's event system.
 		*/
-		Positional(BehaviourType type, World *world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+		Positional(BehaviourType type, World *world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem);
 
 		/** Constructor taking a different behaviour and making a similar one.
 			@param other The template Positional behaviour.
 			@param world A pointer to the game world.
 			@param id The id for the parent entity.
+			@param eventSystem A pointer to the parent entity's event system.
 		*/
-		Positional(Positional* other, World* world, int id);
+		Positional(Positional* other, World* world, int id, EventSystem* eventSystem);
 
 		/** Virtual destructor for destroying things. */
 		virtual ~Positional(void);

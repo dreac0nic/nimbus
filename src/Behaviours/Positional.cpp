@@ -3,14 +3,14 @@
 using namespace Nimbus;
 using namespace Ogre;
 
-Positional::Positional(BehaviourType type, World* world):
-	Behaviour(type, world)
+Positional::Positional(BehaviourType type, World* world, EventSystem* eventSystem):
+	Behaviour(type, world, eventSystem)
 {
 	this->init(Vector3::ZERO, Vector3::ZERO);
 }
 
-Positional::Positional(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(type, world, initializingSettings)
+Positional::Positional(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem):
+	Behaviour(type, world, initializingSettings, eventSystem)
 {
 	stringstream optionParser;
 	Vector3 initialPosition = Vector3::ZERO;
@@ -36,8 +36,8 @@ Positional::Positional(BehaviourType type, World* world, Ogre::ConfigFile::Setti
 	this->init(initialPosition, facingVector);
 }
 
-Positional::Positional(Positional* other, World* world, int id):
-	Behaviour(other, world, id)
+Positional::Positional(Positional* other, World* world, int id, EventSystem* eventSystem):
+	Behaviour(other, world, id, eventSystem)
 {
 	this->init(other->mPosition, other->mFacingVector);
 }
