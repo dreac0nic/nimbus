@@ -6,6 +6,13 @@ using namespace Nimbus;
 
 EventSystem* EventSystem::singleton = NULL;
 
+EventSystem* EventSystem::initializeSingleton()
+{
+	singleton = new EventSystem();
+
+	return singleton;
+}
+
 EventSystem::EventSystem(void)
 {
 	// Setup the singleton pointer.

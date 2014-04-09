@@ -192,6 +192,12 @@ namespace Nimbus
 			 */
 		};
 
+		/** Initializes the event system singleton.
+
+			@return A pointer to the singleton just created.
+		*/
+		static EventSystem* initializeSingleton();
+
 		/** Gets the singleton.
 
 		 @return
