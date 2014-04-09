@@ -1,4 +1,5 @@
 #include "GameEntity.h"
+#include "EventSystem.h"
 #include <OgreConfigFile.h>
 
 using namespace Nimbus;
@@ -6,12 +7,14 @@ using namespace Ogre;
 
 GameEntity::GameEntity(GameEntityId id, GameEntityType type) :
 	mId(id),
+	mEventSystem(),
 	mEntityType(type)
 {
 }
 
 GameEntity::GameEntity(GameEntityId id, GameEntity* other) :
-	mId(id)
+	mId(id),
+	mEventSystem()
 {
 	// Copying all of the properties and behaviours in the given entity to this new entity
 	this->mEntityType = other->getEntityType();

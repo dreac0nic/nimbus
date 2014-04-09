@@ -22,6 +22,9 @@ namespace Nimbus
 		/** The id of the entity. */
 		GameEntityId mId;
 
+		/** The event system for the entity. */
+		EventSystem* mEventSystem;
+
 	public:
 		/** Standard blank constructor. */
 		GameEntity(GameEntityId id, GameEntityType type);
