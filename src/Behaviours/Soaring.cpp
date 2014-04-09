@@ -6,18 +6,18 @@
 using namespace Nimbus;
 using namespace Ogre;
 
-Soaring::Soaring(BehaviourType type, World* world):
-	Behaviour(type, world)
+Soaring::Soaring(BehaviourType type, World* world, EventSystem* eventSystem):
+	Behaviour(type, world, eventSystem)
 {
 }
 
-Soaring::Soaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(type, world, initializingSettings)
+Soaring::Soaring(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem):
+	Behaviour(type, world, initializingSettings, eventSystem)
 {
 }
 
-Soaring::Soaring(Soaring* other, World* world, int id) :
-	Behaviour(other, other->mWorld, id)
+Soaring::Soaring(Soaring* other, World* world, int id, EventSystem* eventSystem) :
+	Behaviour(other, other->mWorld, id, eventSystem)
 {
 }
 

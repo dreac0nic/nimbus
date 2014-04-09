@@ -5,14 +5,14 @@
 using namespace Nimbus;
 using namespace Ogre;
 
-Flocking::Flocking(BehaviourType type, World* world) :
-	Behaviour(type, world)
+Flocking::Flocking(BehaviourType type, World* world, EventSystem* eventSystem) :
+	Behaviour(type, world, eventSystem)
 {
 	this->init(Real(1.0), Real(0.1));
 }
 
-Flocking::Flocking(BehaviourType type, World* world, ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(type, world, initializingSettings)
+Flocking::Flocking(BehaviourType type, World* world, EventSystem* eventSystem, ConfigFile::SettingsMultiMap* initializingSettings):
+	Behaviour(type, world, initializingSettings, eventSystem)
 {
 	stringstream optionsParser;
 
@@ -36,8 +36,8 @@ Flocking::Flocking(BehaviourType type, World* world, ConfigFile::SettingsMultiMa
 	this->init(influenceFactor, overrideFactor);
 }
 
-Flocking::Flocking(Flocking* other, World* world, int id) :
-	Behaviour(other, world, id)
+Flocking::Flocking(Flocking* other, World* world, int id, EventSystem* eventSystem) :
+	Behaviour(other, world, id, eventSystem)
 {
 	this->init(other->mComponentInfluenceFactor, other->mComponentOverrideFactor);
 }
