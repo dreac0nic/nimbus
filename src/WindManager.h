@@ -1,7 +1,7 @@
 #ifndef NIMBUS_WINDMANAGER_H
 #define NIMBUS_WINDMANAGER_H
 
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 #include "Manager.h"
 #include "WindMap.h"
 #include "World.h"

@@ -1,5 +1,5 @@
 #include "Soaring.h"
-#include "../EventSystem.h"
+#include "../EventSystem/EventSystem.h"
 #include "../WindMap.h"
 #include <OgreVector3.h>
 

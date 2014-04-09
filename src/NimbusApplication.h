@@ -3,8 +3,7 @@
 
 #include "RunMode.h"
 #include "InputManager.h"
-#include "EventListener.h"
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 #include <OgreRoot.h>
 #include <OgreFrameListener.h>
 

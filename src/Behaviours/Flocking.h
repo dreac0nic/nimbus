@@ -2,7 +2,7 @@
 #define NIMBUS_BEHAVIOUR_FLOCKING_H
 
 #include "Behaviour.h"
-#include "../EventSystem.h"
+#include "../EventSystem/EventSystem.h"
 #include "../GameEntity.h"
 
 namespace Nimbus

@@ -3,7 +3,7 @@
 
 #include <OgreEntity.h>
 #include "Behaviour.h"
-#include "../EventSystem.h"
+#include "../EventSystem/EventSystem.h"
 
 namespace Nimbus
 {

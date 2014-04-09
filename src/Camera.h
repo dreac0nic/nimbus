@@ -1,7 +1,7 @@
 #ifndef NIMBUS_CAMERA_H
 #define NIMBUS_CAMERA_H
 
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 #include <OgreVector3.h>
 #include <OgreWindowEventUtilities.h>
 

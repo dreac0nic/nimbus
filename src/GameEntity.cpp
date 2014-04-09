@@ -1,5 +1,5 @@
 #include "GameEntity.h"
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 #include <OgreConfigFile.h>
 
 using namespace Nimbus;

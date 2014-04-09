@@ -1,6 +1,6 @@
 #include <OgreRoot.h>
 #include "VectorMap.h"
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 
 namespace Nimbus
 {

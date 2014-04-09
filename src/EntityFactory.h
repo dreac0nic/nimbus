@@ -7,8 +7,7 @@
 
 #include "GameEntity.h"
 #include "./Behaviours/Behaviour.h"
-#include "EventListener.h"
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 
 namespace Nimbus
 {

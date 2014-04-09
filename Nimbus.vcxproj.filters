@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Wind">
       <UniqueIdentifier>{ce5b95d0-bd60-40ab-a5df-ec0983f7ba59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\EventSystem">
+      <UniqueIdentifier>{76adca01-caa3-4fbf-8402-d14a08164989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EventSystem">
+      <UniqueIdentifier>{dff50a1d-1420-4fb6-b05d-980ba0e0f57e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -34,9 +40,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EventSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEntity.cpp">
@@ -59,9 +62,6 @@
     </ClCompile>
     <ClCompile Include="src\EntityFactory.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\behaviours\Positional.cpp">
-      <Filter>Source Files\Behaviours</Filter>
     </ClCompile>
     <ClCompile Include="src\behaviours\Rainy.cpp">
       <Filter>Source Files\Behaviours</Filter>
@@ -93,6 +93,12 @@
     <ClCompile Include="src\VectorMap.cpp">
       <Filter>Source Files\Wind</Filter>
     </ClCompile>
+    <ClCompile Include="src\behaviours\Transformational.cpp">
+      <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EventSystem\EventSystem.cpp">
+      <Filter>Source Files\EventSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\NimbusApplication.h">
@@ -105,12 +111,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EventListener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EventSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\GameEntity.h">
@@ -134,9 +134,6 @@
     <ClInclude Include="src\EntityFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\behaviours\Positional.h">
-      <Filter>Header Files\Behaviours</Filter>
-    </ClInclude>
     <ClInclude Include="src\behaviours\Rainy.h">
       <Filter>Header Files\Behaviours</Filter>
     </ClInclude>
@@ -155,9 +152,6 @@
     <ClInclude Include="src\Grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Behaviour.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -172,6 +166,15 @@
     </ClInclude>
     <ClInclude Include="src\WindMap.h">
       <Filter>Header Files\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="src\behaviours\Transformational.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EventSystem\EventListener.h">
+      <Filter>Header Files\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EventSystem\EventSystem.h">
+      <Filter>Header Files\EventSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

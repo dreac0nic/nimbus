@@ -11,7 +11,7 @@ Flocking::Flocking(BehaviourType type, World* world, EventSystem* eventSystem) :
 	this->init(Real(1.0), Real(0.1));
 }
 
-Flocking::Flocking(BehaviourType type, World* world, EventSystem* eventSystem, ConfigFile::SettingsMultiMap* initializingSettings):
+Flocking::Flocking(BehaviourType type, World* world, ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem):
 	Behaviour(type, world, initializingSettings, eventSystem)
 {
 	stringstream optionsParser;
@@ -151,7 +151,7 @@ void Flocking::TickListener::handleEvent(payloadmap payload, EventListener* resp
 		// Change the translation vector of the entity based on the new direction
 		translatePayload["EntityId"] = &entityId;
 		translatePayload["PositionDelta"] = &delta;
-		this->mEntityEventSystem->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, translatePayload);
+		this->mParent->mEntityEventSystem->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, translatePayload);
 	}
 }
 

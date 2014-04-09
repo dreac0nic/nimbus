@@ -2,7 +2,7 @@
 #include <OgreRenderWindow.h>
 #include <OgreLogManager.h>
 #include "NimbusApplication.h"
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 
 using namespace Nimbus;
 

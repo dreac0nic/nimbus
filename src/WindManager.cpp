@@ -5,7 +5,7 @@
 #include <OgreSceneManager.h>
 #include <OgreVector2.h>
 #include "WindManager.h"
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 #include "WindMap.h"
 #include "VectorMap.h"
 #include "WindCurrent.h"

@@ -5,7 +5,7 @@
 #include <OgreRoot.h>
 #include "Grid.h"
 #include "WindCurrent.h"
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 #include "GameEntity.h"
 
 namespace Nimbus

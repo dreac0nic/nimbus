@@ -3,7 +3,7 @@
 
 #include <OgreRoot.h>
 #include <vector>
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 #include "Grid.h"
 #include "GameEntity.h"
 
