@@ -42,8 +42,8 @@ namespace Nimbus
 
 		/** In form with the prototype pattern, this method creates a new instance of the behaviour. (Deep copy)
 		Note: You are responsible for garbage collecting this behavior. */
-		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings) = 0;
-		virtual Behaviour* clone(int id) = 0;
+		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem) = 0;
+		virtual Behaviour* clone(int id, EventSystem* eventSystem) = 0;
 
 		// Public accessors
 		BehaviourType getBehaviourType() { return this->mBehaviourType; }
