@@ -336,7 +336,7 @@ void WindMap::updateArrowGrid()
 			face3dVector = Ogre::Vector3(faceVector.x, 0, faceVector.y);
 
 			// Send the position update event
-			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_ENTITY, updateArrowPayload);
+			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, updateArrowPayload);
 		}
 	}
 }

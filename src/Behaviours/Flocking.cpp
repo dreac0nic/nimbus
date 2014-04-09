@@ -151,7 +151,7 @@ void Flocking::TickListener::handleEvent(payloadmap payload, EventListener* resp
 		// Change the translation vector of the entity based on the new direction
 		translatePayload["EntityId"] = &entityId;
 		translatePayload["PositionDelta"] = &delta;
-		this->mEntityEventSystem->fireEvent(EventSystem::EventType::BEGIN_TRANSLATE_ENTITY, translatePayload);
+		this->mEntityEventSystem->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, translatePayload);
 	}
 }
 

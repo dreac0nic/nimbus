@@ -13,9 +13,7 @@ namespace Nimbus
 	private:
 		std::string mBaseEntityName;
 		Ogre::Entity* mOgreEntity;
-		//Ogre::Vector3 mPosition;
 		Ogre::Vector3 mScale;
-		//Ogre::Vector3 mRotation;
 		Ogre::SceneNode* mNode;
 
 		/** Constructor function that initializes all the necessary properties of the

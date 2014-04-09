@@ -5,7 +5,7 @@
 
 #include "EntityFactory.h"
 #include "./Behaviours/Renderable.h"
-#include "./Behaviours/Positional.h"
+#include "./Behaviours/Transformational.h"
 #include "./Behaviours/Soaring.h"
 #include "./Behaviours/Flocking.h"
 
@@ -30,7 +30,7 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 	// Load the behaviour prototype list
 	this->mBehaviourInstances.clear();
 	this->mBehaviourInstances["Renderable"] = new Renderable("Renderable", world);
-	this->mBehaviourInstances["Positional"] = new Positional("Positional", world);
+	this->mBehaviourInstances["Transformational"] = new Transformational("Transformational", world);
 	this->mBehaviourInstances["Soaring"] = new Soaring("Soaring", world);
 	this->mBehaviourInstances["Flocking"] = new Flocking("Flocking", world);
 

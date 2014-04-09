@@ -112,7 +112,7 @@ void Nimbus::EntityManager::CreateEntityListener::handleEvent(payloadmap payload
 			}
 
 			// Fire the event to set the position
-			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_ENTITY, positionalPayload);
+			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATION_QUERY, positionalPayload);
 		}
 
 		if(responder != NULL)
@@ -178,7 +178,7 @@ void EntityManager::TickListener::generateCloudGroups()
 	{
 		// Fire off a position query
 		entityId = (*currentCloud)->getEntityId();
-		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_QUERY, queryPayload, mParent->mPositionResponseListener);
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATION_QUERY, queryPayload, mParent->mPositionResponseListener);
 
 		// Store the position
 		positions[entityId] = mParent->mPositionResponseListener->getPosition();
