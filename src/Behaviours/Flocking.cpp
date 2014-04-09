@@ -85,14 +85,14 @@ void Flocking::shutdown(void)
 	*/
 }
 
-Behaviour* Flocking::clone(ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Flocking::clone(ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem)
 {
-	return new Flocking(this->mBehaviourType, this->mWorld, initializingSettings);
+	return new Flocking(this->mBehaviourType, this->mWorld, initializingSettings, eventSystem);
 }
 
-Behaviour* Flocking::clone(int id)
+Behaviour* Flocking::clone(int id, EventSystem* eventSystem)
 {
-	return new Flocking(this, this->mWorld, id);
+	return new Flocking(this, this->mWorld, id, eventSystem);
 }
 
 void Flocking::SoarListener::handleEvent(payloadmap payload, EventListener* responder)

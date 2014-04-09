@@ -58,12 +58,12 @@ namespace Nimbus
 		/** Duplicates the entity using the settings given.
 			@return A pointer given by the constructor.
 		*/
-		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem);
 
 		/** Duplicates the entity based on the current copy.
 			This is used to enable use of the prototype pattern.
 		*/
-		virtual Behaviour* clone(int id);
+		virtual Behaviour* clone(int id, EventSystem* eventSystem);
 	};
 }
 
