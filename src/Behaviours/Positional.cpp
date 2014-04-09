@@ -57,6 +57,7 @@ void Positional::init(Vector3 initialPosition, Vector3 facingDirection)
 	this->mRotationVector = Vector3::ZERO;
 
 	this->mMovementListener = new MovementListener(this);
+	this->mPositionQueryListener = new PositionQueryListener(this);
 }
 
 void Positional::startup(void)
@@ -70,6 +71,8 @@ void Positional::startup(void)
 	EventSystem::getSingleton()->registerListener(mMovementListener, EventSystem::EventType::POSITION_ENTITY);
 	EventSystem::getSingleton()->registerListener(mMovementListener, EventSystem::EventType::BEGIN_TRANSLATE_ENTITY);
 	EventSystem::getSingleton()->registerListener(mMovementListener, EventSystem::EventType::END_TRANSLATE_ENTITY);
+
+	EventSystem::getSingleton()->registerListener(mPositionQueryListener, EventSystem::EventType::POSITION_QUERY);
 
 	// Force an update when things start rendering
 	this->forceUpdate();
@@ -218,5 +221,25 @@ void Positional::MovementListener::handleEvent(payloadmap payload, EventListener
 
 		// Set the new facing vector... there is no facing vector aggregation. Last one wins.
 		parent->mNewFacing = *facingVector;
+	}
+}
+
+void Positional::PositionQueryListener::handleEvent(payloadmap payload, EventListener* responder)
+{
+	// Make sure the request is for us
+	if(mParent->mParentId != *static_cast<GameEntityId*>(payload["EntityId"]))
+	{
+		return;
+	}
+
+	// If there is a responder
+	if(responder != NULL)
+	{
+		// Send it all positional information
+		payloadmap returnPayload;
+		returnPayload["PositionVector"] = &mParent->mPosition;
+		returnPayload["FacingVector"] = &mParent->mFacingVector;
+		returnPayload["RotationVector"] = &mParent->mRotationVector;
+		responder->handleEvent(returnPayload);
 	}
 }

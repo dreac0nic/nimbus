@@ -18,26 +18,6 @@ namespace Nimbus
 	 The Events will be fired using EventSystem's functions. These events will be evaluated and distributed to their 
 	 registered events.
 
-	 THOUGHTS ON EVENT EXPANSION
-	 ===========================
-
-	 One problem raised with the events is how events are expanded across many entities. For example, if EntityA 
-	 wants to know when EntityB moves, there are two possible scenarios.
-
-	 An event type is created for the explicit EntityB, meaning that there are individual event types for each entity 
-	 existing in the world. For example, EntityBMovedEvent is now a type. Which means that EntityAMovedEvent is also a type 
-	 and so and so forth for every entity existing. This could be extrapolated to all different types of situations where events 
-	 are used, meaning there could literally be thousands of events. To top this off, how are event types handled and how do different 
-	 types know about different events.
-
-	 EntityA listens to EVERY EntityMoved event and evaluated whether or not it is EntityB. This means that EntityA is constantly getting called 
-	 for every EntityMoved event fired by every Entity. The obvious problem is the fact taht all these entities possibly listening for EntityMoved 
-	 events are firing off all the time. Oh the chaos!
-
-	 The primary suggested solution to this issue is to provide a filter (presumably a map data type) containing specific information on the event 
-	 that the listener is looking for. For example, the payload may be carrying a key pointing to which entity that it wants to hear an event from. 
-	 The filter would then be used to eliminate any unnecesary events, without calling the appropriate listener.
-
 	 All hail the glorious helix fossil.
 
 	 */
@@ -127,6 +107,9 @@ namespace Nimbus
 					"FacingVector" => Ogre::Vector3		// Facing vector, units in world absolute world space,
 															begins at the object... have fun interpretting that (optional)
 					"RotationVector" => Ogre::Vector3	// Absolute, rotation vector <pitch, yaw, roll> (optional)
+
+				Responder Payload:
+					"EntityId" => GameEntityId
 			 */,
 
 			DESTROY_ENTITY
@@ -185,6 +168,27 @@ namespace Nimbus
 					"PositionVector" => Ogre::Vector3	// Absolute, world position (optional)
 					"FacingVector" => Ogre::Vector3		// The direction the entity is currently facing (optional)
 					"RotationVector" => Ogre::Vector3	// The rotation <pitch, yaw, roll> vector (optional)
+			 */,
+
+			 POSITION_QUERY
+			 /*! The event that requests about an entity's position. Quite possibly a very bad idea to use en masse...
+				which is, of course, what I intend to do (for lack of a better idea).
+
+				Payload:
+					"EntityId" => int
+
+				Responder Payload:
+					"PositionVector" => Ogre::Vector3	// Absolute, world position
+					"FacingVector" => Ogre::Vector3		// The direction the entity is currently facing
+					"RotationVector" => Ogre::Vector3	// The rotation <pitch, yaw, roll> vector
+			 */,
+
+			 FLOCK_UPDATE
+			 /*! The event which lets a Flocking behaviour know it's new entity list.
+				
+				Payload:
+					"EntityId" => GameEntityId
+					"EntityList" => list<GameEntityId>
 			 */
 		};
 

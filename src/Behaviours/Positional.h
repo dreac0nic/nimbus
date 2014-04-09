@@ -60,11 +60,24 @@ namespace Nimbus
 			Positional* parent;
 		public:
 			MovementListener(Positional* parent) { this->parent = parent; }
-			~MovementListener() {}
+			virtual ~MovementListener() {}
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		}* mMovementListener;
+
+		class PositionQueryListener :
+			public EventListener
+		{
+		private:
+			Positional* mParent;
+		public:
+			PositionQueryListener(Positional* parent) : mParent(parent) {}
+			virtual ~PositionQueryListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mPositionQueryListener;
 
 	public:
 		/** Default constructor, taking a world pointer.

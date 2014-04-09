@@ -1,5 +1,6 @@
 #include "Flocking.h"
 #include <algorithm>
+#include <list>
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -46,6 +47,7 @@ Flocking::~Flocking(void)
 	// DESTROY ALL OF THE THINGS
 	delete this->mTickListener;
 	delete this->mSoarListener;
+	delete this->mUpdateListener;
 }
 
 void Flocking::init(Real influenceFactor, Real overrideFactor)
@@ -58,6 +60,7 @@ void Flocking::init(Real influenceFactor, Real overrideFactor)
 	this->mPositionDelta = Vector3::ZERO;
 
 	// Create the listeners
+	this->mUpdateListener = new UpdateListener(this);
 	this->mSoarListener = new SoarListener(this);
 	this->mTickListener = new TickListener(this);
 }
@@ -65,6 +68,8 @@ void Flocking::init(Real influenceFactor, Real overrideFactor)
 void Flocking::startup(void)
 {
 	// Register the tick listener
+	EventSystem::getSingleton()->registerListener(mUpdateListener, EventSystem::EventType::FLOCK_UPDATE);
+	EventSystem::getSingleton()->registerListener(mSoarListener, EventSystem::EventType::SOAR_ENTITY);
 	EventSystem::getSingleton()->registerListener(mTickListener, EventSystem::EventType::TICK);
 }
 
@@ -147,5 +152,30 @@ void Flocking::TickListener::handleEvent(payloadmap payload, EventListener* resp
 		translatePayload["EntityId"] = &entityId;
 		translatePayload["PositionDelta"] = &delta;
 		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::BEGIN_TRANSLATE_ENTITY, translatePayload);
+	}
+}
+
+void Flocking::UpdateListener::handleEvent(payloadmap payload, EventListener* responder)
+{
+	// Make sure the event is for this entity
+	if(mParent->mParentId != *static_cast<GameEntityId*>(payload["EntityId"]))
+	{
+		return;
+	}
+
+	// If there is a valid entity list, store it
+	if(payload.find("EntityList") != payload.end())
+	{
+		std::list<GameEntityId> entityList = *static_cast<std::list<GameEntityId>* >(payload["EntityList"]);
+
+		// Clear the current entity list
+		mParent->mEntities.clear();
+
+		// Go through each entity id and add it to the entity map
+		for(std::list<GameEntityId>::iterator it = entityList.begin(); it != entityList.end(); ++it)
+		{
+			// Store a zero vector for each entity
+			mParent->mEntities[*it] = Vector3::ZERO;
+		}
 	}
 }
