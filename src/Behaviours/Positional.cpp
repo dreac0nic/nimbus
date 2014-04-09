@@ -68,11 +68,11 @@ void Positional::startup(void)
 	this->mNewFacing = Vector3::ZERO;
 
 	// Register event listeners.
-	EventSystem::getSingleton()->registerListener(mMovementListener, EventSystem::EventType::POSITION_ENTITY);
-	EventSystem::getSingleton()->registerListener(mMovementListener, EventSystem::EventType::BEGIN_TRANSLATE_ENTITY);
-	EventSystem::getSingleton()->registerListener(mMovementListener, EventSystem::EventType::END_TRANSLATE_ENTITY);
+	this->mEntityEventSystem->registerListener(mMovementListener, EventSystem::EventType::POSITION_ENTITY);
+	this->mEntityEventSystem->registerListener(mMovementListener, EventSystem::EventType::BEGIN_TRANSLATE_ENTITY);
+	this->mEntityEventSystem->registerListener(mMovementListener, EventSystem::EventType::END_TRANSLATE_ENTITY);
 
-	EventSystem::getSingleton()->registerListener(mPositionQueryListener, EventSystem::EventType::POSITION_QUERY);
+	this->mEntityEventSystem->registerListener(mPositionQueryListener, EventSystem::EventType::POSITION_QUERY);
 
 	// Force an update when things start rendering
 	this->forceUpdate();
@@ -90,7 +90,7 @@ void Positional::update(void)
 		initialMovePayload["PositionVector"] = &this->mPosition;
 		initialMovePayload["FacingVector"] = &this->mFacingVector;
 
-		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::ENTITY_MOVED, initialMovePayload);
+		this->mEntityEventSystem->fireEvent(EventSystem::EventType::ENTITY_MOVED, initialMovePayload);
 
 		this->requireUpdate = false;
 	}
@@ -124,7 +124,7 @@ void Positional::update(void)
 
 		// Send off the movement event
 		eventMovePayload["EntityId"] = &this->mParentId;
-		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::ENTITY_MOVED, eventMovePayload);
+		this->mEntityEventSystem->fireEvent(EventSystem::EventType::ENTITY_MOVED, eventMovePayload);
 
 		// Reset the delta vectors
 		this->mNewFacing = Vector3::ZERO;
@@ -135,9 +135,9 @@ void Positional::shutdown(void)
 {
 	// SUT DOWN THE POSITIONAL STUFF
 	// Deregister event listeners.
-	EventSystem::getSingleton()->unregisterListener(mMovementListener, EventSystem::EventType::POSITION_ENTITY);
-	EventSystem::getSingleton()->unregisterListener(mMovementListener, EventSystem::EventType::BEGIN_TRANSLATE_ENTITY);
-	EventSystem::getSingleton()->unregisterListener(mMovementListener, EventSystem::EventType::END_TRANSLATE_ENTITY);
+	this->mEntityEventSystem->unregisterListener(mMovementListener, EventSystem::EventType::POSITION_ENTITY);
+	this->mEntityEventSystem->unregisterListener(mMovementListener, EventSystem::EventType::BEGIN_TRANSLATE_ENTITY);
+	this->mEntityEventSystem->unregisterListener(mMovementListener, EventSystem::EventType::END_TRANSLATE_ENTITY);
 }
 
 void Positional::forceUpdate(void)
