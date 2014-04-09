@@ -1,5 +1,5 @@
 #include "NimbusApplication.h"
-#include "TestMode.h"
+#include "GameMode.h"
 #include <OgreConfigFile.h>
 #include <OgreRenderWindow.h>
 #include <OgreCamera.h>
@@ -26,8 +26,8 @@ NimbusApplication::NimbusApplication(void):
 
 NimbusApplication::~NimbusApplication(void)
 {
-	delete mCurrentRunMode;
 	delete mInputManager;
+	delete mCurrentRunMode;
 	delete mEventSystem;
 	delete mRoot;
 }
@@ -47,7 +47,8 @@ void NimbusApplication::begin(void)
 		app->mInputManager = new InputManager();
 
 		// Create the initial run mode
-		app->mCurrentRunMode = new TestMode();
+		app->mCurrentRunMode = new GameMode();
+		app->mCurrentRunMode->initialize();
 
 		// Start the rendering process
 		app->mRoot->addFrameListener(app);
@@ -163,7 +164,7 @@ bool NimbusApplication::loadConfiguration(void)
 	return true;
 }
 
-void NimbusApplication::ShutdownListener::handleEvent(payloadmap payload)
+void NimbusApplication::ShutdownListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	std::cerr << "Received shutdown event.\n";
 	Ogre::LogManager::getSingleton().logMessage("(Nimbus) Received shutdown event.");

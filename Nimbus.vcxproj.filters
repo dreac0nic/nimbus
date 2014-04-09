@@ -13,17 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\MapGeneration">
-      <UniqueIdentifier>{faa5adb0-d489-45ee-a773-606d268e2a46}</UniqueIdentifier>
+    <Filter Include="Header Files\Behaviours">
+      <UniqueIdentifier>{1a456996-0d0f-412e-a850-0b3ca03aee4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\MapGeneration">
-      <UniqueIdentifier>{beab7612-4392-445a-9c7c-1a5d5d04be12}</UniqueIdentifier>
+    <Filter Include="Source Files\Behaviours">
+      <UniqueIdentifier>{7a511ab5-4d87-4a7e-822a-a38d63f9815f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Map">
-      <UniqueIdentifier>{cd489ea1-650c-44b0-9bb8-1c9114b5bbea}</UniqueIdentifier>
+    <Filter Include="Header Files\Wind">
+      <UniqueIdentifier>{1bd1f581-5446-4581-9351-976930671134}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Map">
-      <UniqueIdentifier>{9c083eeb-fc1c-4b09-adf2-8442aba39367}</UniqueIdentifier>
+    <Filter Include="Source Files\Wind">
+      <UniqueIdentifier>{ce5b95d0-bd60-40ab-a5df-ec0983f7ba59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,53 +33,65 @@
     <ClCompile Include="src\NimbusApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TestMode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\EventSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MapGeneration\Edge.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
+    <ClCompile Include="src\GameEntity.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MapGeneration\LineSegment.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
+    <ClCompile Include="src\GameEntitySet.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MapGeneration\Halfedge.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
+    <ClCompile Include="src\World.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MapGeneration\Vertex.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
+    <ClCompile Include="src\EnvironmentManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MapGeneration\Voronoi.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
+    <ClCompile Include="src\GameMode.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MapGeneration\Polygon.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
+    <ClCompile Include="src\EntityManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MapGeneration\Site.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
+    <ClCompile Include="src\EntityFactory.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MapGeneration\Rectangle.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
+    <ClCompile Include="src\behaviours\Positional.cpp">
+      <Filter>Source Files\Behaviours</Filter>
     </ClCompile>
-    <ClCompile Include="src\MapGeneration\Util.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
+    <ClCompile Include="src\behaviours\Rainy.cpp">
+      <Filter>Source Files\Behaviours</Filter>
     </ClCompile>
-    <ClCompile Include="src\Corner.cpp">
-      <Filter>Source Files\Map</Filter>
+    <ClCompile Include="src\behaviours\Soaring.cpp">
+      <Filter>Source Files\Behaviours</Filter>
     </ClCompile>
-    <ClCompile Include="src\Map.cpp">
-      <Filter>Source Files\Map</Filter>
+    <ClCompile Include="src\Behaviours\Renderable.cpp">
+      <Filter>Source Files\Behaviours</Filter>
     </ClCompile>
-    <ClCompile Include="src\Tile.cpp">
-      <Filter>Source Files\Map</Filter>
+    <ClCompile Include="src\GeneralEntityIterator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TileEdge.cpp">
-      <Filter>Source Files\Map</Filter>
+    <ClCompile Include="src\behaviours\Flocking.cpp">
+      <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindCurrent.cpp">
+      <Filter>Source Files\Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindMap.cpp">
+      <Filter>Source Files\Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindManager.cpp">
+      <Filter>Source Files\Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VectorMap.cpp">
+      <Filter>Source Files\Wind</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,9 +99,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\RunMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TestMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Manager.h">
@@ -104,20 +113,62 @@
     <ClInclude Include="src\EventSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\MapGeneration\Voronoi.h">
-      <Filter>Header Files\MapGeneration</Filter>
+    <ClInclude Include="src\GameEntity.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Map.h">
-      <Filter>Header Files\Map</Filter>
+    <ClInclude Include="src\GameEntitySet.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Tile.h">
-      <Filter>Header Files\Map</Filter>
+    <ClInclude Include="src\World.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Corner.h">
-      <Filter>Header Files\Map</Filter>
+    <ClInclude Include="src\EnvironmentManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\TileEdge.h">
-      <Filter>Header Files\Map</Filter>
+    <ClInclude Include="src\GameMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EntityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EntityFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\behaviours\Positional.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\behaviours\Rainy.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\behaviours\Soaring.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\behaviours\Behaviour.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Behaviours\Renderable.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\behaviours\Flocking.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Grid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VectorMap.h">
+      <Filter>Header Files\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindCurrent.h">
+      <Filter>Header Files\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindManager.h">
+      <Filter>Header Files\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindMap.h">
+      <Filter>Header Files\Wind</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

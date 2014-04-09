@@ -1,5 +1,9 @@
 # .gitignore file
 
+# Asset Directory Ignores
+
+assets/*
+
 # Build Directory Ignores
 
 Build/*

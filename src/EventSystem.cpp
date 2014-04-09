@@ -11,7 +11,7 @@ EventSystem::EventSystem(void)
 	EventSystem::singleton = this;
 
 	// Initialize the listener map.
-	mListeners = map<EventType, vector<EventListener*>>();
+	mListeners = map<EventType, vector<EventListener*> >();
 }
 
 EventSystem::~EventSystem(void)
@@ -42,9 +42,9 @@ void EventSystem::unregisterListener(EventListener* listener, EventType type)
 	mListeners[type].erase(item);
 }
 
-void EventSystem::fireEvent(EventType type, const payloadmap& payload)
+void EventSystem::fireEvent(EventType type, const payloadmap& payload, EventListener* responder)
 {
 	for(vector<EventListener*>::iterator i = mListeners[type].begin(); i != mListeners[type].end(); ++i) {
-		(*i)->handleEvent(payload); // OH MY GOODNESS TEH SCIENCE
+		(*i)->handleEvent(payload, responder); // OH MY GOODNESS TEH SCIENCE
 	}
 }
