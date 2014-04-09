@@ -102,6 +102,9 @@
     <ClCompile Include="src\EventSystem\GenericHander.cpp">
       <Filter>Source Files\EventSystem</Filter>
     </ClCompile>
+    <ClCompile Include="src\EventSystem\EntityHandler.cpp">
+      <Filter>Source Files\EventSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\NimbusApplication.h">
@@ -183,6 +186,9 @@
       <Filter>Header Files\EventSystem</Filter>
     </ClInclude>
     <ClInclude Include="src\EventSystem\GenericHandler.h">
+      <Filter>Header Files\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EventSystem\EntityHandler.h">
       <Filter>Header Files\EventSystem</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,17 +21,24 @@ namespace Nimbus
 		{
 			GENERIC
 			/*! Used for generically handling any type of event.
-				No filtering applied.
+				
+				No filter
 			*/,
 
 			ENTITY
 			/*! Used for filtering events based on game entity id.
-				Filters according to GameEntityId.
+				
+				Filter:
+					"EntityId" => GameEntityId
+					"LocalOnly" => NULL // Indicates if the event should be registered/unregistered
+											for the global event (optional)
 			*/,
 
 			ENTITY_GROUP
 			/*! Used for filtering events based on a group of game entity ids.
-				Filters according to a list of GameEntityIds.
+				
+				Filter:
+					"EntityIds" => std::list<GameEntityId>
 			*/
 		} mHandlerType;
 
