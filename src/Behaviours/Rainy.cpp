@@ -54,12 +54,12 @@ void Nimbus::Rainy::shutdown(void)
 	*/
 }
 
-Behaviour* Nimbus::Rainy::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Nimbus::Rainy::clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem)
 {
-	return new Nimbus::Rainy(this->mBehaviourType, this->mWorld, initializingSettings);
+	return new Nimbus::Rainy(this->mBehaviourType, this->mWorld, initializingSettings, eventSystem);
 }
 
-Behaviour* Nimbus::Rainy::clone(int id)
+Behaviour* Nimbus::Rainy::clone(int id, EventSystem* eventSystem)
 {
-	return new Nimbus::Rainy(this, this->mWorld, id);
+	return new Nimbus::Rainy(this, this->mWorld, id, eventSystem);
 }

@@ -93,7 +93,7 @@ void Nimbus::Renderable::startup(void)
 	this->mNode->setScale(mScale.x, mScale.y, mScale.z);
 
 	// Register the position update listener
-	EventSystem::getSingleton()->registerListener(mPositionListener, EventSystem::EventType::ENTITY_MOVED);
+	this->mEntityEventSystem->registerListener(mPositionListener, EventSystem::EventType::ENTITY_MOVED);
 }
 
 void Nimbus::Renderable::update(void)
@@ -124,14 +124,14 @@ Ogre::Vector3 Nimbus::Renderable::getScale()
 	return this->mScale;
 }
 
-Behaviour* Nimbus::Renderable::clone(ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Nimbus::Renderable::clone(ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem)
 {
-	return new Nimbus::Renderable(this->mBehaviourType, this->mWorld, initializingSettings);
+	return new Nimbus::Renderable(this->mBehaviourType, this->mWorld, initializingSettings, eventSystem);
 }
 
-Behaviour* Nimbus::Renderable::clone(int id)
+Behaviour* Nimbus::Renderable::clone(int id, EventSystem* eventSystem)
 {
-	return new Nimbus::Renderable(this, this->mWorld, id);
+	return new Nimbus::Renderable(this, this->mWorld, id, eventSystem);
 }
 
 void Nimbus::Renderable::PositionListener::handleEvent(payloadmap payload, EventListener* responder)
