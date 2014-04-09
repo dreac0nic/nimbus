@@ -29,10 +29,10 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 
 	// Load the behaviour prototype list
 	this->mBehaviourInstances.clear();
-	this->mBehaviourInstances["Renderable"] = new Renderable("Renderable", world);
-	this->mBehaviourInstances["Transformational"] = new Transformational("Transformational", world);
-	this->mBehaviourInstances["Soaring"] = new Soaring("Soaring", world);
-	this->mBehaviourInstances["Flocking"] = new Flocking("Flocking", world);
+	this->mBehaviourInstances["Renderable"] = new Renderable("Renderable", world, NULL);
+	this->mBehaviourInstances["Transformational"] = new Transformational("Transformational", world, NULL);
+	this->mBehaviourInstances["Soaring"] = new Soaring("Soaring", world, NULL);
+	this->mBehaviourInstances["Flocking"] = new Flocking("Flocking", world, NULL);
 
 	logBuilder << "(Nimbus) Loading game entity types from " << filePathsFile;
 	LogManager::getSingleton().logMessage(logBuilder.str());

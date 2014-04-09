@@ -22,7 +22,7 @@ GameEntity::GameEntity(GameEntityId id, GameEntity* other) :
 	behaviourmap::iterator behaviour = other->getBehaviours()->begin();
 	while (behaviour != other->getBehaviours()->end())
 	{
-		this->mBehaviours[behaviour->first] = behaviour->second->clone(this->mId);
+		this->mBehaviours[behaviour->first] = behaviour->second->clone(this->mId, this->mEventSystem);
 		behaviour++;
 	}
 }
