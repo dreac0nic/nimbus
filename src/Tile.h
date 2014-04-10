@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include <OGRE/OgreMesh.h>
 #include <OGRE/OgreVector2.h>
 
 
@@ -21,6 +22,9 @@ namespace Nimbus
 	/* This holds the Tile class, originally named "Center." */
 	class Tile
 	{
+	private:
+		void _generateSubMesh(Ogre::MeshPtr& mesh);
+
 	public:
 		// CLASS VARIABLES --
 		/* The delta X of the Tile class. */
@@ -89,7 +93,7 @@ namespace Nimbus
 		void toString(void);
 
 		/* Convert the tile into a OGRE mesh. */
-		Ogre::MeshPtr getMesh(void);
+		Ogre::MeshPtr getMesh(std::string);
 
 		/* Add this tile as a sub-mesh to the current OGRE mesh. */
 		bool addSubMesh(Ogre::MeshPtr& mesh);

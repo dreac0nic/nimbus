@@ -47,152 +47,158 @@ void Tile::toString(void)
 	std::cout << "Tile, x:" << loc.x << ", y:" << loc.y << " " << (border? "b": "-") << (ocean? "o": "-") << (water? "w": "-") << (coast? "c": "-") << "\n";
 }
 
-MeshPtr Tile::getMesh(void)
+void Tile::_generateSubMesh(MeshPtr& mesh)
 {
-	// Create the overall mesh.
-	MeshPtr tileMesh = MeshManager::getSingleton().createManual("tileName", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME); // Fix name issues. tileName not repeatable.
+	// Create a submesh to the given mesh.
+	SubMesh* tileMesh = mesh->createSubMesh();
 
-	// Create the submesh for this mesh.
-	SubMesh* mesh = tileMesh->createSubMesh();
-
-	// Define the vertices
+	// Define the vertices.
 	size_t index = 0;
-	size_t vertCount = this->corners.size() + 1; // number of corners + cent
+	size_t vertCount = this->corners.size() + 1; // corner count + center corner
 
-	Real* vertices = new Real[vertCount*3*2]; // vertCount * 3 [x, y, z] * 2 [coord, normal]
+	Real* vertices = new Real[vertCount*3*2];    // (number of verts)*(x, y, z)*(coord, normal) -or- vertCount*3*2
 
-	// Add center to first vector set.
+	// Manually add center vertex.
+	// -- Position (ord: x, y, z)
 	vertices[index++] = this->loc.x;
 	vertices[index++] = this->elevation;
 	vertices[index++] = this->loc.y;
 
-	// Add center normal to second vector second.
-	Vector3 norm = -Vector3::UNIT_Y;
+	// -- Normal (ord: x, y, z)
+	Vector3 norm = Vector3::UNIT_Y;
 
 	vertices[index++] = norm.x;
 	vertices[index++] = norm.y;
 	vertices[index++] = norm.z;
 
+	// Add the rest of the vertices to data buffer.
 	for(vector<Corner*>::iterator it = this->corners.begin(); it != this->corners.end(); ++it) {
 		// Add to the next point to the array.
-		Vector3 vec = (*it)->getVector3();
+		// -- Position
+		Vector3 vector = (*it)->getVector3();
 
-		vertices[index++] = vec.x;
-		vertices[index++] = vec.y;
-		vertices[index++] = vec.z;
+		vertices[index++] = vector.x;
+		vertices[index++] = vector.y;
+		vertices[index++] = vector.z;
 
-		// Add the normal for the next point to the array.
-		Vector3 norm = -Vector3::UNIT_Y; // Fake normal vector.
+		// -- Normal
+		Vector3 normal = Vector3::UNIT_Y;
 
-		vertices[index++] = norm.x;
-		vertices[index++] = norm.y;
-		vertices[index++] = norm.z;
+		vertices[index++] = normal.x;
+		vertices[index++] = normal.y;
+		vertices[index++] = normal.z;
 	}
 
-	for(int i = 0; i < vertCount; ++i) {
-		std::cout << "v[" << i << "]: " << (float)vertices[i*vertCount + 0] << ", " << (float)vertices[i*vertCount + 1] << ", " << (float)vertices[i*vertCount + 2] << "; n: " << (float)vertices[i*vertCount + 3] << ", " << (float)vertices[i*vertCount + 4] << ", " << (float)vertices[i*vertCount + 5] << std::endl;
-	}
-
-	// Define vertices color
+	// Define vertices color.
 	RenderSystem* rs = Root::getSingleton().getRenderSystem();
 	RGBA* colors = new RGBA[vertCount];
-	RGBA* pColor = colors;
 
-	for(int i = 0; i < vertCount; ++i)
-		rs->convertColourValue(ColourValue(1.0f, 0.0f, 0.0f), pColor++);
+	for(size_t i = 0; i < vertCount; ++i)
+		rs->convertColourValue(ColourValue(0.0f + 0.175f*i, 0.2f, 1.0f - 0.175f*i), colors + i);
 
-	// Define the triangles
-	int faceCount = vertCount - 1; // Face count = vertCount - cent;
-	std::cout << "Faces: " << faceCount << " [" << faceCount*3 << "]" << std::endl;
-	int center = 0;
-	int last = 1;
-	int curr = 2;
+	// Define the triangles.
+	size_t faceCount = vertCount - 1; // Face count = vertCount - cent
+
+	size_t center = 0;
+	size_t last   = 1; //collin was here
+	size_t curr   = 2;
 
 	unsigned short* faces = new unsigned short[faceCount*3];
 
 	index = 0;
 
 	for(size_t i = 0; i < faceCount; ++i) {
-		assert(last < vertCount && curr < vertCount); // Panic check.
+		assert(last < vertCount && curr < vertCount); // Panic check
 
-		std::cout << "Face " << i << ": ";
-
-		std::cout << center << " [" << index << "], ";
 		faces[index++] = center;
-
-		std::cout << curr << " [" << index << "], ";
 		faces[index++] = curr;
-
-		std::cout << last << " [" << index << "]" << std::endl;
 		faces[index++] = last;
 
-		last = curr++; // Move along the array.
+		std::cout << "Faces: " << center << ", " << curr << ", " << last << std::endl;
+
+		last = curr++;
 
 		if(curr >= vertCount) curr = 1;
 	}
 
-	// Create a new shared set of vertices.
-	tileMesh->sharedVertexData = new VertexData();
-	tileMesh->sharedVertexData->vertexCount = vertCount;
+	// All information has been generated, move into mesh structures.
+	//   Note: Currently does not implement or used any sort of shared
+	//     vertices. This is intentional and should be changed at the 
+	//     soonest conveienence. IE -- Never. ;P
+	tileMesh->useSharedVertices = false;
+	tileMesh->vertexData = new VertexData();
+	tileMesh->vertexData->vertexCount = vertCount;
 
-	// Create the memory footprint for our vertex data.
+	// Create memory footprint for vertex data.
 	size_t offset = 0;
-	VertexDeclaration* decl = tileMesh->sharedVertexData->vertexDeclaration;
+	VertexDeclaration* decl = tileMesh->vertexData->vertexDeclaration;
 
 	// Position and normal buffer.
-	// Setup position.
+	// -- Position
 	decl->addElement(0, offset, VET_FLOAT3, VES_POSITION);
 	offset += VertexElement::getTypeSize(VET_FLOAT3);
 
-	// Setup normal.
+	// -- Normal
 	decl->addElement(0, offset, VET_FLOAT3, VES_NORMAL);
 	offset += VertexElement::getTypeSize(VET_FLOAT3);
 
-	// Allocate vertex buffer for number of vertices and vertex size.
+	// Allocate a vertex buffer for a number of vertices and vertex size.
 	HardwareVertexBufferSharedPtr vertBuff = 
 		HardwareBufferManager::getSingleton().createVertexBuffer(
-			offset,
-			tileMesh->sharedVertexData->vertexCount,
+			offset, // Size of a vertex, in bytes.
+			tileMesh->vertexData->vertexCount,
 			HardwareBuffer::HBU_STATIC_WRITE_ONLY);
 
-	// Push vertex data to the card.
+	// Write our data to vertex buffer.
 	vertBuff->writeData(0, vertBuff->getSizeInBytes(), vertices, true);
 
-	// Set the binding to the vertex buffer.
-	VertexBufferBinding* vertBind = tileMesh->sharedVertexData->vertexBufferBinding;
+	// Set the buffer's bind location.
+	VertexBufferBinding* vertBind = tileMesh->vertexData->vertexBufferBinding;
 	vertBind->setBinding(0, vertBuff);
 
-	// Setup color information
+	// Color buffer for vertices
 	offset = 0;
 	decl->addElement(1, offset, VET_COLOUR, VES_DIFFUSE);
 	offset += VertexElement::getTypeSize(VET_COLOUR);
 
-	// Setup the hardware buffer for color.
+	// Allocate a new buffer for colors.
 	vertBuff = HardwareBufferManager::getSingleton().createVertexBuffer(
-			offset,
-			tileMesh->sharedVertexData->vertexCount,
+			offset, // Size of a vertex, in bytes.
+			tileMesh->vertexData->vertexCount,
 			HardwareBuffer::HBU_STATIC_WRITE_ONLY);
 
-	// Push color data to the card.
+	// Write color data to buffer.
 	vertBuff->writeData(0, vertBuff->getSizeInBytes(), colors, true);
 
-	// Set vertex buffer binding so that buffer 1 is the color buffer.
+	// Set the color buffer's bind location
 	vertBind->setBinding(1, vertBuff);
 
-	// Allocate and setup an index buffer.
+	// Allocate a buffer for the index information
 	HardwareIndexBufferSharedPtr indexBuff = HardwareBufferManager::getSingleton().createIndexBuffer(
 		HardwareIndexBuffer::IT_16BIT,
 		faceCount*3,
 		HardwareBuffer::HBU_STATIC_WRITE_ONLY);
 
-	// Pushed index buffer to the graphics card.
+	// Write data to the buffer.
 	indexBuff->writeData(0, indexBuff->getSizeInBytes(), faces, true);
 
-	// Finalize SubMesh
-	mesh->useSharedVertices = true;
-	mesh->indexData->indexBuffer = indexBuff;
-	mesh->indexData->indexCount = faceCount*3;
-	mesh->indexData->indexStart = 0;
+	// Finalize submesh.
+	tileMesh->indexData->indexBuffer = indexBuff;
+	tileMesh->indexData->indexCount = faceCount*3;
+	tileMesh->indexData->indexStart = 0;
+
+	// Deallocate the vertex and face arrays.
+	if(vertices) delete[] vertices;
+	if(faces) delete[] faces;
+}
+
+MeshPtr Tile::getMesh(std::string tileName)
+{
+	// Create the overall mesh.
+	MeshPtr tileMesh = MeshManager::getSingleton().createManual(tileName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME); // Fix name issues. tileName not repeatable.
+
+	// Add the tile as a submesh to mesh major.
+	this->_generateSubMesh(tileMesh);
 
     /// Set bounding information (for culling)
     tileMesh->_setBounds(AxisAlignedBox(-5,-5,-5,5,5,5));
@@ -201,120 +207,14 @@ MeshPtr Tile::getMesh(void)
 	// Signal that the mesh has loaded.
 	tileMesh->load();
 
-	// Deallocate the vertices and faces arrays.
-	delete[] vertices;
-	delete[] faces;
-
 	// Return finished mesh.
 	return tileMesh;
 }
 
 bool Tile::addSubMesh(Ogre::MeshPtr& mesh)
 {
-	// Create the submesh for this mesh.
-	SubMesh* subMesh = mesh->createSubMesh();
-
-	// Define the vertices
-	size_t index = 0;
-	size_t vertCount = this->corners.size() + 1; // number of corners + cent
-
-	Real* vertices = new Real[vertCount*3*2]; // vertCount * 3 [x, y, z] * 2 [coord, normal]
-
-	// Add center to first vector set.
-	vertices[index++] = this->loc.x;
-	vertices[index++] = this->elevation;
-	vertices[index++] = this->loc.y;
-
-	// Add center normal to second vector second.
-	Vector3 norm = -Vector3::UNIT_Y;
-
-	vertices[index++] = norm.x;
-	vertices[index++] = norm.y;
-	vertices[index++] = norm.z;
-
-	for(vector<Corner*>::iterator it = this->corners.begin(); it != this->corners.end(); ++it) {
-		// Add to the next point to the array.
-		Vector3 vec = (*it)->getVector3();
-
-		vertices[index++] = vec.x;
-		vertices[index++] = vec.y;
-		vertices[index++] = vec.z;
-
-		// Add the normal for the next point to the array.
-		Vector3 norm = Vector3::UNIT_Y; // Fake normal vector.
-
-		vertices[index++] = norm.x;
-		vertices[index++] = norm.y;
-		vertices[index++] = norm.z;
-	}
-
-	// Define the triangles
-	int faceCount = vertCount - 1; // Face count = vertCount - cent;
-	int center = 0;
-	int last = 1;
-	int curr = 2;
-
-	unsigned short* faces = new unsigned short[faceCount*3];
-
-	for(size_t i = 0; i < faceCount; ++i) {
-		assert(last < vertCount && curr < vertCount); // Panic check.
-
-		faces[i]   = center;
-		faces[++i] = curr;
-		faces[++i] = last;
-
-		last = curr++; // Move along the array.
-	}
-
-	// Create a new shared set of vertices.
-	subMesh->vertexData = new VertexData();
-	subMesh->vertexData->vertexCount = vertCount;
-
-	// Create the memory footprint for our vertex data.
-	size_t offset = 0;
-	VertexDeclaration* decl = subMesh->vertexData->vertexDeclaration;
-
-	// Position and normal buffer.
-	// Setup position.
-	decl->addElement(0, offset, VET_FLOAT3, VES_POSITION);
-	offset += VertexElement::getTypeSize(VET_FLOAT3);
-
-	// Setup normal.
-	decl->addElement(0, offset, VET_FLOAT3, VES_NORMAL);
-	offset += VertexElement::getTypeSize(VET_FLOAT3);
-
-	// Allocate vertex buffer for number of vertices and vertex size.
-	HardwareVertexBufferSharedPtr vertBuff = 
-		HardwareBufferManager::getSingleton().createVertexBuffer(
-			offset,
-			subMesh->vertexData->vertexCount,
-			HardwareBuffer::HBU_STATIC_WRITE_ONLY);
-
-	// Push vertex data to the card.
-	vertBuff->writeData(0, vertBuff->getSizeInBytes(), vertices, true);
-
-	// Set the binding to the vertex buffer.
-	VertexBufferBinding* vertBind = subMesh->vertexData->vertexBufferBinding;
-	vertBind->setBinding(0, vertBuff);
-
-	// Allocate and setup an index buffer.
-	HardwareIndexBufferSharedPtr indexBuff = HardwareBufferManager::getSingleton().createIndexBuffer(
-		HardwareIndexBuffer::IT_16BIT,
-		faceCount*3,
-		HardwareBuffer::HBU_STATIC_WRITE_ONLY);
-
-	// Pushed index buffer to the graphics card.
-	indexBuff->writeData(0, indexBuff->getSizeInBytes(), faces, true);
-
-	// Finalize SubMesh
-	subMesh->useSharedVertices = false;
-	subMesh->indexData->indexBuffer = indexBuff;
-	subMesh->indexData->indexCount = faceCount*3;
-	subMesh->indexData->indexStart = 0;
-
-	// Deallocate the vertices and faces arrays.
-	delete[] vertices;
-	delete[] faces;
+	// Add the submesh using the internal function.
+	this->_generateSubMesh(mesh);
 
 	// Return true for operation successful!
 	return true;
