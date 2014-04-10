@@ -99,9 +99,9 @@ void Tile::toString(void)
 			//if(tempTile->water) cout << "IT IS WATER!!!" << endl;
 		}
 
-		tempGrnd = tempGrnd/this->neighbors.size;
-		tempTemp = tempTemp/this->neighbors.size;
-		tempHumi = tempHumi/this->neighbors.size;
+		tempGrnd = tempGrnd/this->neighbors.size();
+		tempTemp = tempTemp/this->neighbors.size();
+		tempHumi = tempHumi/this->neighbors.size();
 
 		if(tempGrnd >grndSat)
 		{grndSat = grndSat +((tempGrnd - grndSat)/2);}
