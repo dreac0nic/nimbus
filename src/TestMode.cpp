@@ -96,7 +96,7 @@ bool TestMode::initialize()
 	// dragonNode->attachObject(dragon);
 
 	dragonNode->setPosition(0, 0, -100);
-	dragonNode->setScale(40.0, 40.0, 40.0);
+	dragonNode->setScale(40.0f, 40.0f, 40.0f);
 	dragonNode->pitch(Degree(90));
 
 	//////////
