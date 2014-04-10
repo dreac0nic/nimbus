@@ -108,41 +108,27 @@ bool TestMode::initialize()
 	// Create a point light for main light
 	light = mSceneMgr->createLight("MainLight");
 	light->setPosition(20, 80, 50);
+
 	// Generate some fake map information and throw it into the scene!
 	const int pointCount = 6;
 	const float lPI = 3.14159f;
 	const float tileScalar = 10.0f;
 	Tile testTile;
+	
+	int vertRes = 5;
+	float radius = 2.0f;
 
-	Corner* corn1 = new Corner();
-	Corner* corn2 = new Corner();
-	Corner* corn3 = new Corner();
-	Corner* corn4 = new Corner();
-	Corner* corn5 = new Corner();
-	Corner* corn6 = new Corner();
+	for(int i = 0; i < vertRes; ++i) {
+		Corner* temp = new Corner();
 
-	corn1->loc = new Ogre::Vector2(0.0f, 1.0f);
-	corn1->elevation = 0.5f;
-	corn2->loc = new Ogre::Vector2(-1.0f, 1.0f);
-	corn2->elevation = -0.5f;
-	corn3->loc = new Ogre::Vector2(-1.0f, 0.0f);
-	corn3->elevation = 0.2f;
-	corn4->loc = new Ogre::Vector2(0.0f, -1.0f);
-	corn4->elevation = 0.0f;
-	corn5->loc = new Ogre::Vector2(1.0f, -1.0f);
-	corn5->elevation = 0.2f;
-	corn6->loc = new Ogre::Vector2(1.5f, 0.2f);
-	corn6->elevation = 0.125f;
+		temp->loc = new Ogre::Vector2(radius*cos(i*2*3.14/vertRes), radius*sin(i*2*3.14/vertRes));
+		temp->elevation = 0.0f;
 
-	testTile.corners.push_back(corn1);
-	testTile.corners.push_back(corn2);
-	testTile.corners.push_back(corn3);
-	testTile.corners.push_back(corn5);
-	testTile.corners.push_back(corn4);
-	testTile.corners.push_back(corn6);
+		testTile.corners.push_back(temp);
+	}
 
 	testTile.loc = Ogre::Vector2(0.0f, 0.0f);
-	testTile.elevation = 0.0f;
+	testTile.elevation = 1.0f;
 
 	// Create material
 	MaterialPtr material = MaterialManager::getSingleton().create(
