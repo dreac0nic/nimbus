@@ -23,6 +23,9 @@ humidity = humid;
 temp = temper;
 grndSat = grnd;
 elevation = elev;
+nextHumidity = humidity;
+nextTemperature = temp;
+nextGrndSat = grndSat;
 }
 	
 Tile::~Tile(void)
@@ -104,19 +107,26 @@ void Tile::toString(void)
 		tempHumi = tempHumi/this->neighbors.size;
 
 		if(tempGrnd >grndSat)
-		{grndSat = grndSat +((tempGrnd - grndSat)/2);}
+		{nextGrndSat = grndSat +((tempGrnd - grndSat)/2);}
 		if(tempGrnd <grndSat)
-		{grndSat = grndSat -((grndSat - tempGrnd)/2);}
+		{nextGrndSat = grndSat -((grndSat - tempGrnd)/2);}
 		if(tempTemp >temp)
-		{temp = temp +((tempTemp - temp)/2);}
+		{nextTemperature = temp +((tempTemp - temp)/2);}
 		if(tempTemp <temp)
-		{temp = temp -((temp - tempTemp/2));}
+		{nextTemperature = temp -((temp - tempTemp/2));}
 		if(tempHumi >humidity)
-		{humidity = humidity +((tempHumi - humidity)/2);}
+		{nextHumidity = humidity +((tempHumi - humidity)/2);}
 		if(tempHumi <humidity)
-		{humidity = humidity -((humidity - tempHumi)/2);}
+		{nextHumidity = humidity -((humidity - tempHumi)/2);}
 
 
+	}
+
+	void Tile::updateVar()
+	{
+		grndSat=nextGrndSat;
+		temp = nextTemperature;
+		humidity=nextHumidity;
 	}
 
 	void Tile::setType()
@@ -129,6 +139,9 @@ void Tile::toString(void)
 		biome= 1;
 
 		//low 33-;med 34-66; high = 67+
+		//Threshold is 15
+
+
 
 
 

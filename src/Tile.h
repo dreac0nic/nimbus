@@ -61,9 +61,12 @@ namespace Nimbus
 		/*returns Ground Saturation of a tile*/
 		double getSat();
 
-		/*updates a tile's Ground Saturation,Humidity and Temperature*/
+		/*updates a tile's Ground Saturation,Humidity and Temperature and stores them in 'next' Variable*/
 		void updateTile();
 		
+		/*Assigns values in 'next' variables to current variables */
+		void updateVar();
+
 		/*Changes type of a tile into a string and returns that string*/
 		std::string getType();
 
@@ -120,9 +123,12 @@ namespace Nimbus
 	protected:
 	
 				// MEMBER VARIABLES --
-
-
-		
+		/**/
+		double nextHumidity;
+		/**/
+		double nextTemperature;
+		/**/		
+		double nextGrndSat;
 
 		
 		/*Holds this tile's humidity*/
