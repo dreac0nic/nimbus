@@ -45,6 +45,9 @@ RunMode* TestMode::run(const FrameEvent& evt)
 		return 0;
 	}
 
+	// Rotate the camera around the tile to get a good look at it.
+	this->mCameraParent->rotate(Ogre::Quaternion(Ogre::Degree(0.25f), Ogre::Vector3::UNIT_Y), Ogre::Node::TransformSpace::TS_WORLD);
+
 	// Continue to run this runmode
 	return this;
 }
@@ -64,10 +67,13 @@ bool TestMode::initialize()
 
 	//////////
 	// Set up the camera
-
 	// Position the camera
-	mCamera->setPosition(Vector3(0, 50, 80));
-	mCamera->lookAt(Vector3(0, 0, -100));
+	this->mCameraParent = this->mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	SceneNode* cameraNode = this->mCameraParent->createChildSceneNode();
+
+	cameraNode->attachObject(this->mCamera);
+	cameraNode->translate(Vector3(0, 50, 100));
+
 	mCamera->setNearClipDistance(5);
 
 	// Add a viewport for the camera
@@ -278,6 +284,8 @@ bool TestMode::initialize()
 	thisSceneNode->setScale(10.0f, 10.0f, 10.0f);
 	thisSceneNode->yaw(Ogre::Radian(90.0f));
 	thisSceneNode->attachObject(thisEntity);
+	// Target the tile for tracking.
+	this->mCamera->setAutoTracking(true, tileNode);
 
 	// Note that the RunMode has been initialized
 	this->initialized = true;
