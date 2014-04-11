@@ -11,22 +11,38 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EntityFactory.cpp" />
+    <ClCompile Include="src\EntityManager.cpp" />
+    <ClCompile Include="src\EnvironmentManager.cpp" />
     <ClCompile Include="src\EventSystem.cpp" />
+    <ClCompile Include="src\GameEntity.cpp" />
+    <ClCompile Include="src\GameEntitySet.cpp" />
+    <ClCompile Include="src\GameMode.cpp" />
+    <ClCompile Include="src\GeneralEntityIterator.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MenuMode.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
-    <ClCompile Include="src\TestMode.cpp" />
+    <ClCompile Include="src\Renderable.cpp" />
+    <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Behaviour.h" />
+    <ClInclude Include="src\EntityFactory.h" />
     <ClInclude Include="src\EventListener.h" />
     <ClInclude Include="src\EventSystem.h" />
+    <ClInclude Include="src\GameEntity.h" />
+    <ClInclude Include="src\GameEntitySet.h" />
+    <ClInclude Include="src\EntityManager.h" />
+    <ClInclude Include="src\EnvironmentManager.h" />
+    <ClInclude Include="src\GameMode.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Manager.h" />
     <ClInclude Include="src\MenuMode.h" />
     <ClInclude Include="src\NimbusApplication.h" />
+    <ClInclude Include="src\Renderable.h" />
     <ClInclude Include="src\RunMode.h" />
-    <ClInclude Include="src\TestMode.h" />
+    <ClInclude Include="src\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD12D565-5AB0-44A1-BAAD-B6B8B690D9F7}</ProjectGuid>
@@ -86,13 +102,13 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>C:\Users\Hazen\Documents\projects\Nimbus\ogre\boost;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OIS;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE\Overlay;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ogre\boost;$(SolutionDir)ogre\include\OIS;$(SolutionDir)ogre\include\OGRE\Overlay;$(SolutionDir)ogre\include\OGRE;$(SolutionDir)ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\Hazen\Documents\projects\Nimbus\ogre\lib\Release;C:\Users\Hazen\Documents\projects\Nimbus\ogre\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)ogre\lib\release;$(SolutionDir)ogre\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain.lib;OIS.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>

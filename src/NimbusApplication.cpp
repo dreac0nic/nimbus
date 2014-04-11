@@ -1,5 +1,6 @@
 #include "NimbusApplication.h"
 #include "MenuMode.h"
+#include "GameMode.h"
 #include <OgreConfigFile.h>
 #include <OgreRenderWindow.h>
 #include <OgreCamera.h>
