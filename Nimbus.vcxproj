@@ -53,6 +53,7 @@
     <ClInclude Include="src\Behaviours\Renderable.h" />
     <ClInclude Include="src\behaviours\Soaring.h" />
     <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\Edge.h" />
     <ClInclude Include="src\EntityFactory.h" />
     <ClInclude Include="src\EventListener.h" />
     <ClInclude Include="src\EventSystem.h" />
@@ -66,8 +67,11 @@
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\MapGeneration\Voronoi.h" />
     <ClInclude Include="src\NimbusApplication.h" />
+    <ClInclude Include="src\Parabola.h" />
     <ClInclude Include="src\RunMode.h" />
     <ClInclude Include="src\Grid.h" />
+    <ClInclude Include="src\Site.h" />
+    <ClInclude Include="src\Event.h" />
     <ClInclude Include="src\VectorMap.h" />
     <ClInclude Include="src\Voronoi.h" />
     <ClInclude Include="src\WindCurrent.h" />
