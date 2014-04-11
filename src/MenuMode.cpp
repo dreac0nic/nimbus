@@ -16,9 +16,12 @@
 using namespace Nimbus; 
 using namespace Ogre;
 
+bool menuEndFlag = FALSE; 
+bool overlayFlag = TRUE;
 MenuMode::MenuMode(void)
 {
 	this->keyListener = new KeyListener();
+	
 
 	EventSystem::getSingleton()->registerListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
 }
@@ -42,13 +45,16 @@ return 0;
 }
 
 // Continue to run this runmode
+if(menuEndFlag)
+{
+	std::cout << "menuEndFlag is now true.";
+	return 0;
+}
 return this;
 }
 
 bool MenuMode::initialize()
 {
-//Entity* dragon;
-//SceneNode* dragonNode;
 
 Light* light;
 
@@ -127,8 +133,11 @@ theOverlay->add2D(quitButton);
 resumeButton->addChild(resume);
 quitButton->addChild(quit);
 
-theOverlay->show();
-
+//Determines if the overlay should be shown.
+if(overlayFlag)
+	theOverlay->show();
+else
+	theOverlay->hide();
 
 // Create the camera
 mCamera = mSceneMgr->createCamera("PlayerCam");
@@ -183,6 +192,14 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload)
 
 	if(keyCode == OIS::KC_P) 
 	{
-		
+		overlayFlag = FALSE;
+		std::cout << overlayFlag << "\n";
+	}
+
+	//Pressing the home key should change this flag.
+	if(keyCode == OIS::KC_HOME) 
+	{
+		menuEndFlag = TRUE;
+		std::cout << menuEndFlag << "\n";
 	}
 }

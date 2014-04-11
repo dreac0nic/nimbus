@@ -14,6 +14,7 @@ namespace Nimbus
 		Ogre::SceneManager* mSceneMgr;
 		Ogre::Camera* mCamera;
 		Ogre::Viewport* mViewport;
+		RunMode* gameModePointer;
 
 	protected:
 		// From Nimbus::RunMode
