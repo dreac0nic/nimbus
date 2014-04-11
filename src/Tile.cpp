@@ -149,10 +149,27 @@ void Tile::toString(void)
 
 		//low 33-;med 34-66; high = 67+
 		//Threshold is 10
-		//
+		//Changes for Temperature
 		if(temp<23)
 		{biomeX=0;}
-		
+		if(temp>43 && temp<56 )
+		{biomeX=1;}
+		if(temp>77)
+		{biomeX=2;}
+		//Changes For Ground Saturation
+		if(temp<23)
+		{biomeY=0;}
+		if(temp>43 && temp<56 )
+		{biomeY=1;}
+		if(temp>77)
+		{biomeY=2;}
+		//Changes for Humidity
+		if(temp<23)
+		{biomeZ=0;}
+		if(temp>43 && temp<56 )
+		{biomeZ=1;}
+		if(temp>77)
+		{biomeZ=2;}
 	}
 
 	std::string Tile::getType()
