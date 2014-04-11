@@ -95,7 +95,6 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Map.cpp" />
     <ClCompile Include="..\src\NimbusApplication.cpp" />
-    <ClCompile Include="..\src\TestMode.cpp" />
     <ClCompile Include="..\src\Tile.cpp" />
     <ClCompile Include="..\src\TileEdge.cpp" />
     <ClCompile Include="VoronoiTest.cpp" />
@@ -113,7 +112,6 @@
     <ClInclude Include="..\src\Map.h" />
     <ClInclude Include="..\src\NimbusApplication.h" />
     <ClInclude Include="..\src\RunMode.h" />
-    <ClInclude Include="..\src\TestMode.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
