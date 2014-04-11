@@ -27,19 +27,9 @@
     <ClCompile Include="src\GameMode.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Map.cpp" />
-    <ClCompile Include="src\MapGeneration\Edge.cpp" />
-    <ClCompile Include="src\MapGeneration\Halfedge.cpp" />
-    <ClCompile Include="src\MapGeneration\LineSegment.cpp" />
-    <ClCompile Include="src\MapGeneration\Polygon.cpp" />
-    <ClCompile Include="src\MapGeneration\Rectangle.cpp" />
-    <ClCompile Include="src\MapGeneration\Site.cpp" />
-    <ClCompile Include="src\MapGeneration\Util.cpp" />
-    <ClCompile Include="src\MapGeneration\Vertex.cpp" />
-    <ClCompile Include="src\MapGeneration\Voronoi.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
+    <ClCompile Include="src\Parabola.cpp" />
     <ClCompile Include="src\VectorMap.cpp" />
-    <ClCompile Include="src\Voronoi.cpp" />
     <ClCompile Include="src\WindCurrent.cpp" />
     <ClCompile Include="src\WindManager.cpp" />
     <ClCompile Include="src\WindMap.cpp" />
@@ -64,7 +54,6 @@
     <ClInclude Include="src\GameMode.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Manager.h" />
-    <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\MapGeneration\Voronoi.h" />
     <ClInclude Include="src\NimbusApplication.h" />
     <ClInclude Include="src\Parabola.h" />
@@ -73,7 +62,6 @@
     <ClInclude Include="src\Site.h" />
     <ClInclude Include="src\Event.h" />
     <ClInclude Include="src\VectorMap.h" />
-    <ClInclude Include="src\Voronoi.h" />
     <ClInclude Include="src\WindCurrent.h" />
     <ClInclude Include="src\WindManager.h" />
     <ClInclude Include="src\WindMap.h" />
