@@ -6,6 +6,7 @@
 #include <OgreViewport.h>
 #include <OgreSceneManager.h>
 #include "NimbusApplication.h"
+#include "GameMode.h"
 #include <OgreOverlay.h>
 #include <OgreOverlaySystem.h>
 #include <OgreOverlayManager.h>
@@ -21,8 +22,8 @@ bool overlayFlag = TRUE;
 MenuMode::MenuMode(void)
 {
 	this->keyListener = new KeyListener();
-	
-
+	GameMode* gameAtHand = new GameMode();
+	gameModePointer = gameAtHand;
 	EventSystem::getSingleton()->registerListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
 }
 
@@ -48,7 +49,7 @@ return 0;
 if(menuEndFlag)
 {
 	std::cout << "menuEndFlag is now true.";
-	return 0;
+	return gameModePointer;
 }
 return this;
 }
