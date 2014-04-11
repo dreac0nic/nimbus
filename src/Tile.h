@@ -123,13 +123,12 @@ namespace Nimbus
 	protected:
 	
 				// MEMBER VARIABLES --
-		/**/
+		/*Holds this tiles's Humidity to be after update*/
 		double nextHumidity;
-		/**/
+		/*Holds this tiles's Temperature to be after update*/
 		double nextTemperature;
-		/**/		
+		/*Holds this tiles's Ground Saturation to be after update*/		
 		double nextGrndSat;
-
 		
 		/*Holds this tile's humidity*/
 		double humidity;
@@ -145,7 +144,14 @@ namespace Nimbus
 		
 		/*Holds the limit of ground saturation before flooding*/
 		double grndSatLmt;
-		
+
+		/*Holds the biomes in a 3D array*/
+		static int biomeArray[][][];
+
+		/*Holds the positions of  Biome array*/
+		int biomeX; //Temperature
+		int biomeY; //Ground Saturation
+		int biomeZ; //Humidity
 		
 		int tileId;
 		

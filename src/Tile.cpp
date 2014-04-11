@@ -9,6 +9,11 @@ using namespace Nimbus;
 
 int Tile::deltaX = 0;
 int Tile::deltaY = 0;
+int Tile::biomeArray[][][]={{{1,2,3},{4,5,6},{7,8,9}}
+							 {{10,11,12},{13,14,15},{16,17,18}}
+							 {19,20,21},{22,23,24}{25,26,27}};
+		
+
 
 Tile::Tile()
 {
@@ -26,6 +31,10 @@ elevation = elev;
 nextHumidity = humidity;
 nextTemperature = temp;
 nextGrndSat = grndSat;
+biomeX=0;
+biomeY=0;
+biomeZ=0;
+biome=biomeArray[biomeX][biomeY][biomeZ];
 }
 	
 Tile::~Tile(void)
@@ -139,12 +148,11 @@ void Tile::toString(void)
 		biome= 1;
 
 		//low 33-;med 34-66; high = 67+
-		//Threshold is 15
-
-
-
-
-
+		//Threshold is 10
+		//
+		if(temp<23)
+		{biomeX=0;}
+		
 	}
 
 	std::string Tile::getType()
