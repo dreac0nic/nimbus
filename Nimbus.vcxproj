@@ -23,6 +23,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
     <ClCompile Include="src\Renderable.cpp" />
+    <ClCompile Include="src\Terrain.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -38,8 +39,10 @@
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Manager.h" />
     <ClInclude Include="src\NimbusApplication.h" />
+    <ClInclude Include="src\Point.h" />
     <ClInclude Include="src\Renderable.h" />
     <ClInclude Include="src\RunMode.h" />
+    <ClInclude Include="src\Terrain.h" />
     <ClInclude Include="src\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
