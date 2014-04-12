@@ -164,6 +164,7 @@ bool TestMode::initialize()
 	terrainNode->attachObject(terrainEntity);
 
 	terrainNode->setPosition(0, 0, -100);
+	terrainNode->setScale(10.0f, 10.0f, 10.0f);
 
 	// Target the tile for tracking.
 	this->mCamera->setAutoTracking(true, terrainNode);
