@@ -143,13 +143,27 @@ bool TestMode::initialize()
 
 	tileEntity->setMaterialName("Tiles/Default");
 
-	tileNode->attachObject(tileEntity);
+	// tileNode->attachObject(tileEntity);
 
 	tileNode->setPosition(0, 0, -80);
 	tileNode->setScale(10.0f, 10.0f, 10.0f);
 
+	// Create a map.
+	std::cout << "Test map." << std::endl;
+	Map testMap;
+
+	// Get a mesh from the terrain and attach it to an entity.
+	Entity* terrainEntity = mSceneMgr->createEntity("testTerrain", testMap.getMesh("terrainMesh"));
+	SceneNode* terrainNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+
+	terrainEntity->setMaterialName("Tiles/Default");
+
+	terrainNode->attachObject(terrainEntity);
+
+	terrainNode->setPosition(0, 0, -100);
+
 	// Target the tile for tracking.
-	this->mCamera->setAutoTracking(true, tileNode);
+	this->mCamera->setAutoTracking(true, terrainNode);
 
 	// Note that the RunMode has been initialized
 	this->initialized = true;
