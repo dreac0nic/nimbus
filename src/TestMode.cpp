@@ -125,6 +125,8 @@ bool TestMode::initialize()
 		temp->elevation = 0.0f;
 
 		testTile.corners.push_back(temp);
+
+		std::cout << "Vert: " << temp->loc->x << ", " << temp->loc->y << std::endl;
 	}
 
 	testTile.loc = Ogre::Vector2(0.0f, 0.0f);
@@ -136,6 +138,7 @@ bool TestMode::initialize()
 		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
 	material->getTechnique(0)->getPass(0)->setVertexColourTracking(TVC_AMBIENT);
+	material->setCullingMode(CULL_NONE);
 
 	// Create entity and add to the scene.
 	Entity* tileEntity = mSceneMgr->createEntity("testTile", testTile.getMesh("tileMesh"));
