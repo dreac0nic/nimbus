@@ -17,18 +17,21 @@ using namespace Ogre;
 Map::Map(void)
 {
 	// Generation parameters.
-	size_t numberOfPoints = 2;
+	size_t numberOfPoints = 20;
 
 	// Origin to offset the entire map.
 	Vector3 origin = Vector3(0.0f, 0.0f, 0.0f);
 	Vector3 spacing = Vector3(1.0f, 1.0, 1.0f);
 	Vector3 cornerSpacing = spacing/2;
+	
+	Vector3 midOffset = (spacing*numberOfPoints)/2.0f;
+	midOffset.y = 0.0f;
 
 	// Generate the points.
 	for(size_t i = 0; i < numberOfPoints; ++i) {
 		for(size_t j = 0; j < numberOfPoints; ++j) {
 			// Create the tile.
-			Vector3 localOrigin(origin + Vector3(spacing.x*i, spacing.y, spacing.z*j));
+			Vector3 localOrigin(origin + Vector3(spacing.x*i, spacing.y, spacing.z*j) - midOffset);
 
 			Tile* currentTile = new Tile();
 
@@ -38,30 +41,25 @@ Map::Map(void)
 			currentTile->elevation = localOrigin.y;
 
 			// Create the corners of the tile.
-			Corner* upperLeft = new Corner();
-			Corner* lowerLeft = new Corner();
-			Corner* lowerRight = new Corner();
-			Corner* upperRight = new Corner();
+			Corner* temp = new Corner();
+			temp->loc = new Ogre::Vector2(localOrigin.x + cornerSpacing.x, localOrigin.z + cornerSpacing.z);
+			temp->elevation = localOrigin.y;
+			currentTile->corners.push_back(temp);
 
-			upperLeft->loc = new Vector2(localOrigin.x + -1*cornerSpacing.x*i, localOrigin.z +  1*cornerSpacing.z*j);
-			upperLeft->elevation = localOrigin.y;
+			temp = new Corner();
+			temp->loc = new Ogre::Vector2(localOrigin.x + cornerSpacing.x, localOrigin.z - cornerSpacing.z);
+			temp->elevation = localOrigin.y;
+			currentTile->corners.push_back(temp);
 
-			lowerLeft->loc = new Vector2(localOrigin.x + -1*cornerSpacing.x*i, localOrigin.z + -1*cornerSpacing.z*j);
-			lowerLeft->elevation = localOrigin.y;
+			temp = new Corner();
+			temp->loc = new Ogre::Vector2(localOrigin.x - cornerSpacing.x, localOrigin.z - cornerSpacing.z);
+			temp->elevation = localOrigin.y;
+			currentTile->corners.push_back(temp);
 
-			lowerRight->loc = new Vector2(localOrigin.x +  1*cornerSpacing.x*i, localOrigin.z + -1*cornerSpacing.z*j);
-			lowerRight->elevation = localOrigin.y;
-
-			upperRight->loc = new Vector2(localOrigin.x +  1*cornerSpacing.x*i, localOrigin.z +  1*cornerSpacing.z*j);
-			upperRight->elevation = localOrigin.y;
-
-			currentTile->corners.push_back(upperRight);
-			currentTile->corners.push_back(upperLeft);
-			currentTile->corners.push_back(lowerLeft);
-			currentTile->corners.push_back(lowerRight);
-
-			// Debug!
-			currentTile->toString();
+			temp = new Corner();
+			temp->loc = new Ogre::Vector2(localOrigin.x - cornerSpacing.x, localOrigin.z + cornerSpacing.z);
+			temp->elevation = localOrigin.y;
+			currentTile->corners.push_back(temp);
 
 			// Add the tile to the map.
 			this->centers.push_back(currentTile);
