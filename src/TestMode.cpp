@@ -143,12 +143,14 @@ bool TestMode::initialize()
 	material->setCullingMode(CULL_NONE);
 
 	// Create entity and add to the scene.
-	Entity* tileEntity = mSceneMgr->createEntity("testTile", testTile.getMesh("tileMesh"));
+	MeshPtr tileMesh = MeshManager::getSingleton().createManual("tileMesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+
+	Entity* tileEntity = mSceneMgr->createEntity("testTile", testTile.getMesh("singleTile"));
 	SceneNode* tileNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 
 	tileEntity->setMaterialName("Tiles/Default");
 
-	// tileNode->attachObject(tileEntity);
+	tileNode->attachObject(tileEntity);
 
 	tileNode->setPosition(0, 0, -80);
 	tileNode->setScale(10.0f, 10.0f, 10.0f);
