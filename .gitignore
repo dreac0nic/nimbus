@@ -17,3 +17,6 @@ ogre/*
 
 # Sublime Text
 *.sublime-*
+
+# Assets
+assets/*
