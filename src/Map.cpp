@@ -535,6 +535,13 @@ Ogre::MeshPtr Map::getMesh(std::string meshName)
 		(*it)->addSubMesh(mapMesh);
 	}
 
+	// Set bounding information (for culling)
+    mapMesh->_setBounds(AxisAlignedBox(-5,-5,-5,5,5,5));
+    mapMesh->_setBoundingSphereRadius(Math::Sqrt(3*5*5));
+
+    // Signal the finalization of the mesh.
+    mapMesh->load();
+
 	// Return the mapMesh
 	return mapMesh;
 }
