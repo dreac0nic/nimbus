@@ -44,7 +44,15 @@ void Tile::calculateBox(void)
 
 void Tile::toString(void)
 {
-	std::cout << "Tile, x:" << loc.x << ", y:" << loc.y << " " << (border? "b": "-") << (ocean? "o": "-") << (water? "w": "-") << (coast? "c": "-") << "\n";
+	std::cout << "Tile: " << this->loc.x << "x" << this->loc.y << ": " << this->elevation;
+
+	for(vector<Corner*>::iterator it = this->corners.begin(); it != this->corners.end(); ++it)
+	{
+		Vector3 temp = (*it)->getVector3();
+		std::cout << " [" << temp.x << ", " << temp.y << ", " << temp.z << "]";
+	}
+
+	std::cout << std::endl;
 }
 
 void Tile::_generateSubMesh(MeshPtr& mesh)
