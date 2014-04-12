@@ -525,10 +525,10 @@ void Map::assignBiomes(){
 	}
 }
 
-Ogre::MeshPtr Map::getMesh(void)
+Ogre::MeshPtr Map::getMesh(std::string meshName)
 {
 	// Create overall mesh.
-	Ogre::MeshPtr mapMesh = Ogre::MeshManager::getSingleton().createManual("terrainMap", "map"); // Watch out for collision issues.
+	Ogre::MeshPtr mapMesh = Ogre::MeshManager::getSingleton().createManual(meshName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME); // Watch out for collision issues.
 
 	// Iterate over all tiles and add them to the mapMesh.
 	for(std::vector<Tile*>::iterator it = this->centers.begin(); it != this->centers.end(); ++it) {

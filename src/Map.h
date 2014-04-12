@@ -95,7 +95,7 @@ namespace Nimbus
 		void toString();
 
 		/** Convert the map into an OGRE mesh for rendering! */
-		Ogre::MeshPtr getMesh(void);
+		Ogre::MeshPtr getMesh(std::string meshName);
 	};
 }
 
