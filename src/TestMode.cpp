@@ -130,7 +130,9 @@ bool TestMode::initialize()
 	}
 
 	testTile.loc = Ogre::Vector2(0.0f, 0.0f);
-	testTile.elevation = 1.0f;
+	testTile.elevation = 0.0f;
+
+	testTile.toString();
 
 	// Create material
 	MaterialPtr material = MaterialManager::getSingleton().create(
