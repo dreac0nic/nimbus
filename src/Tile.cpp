@@ -201,7 +201,7 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 MeshPtr Tile::getMesh(std::string tileName)
 {
 	// Create the overall mesh.
-	MeshPtr tileMesh = MeshManager::getSingleton().createManual(tileName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME); // Fix name issues. tileName not repeatable.
+	MeshPtr tileMesh = MeshManager::getSingleton().createManual(tileName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
 	// Add the tile as a submesh to mesh major.
 	this->_generateSubMesh(tileMesh);
