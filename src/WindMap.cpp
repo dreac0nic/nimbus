@@ -26,8 +26,8 @@ WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offs
 	mMinimumCurrentLength(minimumCurrentLength)
 {
 	// Calculate vector map size
-	int vectorMapWidth = (int)round(worldSize / resolution);
-	int vectorMapHeight = (int)round(worldSize / resolution);
+	int vectorMapWidth = (int)round(worldSize / resolution) + 1;
+	int vectorMapHeight = (int)round(worldSize / resolution) + 1;
 
 	// Initialize the vector map to the correct size and to zero vectors
 	this->mVectorMap = new Grid<Ogre::Vector2>(vectorMapWidth, vectorMapHeight);
