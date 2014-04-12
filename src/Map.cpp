@@ -12,6 +12,62 @@
 #define PI 3.1415927
 
 using namespace Nimbus;
+using namespace Ogre;
+
+Map::Map(void)
+{
+	// Generation parameters.
+	size_t numberOfPoints = 2;
+
+	// Origin to offset the entire map.
+	Vector3 origin = Vector3(0.0f, 0.0f, 0.0f);
+	Vector3 spacing = Vector3(1.0f, 1.0, 1.0f);
+	Vector3 cornerSpacing = spacing/2;
+
+	// Generate the points.
+	for(size_t i = 0; i < numberOfPoints; ++i) {
+		for(size_t j = 0; j < numberOfPoints; ++j) {
+			// Create the tile.
+			Vector3 localOrigin(origin + Vector3(spacing.x*i, spacing.y, spacing.z*j));
+
+			Tile* currentTile = new Tile();
+
+			currentTile->loc.x = localOrigin.x;
+			currentTile->loc.y = localOrigin.z;
+
+			currentTile->elevation = localOrigin.y;
+
+			// Create the corners of the tile.
+			Corner* upperLeft = new Corner();
+			Corner* lowerLeft = new Corner();
+			Corner* lowerRight = new Corner();
+			Corner* upperRight = new Corner();
+
+			upperLeft->loc = new Vector2(localOrigin.x + -1*cornerSpacing.x*i, localOrigin.z +  1*cornerSpacing.z*j);
+			upperLeft->elevation = localOrigin.y;
+
+			lowerLeft->loc = new Vector2(localOrigin.x + -1*cornerSpacing.x*i, localOrigin.z + -1*cornerSpacing.z*j);
+			lowerLeft->elevation = localOrigin.y;
+
+			lowerRight->loc = new Vector2(localOrigin.x +  1*cornerSpacing.x*i, localOrigin.z + -1*cornerSpacing.z*j);
+			lowerRight->elevation = localOrigin.y;
+
+			upperRight->loc = new Vector2(localOrigin.x +  1*cornerSpacing.x*i, localOrigin.z +  1*cornerSpacing.z*j);
+			upperRight->elevation = localOrigin.y;
+
+			currentTile->corners.push_back(upperRight);
+			currentTile->corners.push_back(upperLeft);
+			currentTile->corners.push_back(lowerLeft);
+			currentTile->corners.push_back(lowerRight);
+
+			// Debug!
+			currentTile->toString();
+
+			// Add the tile to the map.
+			this->centers.push_back(currentTile);
+		}
+	}
+}
 
 Map::Map(Voronoi::Voronoi *v, int numLloydRelaxations)
 {

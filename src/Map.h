@@ -66,6 +66,11 @@ namespace Nimbus
 		//////////
 		// Public Member Functions
 
+		/** Default constructor taking no agruments.
+		  Generates a simple set of tiles for debug use.
+		*/
+		Map(void);
+
 		/** Constructs a map using a voronoi generator
 		@param v A pointer to a Voronoi generator
 		@param numLloydRelaxations
