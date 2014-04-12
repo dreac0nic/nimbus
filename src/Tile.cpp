@@ -122,8 +122,6 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 		faces[index++] = curr;
 		faces[index++] = last;
 
-		std::cout << "Faces: " << center << ", " << curr << ", " << last << std::endl;
-
 		last = curr++;
 
 		if(curr >= vertCount) curr = 1;
