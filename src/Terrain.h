@@ -15,6 +15,9 @@ namespace Nimbus
 		boost::polygon::voronoi_diagram<double> diagram;
 
 	public:
+		/** Return the current diagram of tile cells.
+			@return Return a voronoi_diagram listing all cells, edges, and points in the graph.
+		*/
 		boost::polygon::voronoi_diagram<double>* getDiagram(void) { return &diagram; }
 	};
 }
