@@ -5,24 +5,21 @@
 
 namespace Nimbus
 {
-	namespace Voronoi
+	class Point
 	{
-		class Point
-		{
-		public:
-			Point(int x, int y) : x(x), y(y) { point = Ogre::Vector3(x, 0.0F, y); }
-			~Point() { }
+	public:
+		Point(int x, int y) : x(x), y(y) { point = Ogre::Vector3(x, 0.0F, y); }
+		~Point() { }
 
-		private:
-			Ogre::Vector3 point;
+	private:
+		Ogre::Vector3 point;
 
-		public:
-			int x;
-			int y;
+	public:
+		int x;
+		int y;
 
-			Ogre::Vector3 getPoint(void) { return point; }
-		};
-	}
+		Ogre::Vector3 getPoint(void) { return point; }
+	};
 }
 
 #endif
