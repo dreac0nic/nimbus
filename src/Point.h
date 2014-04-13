@@ -8,7 +8,7 @@ namespace Nimbus
 	class Point
 	{
 	public:
-		Point(int x, int y) : x(x), y(y) { point = Ogre::Vector3(x, 0.0F, y); }
+		Point(int x, int y) : x(x), y(y) { point = Ogre::Vector3(Ogre::Real(x), 0.0F, Ogre::Real(y)); }
 		~Point() { }
 
 	private:
