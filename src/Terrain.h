@@ -2,17 +2,19 @@
 #define TERRAIN_H
 
 #include <boost/polygon/voronoi.hpp>
+#include "World.h"
 
 namespace Nimbus
 {
 	class Terrain
 	{
 	public:
-		Terrain();
+		Terrain(World* world);
 		~Terrain();
 
 	private:
 		boost::polygon::voronoi_diagram<double> diagram;
+		World* mWorld;
 
 	public:
 		/** Return the current diagram of tile cells.
