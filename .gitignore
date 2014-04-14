@@ -4,7 +4,7 @@
 
 Build/*
 
-# Assets Director Ignores
+# Assets Directory Ignores
 assets/*
 
 # Include Directory Ignores
