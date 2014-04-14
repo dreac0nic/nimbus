@@ -33,6 +33,12 @@
       <UniqueIdentifier>{7a511ab5-4d87-4a7e-822a-a38d63f9815f}</UniqueIdentifier>
 
     </Filter>
+    <Filter Include="Header Files\Voronoi">
+      <UniqueIdentifier>{eda8776e-d4b0-4026-8b6a-bedfa563fb91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Voronoi">
+      <UniqueIdentifier>{ed85de11-f47b-451a-b6ad-0cb2d7b247c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -115,6 +121,9 @@
       <Filter>Source Files</Filter>
 
     </ClCompile>
+    <ClCompile Include="src\Terrain.cpp">
+      <Filter>Source Files\Voronoi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\NimbusApplication.h">
@@ -178,6 +187,12 @@
     <ClInclude Include="src\Renderable.h">
       <Filter>Header Files\Behaviours</Filter>
 
+    </ClInclude>
+    <ClInclude Include="src\Point.h">
+      <Filter>Header Files\Voronoi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Terrain.h">
+      <Filter>Header Files\Voronoi</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

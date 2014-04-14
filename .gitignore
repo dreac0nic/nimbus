@@ -16,3 +16,9 @@ UnitTests/Debug
 *.sdf
 *.suo
 *.opensdf
+
+# Sublime Text
+*.sublime-*
+
+# Assets
+assets/*

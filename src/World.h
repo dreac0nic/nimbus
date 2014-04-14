@@ -8,6 +8,7 @@ namespace Nimbus
 {
 	class GameEntity;
 	class GameEntitySet;
+	class Terrain;
 
 	/** This class aggregates the entire world of Nimbus.
 	 
@@ -40,12 +41,18 @@ namespace Nimbus
 		// The counter for each thing that we add to the world
 		int idCounter;
 
+		// Bounds of World
+		Ogre::Vector2 worldBounds;
+
 		// The list that keeps track of all entities currently in the world
 		GameEntitySet* mEntities;
 
 		// The scene node that contains everything
 		Ogre::SceneNode* mWorldNode;
 		Ogre::SceneManager* mSceneManager;
+
+		// The generated world terrain
+		Terrain* mTerrain;
 
 	public:
 		World(Ogre::SceneManager* sceneManager);
@@ -57,6 +64,7 @@ namespace Nimbus
 		void addEntity(GameEntity* entity);
 		Ogre::SceneNode* getWorldNode() { return this->mWorldNode; }
 		Ogre::SceneManager* getSceneManager() { return this->mSceneManager; }
+		Ogre::Vector2 getWorldBounds() { return this->worldBounds; } 
 	};
 
 }

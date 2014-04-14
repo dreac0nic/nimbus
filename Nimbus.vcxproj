@@ -44,6 +44,7 @@
     <ClInclude Include="src\Corner.h" />
 
     <ClCompile Include="src\Renderable.cpp" />
+    <ClCompile Include="src\Terrain.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -62,11 +63,12 @@
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\MapGeneration\Voronoi.h" />
     <ClInclude Include="src\NimbusApplication.h" />
+    <ClInclude Include="src\Point.h" />
     <ClInclude Include="src\Renderable.h" />
     <ClInclude Include="src\RunMode.h" />
     <ClInclude Include="src\Tile.h" />
     <ClInclude Include="src\TileEdge.h" />
-
+    <ClInclude Include="src\Terrain.h" />
     <ClInclude Include="src\World.h" />
 
   </ItemGroup>
@@ -129,13 +131,13 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>C:\Users\Hazen\Documents\projects\Nimbus\ogre\boost;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OIS;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE\Overlay;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include\OGRE;C:\Users\Hazen\Documents\projects\Nimbus\ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ogre\boost;$(SolutionDir)ogre\include\OIS;$(SolutionDir)ogre\include\OGRE\Overlay;$(SolutionDir)ogre\include\OGRE;$(SolutionDir)ogre\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\Hazen\Documents\projects\Nimbus\ogre\lib\Release;C:\Users\Hazen\Documents\projects\Nimbus\ogre\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)ogre\lib\release;$(SolutionDir)ogre\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain.lib;OIS.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
