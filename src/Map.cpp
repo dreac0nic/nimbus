@@ -459,11 +459,9 @@ TileEdge *Map::lookupEdgeFromCorner(Corner *c, Corner *downslope){
 	return NULL;
 }
 
-void Map::assignBiomes(){
-	for (int i = 0; i < centers.size(); i++) {
-		centers.at(i)->biome = getBiome(centers.at(i));
-	}
-}
-
-
 ///////////////--Game Logic below here--//////////
+
+
+///////Game logic with regard to tiles/////
+
+
