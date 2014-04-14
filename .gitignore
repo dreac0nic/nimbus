@@ -4,6 +4,9 @@
 
 Build/*
 
+# Assets Director Ignores
+assets/*
+
 # Include Directory Ignores
 
 ogre/*
