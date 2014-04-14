@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 
+#include "EventTypeHandler.h"
 #include "EventListener.h"
 
 namespace Nimbus
@@ -174,7 +175,7 @@ namespace Nimbus
 			 */
 		};
 
-		/** Initializes the event system singleton.
+		/** Initializes the global event system singleton.
 
 			@return A pointer to the singleton just created.
 		*/
@@ -189,15 +190,55 @@ namespace Nimbus
 		 */
 		static EventSystem* getSingleton() { return singleton; }
 
+	protected:
+
+		/** Listens for global events and injects them in the local handlers as appropriate.
+		*/
+		class GlobalListener :
+			public EventListener
+		{
+		private:
+			/** The event system owning this listener. */
+			EventSystem* mEventSystem;
+			
+			/** The event type listened for by this listener. */
+			EventType mType;
+
+		public:
+			GlobalListener(EventSystem* eventSystem, EventType type) : mEventSystem(eventSystem), mType(type) {}
+			virtual ~GlobalListener() {}
+
+			// From Nimbus::EventListener
+			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		};
+
 	private:
-		// A map for all the listeners for a certain event.
-		std::map< EventType, std::vector<EventListener*> > mListeners;
+		/** A map of event type to the corresponding event type handler. */
+		std::map< EventType, std::vector<EventTypeHandler*> > mHandlers;
+
+		/** A list of global event handlers. This allows global events
+			to be injected as appropriate into the local handlers. */
+		std::vector<GlobalListener*> mGlobalListeners;
+
+		/** The id of the owning entity. 0 if the global event system. */
+		GameEntityId mOwnerId;
+
+		/** Creates all the handlers needed for any given event type and registers
+			them to the handler list.
+
+			@param
+			type The type of event to create handlers for.
+		*/
+		void makeHandlers(EventType type);
 
 	public:
 		// CONSTRUCTORS
 		/** EventSystem constructor, yep!
+			
+			@param
+			ownerId The id of the owning entity.
 		 */
-		EventSystem(void);
+		EventSystem(GameEntityId owner = 0);
 
 		/** EventSystem destructor, it DESTROYS THINGS!
 		 */
@@ -210,11 +251,13 @@ namespace Nimbus
 		 listener A reference to an isntance of the listener for the Event type.
 		 @param
 		 type The type of Event the listener would like to listen for.
+		 @param
+		 filter The filter for the events which this listener should listen to.
 
 		 @return
 		 True for a successful registration, false if the listener could not be registered.
 		 */
-		bool registerListener(EventListener* listener, EventType type);
+		bool registerListener(EventListener* listener, EventType type, filtermap filter);
 
 		/** Used to deregister a previously registered EventListener.
 		 
@@ -222,9 +265,11 @@ namespace Nimbus
 		  listener A reference to the EventListener to deregister.
 		  @param
 		  type The type of Event the listener is registered to.
+		  @param
+		  filter The filter for the event which this listener is listening to.
 
 		  */
-		void unregisterListener(EventListener* listener, EventType type);
+		void unregisterListener(EventListener* listener, EventType type, filtermap filter);
 
 		/** Fires an Event to the EventSystem to distribute to the appropriate listeners.
 		 
