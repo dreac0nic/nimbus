@@ -220,7 +220,7 @@ void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventL
 		// These two constants are DEBUG VALUES. These need to change! They
 		// will be determined by user input.
 		const int STRENGTH = 10;
-		const bool TEMPORARY = false;
+		const bool TEMPORARY = true;
 		// Note: fix temporary wind currents! We've got SOMETHING going on
 		// with deleting them.
 

@@ -143,15 +143,25 @@ void WindMap::update(void)
 	}
 
 	// Delete any expired wind currents
-	for(std::list<WindCurrent*>::iterator current = this->mCurrents.begin(); current != this->mCurrents.end(); ++current)
+	std::list<WindCurrent*>::iterator current = this->mCurrents.begin();
+	while (current != this->mCurrents.end())
 	{
 		// Temporary currents last 10 seconds (as per GDD... hey it was actually useful guys!)
-		if((*current)->isTemporary() && (*current)->getTimeAlive() > 10)
+		if ((*current)->isTemporary() && (*current)->getTimeAlive() > 5)
 		{
 			// Delete the wind current
 			delete *current;
 
 			current = this->mCurrents.erase(current);
+
+			if (current == this->mCurrents.end())
+			{
+				break;
+			}
+		}
+		else
+		{
+			current++;
 		}
 	}
 
