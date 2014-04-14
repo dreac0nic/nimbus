@@ -17,12 +17,14 @@
 using namespace Nimbus; 
 using namespace Ogre;
 
+//Flags for determining actions
 bool menuEndFlag = FALSE; 
 bool overlayFlag = FALSE;
+
 MenuMode::MenuMode(void)
 {
 	this->keyListener = new KeyListener();
-	GameMode* gameAtHand = new GameMode();
+	RunMode* gameAtHand = new GameMode();
 	gameModePointer = gameAtHand;
 	EventSystem::getSingleton()->registerListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
 }
@@ -31,11 +33,13 @@ MenuMode::~MenuMode(void)
 {
 	EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
 	delete this->keyListener;
+	
 
 }
 
 RunMode* MenuMode::run(const FrameEvent& evt)
 {
+	//Green.
 // Attempt to initialize the run mode
 if(!this->initialized && !this->initialize())
 {
@@ -54,10 +58,13 @@ else if(!overlayFlag)
 {
 	this->mViewport->setOverlaysEnabled(FALSE);
 }
+
 //Checks to see if it needs to change into GameMode
 if(menuEndFlag)
 {
 	std::cout << "menuEndFlag is now true.";
+	// Removes the current Viewport and move on to the next RunMode
+	NimbusApplication::getRenderWindow()->removeViewport(this->mViewport->getZOrder());
 	return gameModePointer;
 }
 
@@ -180,7 +187,7 @@ Real(mViewport->getActualWidth()) / Real(mViewport->getActualHeight()));
 //dragonNode->pitch(Degree(90));
 
 //////////
-// Set up light sources
+// Set up light sources 
 
 // Set the ambient light
 mSceneMgr->setAmbientLight(ColourValue(0.5, 0.5, 0.5));
@@ -199,13 +206,13 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload)
 	OIS::KeyCode keyCode = *static_cast<OIS::KeyCode*>(payload["KeyCode"]);
 	bool keyReleased = *static_cast<bool*>(payload["KeyReleased"]);
 
-	if(keyCode == OIS::KC_P) 
+	//This checks if the correct key was pressed upon the release of it. (Kinda hacky, could be improved.)
+	if(keyReleased && keyCode == OIS::KC_P) 
 	{
 		overlayFlag = !overlayFlag;
-		std::cout << overlayFlag << "\n";
 	}
 
-	//Pressing the home key should change this flag.
+	//Pressing the home key should change this flag. (For testing purposes for now)
 	if(keyCode == OIS::KC_HOME) 
 	{
 		menuEndFlag = TRUE;

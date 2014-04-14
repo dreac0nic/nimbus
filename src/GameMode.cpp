@@ -17,9 +17,9 @@ GameMode::GameMode(void)
 GameMode::~GameMode(void)
 {
 	// Delete dynamic member variables... I think this is the right place for this.
-	delete this->mEntityMan;
-	delete this->mEnvironmentMan;
-	delete this->mWorld;
+	if (mEntityMan) delete this->mEntityMan;
+	if (mEnvironmentMan) delete this->mEnvironmentMan;
+	if (mWorld) delete this->mWorld;
 }
 
 RunMode* GameMode::run(const FrameEvent& evt)
