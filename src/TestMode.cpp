@@ -55,6 +55,7 @@ Light* light;
 // Create the scene manager
 mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
 
+/*
 // Overlay stuffz
 OverlaySystem* overlaySystem = new OverlaySystem;
 mSceneMgr->addRenderQueueListener(overlaySystem);
@@ -137,6 +138,7 @@ printf("resume Enabled = %d\n", resume->isEnabled());
 printf("quit Enabled = %d\n", quit->isEnabled());
 printf("resume Visible = %d\n", resume->isVisible());
 printf("quit Visible = %d\n", quit->isVisible());
+*/
 
 // Create the camera
 mCamera = mSceneMgr->createCamera("PlayerCam");

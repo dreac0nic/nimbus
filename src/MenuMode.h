@@ -32,6 +32,19 @@ namespace Nimbus
 			virtual void handleEvent(payloadmap payload);
 		} *keyListener;
 
+		/** Listens for the mouse event
+		*/
+		class MouseListener :
+			public EventListener
+		{
+		public:
+			MouseListener() {}
+			virtual ~MouseListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload);
+		} *mouseListener;
+
 	public:
 		/** Creates a TestMode type run mode.
 		 */

@@ -19,15 +19,19 @@ using namespace Ogre;
 MenuMode::MenuMode(void)
 {
 	this->keyListener = new KeyListener();
+	this->mouseListener = new MouseListener();
 
 	EventSystem::getSingleton()->registerListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
+	EventSystem::getSingleton()->registerListener(this->keyListener, EventSystem::EventType::MOUSE_CLICKED);
 }
 
 MenuMode::~MenuMode(void)
 {
 	EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
+	EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::MOUSE_CLICKED);
 
 	delete this->keyListener;
+	delete this->mouseListener;
 }
 
 RunMode* MenuMode::run(const FrameEvent& evt)
@@ -101,7 +105,7 @@ resume->setMetricsMode(GMM_PIXELS);
 resume->setFontName("Font");
 resume->setPosition(0.0, 0.0);
 resume->setDimensions(0.1, 0.1);
-resume->setCaption("New Game");
+resume->setCaption("Resume");
 resume->setCharHeight(16);
 //resume->setColourBottom(ColourValue(1.0, 0.0, 0.0));
 //resume->setColourTop(ColourValue(0.0, 1.0, 0.0));
@@ -184,5 +188,22 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload)
 	if(keyCode == OIS::KC_P) 
 	{
 		
+	}
+}
+
+void MenuMode::MouseListener::handleEvent(payloadmap payload)
+{
+	OIS::MouseEvent evt = *static_cast<OIS::MouseEvent*>(payload["MouseEvent"]);
+
+	if((evt.state.X.abs >= (Nimbus::MenuMode::mViewport->getActualWidth() * 0.35)) && (evt.state.X.abs <= (mViewport->getActualWidth() * 0.65))
+		&& (evt.state.Y.abs >= (mViewport->getActualHeight() * 0.25)) && (evt.state.Y.abs <= (mViewport->getActualHeight() * 0.35)))
+	{
+
+	}
+
+	if((evt.state.X.abs >= (NimbusApplication::mWindow-> * 0.35)) && (evt.state.X.abs <= (mViewport->getActualWidth() * 0.65))
+		&& (evt.state.Y.abs >= (mViewport->getActualHeight() * 0.45)) && (evt.state.Y.abs <= (mViewport->getActualHeight() * 0.55)))
+	{
+
 	}
 }

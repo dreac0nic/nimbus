@@ -125,14 +125,12 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 	if(evt.state.buttonDown(OIS::MB_Left))
 	{
 		logstring << "The left mouse button was pressed at ("
-			//<< evt.state.X.rel << ", " << evt.state.Y.rel << ")"
 			<< evt.state.X.abs << ", " << evt.state.Y.abs << ")"
 			<< std::endl;
 	}
 	if(evt.state.buttonDown(OIS::MB_Right))
 	{
 		logstring << "The right mouse button was pressed at ("
-			//<< evt.state.X.rel << ", " << evt.state.Y.rel << ")"
 			<< evt.state.X.abs << ", " << evt.state.Y.abs << ")"
 			<< std::endl;
 	}
