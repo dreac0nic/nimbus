@@ -464,3 +464,6 @@ void Map::assignBiomes(){
 		centers.at(i)->biome = getBiome(centers.at(i));
 	}
 }
+
+
+///////////////--Game Logic below here--//////////

@@ -35,6 +35,7 @@ biomeX=0;
 biomeY=0;
 biomeZ=0;
 biome=biomeArray[biomeX][biomeY][biomeZ];
+raining=false;
 }
 	
 Tile::~Tile(void)
@@ -63,7 +64,10 @@ void Tile::toString(void)
 	
 	//=======
 
-
+void Tile::rainCloud()
+{
+	raining=!raining;
+}
 
 
 
@@ -144,8 +148,6 @@ void Tile::toString(void)
 		//Barren = 1;Sand = 2;Savanna = 3; Plains = 4; Tundra = 5;Tropical 6
 		//Temperate = 7; Taiga = 8; Oceans = 9; 
 		// Artic = 10; Rivers = 11; Lakes = 12; *these are extra
-		
-		biome= 1;
 
 		//low 33-;med 34-66; high = 67+
 		//Threshold is 10

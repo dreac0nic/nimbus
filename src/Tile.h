@@ -67,6 +67,9 @@ namespace Nimbus
 		/*Assigns values in 'next' variables to current variables */
 		void updateVar();
 
+		/*called by outside function to let tile know if */
+		void rainCloud();
+
 		/*Changes type of a tile into a string and returns that string*/
 		std::string getType();
 
@@ -144,6 +147,9 @@ namespace Nimbus
 		
 		/*Holds the limit of ground saturation before flooding*/
 		double grndSatLmt;
+
+		/*Holds whether or not this tile is being rained on*/
+		bool raining;
 
 		/*Holds the biomes in a 3D array*/
 		static int biomeArray[][][];
