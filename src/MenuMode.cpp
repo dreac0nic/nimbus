@@ -18,7 +18,7 @@ using namespace Nimbus;
 using namespace Ogre;
 
 bool menuEndFlag = FALSE; 
-bool overlayFlag = TRUE;
+bool overlayFlag = FALSE;
 MenuMode::MenuMode(void)
 {
 	this->keyListener = new KeyListener();
@@ -30,8 +30,8 @@ MenuMode::MenuMode(void)
 MenuMode::~MenuMode(void)
 {
 	EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
-
 	delete this->keyListener;
+
 }
 
 RunMode* MenuMode::run(const FrameEvent& evt)
@@ -45,12 +45,23 @@ LogManager::getSingletonPtr()->logMessage("(Nimbus) Failed to initialize MenuMod
 return 0;
 }
 
-// Continue to run this runmode
+//Check for if the overlay needs to be enabled.
+if(overlayFlag)
+{
+	this->mViewport->setOverlaysEnabled(TRUE);
+} 
+else if(!overlayFlag)
+{
+	this->mViewport->setOverlaysEnabled(FALSE);
+}
+//Checks to see if it needs to change into GameMode
 if(menuEndFlag)
 {
 	std::cout << "menuEndFlag is now true.";
 	return gameModePointer;
 }
+
+// Continue to run this runmode
 return this;
 }
 
@@ -134,11 +145,7 @@ theOverlay->add2D(quitButton);
 resumeButton->addChild(resume);
 quitButton->addChild(quit);
 
-//Determines if the overlay should be shown.
-if(overlayFlag)
-	theOverlay->show();
-else
-	theOverlay->hide();
+theOverlay->show();
 
 // Create the camera
 mCamera = mSceneMgr->createCamera("PlayerCam");
@@ -155,6 +162,7 @@ mCamera->setNearClipDistance(5);
 // Add a viewport for the camera
 mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
 
+mViewport->setOverlaysEnabled(FALSE);
 //////////
 // Set up the appropriate models
 
@@ -193,7 +201,7 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload)
 
 	if(keyCode == OIS::KC_P) 
 	{
-		overlayFlag = FALSE;
+		overlayFlag = !overlayFlag;
 		std::cout << overlayFlag << "\n";
 	}
 
