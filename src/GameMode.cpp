@@ -127,6 +127,7 @@ void GameMode::MouseDownListener::handleEvent(payloadmap payload, EventListener*
 	// We need to know what was clicked and who should know about it.
 	// That means input delegation to send to overlays/user interface,
 	// wind, or whatnot.
+	OIS::MouseButtonID* id = static_cast<OIS::MouseButtonID*>(payload["ButtonPressed"]);
 	Ogre::Vector2* position = static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
 	Ogre::Ray ray = mContainingMode->mCamera->getCamera()->getCameraToViewportRay(
 		position->x / mContainingMode->mCamera->getViewport()->getActualWidth(),
@@ -134,6 +135,7 @@ void GameMode::MouseDownListener::handleEvent(payloadmap payload, EventListener*
 
 	payloadmap mousePosRay;
 	mousePosRay["Context"] = new std::string("Wind");
+	mousePosRay["ButtonPressed"] = id;
 	mousePosRay["ScreenPosition"] = position;
 	mousePosRay["WorldRay"] = &ray;
 
@@ -194,6 +196,7 @@ void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* r
 	// We need to know what was clicked and who should know about it.
 	// That means input delegation to send to overlays/user interface,
 	// wind, or whatnot.
+	OIS::MouseButtonID* id = static_cast<OIS::MouseButtonID*>(payload["ButtonPressed"]);
 	Ogre::Vector2* position = static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
 	Ogre::Ray ray = mContainingMode->mCamera->getCamera()->getCameraToViewportRay(
 		position->x / mContainingMode->mCamera->getViewport()->getActualWidth(),
@@ -201,6 +204,7 @@ void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* r
 
 	payloadmap mousePosRay;
 	mousePosRay["Context"] = new std::string("Wind");
+	mousePosRay["ButtonPressed"] = id;
 	mousePosRay["ScreenPosition"] = position;
 	mousePosRay["WorldRay"] = &ray;
 

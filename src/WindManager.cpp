@@ -1,9 +1,11 @@
 #include <list>
 #include <OgreEntity.h>
+#include <OISMouse.h>
 #include <OgreMeshManager.h>
 #include <OgreRay.h>
 #include <OgreSceneManager.h>
 #include <OgreVector2.h>
+
 #include "WindManager.h"
 #include "EventSystem.h"
 #include "WindMap.h"
@@ -215,16 +217,24 @@ void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventL
 	}
 
 	if (payload.find("WorldRay") != payload.end()) {
+		OIS::MouseButtonID* id = static_cast<OIS::MouseButtonID*>(payload["ButtonPressed"]);
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
+
+		bool tempCurrent = false;
+		if (*id == OIS::MouseButtonID::MB_Left)
+		{
+			tempCurrent = true;
+		}
+		else if (*id == OIS::MouseButtonID::MB_Right)
+		{
+			tempCurrent = false;
+		}
 
 		// These two constants are DEBUG VALUES. These need to change! They
 		// will be determined by user input.
 		const int STRENGTH = 10;
-		const bool TEMPORARY = true;
-		// Note: fix temporary wind currents! We've got SOMETHING going on
-		// with deleting them.
 
-		mParent->mWindCurrent = new WindCurrent(Ogre::Real(STRENGTH), TEMPORARY);
+		mParent->mWindCurrent = new WindCurrent(Ogre::Real(STRENGTH), tempCurrent);
 
 		// Create the first mouseDown point and add it to our current.
 		Ogre::Vector2 collisionPoint = this->mParent->getCollisionPoint(worldRay);

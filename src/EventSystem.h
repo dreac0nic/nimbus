@@ -104,6 +104,7 @@ namespace Nimbus
 				// May not include a payload
 				Payload:
 					"Context" => std::string
+					"ButtonPressed" => OIS::MouseButtonID
 					"ScreenPosition" => Ogre::Vector2
 					"WorldRay" => Ogre::Ray
 			*/,
@@ -114,6 +115,7 @@ namespace Nimbus
 				// May not include a payload
 				Payload:
 					"Context" => std::string
+					"ButtonPressed" => OIS::MouseButtonID
 					"ScreenPosition" => Ogre::Vector2
 					"WorldRay" => Ogre::Ray
 			*/,
