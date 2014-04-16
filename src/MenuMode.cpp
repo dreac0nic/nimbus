@@ -19,16 +19,16 @@ using namespace Ogre;
 MenuMode::MenuMode(void)
 {
 	this->keyListener = new KeyListener();
-	this->mouseListener = new MouseListener();
+	this->mouseListener = new MouseListener(mViewport);
 
 	EventSystem::getSingleton()->registerListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
-	EventSystem::getSingleton()->registerListener(this->keyListener, EventSystem::EventType::MOUSE_CLICKED);
+	EventSystem::getSingleton()->registerListener(this->mouseListener, EventSystem::EventType::MOUSE_CLICKED);
 }
 
 MenuMode::~MenuMode(void)
 {
 	EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
-	EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::MOUSE_CLICKED);
+	EventSystem::getSingleton()->unregisterListener(this->mouseListener, EventSystem::EventType::MOUSE_CLICKED);
 
 	delete this->keyListener;
 	delete this->mouseListener;
@@ -51,8 +51,8 @@ return this;
 
 bool MenuMode::initialize()
 {
-//Entity* dragon;
-//SceneNode* dragonNode;
+Entity* dragon;
+SceneNode* dragonNode;
 
 Light* light;
 
@@ -133,6 +133,14 @@ quitButton->addChild(quit);
 
 theOverlay->show();
 
+// testing
+printf("Overlay Enabled = %d\n", theOverlay->isInitialised());
+printf("mPanel Enabled = %d\n", mPanel->isEnabled());
+printf("resumeButton Enabled = %d\n", resumeButton->isEnabled());
+printf("resume Enabled = %d\n", resume->isEnabled());
+printf("quit Enabled = %d\n", quit->isEnabled());
+printf("resume Visible = %d\n", resume->isVisible());
+printf("quit Visible = %d\n", quit->isVisible());
 
 // Create the camera
 mCamera = mSceneMgr->createCamera("PlayerCam");
@@ -149,6 +157,16 @@ mCamera->setNearClipDistance(5);
 // Add a viewport for the camera
 mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
 
+// testing
+printf("Left of Resume Button = %f\n", float(mViewport->getActualWidth()) * 0.35);
+printf("Right of Resume Button = %f\n", float(mViewport->getActualWidth()) * 0.65);
+printf("Top of Resume Button = %f\n", float(mViewport->getActualHeight()) * 0.25);
+printf("Bottom of Resume Button = %f\n", float(mViewport->getActualHeight()) * 0.35);
+printf("Left of Quit Button = %f\n", float(mViewport->getActualWidth()) * 0.35);
+printf("Right of Quit Button = %f\n", float(mViewport->getActualWidth()) * 0.65);
+printf("Top of Quit Button = %f\n", float(mViewport->getActualHeight()) * 0.45);
+printf("Bottom of Quit Button = %f\n", float(mViewport->getActualHeight()) * 0.55);
+
 //////////
 // Set up the appropriate models
 
@@ -157,13 +175,13 @@ mCamera->setAspectRatio(
 Real(mViewport->getActualWidth()) / Real(mViewport->getActualHeight()));
 
 //// Load the dragon
-//dragon = mSceneMgr->createEntity("Dragon", "dragon.mesh");
-//dragonNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-//dragonNode->attachObject(dragon);
-//
-//dragonNode->setPosition(0, 0, -100);
-//dragonNode->setScale(40.0, 40.0, 40.0);
-//dragonNode->pitch(Degree(90));
+dragon = mSceneMgr->createEntity("Dragon", "dragon.mesh");
+dragonNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+dragonNode->attachObject(dragon);
+
+dragonNode->setPosition(0, 0, -100);
+dragonNode->setScale(40.0, 40.0, 40.0);
+dragonNode->pitch(Degree(90));
 
 //////////
 // Set up light sources
@@ -182,6 +200,7 @@ return true;
 
 void MenuMode::KeyListener::handleEvent(payloadmap payload)
 {
+	printf("I'm in the KeyListener!\n");
 	OIS::KeyCode keyCode = *static_cast<OIS::KeyCode*>(payload["KeyCode"]);
 	bool keyReleased = *static_cast<bool*>(payload["KeyReleased"]);
 
@@ -193,17 +212,18 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload)
 
 void MenuMode::MouseListener::handleEvent(payloadmap payload)
 {
-	OIS::MouseEvent evt = *static_cast<OIS::MouseEvent*>(payload["MouseEvent"]);
+	printf("I'm in the MouseListener!\n");
+	OIS::MouseEvent& evt = *static_cast<OIS::MouseEvent*>(payload["MouseClicked"]);
 
-	if((evt.state.X.abs >= (Nimbus::MenuMode::mViewport->getActualWidth() * 0.35)) && (evt.state.X.abs <= (mViewport->getActualWidth() * 0.65))
-		&& (evt.state.Y.abs >= (mViewport->getActualHeight() * 0.25)) && (evt.state.Y.abs <= (mViewport->getActualHeight() * 0.35)))
+	if((evt.state.X.abs >= (float(viewport->getActualWidth()) * 0.35)) && (evt.state.X.abs <= (float(viewport->getActualWidth()) * 0.65))
+		&& (evt.state.Y.abs >= (float(viewport->getActualHeight()) * 0.25)) && (evt.state.Y.abs <= (float(viewport->getActualHeight()) * 0.35)))
 	{
-
+		printf("Resume Button Pressed!\n");
 	}
 
-	if((evt.state.X.abs >= (NimbusApplication::mWindow-> * 0.35)) && (evt.state.X.abs <= (mViewport->getActualWidth() * 0.65))
-		&& (evt.state.Y.abs >= (mViewport->getActualHeight() * 0.45)) && (evt.state.Y.abs <= (mViewport->getActualHeight() * 0.55)))
+	if((evt.state.X.abs >= (float(viewport->getActualWidth()) * 0.35)) && (evt.state.X.abs <= (float(viewport->getActualWidth()) * 0.65))
+		&& (evt.state.Y.abs >= (float(viewport->getActualHeight()) * 0.45)) && (evt.state.Y.abs <= (float(viewport->getActualHeight()) * 0.55)))
 	{
-
+		printf("Quit Button Pressed!\n");
 	}
 }
