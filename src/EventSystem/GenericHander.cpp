@@ -40,3 +40,9 @@ void GenericHandler::unregisterListener(EventListener* listener, filtermap filte
 		mListeners.erase(element);
 	}
 }
+
+bool GenericHandler::isEmpty()
+{
+	// If the listener list is 0, then the handler is empty
+	return mListeners.size() <= 0;
+}

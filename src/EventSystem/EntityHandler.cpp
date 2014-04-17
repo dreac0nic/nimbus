@@ -83,18 +83,21 @@ void EntityHandler::unregisterListener(EventListener* listener, filtermap filter
 			mListeners[entityId].erase(element);
 		}
 	}
+}
 
-	// Delete the global case if not only local
-	if(filter.find("LocalOnly") == filter.end())
+bool EntityHandler::isEmpty()
+{
+	// For every id in the handler
+	for(std::map<GameEntityId, std::list<EventListener*> >::iterator it = mListeners.begin(); it != mListeners.end(); ++it)
 	{
-		// Find the listener in the global list
-		element = find(mListeners[0].begin(), mListeners[0].end(), listener);
-
-		// If the listener was found
-		if(element != mListeners[0].end())
+		// If the list contains something
+		if(it->second.size() > 0)
 		{
-			// Remove the listener
-			mListeners[0].erase(element);
+			// Then the handler is not empty
+			return false;
 		}
 	}
+
+	// Otherwise, the handler is empty
+	return true;
 }

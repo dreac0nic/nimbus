@@ -30,8 +30,6 @@ namespace Nimbus
 				
 				Filter:
 					"EntityId" => GameEntityId
-					"LocalOnly" => NULL // Indicates if the event should be registered/unregistered
-											for the global event (optional)
 			*/,
 
 			ENTITY_GROUP
@@ -66,6 +64,12 @@ namespace Nimbus
 			@param filter A filtermap which contains the filter for the event handler to classify the listener.
 		*/
 		virtual void unregisterListener(EventListener* listener, filtermap filter) = 0;
+
+		/** Indicates if the handler is empty of listeners.
+
+			@return True if the handler contains no listeners.
+		*/
+		virtual bool isEmpty() = 0;
 	};
 }
 
