@@ -180,7 +180,7 @@ Ogre::Vector2 WindManager::getCollisionPoint(Ogre::Ray* collisionRay)
 
 WindCurrent WindManager::generateCurrent(void)
 {
-	WindCurrent w = WindCurrent(rand() % 10);
+	WindCurrent w = WindCurrent(Ogre::Real(rand() % 10));
 	int numVectors = rand() % 8 + 3;
 
 	/*Ogre::Vector2 point = Ogre::Vector2(Ogre::Real(rand() % mWorld->getWindMap()->mOffset), Ogre::real)

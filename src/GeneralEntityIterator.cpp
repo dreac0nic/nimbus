@@ -17,6 +17,7 @@ GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(
 	const GameEntitySet::GeneralEntityIterator& other)
 {
 	this->currentEntity = other.currentEntity;
+	this->mEntityMap = other.mEntityMap;
 }
 
 const GameEntitySet::GeneralEntityIterator& GameEntitySet::GeneralEntityIterator::operator++()
