@@ -23,7 +23,7 @@ Nimbus::Camera::Camera() :
 	mPositionDelta(Vector3::ZERO),
 	slowDown(0),
 	accelerationFactor((Ogre::Real)0.2),
-	accelerationMax((Ogre::Real)0.5),
+	accelerationMax((Ogre::Real)3.0),
 	essentiallyZero((Ogre::Real)0.1)
 {
 	this->mMousePositionListener = new MousePositionListener(this);

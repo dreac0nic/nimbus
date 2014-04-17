@@ -13,11 +13,13 @@ GameEntity::GameEntity(GameEntityId id, GameEntityType type) :
 }
 
 GameEntity::GameEntity(GameEntityId id, GameEntity* other) :
-	mId(id),
-	mEventSystem()
+	mId(id)
 {
 	// Copying all of the properties and behaviours in the given entity to this new entity
 	this->mEntityType = other->getEntityType();
+
+	// Initialize the local event system
+	mEventSystem = new EventSystem(id);
 
 	behaviourmap::iterator behaviour = other->getBehaviours()->begin();
 	while (behaviour != other->getBehaviours()->end())

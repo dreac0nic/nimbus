@@ -59,11 +59,11 @@ bool EventSystem::registerListener(EventListener* listener, EventType type, filt
 	if(this->mOwnerId != 0)
 	{
 		// If there is not yet a global listener
-		if(mGlobalListeners.find(type) != mGlobalListeners.end())
+		if(mGlobalListeners.find(type) != mGlobalListeners.end() && mGlobalListeners[type] == NULL)
 		{
 			// Create one
 			mGlobalListeners[type] = new GlobalListener(this, type);
-
+			
 			// And register the created listener with the global system
 			singleton->registerListener(mGlobalListeners[type], type, filter);
 		}

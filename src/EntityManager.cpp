@@ -112,7 +112,7 @@ void Nimbus::EntityManager::CreateEntityListener::handleEvent(payloadmap payload
 			}
 
 			// Fire the event to set the position
-			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATION_QUERY, positionalPayload);
+			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, positionalPayload);
 		}
 
 		if(responder != NULL)
