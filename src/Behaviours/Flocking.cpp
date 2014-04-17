@@ -21,14 +21,14 @@ Flocking::Flocking(BehaviourType type, World* world, ConfigFile::SettingsMultiMa
 	// Load the influence factor for the flocking group
 	if(initializingSettings->find("influence") != initializingSettings->end())
 	{
-		optionsParser = stringstream(initializingSettings->find("influence")->second);
+        optionsParser.str(initializingSettings->find("influence")->second);
 		optionsParser >> influenceFactor;
 	}
 
 	// Load the override factor for the flocking group
 	if(initializingSettings->find("override") != initializingSettings->end())
 	{
-		optionsParser = stringstream(initializingSettings->find("override")->second);
+        optionsParser.str(initializingSettings->find("override")->second);
 		optionsParser >> overrideFactor;
 	}
 

@@ -19,14 +19,14 @@ Positional::Positional(BehaviourType type, World* world, Ogre::ConfigFile::Setti
 	// Get the position vector
 	if(initializingSettings->find("position") != initializingSettings->end())
 	{
-		optionParser = stringstream(initializingSettings->find("position")->second);
+        optionParser.str(initializingSettings->find("position")->second);
 		optionParser >> initialPosition.x >> initialPosition.y >> initialPosition.z;
 	}
 
 	// Get the facing vector
 	if(initializingSettings->find("face") != initializingSettings->end())
 	{
-		optionParser = stringstream(initializingSettings->find("face")->second);
+        optionParser.str(initializingSettings->find("face")->second);
 		optionParser >> facingVector.x >> facingVector.y >> facingVector.z;
 		stringstream temp;
 		temp << "(Nimbus) Facing vector (" << facingVector.x << ", " << facingVector.y << ", " << facingVector.z << ")";

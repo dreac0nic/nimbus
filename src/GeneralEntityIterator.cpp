@@ -6,7 +6,7 @@ using namespace Nimbus;
 // General Entity Iterator
 // Designed to iterate over all entities one at a time
 
-GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(generaliterator& initial,
+GameEntitySet::GeneralEntityIterator::GeneralEntityIterator(generaliterator initial,
 															std::map<GameEntityId, GameEntity*>* entityMap)
 {
 	this->currentEntity = initial;
