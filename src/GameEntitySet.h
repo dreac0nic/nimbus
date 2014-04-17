@@ -11,7 +11,7 @@ namespace Nimbus
 {
 	
 	/** The GameEntitySet is a class for holding all the entities in the game
-	world. It's main benefit and purpose is to provide custom iterators over
+	world. Its main benefit and purpose is to provide custom iterators over
 	entities so that users can select specific relevant sets of entities
 	based on their component behaviours. */
 	class GameEntitySet

@@ -57,13 +57,13 @@ namespace Nimbus
 			@param listener A pointer to the event listener which should be registered.
 			@param filter A filtermap which contains the filter for the event handler to classify the listener.
 		*/
-		virtual void registerListener(EventListener* listener, filtermap filter) = 0;
+		virtual void registerListener(EventListener* listener, filtermap filter = filtermap()) = 0;
 
 		/** Unregisters a listener with the event handler.
 			@param listener A pointer to the event listener which should be unregistered.
 			@param filter A filtermap which contains the filter for the event handler to classify the listener.
 		*/
-		virtual void unregisterListener(EventListener* listener, filtermap filter) = 0;
+		virtual void unregisterListener(EventListener* listener, filtermap filter = filtermap()) = 0;
 
 		/** Indicates if the handler is empty of listeners.
 
