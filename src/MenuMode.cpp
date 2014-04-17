@@ -213,16 +213,26 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload)
 void MenuMode::MouseListener::handleEvent(payloadmap payload)
 {
 	printf("I'm in the MouseListener!\n");
-	OIS::MouseEvent& evt = *static_cast<OIS::MouseEvent*>(payload["MouseClicked"]);
+	OIS::MouseEvent* evt = (static_cast<OIS::MouseEvent*>(payload["MouseClicked"]));
 
-	if((evt.state.X.abs >= (float(viewport->getActualWidth()) * 0.35)) && (evt.state.X.abs <= (float(viewport->getActualWidth()) * 0.65))
-		&& (evt.state.Y.abs >= (float(viewport->getActualHeight()) * 0.25)) && (evt.state.Y.abs <= (float(viewport->getActualHeight()) * 0.35)))
+	// testing
+	printf("Left of Resume Button = %f\n", float(viewport->getActualWidth()) * 0.35);
+	printf("Right of Resume Button = %f\n", float(viewport->getActualWidth()) * 0.65);
+	printf("Top of Resume Button = %f\n", float(viewport->getActualHeight()) * 0.25);
+	printf("Bottom of Resume Button = %f\n", float(viewport->getActualHeight()) * 0.35);
+	printf("Left of Quit Button = %f\n", float(viewport->getActualWidth()) * 0.35);
+	printf("Right of Quit Button = %f\n", float(viewport->getActualWidth()) * 0.65);
+	printf("Top of Quit Button = %f\n", float(viewport->getActualHeight()) * 0.45);
+	printf("Bottom of Quit Button = %f\n", float(viewport->getActualHeight()) * 0.55);
+
+	if((evt->state.X.abs >= (float(viewport->getActualWidth()) * 0.35)) && (evt->state.X.abs <= (float(viewport->getActualWidth()) * 0.65))
+		&& (evt->state.Y.abs >= (float(viewport->getActualHeight()) * 0.25)) && (evt->state.Y.abs <= (float(viewport->getActualHeight()) * 0.35)))
 	{
 		printf("Resume Button Pressed!\n");
 	}
 
-	if((evt.state.X.abs >= (float(viewport->getActualWidth()) * 0.35)) && (evt.state.X.abs <= (float(viewport->getActualWidth()) * 0.65))
-		&& (evt.state.Y.abs >= (float(viewport->getActualHeight()) * 0.45)) && (evt.state.Y.abs <= (float(viewport->getActualHeight()) * 0.55)))
+	if((evt->state.X.abs >= (float(viewport->getActualWidth()) * 0.35)) && (evt->state.X.abs <= (float(viewport->getActualWidth()) * 0.65))
+		&& (evt->state.Y.abs >= (float(viewport->getActualHeight()) * 0.45)) && (evt->state.Y.abs <= (float(viewport->getActualHeight()) * 0.55)))
 	{
 		printf("Quit Button Pressed!\n");
 	}

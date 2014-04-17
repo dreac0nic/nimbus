@@ -122,7 +122,11 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 {
 	std::stringstream logstring;
 
-	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_CLICKED, mouse_event);
+	std::map<std::string, void*> mouseEvent;
+
+	mouseEvent["MouseClicked"] = (void*)(&evt);
+
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_CLICKED, mouseEvent);
 
 	if(evt.state.buttonDown(OIS::MB_Left))
 	{
