@@ -167,7 +167,7 @@ namespace Nimbus
 			 */,
 
 			 FLOCK_UPDATE
-			 /*! The event which lets a Flocking behaviour know it's new entity list.
+			 /*! The event which lets a Flocking behaviour know its new entity list.
 				
 				Payload:
 					"EntityId" => GameEntityId
