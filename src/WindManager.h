@@ -81,7 +81,7 @@ namespace Nimbus
 			across our wind plane
 			@param collisionRay A pointer of the ray click to collide our plane with
 		*/
-		Ogre::Vector2 WindManager::getCollisionPoint(Ogre::Ray* collisionRay);
+        Ogre::Vector2 getCollisionPoint(Ogre::Ray* collisionRay);
 
 	protected:
 		// Event Listeners
