@@ -54,7 +54,7 @@ Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::Set
 Nimbus::Renderable::Renderable(Renderable* other, World* world, int id, EventSystem* eventSystem):
 	Behaviour(other, world, id, eventSystem)
 {
-	this->init(other->getModel(), other->getScale(), other->mBaseEntityName);
+	this->init(other->getModel(), other->mScale, other->mBaseEntityName);
 }
 
 Nimbus::Renderable::~Renderable()

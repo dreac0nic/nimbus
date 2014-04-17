@@ -47,7 +47,6 @@ namespace Nimbus
 
 		// Accessor methods
 		virtual Ogre::Entity* getModel();
-		virtual Ogre::Vector3 getScale();
 
 		// Setter methods
 		virtual void setModel(Ogre::Entity* model);
