@@ -14,13 +14,13 @@ enum Corner {
 };
 
 float round(float x) {
-	return floor(x + 0.5);
+	return (float)floor(x + 0.5);
 }
 
 WindMap::WindMap(Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offset, Ogre::Real minimumCurrentLength) :
 	mResolution(resolution),
 	mAlphaVector(Ogre::Vector2(resolution, resolution)),
-	mPersistenceFactor(.7),
+	mPersistenceFactor(Ogre::Real(.7)),
 	mCurrents(),
 	mOffset(offset),
 	mMinimumCurrentLength(minimumCurrentLength)
@@ -63,19 +63,24 @@ void WindMap::update(void)
 	Ogre::Vector2 averageWindVector;
 
 	// Initialize the pending influence vectors grid
-	for(int x = 0; x < pendingInfluenceVectors.getXDimension(); ++x)
+	for (int x = 0; x < pendingInfluenceVectors.getXDimension(); ++x)
 	{
-		for(int y = 0; y < pendingInfluenceVectors.getYDimension(); ++y)
+		for (int y = 0; y < pendingInfluenceVectors.getYDimension(); ++y)
 		{
-			pendingInfluenceVectors.set(x,y, new std::vector<Ogre::Vector2>());
+			pendingInfluenceVectors.set(x, y, new std::vector<Ogre::Vector2>());
+			pendingInfluenceVectors.get(x, y)->push_back(Ogre::Vector2(0, 0));
 		}
 	}
 
 	// Go through each wind current
-	for(std::list<WindCurrent*>::iterator current = this->mCurrents.begin(); current != this->mCurrents.end(); ++current)
+	for (std::list<WindCurrent*>::iterator current = this->mCurrents.begin();
+		current != this->mCurrents.end();
+		++current)
 	{
 		// Go through each wind influence vector (stored as a position vector paired with an influence vector)
-		for(pathList::iterator windInfluenceVector = (*current)->getPath()->begin(); windInfluenceVector != (*current)->getPath()->end(); ++windInfluenceVector)
+		for (pathList::iterator windInfluenceVector = (*current)->getPath()->begin();
+			windInfluenceVector != (*current)->getPath()->end();
+			++windInfluenceVector)
 		{
 			// Name the values for clarity
 			Ogre::Vector2 positionVector = windInfluenceVector->first;
@@ -102,9 +107,9 @@ void WindMap::update(void)
 
 				// Store the scaled delta vector (excuse my [gl]OOP and math)
 				pendingInfluenceVectors.get(
-				(int)cornerCoordinates[corner].x,
-				(int)cornerCoordinates[corner].y)->push_back(
-					(1 - cornerDistance[corner].length() / this->mAlphaVector.length()) * deltaVector);
+					(int)cornerCoordinates[corner].x,
+					(int)cornerCoordinates[corner].y)->push_back(
+						(1 - cornerDistance[corner].length() / this->mAlphaVector.length()) * deltaVector);
 			}
 		}
 
@@ -113,9 +118,9 @@ void WindMap::update(void)
 	}
 
 	// For the each of the pending influence vectors
-	for(int x = 0; x < pendingInfluenceVectors.getXDimension(); ++x)
+	for (int x = 0; x < pendingInfluenceVectors.getXDimension(); ++x)
 	{
-		for(int y = 0; y < pendingInfluenceVectors.getYDimension(); ++y)
+		for (int y = 0; y < pendingInfluenceVectors.getYDimension(); ++y)
 		{
 			// Reset the average wind vector to zero
 			averageWindVector = Ogre::Vector2::ZERO;
@@ -123,7 +128,7 @@ void WindMap::update(void)
 			std::vector<Ogre::Vector2>* tempList = pendingInfluenceVectors.get(x,y);
 
 			// Sum all scaled delta vectors
-			for(std::vector<Ogre::Vector2>::iterator vectorList = tempList->begin();
+			for (std::vector<Ogre::Vector2>::iterator vectorList = tempList->begin();
 				vectorList != tempList->end();
 				++vectorList)
 			{
@@ -135,23 +140,39 @@ void WindMap::update(void)
 				averageWindVector /= Ogre::Real(tempList->size());
 
 				// Average the scaled delta vector average and the previous value, storing it back into the vector map
-				this->mVectorMap->set(x,y,
+				this->mVectorMap->set(x, y,
 					(1- this->mPersistenceFactor) * averageWindVector +
 					(this->mPersistenceFactor) * this->mVectorMap->get(x,y));
+
+				// Essentially zero
+				if (this->mVectorMap->get(x, y).length() < 0.1)
+				{
+					this->mVectorMap->set(x, y, Ogre::Vector2(0, 0));
+				}
 			}
 		}
 	}
 
 	// Delete any expired wind currents
-	for(std::list<WindCurrent*>::iterator current = this->mCurrents.begin(); current != this->mCurrents.end(); ++current)
+	std::list<WindCurrent*>::iterator current = this->mCurrents.begin();
+	while (current != this->mCurrents.end())
 	{
 		// Temporary currents last 10 seconds (as per GDD... hey it was actually useful guys!)
-		if((*current)->isTemporary() && (*current)->getTimeAlive() > 10)
+		if ((*current)->isTemporary() && (*current)->getTimeAlive() > 5)
 		{
 			// Delete the wind current
 			delete *current;
 
 			current = this->mCurrents.erase(current);
+
+			if (current == this->mCurrents.end())
+			{
+				break;
+			}
+		}
+		else
+		{
+			current++;
 		}
 	}
 
@@ -292,7 +313,8 @@ void WindMap::createArrowGrid()
 		for(int y = 0; y < mArrowGrid->getYDimension(); ++y)
 		{
 			// Calculate the position of the arrow
-			position = this->mResolution * Ogre::Vector3(x, 0, y) - Ogre::Vector3(mOffset.x , 0, mOffset.y);
+			position = this->mResolution * Ogre::Vector3(
+				Ogre::Real(x), Ogre::Real(0), Ogre::Real(y)) - Ogre::Vector3(mOffset.x , 0, mOffset.y);
 
 			// Create an arrow and capture the arrow id
 			EventSystem::getSingleton()->fireEvent(
