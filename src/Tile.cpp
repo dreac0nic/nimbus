@@ -36,7 +36,12 @@ Tile::~Tile(void)
 		raining=!raining;
 	}
 
+	void Tile::windBlowing(Ogre::Real power, bool into)
+	{
+		//Wind power is calculated for determining how much humidity leaves or enters a tile
+		windPower = power;
 
+	}
 
 	double Tile::getHumidity()
 	{
@@ -127,7 +132,17 @@ Tile::~Tile(void)
 		//if raining, tile is moves towards 50 temp by 1
 		if(raining)
 		{
-		
+		nextHumidity = nextHumidity + (.1 * humidity);
+		nextGrndSat = nextGrndSat + (.2 * grndSat);
+		if(temp > 50)
+			{
+				nextTemperature= nextTemperature -1
+			}
+
+		if(temp > 50)
+			{
+				nextTemperature = nextTemperature + 1
+			}
 		}
 		
 	}

@@ -40,7 +40,7 @@ namespace Nimbus
 		~Tile();
 		
 		// MEMBER FUNCTIONS --
-
+		
 		
 		/** Returns a pointer to the cell that identifies this tile.
 		 */
@@ -82,7 +82,8 @@ namespace Nimbus
 		std::string getType();
 
 		/*Gives humidity to a tile based on wind*/
-		void giveHumi();
+		void windBlowing(Ogre::Real power,bool into);
+
 
 
 	private:
@@ -98,6 +99,10 @@ namespace Nimbus
 
 		/*Holds this tile's biome.*/
 		int biome;
+
+		/*Wind power for calculation*/
+		Ogre::Real windPower;
+
 
 		
 		void setHumidity(double humi);
