@@ -41,13 +41,13 @@ Transformational::Transformational(BehaviourType type, World* world, Ogre::Confi
 		optionParser >> scaleVector.x >> scaleVector.y >> scaleVector.y;
 	}
 
-	this->init(initialPosition, facingVector);
+	this->init(initialPosition, facingVector, scaleVector);
 }
 
 Transformational::Transformational(Transformational* other, World* world, int id, EventSystem* eventSystem):
 	Behaviour(other, world, id, eventSystem)
 {
-	this->init(other->mPosition, other->mFacingVector);
+	this->init(other->mPosition, other->mFacingVector, other->mScale);
 }
 
 Transformational::~Transformational(void)
@@ -78,8 +78,11 @@ void Transformational::startup(void)
 	this->mNewFacing = Vector3::ZERO;
 
 	// Register event listeners.
-	this->mEntityEventSystem->registerListener(mTranslationListener, EventSystem::EventType::TRANSLATE_ENTITY);
-	this->mEntityEventSystem->registerListener(mTranslationQueryListener, EventSystem::EventType::TRANSLATION_QUERY);
+	filtermap entityFilter;
+	entityFilter["EntityId"] = &this->mParentId;
+
+	this->mEntityEventSystem->registerListener(mTranslationListener, EventSystem::EventType::TRANSLATE_ENTITY, entityFilter);
+	this->mEntityEventSystem->registerListener(mTranslationQueryListener, EventSystem::EventType::TRANSLATION_QUERY, entityFilter);
 
 	// Force an update when things start rendering
 	this->forceUpdate();
@@ -141,9 +144,12 @@ void Transformational::update(void)
 void Transformational::shutdown(void)
 {
 	// SUT DOWN THE TRANSLATIONAL STUFF
-	// Deregister event listeners.
-	this->mEntityEventSystem->unregisterListener(mTranslationListener, EventSystem::EventType::TRANSLATE_ENTITY);
-	this->mEntityEventSystem->unregisterListener(mTranslationQueryListener, EventSystem::EventType::TRANSLATION_QUERY);
+	// Unregister event listeners.
+	filtermap entityFilter;
+	entityFilter["EntityId"] = &this->mParentId;
+
+	this->mEntityEventSystem->unregisterListener(mTranslationListener, EventSystem::EventType::TRANSLATE_ENTITY, entityFilter);
+	this->mEntityEventSystem->unregisterListener(mTranslationQueryListener, EventSystem::EventType::TRANSLATION_QUERY, entityFilter);
 }
 
 void Transformational::forceUpdate(void)
