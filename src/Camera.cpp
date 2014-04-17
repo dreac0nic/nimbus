@@ -22,9 +22,9 @@ Nimbus::Camera::Camera() :
 	mFacing(Vector3::ZERO),
 	mPositionDelta(Vector3::ZERO),
 	slowDown(0),
-	accelerationFactor(0.2),
-	accelerationMax(5.0),
-	essentiallyZero(0.1)
+	accelerationFactor(0.2f),
+	accelerationMax(5.0f),
+	essentiallyZero(0.1f)
 {
 	this->mMousePositionListener = new MousePositionListener(this);
 }

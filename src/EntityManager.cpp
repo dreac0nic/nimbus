@@ -233,7 +233,7 @@ void EntityManager::TickListener::generateCloudGroups()
 
 	// Update the appropriate cloud group
 	payloadmap groupUpdatePayload;
-	GameEntityId groupEntityId;
+	// GameEntityId groupEntityId; // NOT USED SO WARNINGS
 	for(map<int, list<GameEntityId> >::iterator it = groups.begin(); it != groups.end(); ++it)
 	{
 		payloadmap updateCloudGroupPayload;
