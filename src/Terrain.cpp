@@ -1,4 +1,5 @@
 #include "Terrain.h"
+#include "World.h"
 
 using namespace boost::polygon;
 using namespace Nimbus;

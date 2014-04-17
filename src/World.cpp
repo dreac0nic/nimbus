@@ -1,7 +1,7 @@
 #include "World.h"
 #include "GameEntity.h"
 #include "GameEntitySet.h"
-#include "Terrain.h"
+#include "Map.h"
 #include <OgreSceneManager.h>
 
 using namespace Nimbus;
@@ -14,7 +14,7 @@ World::World(Ogre::SceneManager* sceneManager):
 	this->mWorldNode = mSceneManager->createSceneNode();
 	this->mEntities = new GameEntitySet();
 
-	this->mTerrain = new Terrain(this);
+	this->mMap = new Map(this);
 
 	//mTerrain->printDiagram();
 }
