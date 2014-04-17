@@ -68,9 +68,12 @@ void Flocking::init(Real influenceFactor, Real overrideFactor)
 void Flocking::startup(void)
 {
 	// Register the tick listener
-	EventSystem::getSingleton()->registerListener(mUpdateListener, EventSystem::EventType::FLOCK_UPDATE);
-	EventSystem::getSingleton()->registerListener(mSoarListener, EventSystem::EventType::SOAR_ENTITY);
-	EventSystem::getSingleton()->registerListener(mTickListener, EventSystem::EventType::TICK);
+	filtermap entityFilter;
+	entityFilter["EntityId"] = &this->mParentId;
+
+	EventSystem::getSingleton()->registerListener(mUpdateListener, EventSystem::EventType::FLOCK_UPDATE, entityFilter);
+	EventSystem::getSingleton()->registerListener(mSoarListener, EventSystem::EventType::SOAR_ENTITY, entityFilter);
+	EventSystem::getSingleton()->registerListener(mTickListener, EventSystem::EventType::TICK, entityFilter);
 }
 
 void Flocking::update(void)
@@ -151,7 +154,7 @@ void Flocking::TickListener::handleEvent(payloadmap payload, EventListener* resp
 		// Change the translation vector of the entity based on the new direction
 		translatePayload["EntityId"] = &entityId;
 		translatePayload["PositionDelta"] = &delta;
-		this->mParent->mEntityEventSystem->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, translatePayload);
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, translatePayload);
 	}
 }
 
