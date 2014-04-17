@@ -216,15 +216,14 @@ namespace Nimbus
 		/** A map of event type to the corresponding event type handler. */
 		std::map< EventType, std::vector<EventTypeHandler*> > mHandlers;
 
-		/** A list of global event handlers. This allows global events
-			to be injected as appropriate into the local handlers. */
-		std::vector<GlobalListener*> mGlobalListeners;
+		/** A map of listeners to capture events from the global event system. */
+		std::map<EventType, GlobalListener*> mGlobalListeners;
 
 		/** The id of the owning entity. 0 if the global event system. */
 		GameEntityId mOwnerId;
 
 		/** Creates all the handlers needed for any given event type and registers
-			them to the handler list.
+			them to the handler list for that event type
 
 			@param
 			type The type of event to create handlers for.
