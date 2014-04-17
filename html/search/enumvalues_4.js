@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['flock_5fupdate',['FLOCK_UPDATE',['../class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aae63e9d69a4d7806cfa58a7801fda8446',1,'Nimbus::EventSystem']]]
+  ['generic',['GENERIC',['../class_nimbus_1_1_event_type_handler.html#af5f1b882111816bd728fe4da54a1c377a414cb52aaa6a89acc74adb85bc1541db',1,'Nimbus::EventTypeHandler']]]
 ];

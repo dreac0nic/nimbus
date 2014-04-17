@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_event_system.html',''
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -105,6 +105,7 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_event_system.html',''
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
@@ -116,6 +117,11 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_event_system.html',''
 
 <p><code>#include &lt;<a class="el" href="_event_system_8h_source.html">EventSystem.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system_1_1_global_listener.html">GlobalListener</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:afc54aee8429f6d972c6166513194ee8a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8a">EventType</a> { <br/>
@@ -125,17 +131,17 @@ Public Types</h2></td></tr>
 <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa248040c2fdfc433eea89458547d3a433">MOUSE_UP</a>, 
 <br/>
 &#160;&#160;<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa1833614b03deab49a24cffefb6458c46">MOUSE_UPDATE</a>, 
-<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa86ddf8e09ac67f8351609a61e0caf82c">MOUSE_POSITION</a>, 
-<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa1ef6e4d356d14b6d5facae3fe9c40240">CREATE_ENTITY</a>, 
+<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aae4586a24bc5ef2da391e21a34143d13f">MOUSE_POSITION_UPDATE</a>, 
+<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aadc796b52004f9adb400d4f7f936f023c">MOUSE_POSITION_START</a>, 
+<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa97db5a829c7a7c8ffb06fc1358cc4fe7">MOUSE_POSITION_END</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa1ef6e4d356d14b6d5facae3fe9c40240">CREATE_ENTITY</a>, 
 <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa6377ea8c94e5ae05c9a58cfe3ff9c755">DESTROY_ENTITY</a>, 
+<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa443eb200be7877e3c10ae1e5de4930b8">SOAR_ENTITY</a>, 
+<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa0526999fa27f0322f14327e5041f3f4d">TRANSLATE_ENTITY</a>, 
 <br/>
-&#160;&#160;<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa443eb200be7877e3c10ae1e5de4930b8">SOAR_ENTITY</a>, 
-<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aad2cccf3cc19715f9ba455e3e170a1901">POSITION_ENTITY</a>, 
-<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa339594c7d1a2027813fcfd12da6e8cac">BEGIN_TRANSLATE_ENTITY</a>, 
-<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa79ea96966c7afd9c686c412d4f7bc65b">END_TRANSLATE_ENTITY</a>, 
-<br/>
-&#160;&#160;<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aaa7419a2a2d9cc18ef1c16d7b5809d9dd">ENTITY_MOVED</a>, 
-<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa2cec9cbf6afde9caec329bfc7ef6cabc">POSITION_QUERY</a>, 
+&#160;&#160;<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa40b36c126442a25f6a9843308872ecee">ENTITY_TRANSLATED</a>, 
+<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aaa69341d436b9ccd5acdcf0f44b999756">TRANSLATION_QUERY</a>, 
 <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aae63e9d69a4d7806cfa58a7801fda8446">FLOCK_UPDATE</a>
 <br/>
  }</td></tr>
@@ -143,19 +149,21 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6d1ea0fd27852947d047fe803d6c7584"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system.html#a6d1ea0fd27852947d047fe803d6c7584">EventSystem</a> (void)</td></tr>
-<tr class="separator:a6d1ea0fd27852947d047fe803d6c7584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab812c5edf72fb3f4617fc9f09d331013"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system.html#ab812c5edf72fb3f4617fc9f09d331013">EventSystem</a> (GameEntityId owner=0)</td></tr>
+<tr class="separator:ab812c5edf72fb3f4617fc9f09d331013"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47b9e9a1d8dca16dde1188a4c1d9d7a6"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system.html#a47b9e9a1d8dca16dde1188a4c1d9d7a6">~EventSystem</a> (void)</td></tr>
 <tr class="separator:a47b9e9a1d8dca16dde1188a4c1d9d7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fa6ee1b8f59befa9fb964178b343f98"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system.html#a7fa6ee1b8f59befa9fb964178b343f98">registerListener</a> (<a class="el" href="class_nimbus_1_1_event_listener.html">EventListener</a> *listener, <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8a">EventType</a> type)</td></tr>
-<tr class="separator:a7fa6ee1b8f59befa9fb964178b343f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae20fb87df21fb731adb1b4af01620c08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system.html#ae20fb87df21fb731adb1b4af01620c08">unregisterListener</a> (<a class="el" href="class_nimbus_1_1_event_listener.html">EventListener</a> *listener, <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8a">EventType</a> type)</td></tr>
-<tr class="separator:ae20fb87df21fb731adb1b4af01620c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f0bc08eed90720cbda6202e1ace9a2c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system.html#a1f0bc08eed90720cbda6202e1ace9a2c">registerListener</a> (<a class="el" href="class_nimbus_1_1_event_listener.html">EventListener</a> *listener, <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8a">EventType</a> type, filtermap filter=filtermap())</td></tr>
+<tr class="separator:a1f0bc08eed90720cbda6202e1ace9a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dd5b252c988366e275617e219268f8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system.html#a3dd5b252c988366e275617e219268f8a">unregisterListener</a> (<a class="el" href="class_nimbus_1_1_event_listener.html">EventListener</a> *listener, <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8a">EventType</a> type, filtermap filter=filtermap())</td></tr>
+<tr class="separator:a3dd5b252c988366e275617e219268f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e20b8928a8f1ccc9de1844759af2370"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system.html#a0e20b8928a8f1ccc9de1844759af2370">fireEvent</a> (<a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8a">EventType</a> type, const payloadmap &amp;payload=payloadmap(), <a class="el" href="class_nimbus_1_1_event_listener.html">EventListener</a> *responder=NULL)</td></tr>
 <tr class="separator:a0e20b8928a8f1ccc9de1844759af2370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ad0771cf78f08435e5da051e67bccec6f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_nimbus_1_1_event_system.html">EventSystem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system.html#ad0771cf78f08435e5da051e67bccec6f">initializeSingleton</a> ()</td></tr>
+<tr class="separator:ad0771cf78f08435e5da051e67bccec6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57874808edce83ec2aade2d9d02678f0"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_nimbus_1_1_event_system.html">EventSystem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_event_system.html#a57874808edce83ec2aade2d9d02678f0">getSingleton</a> ()</td></tr>
 <tr class="separator:a57874808edce83ec2aade2d9d02678f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -197,12 +205,20 @@ Static Public Member Functions</h2></td></tr>
 <p>An event fired whenever the mouse moves. </p>
 <pre class="fragment">        Payload:
             "ScreenPosition" =&gt; Ogre::Vector2</pre> </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aa86ddf8e09ac67f8351609a61e0caf82c"></a>MOUSE_POSITION</em>&#160;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aae4586a24bc5ef2da391e21a34143d13f"></a>MOUSE_POSITION_UPDATE</em>&#160;</td><td class="fielddoc">
 <p>An event fired whenever the mouse moves. </p>
 <pre class="fragment">        Payload:
             "Context" =&gt; std::string
             "ScreenPosition" =&gt; Ogre::Vector2
             "WorldRay" =&gt; Ogre::Ray</pre> </td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aadc796b52004f9adb400d4f7f936f023c"></a>MOUSE_POSITION_START</em>&#160;</td><td class="fielddoc">
+<p>An event fired whenever the mouse moves.</p>
+<p>May not include a payload Payload: "Context" =&gt; std::string "ScreenPosition" =&gt; Ogre::Vector2 "WorldRay" =&gt; Ogre::Ray </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aa97db5a829c7a7c8ffb06fc1358cc4fe7"></a>MOUSE_POSITION_END</em>&#160;</td><td class="fielddoc">
+<p>An event fired whenever the mouse moves.</p>
+<p>May not include a payload Payload: "Context" =&gt; std::string "ScreenPosition" =&gt; Ogre::Vector2 "WorldRay" =&gt; Ogre::Ray </p>
+</td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aa1ef6e4d356d14b6d5facae3fe9c40240"></a>CREATE_ENTITY</em>&#160;</td><td class="fielddoc">
 <p>The event that causes the <a class="el" href="class_nimbus_1_1_entity_factory.html">EntityFactory</a> to produce a new entity of given type. </p>
 <pre class="fragment">        Payload:
@@ -223,37 +239,32 @@ Static Public Member Functions</h2></td></tr>
 <pre class="fragment">        Payload:
             "EntityId" =&gt; GameEntityId
             "PositionDelta" =&gt; Ogre::Vector3</pre> </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aad2cccf3cc19715f9ba455e3e170a1901"></a>POSITION_ENTITY</em>&#160;</td><td class="fielddoc">
-<p>The event that positions an entity in absolute world space. This can be useful for spawning, etc. </p>
+<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aa0526999fa27f0322f14327e5041f3f4d"></a>TRANSLATE_ENTITY</em>&#160;</td><td class="fielddoc">
+<p>The event that translates an entity in virtual world space. Used to move the entity. </p>
 <pre class="fragment">        Payload:
             "EntityId" =&gt; int
             "PositionVector" =&gt; Ogre::Vector3   // Absolute, world position (optional)
+            "PositionDelta" =&gt; Ogre::Vector3    // Relative position vector, applied per frame (optional)
+            "RotationVector" =&gt; Ogre::Vector3   // Absolute, rotation vector &lt;pitch, yaw, roll&gt; (optional)
+            "RotationDelta" =&gt; Ogre::Vector3    // Relative rotation vector, applied per frame (optional)
+            "ScaleVector" =&gt; Ogre::Vector3      // Scale vector, should be absolute scale factor with 1.0 being original size (optional)
             "FacingVector" =&gt; Ogre::Vector3     // Facing vector, units in world absolute world space,
-                                                    begins at the object (optional)
-            "RotationVector" =&gt; Ogre::Vector3   // Absolute, rotation vector &lt;pitch, yaw, roll&gt; (optional)</pre> </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aa339594c7d1a2027813fcfd12da6e8cac"></a>BEGIN_TRANSLATE_ENTITY</em>&#160;</td><td class="fielddoc">
-<p>The event that causes an entity to move from one place to another. Generally speaking, this is the more appropriate event to use to cause an entity to move as it is blended with other movement during a frame while PositionEntity is not blended at all.</p>
-<p>Payload: "EntityId" =&gt; int "PositionDelta" =&gt; Ogre::Vector3 // Relative position vector (optional) "RotationDelta" =&gt; Ogre::Vector3 // Relative rotation vector (optional) "FacingVector" =&gt; Ogre::Vector3 // Facing vector, units in world space, begins at object... there is no relative facing vector... while all facing vectors are relative... it's complicated (optional) </p>
-</td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aa79ea96966c7afd9c686c412d4f7bc65b"></a>END_TRANSLATE_ENTITY</em>&#160;</td><td class="fielddoc">
-<p>The event that causes an entity to stop moving in the given direction. Simply stops translating the entity. </p>
-<pre class="fragment">        Payload:
-            "EntityId" =&gt; int
-            "EndTranslate" =&gt; NULL</pre> </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aaa7419a2a2d9cc18ef1c16d7b5809d9dd"></a>ENTITY_MOVED</em>&#160;</td><td class="fielddoc">
-<p>The event that notifies behaviours when the position of an entity is updated. </p>
+                                                    begins at the object (optional)</pre> </td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aa40b36c126442a25f6a9843308872ecee"></a>ENTITY_TRANSLATED</em>&#160;</td><td class="fielddoc">
+<p>The event that notifies behaviours when the entity is actually translated. </p>
 <pre class="fragment">        Payload:
             "EntityId" =&gt; int
             "PositionVector" =&gt; Ogre::Vector3   // Absolute, world position (optional)
             "FacingVector" =&gt; Ogre::Vector3     // The direction the entity is currently facing (optional)
-            "RotationVector" =&gt; Ogre::Vector3   // The rotation &lt;pitch, yaw, roll&gt; vector (optional)</pre> </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aa2cec9cbf6afde9caec329bfc7ef6cabc"></a>POSITION_QUERY</em>&#160;</td><td class="fielddoc">
+            "RotationVector" =&gt; Ogre::Vector3   // The rotation &lt;pitch, yaw, roll&gt; vector (optional)
+            "ScaleVector" =&gt; Ogre::Vector3      // Scale vector, should be absolute scale factor with 1.0 being original size (optional)</pre> </td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aaa69341d436b9ccd5acdcf0f44b999756"></a>TRANSLATION_QUERY</em>&#160;</td><td class="fielddoc">
 <p>The event that requests about an entity's position. Quite possibly a very bad idea to use en masse... which is, of course, what I intend to do (for lack of a better idea).</p>
 <p>Payload: "EntityId" =&gt; int</p>
 <p>Responder Payload: "PositionVector" =&gt; Ogre::Vector3 // Absolute, world position "FacingVector" =&gt; Ogre::Vector3 // The direction the entity is currently facing "RotationVector" =&gt; Ogre::Vector3 // The rotation &lt;pitch, yaw, roll&gt; vector </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="afc54aee8429f6d972c6166513194ee8aae63e9d69a4d7806cfa58a7801fda8446"></a>FLOCK_UPDATE</em>&#160;</td><td class="fielddoc">
-<p>The event which lets a Flocking behaviour know it's new entity list. </p>
+<p>The event which lets a <a class="el" href="class_nimbus_1_1_flocking.html">Flocking</a> behaviour know its new entity list. </p>
 <pre class="fragment">        Payload:
             "EntityId" =&gt; GameEntityId
             "EntityList" =&gt; list&lt;GameEntityId&gt;</pre> </td></tr>
@@ -262,20 +273,26 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a6d1ea0fd27852947d047fe803d6c7584"></a>
+<a class="anchor" id="ab812c5edf72fb3f4617fc9f09d331013"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">EventSystem::EventSystem </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">GameEntityId&#160;</td>
+          <td class="paramname"><em>owner</em> = <code>0</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="class_nimbus_1_1_event_system.html">EventSystem</a> constructor, yep! </p>
+<p><a class="el" href="class_nimbus_1_1_event_system.html">EventSystem</a> constructor, yep!</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ownerId</td><td>The id of the owning entity. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -348,11 +365,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nimbus_1_1_event_system_a0e20b8928a8f1ccc9de1844759af2370_icgraph.png" border="0" usemap="#class_nimbus_1_1_event_system_a0e20b8928a8f1ccc9de1844759af2370_icgraph" alt=""/></div>
 <map name="class_nimbus_1_1_event_system_a0e20b8928a8f1ccc9de1844759af2370_icgraph" id="class_nimbus_1_1_event_system_a0e20b8928a8f1ccc9de1844759af2370_icgraph">
-<area shape="rect" id="node2" href="class_nimbus_1_1_entity_manager_1_1_create_entity_listener.html#ac84c0f31719243493949a190b2c2e738" title="Nimbus::EntityManager\l::CreateEntityListener\l::handleEvent" alt="" coords="225,5,383,61"/>
-<area shape="rect" id="node3" href="class_nimbus_1_1_game_mode.html#a9f16984e347ee2378ba576f3522a9e86" title="Nimbus::GameMode::run" alt="" coords="221,85,387,112"/>
-<area shape="rect" id="node4" href="class_nimbus_1_1_game_mode.html#a5f6a221b458b07440f62b3bb029172b0" title="Nimbus::GameMode::initialize" alt="" coords="206,136,402,163"/>
-<area shape="rect" id="node5" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html#ae00d59438516438ddd7d0e5113424309" title="Nimbus::WindManager\l::MouseWindListener\l::handleEvent" alt="" coords="227,187,381,243"/>
-</map>
+<area shape="rect" id="node2" href="class_nimbus_1_1_flocking_1_1_tick_listener.html#aedf991aa609c1408309201ff735fd611" title="Nimbus::Flocking::TickListener\l::handleEvent" alt="" coords="206,5,407,46"/><area shape="rect" id="node3" href="class_nimbus_1_1_soaring.html#aa42d5160c47059c8b12953f3588ba12f" title="Nimbus::Soaring::update" alt="" coords="224,71,389,97"/><area shape="rect" id="node4" href="class_nimbus_1_1_transformational.html#a16e334ad4cf7385ee14eb1484dc87668" title="Nimbus::Transformational\l::update" alt="" coords="222,122,391,163"/><area shape="rect" id="node5" href="class_nimbus_1_1_entity_manager_1_1_create_entity_listener.html#ac84c0f31719243493949a190b2c2e738" title="Nimbus::EntityManager\l::CreateEntityListener\l::handleEvent" alt="" coords="227,188,386,244"/><area shape="rect" id="node6" href="class_nimbus_1_1_event_system_1_1_global_listener.html#afb69eec9a75c96cef8232183fcf0d670" title="Nimbus::EventSystem\l::GlobalListener::handleEvent" alt="" coords="211,269,402,310"/><area shape="rect" id="node7" href="class_nimbus_1_1_game_mode.html#a9f16984e347ee2378ba576f3522a9e86" title="Nimbus::GameMode::run" alt="" coords="223,335,390,361"/><area shape="rect" id="node8" href="class_nimbus_1_1_game_mode.html#a5f6a221b458b07440f62b3bb029172b0" title="Nimbus::GameMode::initialize" alt="" coords="209,385,405,412"/></map>
 </div>
 </p>
 
@@ -387,20 +400,38 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nimbus_1_1_event_system_a57874808edce83ec2aade2d9d02678f0_icgraph.png" border="0" usemap="#class_nimbus_1_1_event_system_a57874808edce83ec2aade2d9d02678f0_icgraph" alt=""/></div>
 <map name="class_nimbus_1_1_event_system_a57874808edce83ec2aade2d9d02678f0_icgraph" id="class_nimbus_1_1_event_system_a57874808edce83ec2aade2d9d02678f0_icgraph">
-<area shape="rect" id="node2" href="class_nimbus_1_1_entity_manager.html#a0873d15a1637d6fa5e8f571dcca3c2f5" title="Nimbus::EntityManager\l::initialize" alt="" coords="225,5,383,46"/>
-<area shape="rect" id="node3" href="class_nimbus_1_1_entity_manager_1_1_create_entity_listener.html#ac84c0f31719243493949a190b2c2e738" title="Nimbus::EntityManager\l::CreateEntityListener\l::handleEvent" alt="" coords="225,71,383,127"/>
-<area shape="rect" id="node4" href="class_nimbus_1_1_game_mode.html#a9f16984e347ee2378ba576f3522a9e86" title="Nimbus::GameMode::run" alt="" coords="221,151,387,177"/>
-<area shape="rect" id="node5" href="class_nimbus_1_1_game_mode.html#a5f6a221b458b07440f62b3bb029172b0" title="Nimbus::GameMode::initialize" alt="" coords="206,201,402,228"/>
-<area shape="rect" id="node6" href="class_nimbus_1_1_game_mode.html#a323d8257668bb83ab5c41962563e0f9b" title="Nimbus::GameMode::pause" alt="" coords="212,252,396,279"/>
-<area shape="rect" id="node7" href="class_nimbus_1_1_game_mode.html#aa52782c322c02e7ad91101a6d22023a4" title="Nimbus::GameMode::stop" alt="" coords="217,303,391,329"/>
-<area shape="rect" id="node8" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html#ae00d59438516438ddd7d0e5113424309" title="Nimbus::WindManager\l::MouseWindListener\l::handleEvent" alt="" coords="227,353,381,409"/>
-</map>
+<area shape="rect" id="node2" href="class_nimbus_1_1_flocking.html#a57a78b28804c0e60222836014f2881f1" title="Nimbus::Flocking::startup" alt="" coords="221,5,392,32"/><area shape="rect" id="node3" href="class_nimbus_1_1_flocking_1_1_tick_listener.html#aedf991aa609c1408309201ff735fd611" title="Nimbus::Flocking::TickListener\l::handleEvent" alt="" coords="206,57,407,98"/><area shape="rect" id="node4" href="class_nimbus_1_1_soaring.html#aa42d5160c47059c8b12953f3588ba12f" title="Nimbus::Soaring::update" alt="" coords="224,123,389,149"/><area shape="rect" id="node5" href="class_nimbus_1_1_entity_manager.html#a0873d15a1637d6fa5e8f571dcca3c2f5" title="Nimbus::EntityManager\l::initialize" alt="" coords="227,174,386,215"/><area shape="rect" id="node6" href="class_nimbus_1_1_entity_manager_1_1_create_entity_listener.html#ac84c0f31719243493949a190b2c2e738" title="Nimbus::EntityManager\l::CreateEntityListener\l::handleEvent" alt="" coords="227,240,386,296"/><area shape="rect" id="node7" href="class_nimbus_1_1_game_mode.html#a9f16984e347ee2378ba576f3522a9e86" title="Nimbus::GameMode::run" alt="" coords="223,320,390,347"/><area shape="rect" id="node8" href="class_nimbus_1_1_game_mode.html#a5f6a221b458b07440f62b3bb029172b0" title="Nimbus::GameMode::initialize" alt="" coords="209,371,405,397"/><area shape="rect" id="node9" href="class_nimbus_1_1_game_mode.html#a323d8257668bb83ab5c41962563e0f9b" title="Nimbus::GameMode::pause" alt="" coords="215,421,399,448"/><area shape="rect" id="node10" href="class_nimbus_1_1_game_mode.html#aa52782c322c02e7ad91101a6d22023a4" title="Nimbus::GameMode::stop" alt="" coords="219,472,394,499"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a7fa6ee1b8f59befa9fb964178b343f98"></a>
+<a class="anchor" id="ad0771cf78f08435e5da051e67bccec6f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_nimbus_1_1_event_system.html">EventSystem</a> * EventSystem::initializeSingleton </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Initializes the global event system singleton.</p>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the singleton just created. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1f0bc08eed90720cbda6202e1ace9a2c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -414,7 +445,13 @@ Here is the caller graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8a">EventType</a>&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">filtermap&#160;</td>
+          <td class="paramname"><em>filter</em> = <code>filtermap()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -427,26 +464,34 @@ Here is the caller graph for this function:</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">listener</td><td>A reference to an isntance of the listener for the Event type. </td></tr>
-    <tr><td class="paramname">type</td><td>The type of Event the listener would like to listen for.</td></tr>
+    <tr><td class="paramname">type</td><td>The type of Event the listener would like to listen for. </td></tr>
+    <tr><td class="paramname">filter</td><td>The filter for the events which this listener should listen to.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True for a successful registration, false if the listener could not be registered. </dd></dl>
 
 <p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_event_system_a1f0bc08eed90720cbda6202e1ace9a2c_cgraph.png" border="0" usemap="#class_nimbus_1_1_event_system_a1f0bc08eed90720cbda6202e1ace9a2c_cgraph" alt=""/></div>
+<map name="class_nimbus_1_1_event_system_a1f0bc08eed90720cbda6202e1ace9a2c_cgraph" id="class_nimbus_1_1_event_system_a1f0bc08eed90720cbda6202e1ace9a2c_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_nimbus_1_1_event_system_a7fa6ee1b8f59befa9fb964178b343f98_icgraph.png" border="0" usemap="#class_nimbus_1_1_event_system_a7fa6ee1b8f59befa9fb964178b343f98_icgraph" alt=""/></div>
-<map name="class_nimbus_1_1_event_system_a7fa6ee1b8f59befa9fb964178b343f98_icgraph" id="class_nimbus_1_1_event_system_a7fa6ee1b8f59befa9fb964178b343f98_icgraph">
-<area shape="rect" id="node2" href="class_nimbus_1_1_entity_manager.html#a0873d15a1637d6fa5e8f571dcca3c2f5" title="Nimbus::EntityManager\l::initialize" alt="" coords="225,5,383,46"/>
-<area shape="rect" id="node3" href="class_nimbus_1_1_game_mode.html#a5f6a221b458b07440f62b3bb029172b0" title="Nimbus::GameMode::initialize" alt="" coords="206,71,402,97"/>
-</map>
+<div class="center"><img src="class_nimbus_1_1_event_system_a1f0bc08eed90720cbda6202e1ace9a2c_icgraph.png" border="0" usemap="#class_nimbus_1_1_event_system_a1f0bc08eed90720cbda6202e1ace9a2c_icgraph" alt=""/></div>
+<map name="class_nimbus_1_1_event_system_a1f0bc08eed90720cbda6202e1ace9a2c_icgraph" id="class_nimbus_1_1_event_system_a1f0bc08eed90720cbda6202e1ace9a2c_icgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_flocking.html#a57a78b28804c0e60222836014f2881f1" title="Nimbus::Flocking::startup" alt="" coords="219,5,389,32"/><area shape="rect" id="node3" href="class_nimbus_1_1_transformational.html#a4bbac5a680450e683a176b5c41c74277" title="Nimbus::Transformational\l::startup" alt="" coords="219,57,389,98"/><area shape="rect" id="node4" href="class_nimbus_1_1_entity_manager.html#a0873d15a1637d6fa5e8f571dcca3c2f5" title="Nimbus::EntityManager\l::initialize" alt="" coords="225,122,383,163"/><area shape="rect" id="node5" href="class_nimbus_1_1_game_mode.html#a5f6a221b458b07440f62b3bb029172b0" title="Nimbus::GameMode::initialize" alt="" coords="206,188,402,215"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="ae20fb87df21fb731adb1b4af01620c08"></a>
+<a class="anchor" id="a3dd5b252c988366e275617e219268f8a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -460,7 +505,13 @@ Here is the caller graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8a">EventType</a>&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">filtermap&#160;</td>
+          <td class="paramname"><em>filter</em> = <code>filtermap()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -474,26 +525,34 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">listener</td><td>A reference to the <a class="el" href="class_nimbus_1_1_event_listener.html">EventListener</a> to deregister. </td></tr>
     <tr><td class="paramname">type</td><td>The type of Event the listener is registered to. </td></tr>
+    <tr><td class="paramname">filter</td><td>The filter for the event which this listener is listening to. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_event_system_a3dd5b252c988366e275617e219268f8a_cgraph.png" border="0" usemap="#class_nimbus_1_1_event_system_a3dd5b252c988366e275617e219268f8a_cgraph" alt=""/></div>
+<map name="class_nimbus_1_1_event_system_a3dd5b252c988366e275617e219268f8a_cgraph" id="class_nimbus_1_1_event_system_a3dd5b252c988366e275617e219268f8a_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_nimbus_1_1_event_system_ae20fb87df21fb731adb1b4af01620c08_icgraph.png" border="0" usemap="#class_nimbus_1_1_event_system_ae20fb87df21fb731adb1b4af01620c08_icgraph" alt=""/></div>
-<map name="class_nimbus_1_1_event_system_ae20fb87df21fb731adb1b4af01620c08_icgraph" id="class_nimbus_1_1_event_system_ae20fb87df21fb731adb1b4af01620c08_icgraph">
-<area shape="rect" id="node2" href="class_nimbus_1_1_game_mode.html#a323d8257668bb83ab5c41962563e0f9b" title="Nimbus::GameMode::pause" alt="" coords="205,5,389,32"/>
-<area shape="rect" id="node3" href="class_nimbus_1_1_game_mode.html#aa52782c322c02e7ad91101a6d22023a4" title="Nimbus::GameMode::stop" alt="" coords="210,56,385,83"/>
-</map>
+<div class="center"><img src="class_nimbus_1_1_event_system_a3dd5b252c988366e275617e219268f8a_icgraph.png" border="0" usemap="#class_nimbus_1_1_event_system_a3dd5b252c988366e275617e219268f8a_icgraph" alt=""/></div>
+<map name="class_nimbus_1_1_event_system_a3dd5b252c988366e275617e219268f8a_icgraph" id="class_nimbus_1_1_event_system_a3dd5b252c988366e275617e219268f8a_icgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_transformational.html#a13ab706ee96c0b5cace8a483493a2e9c" title="Nimbus::Transformational\l::shutdown" alt="" coords="213,5,382,46"/><area shape="rect" id="node3" href="class_nimbus_1_1_game_mode.html#a323d8257668bb83ab5c41962563e0f9b" title="Nimbus::GameMode::pause" alt="" coords="205,71,389,97"/><area shape="rect" id="node4" href="class_nimbus_1_1_game_mode.html#aa52782c322c02e7ad91101a6d22023a4" title="Nimbus::GameMode::stop" alt="" coords="210,121,385,148"/></map>
 </div>
 </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/Hazen/Documents/projects/Nimbus/src/<a class="el" href="_event_system_8h_source.html">EventSystem.h</a></li>
-<li>C:/Users/Hazen/Documents/projects/Nimbus/src/EventSystem.cpp</li>
+<li>C:/Users/Hazen/Documents/projects/Nimbus/src/EventSystem/<a class="el" href="_event_system_8h_source.html">EventSystem.h</a></li>
+<li>C:/Users/Hazen/Documents/projects/Nimbus/src/EventSystem/EventSystem.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -501,7 +560,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>Nimbus</b></li><li class="navelem"><a class="el" href="class_nimbus_1_1_event_system.html">EventSystem</a></li>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:25 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:49:59 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

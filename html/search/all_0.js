@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['begin',['begin',['../class_nimbus_1_1_nimbus_application.html#a6af1ddc3b37511eb3c215a9ea8d8162f',1,'Nimbus::NimbusApplication']]],
-  ['begin_5ftranslate_5fentity',['BEGIN_TRANSLATE_ENTITY',['../class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa339594c7d1a2027813fcfd12da6e8cac',1,'Nimbus::EventSystem']]]
+  ['addpoint',['addPoint',['../class_nimbus_1_1_wind_current.html#a1ecc9d75e397e2664c37153d7669784e',1,'Nimbus::WindCurrent']]],
+  ['addwindcurrent',['addWindCurrent',['../class_nimbus_1_1_wind_map.html#ace7fb55e2bf4b84c626e5a8320636c22',1,'Nimbus::WindMap']]],
+  ['arrowcatcher',['ArrowCatcher',['../class_nimbus_1_1_wind_map_1_1_arrow_catcher.html',1,'Nimbus::WindMap']]]
 ];

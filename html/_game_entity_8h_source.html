@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('_game_entity_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -126,45 +126,49 @@ $(document).ready(function(){initNavTree('_game_entity_8h_source.html','');});
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        GameEntityId mId;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="class_nimbus_1_1_game_entity.html#ade27876d152ee738a0d83249c0f683e2">GameEntity</a>(GameEntityId <span class="keywordtype">id</span>, GameEntityType type);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="class_nimbus_1_1_game_entity.html#ade27876d152ee738a0d83249c0f683e2">GameEntity</a>(GameEntityId <span class="keywordtype">id</span>, <a class="code" href="class_nimbus_1_1_game_entity.html">GameEntity</a>* other);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="class_nimbus_1_1_event_system.html">EventSystem</a>* mEventSystem;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="class_nimbus_1_1_game_entity.html#ade27876d152ee738a0d83249c0f683e2">GameEntity</a>(GameEntityId <span class="keywordtype">id</span>, GameEntityType type);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="class_nimbus_1_1_game_entity.html#a2d82b35dcd5ba15cc56f01948a42ca92">~GameEntity</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="class_nimbus_1_1_game_entity.html#ade27876d152ee738a0d83249c0f683e2">GameEntity</a>(GameEntityId <span class="keywordtype">id</span>, <a class="code" href="class_nimbus_1_1_game_entity.html">GameEntity</a>* other);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_game_entity.html#a94c4ff3b81fea292e95554316bca7687">configure</a>(Ogre::ConfigFile::SettingsMultiMap* configurationSettings);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="comment">// OBJECT METHODS --</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">void</span> startup(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">bool</span> addBehaviour(Behaviour* behaviour, std::string name);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> update(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">void</span> removeBehaviour(Behaviour* behaviour);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="comment">// ACCESSOR METHODS --</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_game_entity.html#a52176c2cff4e5588d77027ef595ad9f4">   50</a></span>&#160;<span class="comment"></span>        behaviourmap* <a class="code" href="class_nimbus_1_1_game_entity.html#a52176c2cff4e5588d77027ef595ad9f4">getBehaviours</a>(<span class="keywordtype">void</span>) { <span class="keywordflow">return</span> &amp;(this-&gt;mBehaviours); }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_game_entity.html#a30d8ee23b9e3b023f0ffa66a53ac00e0">   53</a></span>&#160;        GameEntityType <a class="code" href="class_nimbus_1_1_game_entity.html#a30d8ee23b9e3b023f0ffa66a53ac00e0">getEntityType</a>() { <span class="keywordflow">return</span> this-&gt;mEntityType; }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="class_nimbus_1_1_game_entity.html#a2d82b35dcd5ba15cc56f01948a42ca92">~GameEntity</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_game_entity.html#a94c4ff3b81fea292e95554316bca7687">configure</a>(Ogre::ConfigFile::SettingsMultiMap* configurationSettings);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="comment">// OBJECT METHODS --</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">void</span> startup(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">bool</span> addBehaviour(<a class="code" href="class_nimbus_1_1_behaviour.html">Behaviour</a>* behaviour, std::string name);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">void</span> update(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">void</span> removeBehaviour(<a class="code" href="class_nimbus_1_1_behaviour.html">Behaviour</a>* behaviour);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="comment">// ACCESSOR METHODS --</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_game_entity.html#a52176c2cff4e5588d77027ef595ad9f4">   53</a></span>&#160;<span class="comment"></span>        behaviourmap* <a class="code" href="class_nimbus_1_1_game_entity.html#a52176c2cff4e5588d77027ef595ad9f4">getBehaviours</a>(<span class="keywordtype">void</span>) { <span class="keywordflow">return</span> &amp;(this-&gt;mBehaviours); }</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_game_entity.html#ad32915604ad6fd3e97ba9234b57b4738">   56</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_nimbus_1_1_game_entity.html#ad32915604ad6fd3e97ba9234b57b4738">getEntityId</a>() { <span class="keywordflow">return</span> this-&gt;mId; }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    };</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_nimbus_1_1_game_entity_html_ad32915604ad6fd3e97ba9234b57b4738"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#ad32915604ad6fd3e97ba9234b57b4738">Nimbus::GameEntity::getEntityId</a></div><div class="ttdeci">int getEntityId()</div><div class="ttdef"><b>Definition:</b> GameEntity.h:56</div></div>
-<div class="ttc" id="class_nimbus_1_1_game_entity_html_a30d8ee23b9e3b023f0ffa66a53ac00e0"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#a30d8ee23b9e3b023f0ffa66a53ac00e0">Nimbus::GameEntity::getEntityType</a></div><div class="ttdeci">GameEntityType getEntityType()</div><div class="ttdef"><b>Definition:</b> GameEntity.h:53</div></div>
-<div class="ttc" id="class_nimbus_1_1_game_entity_html_a2d82b35dcd5ba15cc56f01948a42ca92"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#a2d82b35dcd5ba15cc56f01948a42ca92">Nimbus::GameEntity::~GameEntity</a></div><div class="ttdeci">~GameEntity(void)</div><div class="ttdef"><b>Definition:</b> GameEntity.cpp:27</div></div>
-<div class="ttc" id="class_nimbus_1_1_game_entity_html_a52176c2cff4e5588d77027ef595ad9f4"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#a52176c2cff4e5588d77027ef595ad9f4">Nimbus::GameEntity::getBehaviours</a></div><div class="ttdeci">behaviourmap * getBehaviours(void)</div><div class="ttdef"><b>Definition:</b> GameEntity.h:50</div></div>
-<div class="ttc" id="class_nimbus_1_1_game_entity_html_a94c4ff3b81fea292e95554316bca7687"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#a94c4ff3b81fea292e95554316bca7687">Nimbus::GameEntity::configure</a></div><div class="ttdeci">void configure(Ogre::ConfigFile::SettingsMultiMap *configurationSettings)</div><div class="ttdef"><b>Definition:</b> GameEntity.cpp:31</div></div>
-<div class="ttc" id="class_nimbus_1_1_game_entity_html_ade27876d152ee738a0d83249c0f683e2"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#ade27876d152ee738a0d83249c0f683e2">Nimbus::GameEntity::GameEntity</a></div><div class="ttdeci">GameEntity(GameEntityId id, GameEntityType type)</div><div class="ttdef"><b>Definition:</b> GameEntity.cpp:7</div></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_game_entity.html#a30d8ee23b9e3b023f0ffa66a53ac00e0">   56</a></span>&#160;        GameEntityType <a class="code" href="class_nimbus_1_1_game_entity.html#a30d8ee23b9e3b023f0ffa66a53ac00e0">getEntityType</a>() { <span class="keywordflow">return</span> this-&gt;mEntityType; }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_game_entity.html#ad32915604ad6fd3e97ba9234b57b4738">   59</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_nimbus_1_1_game_entity.html#ad32915604ad6fd3e97ba9234b57b4738">getEntityId</a>() { <span class="keywordflow">return</span> this-&gt;mId; }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    };</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_nimbus_1_1_game_entity_html_ad32915604ad6fd3e97ba9234b57b4738"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#ad32915604ad6fd3e97ba9234b57b4738">Nimbus::GameEntity::getEntityId</a></div><div class="ttdeci">int getEntityId()</div><div class="ttdef"><b>Definition:</b> GameEntity.h:59</div></div>
+<div class="ttc" id="class_nimbus_1_1_game_entity_html_a30d8ee23b9e3b023f0ffa66a53ac00e0"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#a30d8ee23b9e3b023f0ffa66a53ac00e0">Nimbus::GameEntity::getEntityType</a></div><div class="ttdeci">GameEntityType getEntityType()</div><div class="ttdef"><b>Definition:</b> GameEntity.h:56</div></div>
+<div class="ttc" id="class_nimbus_1_1_game_entity_html_a2d82b35dcd5ba15cc56f01948a42ca92"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#a2d82b35dcd5ba15cc56f01948a42ca92">Nimbus::GameEntity::~GameEntity</a></div><div class="ttdeci">~GameEntity(void)</div><div class="ttdef"><b>Definition:</b> GameEntity.cpp:32</div></div>
+<div class="ttc" id="class_nimbus_1_1_game_entity_html_a52176c2cff4e5588d77027ef595ad9f4"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#a52176c2cff4e5588d77027ef595ad9f4">Nimbus::GameEntity::getBehaviours</a></div><div class="ttdeci">behaviourmap * getBehaviours(void)</div><div class="ttdef"><b>Definition:</b> GameEntity.h:53</div></div>
+<div class="ttc" id="class_nimbus_1_1_game_entity_html_a94c4ff3b81fea292e95554316bca7687"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#a94c4ff3b81fea292e95554316bca7687">Nimbus::GameEntity::configure</a></div><div class="ttdeci">void configure(Ogre::ConfigFile::SettingsMultiMap *configurationSettings)</div><div class="ttdef"><b>Definition:</b> GameEntity.cpp:36</div></div>
+<div class="ttc" id="class_nimbus_1_1_game_entity_html_ade27876d152ee738a0d83249c0f683e2"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html#ade27876d152ee738a0d83249c0f683e2">Nimbus::GameEntity::GameEntity</a></div><div class="ttdeci">GameEntity(GameEntityId id, GameEntityType type)</div><div class="ttdef"><b>Definition:</b> GameEntity.cpp:8</div></div>
 <div class="ttc" id="class_nimbus_1_1_game_entity_html"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html">Nimbus::GameEntity</a></div><div class="ttdef"><b>Definition:</b> GameEntity.h:13</div></div>
+<div class="ttc" id="class_nimbus_1_1_event_system_html"><div class="ttname"><a href="class_nimbus_1_1_event_system.html">Nimbus::EventSystem</a></div><div class="ttdef"><b>Definition:</b> EventSystem.h:27</div></div>
+<div class="ttc" id="class_nimbus_1_1_behaviour_html"><div class="ttname"><a href="class_nimbus_1_1_behaviour.html">Nimbus::Behaviour</a></div><div class="ttdef"><b>Definition:</b> Behaviour.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>GameEntity.h</b></li>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:24 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:49:58 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

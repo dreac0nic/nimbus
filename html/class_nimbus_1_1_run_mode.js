@@ -6,7 +6,5 @@ var class_nimbus_1_1_run_mode =
     [ "pause", "class_nimbus_1_1_run_mode.html#a301ae7ab9fdd9bbef772df797e756170", null ],
     [ "run", "class_nimbus_1_1_run_mode.html#a961ab47f4f2f51b1ebf2b3d5009ef396", null ],
     [ "stop", "class_nimbus_1_1_run_mode.html#a9908b41ffc1b0f94beef59d5b2652354", null ],
-    [ "mCamera", "class_nimbus_1_1_run_mode.html#a376187eaaa36026f959dfe88df133bc9", null ],
-    [ "mSceneMgr", "class_nimbus_1_1_run_mode.html#acf5976182c8b2bf6815ceeb3e6455128", null ],
-    [ "mViewport", "class_nimbus_1_1_run_mode.html#accc2c5ff85135b3db25145291d1e8246", null ]
+    [ "mSceneMgr", "class_nimbus_1_1_run_mode.html#acf5976182c8b2bf6815ceeb3e6455128", null ]
 ];

@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('_run_mode_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -121,20 +121,18 @@ $(document).ready(function(){initNavTree('_run_mode_8h_source.html','');});
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="comment">// Ogre variables</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        Ogre::SceneManager* mSceneMgr;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        Ogre::Camera* mCamera;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        Ogre::Viewport* mViewport;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_run_mode.html#acd75783f79d2cb33595f7f755819bd70">initialize</a>() = 0;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_nimbus_1_1_run_mode.html">RunMode</a>* <a class="code" href="class_nimbus_1_1_run_mode.html#a961ab47f4f2f51b1ebf2b3d5009ef396">run</a>(<span class="keyword">const</span> Ogre::FrameEvent&amp; evt) = 0;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_run_mode.html#a301ae7ab9fdd9bbef772df797e756170">pause</a>() = 0;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_run_mode.html#a9908b41ffc1b0f94beef59d5b2652354">stop</a>() = 0;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    };</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_run_mode.html#acd75783f79d2cb33595f7f755819bd70">initialize</a>() = 0;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_nimbus_1_1_run_mode.html">RunMode</a>* <a class="code" href="class_nimbus_1_1_run_mode.html#a961ab47f4f2f51b1ebf2b3d5009ef396">run</a>(<span class="keyword">const</span> Ogre::FrameEvent&amp; evt) = 0;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_run_mode.html#a301ae7ab9fdd9bbef772df797e756170">pause</a>() = 0;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_run_mode.html#a9908b41ffc1b0f94beef59d5b2652354">stop</a>() = 0;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    };</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="class_nimbus_1_1_run_mode_html_a9908b41ffc1b0f94beef59d5b2652354"><div class="ttname"><a href="class_nimbus_1_1_run_mode.html#a9908b41ffc1b0f94beef59d5b2652354">Nimbus::RunMode::stop</a></div><div class="ttdeci">virtual void stop()=0</div></div>
 <div class="ttc" id="class_nimbus_1_1_run_mode_html_a961ab47f4f2f51b1ebf2b3d5009ef396"><div class="ttname"><a href="class_nimbus_1_1_run_mode.html#a961ab47f4f2f51b1ebf2b3d5009ef396">Nimbus::RunMode::run</a></div><div class="ttdeci">virtual RunMode * run(const Ogre::FrameEvent &amp;evt)=0</div></div>
 <div class="ttc" id="class_nimbus_1_1_run_mode_html_a301ae7ab9fdd9bbef772df797e756170"><div class="ttname"><a href="class_nimbus_1_1_run_mode.html#a301ae7ab9fdd9bbef772df797e756170">Nimbus::RunMode::pause</a></div><div class="ttdeci">virtual void pause()=0</div></div>
@@ -146,7 +144,7 @@ $(document).ready(function(){initNavTree('_run_mode_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>RunMode.h</b></li>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:24 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:49:58 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

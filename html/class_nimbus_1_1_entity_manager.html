@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_entity_manager.html',
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -120,22 +120,14 @@ Inheritance diagram for Nimbus::EntityManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nimbus_1_1_entity_manager__inherit__graph.png" border="0" usemap="#_nimbus_1_1_entity_manager_inherit__map" alt="Inheritance graph"/></div>
 <map name="_nimbus_1_1_entity_manager_inherit__map" id="_nimbus_1_1_entity_manager_inherit__map">
-<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="22,5,145,32"/>
-</map>
+<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="22,5,145,32"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for Nimbus::EntityManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nimbus_1_1_entity_manager__coll__graph.png" border="0" usemap="#_nimbus_1_1_entity_manager_coll__map" alt="Collaboration graph"/></div>
 <map name="_nimbus_1_1_entity_manager_coll__map" id="_nimbus_1_1_entity_manager_coll__map">
-<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="237,5,361,32"/>
-<area shape="rect" id="node3" href="class_nimbus_1_1_entity_manager_1_1_tick_listener.html" title="Nimbus::EntityManager\l::TickListener" alt="" coords="219,57,378,98"/>
-<area shape="rect" id="node4" href="class_nimbus_1_1_event_listener.html" title="Nimbus::EventListener" alt="" coords="5,195,157,221"/>
-<area shape="rect" id="node5" href="class_nimbus_1_1_entity_manager_1_1_create_entity_listener.html" title="Nimbus::EntityManager\l::CreateEntityListener" alt="" coords="219,122,378,163"/>
-<area shape="rect" id="node6" href="class_nimbus_1_1_entity_manager_1_1_position_response_listener.html" title="Nimbus::EntityManager\l::PositionResponseListener" alt="" coords="208,187,389,229"/>
-<area shape="rect" id="node7" href="class_nimbus_1_1_entity_manager_1_1_destroy_entity_listener.html" title="Nimbus::EntityManager\l::DestroyEntityListener" alt="" coords="219,253,378,294"/>
-<area shape="rect" id="node8" href="class_nimbus_1_1_entity_manager_1_1_catch_entity_listener.html" title="Nimbus::EntityManager\l::CatchEntityListener" alt="" coords="219,318,378,359"/>
-</map>
+<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="237,5,361,32"/><area shape="rect" id="node3" href="class_nimbus_1_1_entity_manager_1_1_tick_listener.html" title="Nimbus::EntityManager\l::TickListener" alt="" coords="219,57,378,98"/><area shape="rect" id="node4" href="class_nimbus_1_1_event_listener.html" title="Nimbus::EventListener" alt="" coords="5,195,157,221"/><area shape="rect" id="node5" href="class_nimbus_1_1_entity_manager_1_1_create_entity_listener.html" title="Nimbus::EntityManager\l::CreateEntityListener" alt="" coords="219,122,378,163"/><area shape="rect" id="node6" href="class_nimbus_1_1_entity_manager_1_1_position_response_listener.html" title="Nimbus::EntityManager\l::PositionResponseListener" alt="" coords="208,187,389,229"/><area shape="rect" id="node7" href="class_nimbus_1_1_entity_manager_1_1_destroy_entity_listener.html" title="Nimbus::EntityManager\l::DestroyEntityListener" alt="" coords="219,253,378,294"/><area shape="rect" id="node8" href="class_nimbus_1_1_entity_manager_1_1_catch_entity_listener.html" title="Nimbus::EntityManager\l::CatchEntityListener" alt="" coords="219,318,378,359"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -257,9 +249,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nimbus_1_1_entity_manager_a0873d15a1637d6fa5e8f571dcca3c2f5_cgraph.png" border="0" usemap="#class_nimbus_1_1_entity_manager_a0873d15a1637d6fa5e8f571dcca3c2f5_cgraph" alt=""/></div>
 <map name="class_nimbus_1_1_entity_manager_a0873d15a1637d6fa5e8f571dcca3c2f5_cgraph" id="class_nimbus_1_1_entity_manager_a0873d15a1637d6fa5e8f571dcca3c2f5_cgraph">
-<area shape="rect" id="node2" href="class_nimbus_1_1_event_system.html#a57874808edce83ec2aade2d9d02678f0" title="Nimbus::EventSystem\l::getSingleton" alt="" coords="214,5,365,46"/>
-<area shape="rect" id="node3" href="class_nimbus_1_1_event_system.html#a7fa6ee1b8f59befa9fb964178b343f98" title="Nimbus::EventSystem\l::registerListener" alt="" coords="214,70,365,111"/>
-</map>
+<area shape="rect" id="node2" href="class_nimbus_1_1_event_system.html#a57874808edce83ec2aade2d9d02678f0" title="Nimbus::EventSystem\l::getSingleton" alt="" coords="214,5,365,46"/><area shape="rect" id="node3" href="class_nimbus_1_1_event_system.html#a1f0bc08eed90720cbda6202e1ace9a2c" title="Nimbus::EventSystem\l::registerListener" alt="" coords="214,94,365,135"/></map>
 </div>
 </p>
 
@@ -304,7 +294,7 @@ Here is the call graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>Nimbus</b></li><li class="navelem"><a class="el" href="class_nimbus_1_1_entity_manager.html">EntityManager</a></li>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:24 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:49:59 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

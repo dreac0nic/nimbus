@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_nimbus_1_1_game_entity_set.html" title="Nimbus::GameEntitySet" alt="" coords="5,5,168,32"/>
+<area shape="rect" id="node1" href="$class_nimbus_1_1_event_type_handler.html" title="Nimbus::EventTypeHandler" alt="" coords="5,31,184,57"/>
+<area shape="rect" id="node2" href="$class_nimbus_1_1_entity_handler.html" title="Nimbus::EntityHandler" alt="" coords="237,5,389,32"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_generic_handler.html" title="Nimbus::GenericHandler" alt="" coords="232,56,395,83"/>
 </map>

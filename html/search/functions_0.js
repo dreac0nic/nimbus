@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['begin',['begin',['../class_nimbus_1_1_nimbus_application.html#a6af1ddc3b37511eb3c215a9ea8d8162f',1,'Nimbus::NimbusApplication']]]
+  ['addpoint',['addPoint',['../class_nimbus_1_1_wind_current.html#a1ecc9d75e397e2664c37153d7669784e',1,'Nimbus::WindCurrent']]],
+  ['addwindcurrent',['addWindCurrent',['../class_nimbus_1_1_wind_map.html#ace7fb55e2bf4b84c626e5a8320636c22',1,'Nimbus::WindMap']]]
 ];

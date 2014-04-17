@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_grid.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -118,6 +118,10 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_grid.html','');});
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a528827ec61b5e5b0b5c458525ed7fcad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_grid.html#a528827ec61b5e5b0b5c458525ed7fcad">Grid</a> (int xLength, int yLength)</td></tr>
 <tr class="separator:a528827ec61b5e5b0b5c458525ed7fcad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7773e2c1496781655b04eeb3d49ad4d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_grid.html#a7773e2c1496781655b04eeb3d49ad4d6">initialize</a> (T value)</td></tr>
+<tr class="separator:a7773e2c1496781655b04eeb3d49ad4d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37449a299766577a1ad840de18d6cfa9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_grid.html#a37449a299766577a1ad840de18d6cfa9">erase</a> ()</td></tr>
+<tr class="separator:a37449a299766577a1ad840de18d6cfa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcbf1aebecd8103c2979c48d89255c0d"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_grid.html#adcbf1aebecd8103c2979c48d89255c0d">get</a> (int posx, int posy)</td></tr>
 <tr class="separator:adcbf1aebecd8103c2979c48d89255c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15156d41f3030605dc9c796e2f9f4ef5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_grid.html#a15156d41f3030605dc9c796e2f9f4ef5">set</a> (int posx, int posy, T value)</td></tr>
@@ -180,6 +184,32 @@ template&lt;class T&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a37449a299766577a1ad840de18d6cfa9"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid</a>&lt; T &gt;::erase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Erases all the elements in the grid (though it may not delete them if they're pointers) </p>
+
+</div>
+</div>
 <a class="anchor" id="adcbf1aebecd8103c2979c48d89255c0d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -223,6 +253,15 @@ template&lt;class T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The value of the given element </dd></dl>
 
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_grid_adcbf1aebecd8103c2979c48d89255c0d_icgraph.png" border="0" usemap="#class_nimbus_1_1_grid_adcbf1aebecd8103c2979c48d89255c0d_icgraph" alt=""/></div>
+<map name="class_nimbus_1_1_grid_adcbf1aebecd8103c2979c48d89255c0d_icgraph" id="class_nimbus_1_1_grid_adcbf1aebecd8103c2979c48d89255c0d_icgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_wind_map.html#aace3565379e73e4d3e51a839e0303ca9" title="Nimbus::WindMap::update" alt="" coords="184,5,360,32"/><area shape="rect" id="node3" href="class_nimbus_1_1_wind_map.html#a834a3e14ac672aff34b87dd9c0ffd1c0" title="Nimbus::WindMap::getWind\lVector" alt="" coords="179,57,365,98"/><area shape="rect" id="node4" href="class_nimbus_1_1_soaring.html#aa42d5160c47059c8b12953f3588ba12f" title="Nimbus::Soaring::update" alt="" coords="432,5,597,32"/><area shape="rect" id="node5" href="class_nimbus_1_1_wind_map.html#ad416df5053631fd3d1b6069c9216ea76" title="Nimbus::WindMap::getWind\lVector" alt="" coords="422,57,607,98"/><area shape="rect" id="node6" href="class_nimbus_1_1_wind_map.html#a5365432675dfe4519830c3c6f42f742c" title="Nimbus::WindMap::getAverage\lWindVector" alt="" coords="414,122,615,163"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="aefadf63295a206a72c65e39bc4771cf2"></a>
@@ -255,8 +294,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nimbus_1_1_grid_aefadf63295a206a72c65e39bc4771cf2_icgraph.png" border="0" usemap="#class_nimbus_1_1_grid_aefadf63295a206a72c65e39bc4771cf2_icgraph" alt=""/></div>
 <map name="class_nimbus_1_1_grid_aefadf63295a206a72c65e39bc4771cf2_icgraph" id="class_nimbus_1_1_grid_aefadf63295a206a72c65e39bc4771cf2_icgraph">
-<area shape="rect" id="node2" href="class_nimbus_1_1_grid.html#a0912e92f2749e1e96f85e628258ff153" title="Nimbus::Grid\&lt; Ogre\l::Vector2 \&gt;::str" alt="" coords="245,5,384,46"/>
-</map>
+<area shape="rect" id="node2" href="class_nimbus_1_1_grid.html#a0912e92f2749e1e96f85e628258ff153" title="Nimbus::Grid\&lt; Ogre\l::Vector2 \&gt;::str" alt="" coords="264,5,403,46"/><area shape="rect" id="node3" href="class_nimbus_1_1_wind_map.html#aace3565379e73e4d3e51a839e0303ca9" title="Nimbus::WindMap::update" alt="" coords="245,71,421,97"/></map>
 </div>
 </p>
 
@@ -292,8 +330,49 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nimbus_1_1_grid_aa35df9d30c89aea29115d59eef67a88b_icgraph.png" border="0" usemap="#class_nimbus_1_1_grid_aa35df9d30c89aea29115d59eef67a88b_icgraph" alt=""/></div>
 <map name="class_nimbus_1_1_grid_aa35df9d30c89aea29115d59eef67a88b_icgraph" id="class_nimbus_1_1_grid_aa35df9d30c89aea29115d59eef67a88b_icgraph">
-<area shape="rect" id="node2" href="class_nimbus_1_1_grid.html#a0912e92f2749e1e96f85e628258ff153" title="Nimbus::Grid\&lt; Ogre\l::Vector2 \&gt;::str" alt="" coords="248,5,387,46"/>
-</map>
+<area shape="rect" id="node2" href="class_nimbus_1_1_grid.html#a0912e92f2749e1e96f85e628258ff153" title="Nimbus::Grid\&lt; Ogre\l::Vector2 \&gt;::str" alt="" coords="267,5,405,46"/><area shape="rect" id="node3" href="class_nimbus_1_1_wind_map.html#aace3565379e73e4d3e51a839e0303ca9" title="Nimbus::WindMap::update" alt="" coords="248,71,424,97"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a7773e2c1496781655b04eeb3d49ad4d6"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid</a>&lt; T &gt;::initialize </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Initializes the entire grid to the given value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value to which the entire grid should be initialized. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_grid_a7773e2c1496781655b04eeb3d49ad4d6_icgraph.png" border="0" usemap="#class_nimbus_1_1_grid_a7773e2c1496781655b04eeb3d49ad4d6_icgraph" alt=""/></div>
+<map name="class_nimbus_1_1_grid_a7773e2c1496781655b04eeb3d49ad4d6_icgraph" id="class_nimbus_1_1_grid_a7773e2c1496781655b04eeb3d49ad4d6_icgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_wind_map.html#a1d970705e9662d1eaf30d2b8255234db" title="Nimbus::WindMap::WindMap" alt="" coords="208,5,400,32"/></map>
 </div>
 </p>
 
@@ -348,6 +427,15 @@ template&lt;class T&gt; </div>
   </dd>
 </dl>
 
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_grid_a15156d41f3030605dc9c796e2f9f4ef5_icgraph.png" border="0" usemap="#class_nimbus_1_1_grid_a15156d41f3030605dc9c796e2f9f4ef5_icgraph" alt=""/></div>
+<map name="class_nimbus_1_1_grid_a15156d41f3030605dc9c796e2f9f4ef5_icgraph" id="class_nimbus_1_1_grid_a15156d41f3030605dc9c796e2f9f4ef5_icgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_wind_map.html#aace3565379e73e4d3e51a839e0303ca9" title="Nimbus::WindMap::update" alt="" coords="179,5,355,32"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a0912e92f2749e1e96f85e628258ff153"></a>
@@ -386,7 +474,7 @@ template&lt;class T&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>Nimbus</b></li><li class="navelem"><a class="el" href="class_nimbus_1_1_grid.html">Grid</a></li>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:25 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:49:59 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

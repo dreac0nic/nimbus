@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['destroy_5fentity',['DESTROY_ENTITY',['../class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa6377ea8c94e5ae05c9a58cfe3ff9c755',1,'Nimbus::EventSystem']]]
+  ['entity',['ENTITY',['../class_nimbus_1_1_event_type_handler.html#af5f1b882111816bd728fe4da54a1c377a9c5ffb673e25082233bdcd5469fd5705',1,'Nimbus::EventTypeHandler']]],
+  ['entity_5fgroup',['ENTITY_GROUP',['../class_nimbus_1_1_event_type_handler.html#af5f1b882111816bd728fe4da54a1c377ac5c349c8eed5446770a1c8389ea6ce52',1,'Nimbus::EventTypeHandler']]],
+  ['entity_5ftranslated',['ENTITY_TRANSLATED',['../class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa40b36c126442a25f6a9843308872ecee',1,'Nimbus::EventSystem']]]
 ];

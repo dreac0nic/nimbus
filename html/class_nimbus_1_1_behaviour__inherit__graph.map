@@ -1,0 +1,7 @@
+<map id="Nimbus::Behaviour" name="Nimbus::Behaviour">
+<area shape="rect" id="node2" href="$class_nimbus_1_1_flocking.html" title="Nimbus::Flocking" alt="" coords="208,5,331,32"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_rainy.html" title="Nimbus::Rainy" alt="" coords="216,56,323,83"/>
+<area shape="rect" id="node4" href="$class_nimbus_1_1_renderable.html" title="Nimbus::Renderable" alt="" coords="200,107,339,133"/>
+<area shape="rect" id="node5" href="$class_nimbus_1_1_soaring.html" title="Nimbus::Soaring" alt="" coords="210,157,329,184"/>
+<area shape="rect" id="node6" href="$class_nimbus_1_1_transformational.html" title="Nimbus::Transformational" alt="" coords="185,208,354,235"/>
+</map>

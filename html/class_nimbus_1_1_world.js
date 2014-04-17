@@ -7,5 +7,6 @@ var class_nimbus_1_1_world =
     [ "getEntities", "class_nimbus_1_1_world.html#a04ff7cc7697cdd34d83dc3def999b958", null ],
     [ "getSceneManager", "class_nimbus_1_1_world.html#aa0154dc78a31f760e04cb25dcdf91466", null ],
     [ "getWindMap", "class_nimbus_1_1_world.html#a1a1071a8fa567f62ee986fc7f7c78001", null ],
+    [ "getWorldBounds", "class_nimbus_1_1_world.html#aff19e4a66c3e715cb53eea59af490c4a", null ],
     [ "getWorldNode", "class_nimbus_1_1_world.html#aa1b1af13fe3baaab22f78b3d57861dc9", null ]
 ];

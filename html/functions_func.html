@@ -78,12 +78,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="functions.html"><span>All</span></a></li>
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
+      <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
     <ul class="tablist">
+      <li><a href="#index_a"><span>a</span></a></li>
       <li><a href="#index_b"><span>b</span></a></li>
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_e"><span>e</span></a></li>
@@ -91,10 +93,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_g"><span>g</span></a></li>
       <li><a href="#index_h"><span>h</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
+      <li><a href="#index_l"><span>l</span></a></li>
       <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
+      <li><a href="#index_t"><span>t</span></a></li>
       <li><a href="#index_u"><span>u</span></a></li>
+      <li><a href="#index_w"><span>w</span></a></li>
       <li class="current"><a href="#index_~"><span>~</span></a></li>
     </ul>
   </div>
@@ -118,7 +123,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -130,6 +135,16 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <div class="contents">
 &#160;
 
+<h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
+<li>addPoint()
+: <a class="el" href="class_nimbus_1_1_wind_current.html#a1ecc9d75e397e2664c37153d7669784e">Nimbus::WindCurrent</a>
+</li>
+<li>addWindCurrent()
+: <a class="el" href="class_nimbus_1_1_wind_map.html#ace7fb55e2bf4b84c626e5a8320636c22">Nimbus::WindMap</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
 <li>begin()
 : <a class="el" href="class_nimbus_1_1_nimbus_application.html#a6af1ddc3b37511eb3c215a9ea8d8162f">Nimbus::NimbusApplication</a>
@@ -138,6 +153,14 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 
 
 <h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
+<li>clone()
+: <a class="el" href="class_nimbus_1_1_behaviour.html#a35e320033b82c1ba7d6d6cad31bc6908">Nimbus::Behaviour</a>
+, <a class="el" href="class_nimbus_1_1_flocking.html#aceed2002791b5d2a109d70290b5f2a49">Nimbus::Flocking</a>
+, <a class="el" href="class_nimbus_1_1_rainy.html#a3158f21e3f542a75c34703449093ec1d">Nimbus::Rainy</a>
+, <a class="el" href="class_nimbus_1_1_renderable.html#a4d40d442d33be0e5f15be6ecce2df51e">Nimbus::Renderable</a>
+, <a class="el" href="class_nimbus_1_1_soaring.html#a505a84b0be9620b8e9d98e69cc9078a8">Nimbus::Soaring</a>
+, <a class="el" href="class_nimbus_1_1_transformational.html#a8ccaeb1133fa0b02f1f4922f307eadf0">Nimbus::Transformational</a>
+</li>
 <li>configure()
 : <a class="el" href="class_nimbus_1_1_game_entity.html#a94c4ff3b81fea292e95554316bca7687">Nimbus::GameEntity</a>
 </li>
@@ -151,8 +174,14 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 
 
 <h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
+<li>EntityHandler()
+: <a class="el" href="class_nimbus_1_1_entity_handler.html#a5f377a7f22f18356e71d609cc355d766">Nimbus::EntityHandler</a>
+</li>
+<li>erase()
+: <a class="el" href="class_nimbus_1_1_grid.html#a37449a299766577a1ad840de18d6cfa9">Nimbus::Grid&lt; T &gt;</a>
+</li>
 <li>EventSystem()
-: <a class="el" href="class_nimbus_1_1_event_system.html#a6d1ea0fd27852947d047fe803d6c7584">Nimbus::EventSystem</a>
+: <a class="el" href="class_nimbus_1_1_event_system.html#ab812c5edf72fb3f4617fc9f09d331013">Nimbus::EventSystem</a>
 </li>
 </ul>
 
@@ -161,6 +190,12 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>fireEvent()
 : <a class="el" href="class_nimbus_1_1_event_system.html#a0e20b8928a8f1ccc9de1844759af2370">Nimbus::EventSystem</a>
 </li>
+<li>Flocking()
+: <a class="el" href="class_nimbus_1_1_flocking.html#a288655e4a522b88f20a5633d646d4301">Nimbus::Flocking</a>
+</li>
+<li>forceUpdate()
+: <a class="el" href="class_nimbus_1_1_transformational.html#a748cec95d09792f97e01302772b83115">Nimbus::Transformational</a>
+</li>
 </ul>
 
 
@@ -168,21 +203,38 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>GameEntity()
 : <a class="el" href="class_nimbus_1_1_game_entity.html#ade27876d152ee738a0d83249c0f683e2">Nimbus::GameEntity</a>
 </li>
+<li>GenericHandler()
+: <a class="el" href="class_nimbus_1_1_generic_handler.html#a2ca002954edfcc9550408dfddde3d8fb">Nimbus::GenericHandler</a>
+</li>
 <li>get()
 : <a class="el" href="class_nimbus_1_1_grid.html#adcbf1aebecd8103c2979c48d89255c0d">Nimbus::Grid&lt; T &gt;</a>
+</li>
+<li>getAlphaVector()
+: <a class="el" href="class_nimbus_1_1_wind_map.html#a2da367953c77490172c775bd4d065e3a">Nimbus::WindMap</a>
+</li>
+<li>getAverageWindVector()
+: <a class="el" href="class_nimbus_1_1_wind_map.html#a5365432675dfe4519830c3c6f42f742c">Nimbus::WindMap</a>
 </li>
 <li>getBehaviours()
 : <a class="el" href="class_nimbus_1_1_game_entity.html#a52176c2cff4e5588d77027ef595ad9f4">Nimbus::GameEntity</a>
 </li>
 <li>getCamera()
-: <a class="el" href="class_nimbus_1_1_nimbus_application.html#a0524f9041992081d59e4b7152bd519c1">Nimbus::NimbusApplication</a>
+: <a class="el" href="class_nimbus_1_1_camera.html#a7d6e0c81e3f96eb7042d934ad249ed5e">Nimbus::Camera</a>
 </li>
 <li>getEntityId()
 : <a class="el" href="class_nimbus_1_1_entity_manager_1_1_catch_entity_listener.html#ab6b362f2dd3cfd3edb90d1336d24347c">Nimbus::EntityManager::CatchEntityListener</a>
 , <a class="el" href="class_nimbus_1_1_game_entity.html#ad32915604ad6fd3e97ba9234b57b4738">Nimbus::GameEntity</a>
+, <a class="el" href="class_nimbus_1_1_vector_map_1_1_catch_entity_listener.html#a66f18b5d93ef80fd3ba2d48605f7d5b5">Nimbus::VectorMap::CatchEntityListener</a>
+, <a class="el" href="class_nimbus_1_1_wind_map_1_1_arrow_catcher.html#ad3e007b1d6ea72aa2472b8bbf1aa75d8">Nimbus::WindMap::ArrowCatcher</a>
 </li>
 <li>getEntityType()
 : <a class="el" href="class_nimbus_1_1_game_entity.html#a30d8ee23b9e3b023f0ffa66a53ac00e0">Nimbus::GameEntity</a>
+</li>
+<li>getOffset()
+: <a class="el" href="class_nimbus_1_1_wind_map.html#ad2df5c946eaa549c402b0738349d960b">Nimbus::WindMap</a>
+</li>
+<li>getPath()
+: <a class="el" href="class_nimbus_1_1_wind_current.html#ac44745238e3c0871fb605d97d47069a3">Nimbus::WindCurrent</a>
 </li>
 <li>getPosition()
 : <a class="el" href="class_nimbus_1_1_entity_manager_1_1_position_response_listener.html#a8e4ce4b463251f470a7c84831b2f4d1f">Nimbus::EntityManager::PositionResponseListener</a>
@@ -190,8 +242,26 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>getRenderWindow()
 : <a class="el" href="class_nimbus_1_1_nimbus_application.html#aafb928d6f5f7ec3fb62d165fb1b7f47a">Nimbus::NimbusApplication</a>
 </li>
+<li>getScreenThreshold()
+: <a class="el" href="class_nimbus_1_1_camera.html#aa7e2f63dfa51a2e082646ff087fd47a8">Nimbus::Camera</a>
+</li>
 <li>getSingleton()
 : <a class="el" href="class_nimbus_1_1_event_system.html#a57874808edce83ec2aade2d9d02678f0">Nimbus::EventSystem</a>
+</li>
+<li>getStrength()
+: <a class="el" href="class_nimbus_1_1_wind_current.html#a114aa9565a34e95f7011089f37fa3954">Nimbus::WindCurrent</a>
+</li>
+<li>getTimeAlive()
+: <a class="el" href="class_nimbus_1_1_wind_current.html#aaf871153caf56042e911bf49c660193e">Nimbus::WindCurrent</a>
+</li>
+<li>getViewport()
+: <a class="el" href="class_nimbus_1_1_camera.html#a48c48a395224eb6964a7986424ba5e58">Nimbus::Camera</a>
+</li>
+<li>getWindCurrents()
+: <a class="el" href="class_nimbus_1_1_wind_map.html#ab0be30a09138b05a8718d2c83e7c69b0">Nimbus::WindMap</a>
+</li>
+<li>getWindVector()
+: <a class="el" href="class_nimbus_1_1_wind_map.html#a834a3e14ac672aff34b87dd9c0ffd1c0">Nimbus::WindMap</a>
 </li>
 <li>getXDimension()
 : <a class="el" href="class_nimbus_1_1_grid.html#aefadf63295a206a72c65e39bc4771cf2">Nimbus::Grid&lt; T &gt;</a>
@@ -207,30 +277,69 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 
 <h3><a class="anchor" id="index_h"></a>- h -</h3><ul>
 <li>handleEvent()
-: <a class="el" href="class_nimbus_1_1_entity_manager_1_1_catch_entity_listener.html#aacb2d6596520fd9989187c9b9bde741c">Nimbus::EntityManager::CatchEntityListener</a>
+: <a class="el" href="class_nimbus_1_1_camera_1_1_mouse_position_listener.html#aa0eb82a673bf04e5b2d93b1a5e6f3235">Nimbus::Camera::MousePositionListener</a>
+, <a class="el" href="class_nimbus_1_1_entity_handler.html#a728589af1fb464d033c3d932e471d236">Nimbus::EntityHandler</a>
+, <a class="el" href="class_nimbus_1_1_entity_manager_1_1_catch_entity_listener.html#aacb2d6596520fd9989187c9b9bde741c">Nimbus::EntityManager::CatchEntityListener</a>
 , <a class="el" href="class_nimbus_1_1_entity_manager_1_1_create_entity_listener.html#ac84c0f31719243493949a190b2c2e738">Nimbus::EntityManager::CreateEntityListener</a>
 , <a class="el" href="class_nimbus_1_1_entity_manager_1_1_destroy_entity_listener.html#a69dfd3b40fc9747671231606ad380a27">Nimbus::EntityManager::DestroyEntityListener</a>
 , <a class="el" href="class_nimbus_1_1_entity_manager_1_1_position_response_listener.html#aba7a9f0f8b7ebb48a4389d626b4e2909">Nimbus::EntityManager::PositionResponseListener</a>
 , <a class="el" href="class_nimbus_1_1_entity_manager_1_1_tick_listener.html#aea78ff0c7cb2641b49ddaab9efe11073">Nimbus::EntityManager::TickListener</a>
 , <a class="el" href="class_nimbus_1_1_event_listener.html#a933245851c999fda088e2c873f6a3afa">Nimbus::EventListener</a>
+, <a class="el" href="class_nimbus_1_1_event_system_1_1_global_listener.html#afb69eec9a75c96cef8232183fcf0d670">Nimbus::EventSystem::GlobalListener</a>
+, <a class="el" href="class_nimbus_1_1_event_type_handler.html#afe3e361d4b3efa9c7c702d76ee806084">Nimbus::EventTypeHandler</a>
+, <a class="el" href="class_nimbus_1_1_flocking_1_1_soar_listener.html#ab624b2e380adf9308c0b4ce2d7828832">Nimbus::Flocking::SoarListener</a>
+, <a class="el" href="class_nimbus_1_1_flocking_1_1_tick_listener.html#aedf991aa609c1408309201ff735fd611">Nimbus::Flocking::TickListener</a>
+, <a class="el" href="class_nimbus_1_1_flocking_1_1_update_listener.html#a65f439c07b2a43868994e69a13304ec0">Nimbus::Flocking::UpdateListener</a>
+, <a class="el" href="class_nimbus_1_1_generic_handler.html#aa8a32c646dd0e3ae2e7ab462e448a79b">Nimbus::GenericHandler</a>
 , <a class="el" href="class_nimbus_1_1_nimbus_application_1_1_shutdown_listener.html#a4efd04e6843c2967de4b02e86428a615">Nimbus::NimbusApplication::ShutdownListener</a>
-, <a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html#ae00d59438516438ddd7d0e5113424309">Nimbus::WindManager::MouseWindListener</a>
+, <a class="el" href="class_nimbus_1_1_renderable_1_1_position_listener.html#a1acf8fee6799aaf6effb8dca4362c585">Nimbus::Renderable::PositionListener</a>
+, <a class="el" href="class_nimbus_1_1_transformational_1_1_translation_listener.html#a8327e37d29fe8df7655485c3c8e8ed2b">Nimbus::Transformational::TranslationListener</a>
+, <a class="el" href="class_nimbus_1_1_transformational_1_1_translation_query_listener.html#aced509f2cad945855086cb8dda73280a">Nimbus::Transformational::TranslationQueryListener</a>
+, <a class="el" href="class_nimbus_1_1_vector_map_1_1_catch_entity_listener.html#aaf3d02593b12deaae7f5d9d5eb61480a">Nimbus::VectorMap::CatchEntityListener</a>
+, <a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html#a72f2b2f2298aa14b9e4e5e72461f9171">Nimbus::WindManager::MouseWindEndListener</a>
+, <a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html#a13ab0b78e87ed09c466bbc8745787f59">Nimbus::WindManager::MouseWindStartListener</a>
+, <a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html#af6baa972bd2a36bd98a50173c5edaa5c">Nimbus::WindManager::MouseWindUpdateListener</a>
+, <a class="el" href="class_nimbus_1_1_wind_manager_1_1_tick_listener.html#a15b4ce78f80dd76cdff30a8ca8f14b60">Nimbus::WindManager::TickListener</a>
+, <a class="el" href="class_nimbus_1_1_wind_map_1_1_arrow_catcher.html#ae0b6ad15acdfcae1623717c26542c306">Nimbus::WindMap::ArrowCatcher</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>incrementTimer()
+: <a class="el" href="class_nimbus_1_1_wind_current.html#a0592609df9b4e5154689e49947f34c1e">Nimbus::WindCurrent</a>
+</li>
 <li>initialize()
-: <a class="el" href="class_nimbus_1_1_entity_manager.html#a0873d15a1637d6fa5e8f571dcca3c2f5">Nimbus::EntityManager</a>
+: <a class="el" href="class_nimbus_1_1_camera.html#ad050aabe2261e4814beb7e2d4c10a75c">Nimbus::Camera</a>
+, <a class="el" href="class_nimbus_1_1_entity_manager.html#a0873d15a1637d6fa5e8f571dcca3c2f5">Nimbus::EntityManager</a>
 , <a class="el" href="class_nimbus_1_1_environment_manager.html#aad8a8df76cf6eec0f1a59fc866a8ca34">Nimbus::EnvironmentManager</a>
 , <a class="el" href="class_nimbus_1_1_game_mode.html#a5f6a221b458b07440f62b3bb029172b0">Nimbus::GameMode</a>
+, <a class="el" href="class_nimbus_1_1_grid.html#a7773e2c1496781655b04eeb3d49ad4d6">Nimbus::Grid&lt; T &gt;</a>
 , <a class="el" href="class_nimbus_1_1_input_manager.html#a6c0c55f080a460e6d01c5861ee6ab672">Nimbus::InputManager</a>
 , <a class="el" href="class_nimbus_1_1_manager.html#a27b5bdba363ae52904441e9648918353">Nimbus::Manager</a>
 , <a class="el" href="class_nimbus_1_1_run_mode.html#acd75783f79d2cb33595f7f755819bd70">Nimbus::RunMode</a>
 , <a class="el" href="class_nimbus_1_1_wind_manager.html#ae467cbc7fa48e2a9ab94b6d83d46c7d2">Nimbus::WindManager</a>
 </li>
+<li>initializeSingleton()
+: <a class="el" href="class_nimbus_1_1_event_system.html#ad0771cf78f08435e5da051e67bccec6f">Nimbus::EventSystem</a>
+</li>
 <li>InputManager()
 : <a class="el" href="class_nimbus_1_1_input_manager.html#af79fb24dfe48fe876ff282762fbcfd96">Nimbus::InputManager</a>
+</li>
+<li>isEmpty()
+: <a class="el" href="class_nimbus_1_1_entity_handler.html#adfca281dfa5d9fb59f68a7b69b64cf4c">Nimbus::EntityHandler</a>
+, <a class="el" href="class_nimbus_1_1_event_type_handler.html#a6a716cc7f5075a641f402232cf0160fa">Nimbus::EventTypeHandler</a>
+, <a class="el" href="class_nimbus_1_1_generic_handler.html#a57f5a5f56b0d51be87a1a0042b18eaaf">Nimbus::GenericHandler</a>
+</li>
+<li>isTemporary()
+: <a class="el" href="class_nimbus_1_1_wind_current.html#a3becbee506a7173a64a48a85905cc532">Nimbus::WindCurrent</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_l"></a>- l -</h3><ul>
+<li>length()
+: <a class="el" href="class_nimbus_1_1_wind_current.html#a3675ff54ac80b195f709bfc741520364">Nimbus::WindCurrent</a>
 </li>
 </ul>
 
@@ -244,8 +353,17 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 
 
 <h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
+<li>Rainy()
+: <a class="el" href="class_nimbus_1_1_rainy.html#ad741b4ac2dcc081294326ffe1ea36b2c">Nimbus::Rainy</a>
+</li>
 <li>registerListener()
-: <a class="el" href="class_nimbus_1_1_event_system.html#a7fa6ee1b8f59befa9fb964178b343f98">Nimbus::EventSystem</a>
+: <a class="el" href="class_nimbus_1_1_entity_handler.html#a04ec7256a66a022981a10098125bc0b3">Nimbus::EntityHandler</a>
+, <a class="el" href="class_nimbus_1_1_event_system.html#a1f0bc08eed90720cbda6202e1ace9a2c">Nimbus::EventSystem</a>
+, <a class="el" href="class_nimbus_1_1_event_type_handler.html#a82d660903e53c4064e6fe8667d46650e">Nimbus::EventTypeHandler</a>
+, <a class="el" href="class_nimbus_1_1_generic_handler.html#a8c3b86cfa6c6b9b266f04dd5364f84b6">Nimbus::GenericHandler</a>
+</li>
+<li>removeWindCurrent()
+: <a class="el" href="class_nimbus_1_1_wind_map.html#a144f3641c21947ff92b7e31edc4309b8">Nimbus::WindMap</a>
 </li>
 <li>run()
 : <a class="el" href="class_nimbus_1_1_game_mode.html#a9f16984e347ee2378ba576f3522a9e86">Nimbus::GameMode</a>
@@ -258,6 +376,21 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>set()
 : <a class="el" href="class_nimbus_1_1_grid.html#a15156d41f3030605dc9c796e2f9f4ef5">Nimbus::Grid&lt; T &gt;</a>
 </li>
+<li>shutdown()
+: <a class="el" href="class_nimbus_1_1_flocking.html#ab41a5fc0db99402b146dee3d815ad482">Nimbus::Flocking</a>
+, <a class="el" href="class_nimbus_1_1_rainy.html#af5b0f4e1b6e20a05a5e19dbd862cfa1d">Nimbus::Rainy</a>
+, <a class="el" href="class_nimbus_1_1_soaring.html#a9b8166c8e6dd154285d7d59e455de02e">Nimbus::Soaring</a>
+, <a class="el" href="class_nimbus_1_1_transformational.html#a13ab706ee96c0b5cace8a483493a2e9c">Nimbus::Transformational</a>
+</li>
+<li>Soaring()
+: <a class="el" href="class_nimbus_1_1_soaring.html#a4df8966838104cf5d2e898ec9caa30f6">Nimbus::Soaring</a>
+</li>
+<li>startup()
+: <a class="el" href="class_nimbus_1_1_flocking.html#a57a78b28804c0e60222836014f2881f1">Nimbus::Flocking</a>
+, <a class="el" href="class_nimbus_1_1_rainy.html#a21b397bf1556d7c25935dd98f39c223c">Nimbus::Rainy</a>
+, <a class="el" href="class_nimbus_1_1_soaring.html#aada1701bd017ab85746528348c143148">Nimbus::Soaring</a>
+, <a class="el" href="class_nimbus_1_1_transformational.html#a4bbac5a680450e683a176b5c41c74277">Nimbus::Transformational</a>
+</li>
 <li>stop()
 : <a class="el" href="class_nimbus_1_1_game_mode.html#aa52782c322c02e7ad91101a6d22023a4">Nimbus::GameMode</a>
 , <a class="el" href="class_nimbus_1_1_run_mode.html#a9908b41ffc1b0f94beef59d5b2652354">Nimbus::RunMode</a>
@@ -268,16 +401,39 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </ul>
 
 
+<h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
+<li>Transformational()
+: <a class="el" href="class_nimbus_1_1_transformational.html#ad72fb2b5e9a0f92bc23ab443c6e7e9ad">Nimbus::Transformational</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
 <li>unregisterListener()
-: <a class="el" href="class_nimbus_1_1_event_system.html#ae20fb87df21fb731adb1b4af01620c08">Nimbus::EventSystem</a>
+: <a class="el" href="class_nimbus_1_1_entity_handler.html#a16ae89fc49e2ac9805ddaf7ce3bcf061">Nimbus::EntityHandler</a>
+, <a class="el" href="class_nimbus_1_1_event_system.html#a3dd5b252c988366e275617e219268f8a">Nimbus::EventSystem</a>
+, <a class="el" href="class_nimbus_1_1_event_type_handler.html#a38acbd06f329de11600a31913784dd69">Nimbus::EventTypeHandler</a>
+, <a class="el" href="class_nimbus_1_1_generic_handler.html#abc44e2e57f8c85bfa0a6a79a86822e0b">Nimbus::GenericHandler</a>
 </li>
 <li>update()
-: <a class="el" href="class_nimbus_1_1_entity_manager.html#a22d4732136fca150cb047e50c3c2393f">Nimbus::EntityManager</a>
+: <a class="el" href="class_nimbus_1_1_camera.html#afce462b3213349340a4fba7257e43fb2">Nimbus::Camera</a>
+, <a class="el" href="class_nimbus_1_1_entity_manager.html#a22d4732136fca150cb047e50c3c2393f">Nimbus::EntityManager</a>
 , <a class="el" href="class_nimbus_1_1_environment_manager.html#a7911b45dbf9de61c6da46faee713564d">Nimbus::EnvironmentManager</a>
+, <a class="el" href="class_nimbus_1_1_flocking.html#a8aa676ac608e791494e80fd05a328f80">Nimbus::Flocking</a>
 , <a class="el" href="class_nimbus_1_1_input_manager.html#a55c59b37f1fe423ad942f103f8584849">Nimbus::InputManager</a>
 , <a class="el" href="class_nimbus_1_1_manager.html#ab7defd34139bb09db05d89e6e935d6d8">Nimbus::Manager</a>
+, <a class="el" href="class_nimbus_1_1_rainy.html#a02f7b5830fedcefef2aaf5bf0db967f8">Nimbus::Rainy</a>
+, <a class="el" href="class_nimbus_1_1_soaring.html#aa42d5160c47059c8b12953f3588ba12f">Nimbus::Soaring</a>
+, <a class="el" href="class_nimbus_1_1_transformational.html#a16e334ad4cf7385ee14eb1484dc87668">Nimbus::Transformational</a>
 , <a class="el" href="class_nimbus_1_1_wind_manager.html#a50149c1756ea43d5ab75c361bf5de109">Nimbus::WindManager</a>
+, <a class="el" href="class_nimbus_1_1_wind_map.html#aace3565379e73e4d3e51a839e0303ca9">Nimbus::WindMap</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_w"></a>- w -</h3><ul>
+<li>WindMap()
+: <a class="el" href="class_nimbus_1_1_wind_map.html#a1d970705e9662d1eaf30d2b8255234db">Nimbus::WindMap</a>
 </li>
 </ul>
 
@@ -286,8 +442,20 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>~EventSystem()
 : <a class="el" href="class_nimbus_1_1_event_system.html#a47b9e9a1d8dca16dde1188a4c1d9d7a6">Nimbus::EventSystem</a>
 </li>
+<li>~Flocking()
+: <a class="el" href="class_nimbus_1_1_flocking.html#ad8e32bcc2f3ecf84ee8d317bb1672c77">Nimbus::Flocking</a>
+</li>
 <li>~GameEntity()
 : <a class="el" href="class_nimbus_1_1_game_entity.html#a2d82b35dcd5ba15cc56f01948a42ca92">Nimbus::GameEntity</a>
+</li>
+<li>~Rainy()
+: <a class="el" href="class_nimbus_1_1_rainy.html#a5a6e7c41aa5d1135cdbcad98adb6c62a">Nimbus::Rainy</a>
+</li>
+<li>~Soaring()
+: <a class="el" href="class_nimbus_1_1_soaring.html#a93a2bb80040a6a748d39826fa6654837">Nimbus::Soaring</a>
+</li>
+<li>~Transformational()
+: <a class="el" href="class_nimbus_1_1_transformational.html#a3edaf36f8ca8a80019101eb6df26a891">Nimbus::Transformational</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -295,7 +463,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:25 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:50:00 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_wind_manager.html',''
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -107,7 +107,6 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_wind_manager.html',''
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_nimbus_1_1_wind_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -121,52 +120,54 @@ Inheritance diagram for Nimbus::WindManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nimbus_1_1_wind_manager__inherit__graph.png" border="0" usemap="#_nimbus_1_1_wind_manager_inherit__map" alt="Inheritance graph"/></div>
 <map name="_nimbus_1_1_wind_manager_inherit__map" id="_nimbus_1_1_wind_manager_inherit__map">
-<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="21,5,144,32"/>
-</map>
+<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="21,5,144,32"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for Nimbus::WindManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nimbus_1_1_wind_manager__coll__graph.png" border="0" usemap="#_nimbus_1_1_wind_manager_coll__map" alt="Collaboration graph"/></div>
 <map name="_nimbus_1_1_wind_manager_coll__map" id="_nimbus_1_1_wind_manager_coll__map">
-<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="5,91,128,117"/>
-<area shape="rect" id="node3" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html" title="Nimbus::WindManager\l::MouseWindListener" alt="" coords="153,83,308,125"/>
-<area shape="rect" id="node4" href="class_nimbus_1_1_event_listener.html" title="Nimbus::EventListener" alt="" coords="155,5,307,32"/>
-</map>
+<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="239,5,363,32"/><area shape="rect" id="node3" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html" title="Listens for the wind current completion events. " alt="" coords="217,57,385,98"/><area shape="rect" id="node4" href="class_nimbus_1_1_event_listener.html" title="Nimbus::EventListener" alt="" coords="5,163,157,189"/><area shape="rect" id="node5" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html" title="Listens for the wind update events. " alt="" coords="208,122,395,163"/><area shape="rect" id="node6" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html" title="Listens for the wind current creation events. " alt="" coords="215,187,388,229"/><area shape="rect" id="node7" href="class_nimbus_1_1_wind_manager_1_1_tick_listener.html" title="Nimbus::WindManager\l::TickListener" alt="" coords="224,253,379,294"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html">MouseWindListener</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html">MouseWindEndListener</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Listens for the wind current completion events.  <a href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html">MouseWindStartListener</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Listens for the wind current creation events.  <a href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html">MouseWindUpdateListener</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Listens for the wind update events.  <a href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_manager_1_1_tick_listener.html">TickListener</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a18d58c8d6e8e31b5c22f8c18813afbd7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18d58c8d6e8e31b5c22f8c18813afbd7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>WindManager</b> (Ogre::SceneManager *sceneManager)</td></tr>
-<tr class="separator:a18d58c8d6e8e31b5c22f8c18813afbd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab91ebf26444c4781344693e2589b9169"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab91ebf26444c4781344693e2589b9169"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>WindManager</b> (Ogre::SceneManager *sceneManager, <a class="el" href="class_nimbus_1_1_world.html">World</a> *world, Ogre::Real beta)</td></tr>
+<tr class="separator:ab91ebf26444c4781344693e2589b9169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae467cbc7fa48e2a9ab94b6d83d46c7d2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_manager.html#ae467cbc7fa48e2a9ab94b6d83d46c7d2">initialize</a> (void)</td></tr>
 <tr class="separator:ae467cbc7fa48e2a9ab94b6d83d46c7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50149c1756ea43d5ab75c361bf5de109"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_manager.html#a50149c1756ea43d5ab75c361bf5de109">update</a> (void)</td></tr>
 <tr class="separator:a50149c1756ea43d5ab75c361bf5de109"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae117adb6342e7bfd7c3f86ad918fd7bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae117adb6342e7bfd7c3f86ad918fd7bf"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>createClickPlane</b> ()</td></tr>
-<tr class="separator:ae117adb6342e7bfd7c3f86ad918fd7bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a6f9ffa86904cd303f9b8997dd8d105d2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f9ffa86904cd303f9b8997dd8d105d2"></a>
-Ogre::SceneManager *&#160;</td><td class="memItemRight" valign="bottom"><b>mSceneManager</b></td></tr>
-<tr class="separator:a6f9ffa86904cd303f9b8997dd8d105d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9c6e96d22559b915ba172910059fc42"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9c6e96d22559b915ba172910059fc42"></a>
-Ogre::Plane&#160;</td><td class="memItemRight" valign="bottom"><b>mWindPlane</b></td></tr>
-<tr class="separator:af9c6e96d22559b915ba172910059fc42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4403a286a6856b0b109cdfcd48e403d7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4403a286a6856b0b109cdfcd48e403d7"></a>
-<a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html">Nimbus::WindManager::MouseWindListener</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mMouseWindListener</b></td></tr>
-<tr class="separator:a4403a286a6856b0b109cdfcd48e403d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a322cc3cc57b6bbd70cea85cf5e358d5a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a322cc3cc57b6bbd70cea85cf5e358d5a"></a>
+<a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html">Nimbus::WindManager::MouseWindUpdateListener</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mMouseWindUpdateListener</b></td></tr>
+<tr class="separator:a322cc3cc57b6bbd70cea85cf5e358d5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab65a6b560725cbdbde5b10c5d1839948"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab65a6b560725cbdbde5b10c5d1839948"></a>
+<a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html">Nimbus::WindManager::MouseWindStartListener</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mMouseWindStartListener</b></td></tr>
+<tr class="separator:ab65a6b560725cbdbde5b10c5d1839948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2689293e3aa0b10c973282a272deeb2d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2689293e3aa0b10c973282a272deeb2d"></a>
+<a class="el" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html">Nimbus::WindManager::MouseWindEndListener</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mMouseWindEndListener</b></td></tr>
+<tr class="separator:a2689293e3aa0b10c973282a272deeb2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9333181fbbcab01376277aa890e1c1f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9333181fbbcab01376277aa890e1c1f"></a>
+<a class="el" href="class_nimbus_1_1_wind_manager_1_1_tick_listener.html">Nimbus::WindManager::TickListener</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mTickListener</b></td></tr>
+<tr class="separator:aa9333181fbbcab01376277aa890e1c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Takes input and Updates <a class="el" href="class_nimbus_1_1_wind_map.html">WindMap</a> </p>
@@ -224,6 +225,15 @@ Ogre::Plane&#160;</td><td class="memItemRight" valign="bottom"><b>mWindPlane</b>
 
 <p>Implements <a class="el" href="class_nimbus_1_1_manager.html#ab7defd34139bb09db05d89e6e935d6d8">Nimbus::Manager</a>.</p>
 
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_wind_manager_a50149c1756ea43d5ab75c361bf5de109_icgraph.png" border="0" usemap="#class_nimbus_1_1_wind_manager_a50149c1756ea43d5ab75c361bf5de109_icgraph" alt=""/></div>
+<map name="class_nimbus_1_1_wind_manager_a50149c1756ea43d5ab75c361bf5de109_icgraph" id="class_nimbus_1_1_wind_manager_a50149c1756ea43d5ab75c361bf5de109_icgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_environment_manager.html#a7911b45dbf9de61c6da46faee713564d" title="Nimbus::EnvironmentManager\l::update" alt="" coords="208,5,403,46"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -236,7 +246,7 @@ Ogre::Plane&#160;</td><td class="memItemRight" valign="bottom"><b>mWindPlane</b>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>Nimbus</b></li><li class="navelem"><a class="el" href="class_nimbus_1_1_wind_manager.html">WindManager</a></li>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:25 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:50:00 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

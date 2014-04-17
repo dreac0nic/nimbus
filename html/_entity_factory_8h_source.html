@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('_entity_factory_8h_source.html','');})
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -114,33 +114,32 @@ $(document).ready(function(){initNavTree('_entity_factory_8h_source.html','');})
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;GameEntity.h&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;./Behaviours/Behaviour.h&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;EventListener.h&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;EventSystem.h&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>Nimbus</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_entity_factory.html">   15</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_nimbus_1_1_entity_factory.html">EntityFactory</a></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        std::map&lt; GameEntityType, GameEntity* &gt; mEntityInstances;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        std::map&lt; std::string, Behaviour* &gt; mBehaviourInstances;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="class_nimbus_1_1_world.html">World</a>* mWorld;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="class_nimbus_1_1_entity_factory.html">EntityFactory</a>(<a class="code" href="class_nimbus_1_1_world.html">World</a>* world, std::string entityDefinitionFile);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        ~<a class="code" href="class_nimbus_1_1_entity_factory.html">EntityFactory</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="comment">// Object Methods --</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span>        <a class="code" href="class_nimbus_1_1_game_entity.html">GameEntity</a>* <a class="code" href="class_nimbus_1_1_entity_factory.html#a677df5829328d591a94da395d5818c4e">createEntity</a>(std::string entityType);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    };</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;EventSystem/EventSystem.h&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>Nimbus</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_entity_factory.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_nimbus_1_1_entity_factory.html">EntityFactory</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        std::map&lt; GameEntityType, GameEntity* &gt; mEntityInstances;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        std::map&lt; std::string, Behaviour* &gt; mBehaviourInstances;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="class_nimbus_1_1_world.html">World</a>* mWorld;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="class_nimbus_1_1_entity_factory.html">EntityFactory</a>(<a class="code" href="class_nimbus_1_1_world.html">World</a>* world, std::string entityDefinitionFile);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        ~<a class="code" href="class_nimbus_1_1_entity_factory.html">EntityFactory</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="comment">// Object Methods --</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span>        <a class="code" href="class_nimbus_1_1_game_entity.html">GameEntity</a>* <a class="code" href="class_nimbus_1_1_entity_factory.html#a677df5829328d591a94da395d5818c4e">createEntity</a>(std::string entityType);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    };</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="class_nimbus_1_1_game_entity_html"><div class="ttname"><a href="class_nimbus_1_1_game_entity.html">Nimbus::GameEntity</a></div><div class="ttdef"><b>Definition:</b> GameEntity.h:13</div></div>
-<div class="ttc" id="class_nimbus_1_1_world_html"><div class="ttname"><a href="class_nimbus_1_1_world.html">Nimbus::World</a></div><div class="ttdef"><b>Definition:</b> World.h:38</div></div>
-<div class="ttc" id="class_nimbus_1_1_entity_factory_html"><div class="ttname"><a href="class_nimbus_1_1_entity_factory.html">Nimbus::EntityFactory</a></div><div class="ttdef"><b>Definition:</b> EntityFactory.h:15</div></div>
+<div class="ttc" id="class_nimbus_1_1_world_html"><div class="ttname"><a href="class_nimbus_1_1_world.html">Nimbus::World</a></div><div class="ttdef"><b>Definition:</b> World.h:39</div></div>
+<div class="ttc" id="class_nimbus_1_1_entity_factory_html"><div class="ttname"><a href="class_nimbus_1_1_entity_factory.html">Nimbus::EntityFactory</a></div><div class="ttdef"><b>Definition:</b> EntityFactory.h:14</div></div>
 <div class="ttc" id="class_nimbus_1_1_entity_factory_html_a677df5829328d591a94da395d5818c4e"><div class="ttname"><a href="class_nimbus_1_1_entity_factory.html#a677df5829328d591a94da395d5818c4e">Nimbus::EntityFactory::createEntity</a></div><div class="ttdeci">GameEntity * createEntity(std::string entityType)</div><div class="ttdef"><b>Definition:</b> EntityFactory.cpp:129</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -148,7 +147,7 @@ $(document).ready(function(){initNavTree('_entity_factory_8h_source.html','');})
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>EntityFactory.h</b></li>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:24 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:49:58 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

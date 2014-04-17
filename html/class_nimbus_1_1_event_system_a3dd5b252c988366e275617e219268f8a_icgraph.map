@@ -1,0 +1,5 @@
+<map id="Nimbus::EventSystem::unregisterListener" name="Nimbus::EventSystem::unregisterListener">
+<area shape="rect" id="node2" href="$class_nimbus_1_1_transformational.html#a13ab706ee96c0b5cace8a483493a2e9c" title="Nimbus::Transformational\l::shutdown" alt="" coords="213,5,382,46"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_game_mode.html#a323d8257668bb83ab5c41962563e0f9b" title="Nimbus::GameMode::pause" alt="" coords="205,71,389,97"/>
+<area shape="rect" id="node4" href="$class_nimbus_1_1_game_mode.html#aa52782c322c02e7ad91101a6d22023a4" title="Nimbus::GameMode::stop" alt="" coords="210,121,385,148"/>
+</map>

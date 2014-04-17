@@ -1,3 +1,4 @@
 <map id="Nimbus::Grid::getXDimension" name="Nimbus::Grid::getXDimension">
-<area shape="rect" id="node2" href="$class_nimbus_1_1_grid.html#a0912e92f2749e1e96f85e628258ff153" title="Nimbus::Grid\&lt; Ogre\l::Vector2 \&gt;::str" alt="" coords="245,5,384,46"/>
+<area shape="rect" id="node2" href="$class_nimbus_1_1_grid.html#a0912e92f2749e1e96f85e628258ff153" title="Nimbus::Grid\&lt; Ogre\l::Vector2 \&gt;::str" alt="" coords="264,5,403,46"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_wind_map.html#aace3565379e73e4d3e51a839e0303ca9" title="Nimbus::WindMap::update" alt="" coords="245,71,421,97"/>
 </map>

@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('_wind_manager_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -108,61 +108,139 @@ $(document).ready(function(){initNavTree('_wind_manager_8h_source.html','');});
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef NIMBUS_WINDMANAGER_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define NIMBUS_WINDMANAGER_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;OgrePlane.h&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;EventListener.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Manager.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>Nimbus</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;EventSystem/EventSystem.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;Manager.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;WindMap.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;World.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>Nimbus</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_wind_manager.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a> :</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keyword">public</span> <a class="code" href="class_nimbus_1_1_manager.html">Manager</a></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="comment">// Member variables</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        Ogre::SceneManager* mSceneManager;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        Ogre::Plane mWindPlane;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="comment">// Setting up the plane that will register the clicks for the wind creation</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> createClickPlane();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="comment">// Event Listeners</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="comment">// Listens for the wind creation events</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html">   28</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html">MouseWindListener</a> : </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keyword">public</span> <a class="code" href="class_nimbus_1_1_event_listener.html">EventListener</a></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>* mContainingManager;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            Ogre::SceneManager* mSceneManager;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordtype">int</span> mCounter;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html">MouseWindListener</a>(<a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>* containingManager, Ogre::SceneManager* sceneManager)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                { this-&gt;mContainingManager = containingManager; this-&gt;mSceneManager = sceneManager; mCounter = 0; }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keyword">virtual</span> ~<a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html">MouseWindListener</a>() {}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="class_nimbus_1_1_world.html">World</a>* mWorld;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        Ogre::SceneManager* mSceneManager;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        Ogre::Plane mWindPlane;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        Ogre::Vector2 mCurrentPosition;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="class_nimbus_1_1_wind_current.html">WindCurrent</a>* mWindCurrent;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        Ogre::Vector2 mEssentiallyZero;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> createClickPlane();</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="comment">// From Nimbus::EventListener</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html#ae00d59438516438ddd7d0e5113424309">handleEvent</a>(payloadmap payload, <a class="code" href="class_nimbus_1_1_event_listener.html">EventListener</a>* responder = NULL);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        }* mMouseWindListener;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>(Ogre::SceneManager* sceneManager);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">void</span> addPoint(Ogre::Vector2&amp; newPosition);</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="comment">// From Nimbus::Manager</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_wind_manager.html#ae467cbc7fa48e2a9ab94b6d83d46c7d2">   50</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_wind_manager.html#ae467cbc7fa48e2a9ab94b6d83d46c7d2">initialize</a>(<span class="keywordtype">void</span>) {}</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_nimbus_1_1_wind_manager.html#a50149c1756ea43d5ab75c361bf5de109">update</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    };</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_nimbus_1_1_wind_manager_html_a50149c1756ea43d5ab75c361bf5de109"><div class="ttname"><a href="class_nimbus_1_1_wind_manager.html#a50149c1756ea43d5ab75c361bf5de109">Nimbus::WindManager::update</a></div><div class="ttdeci">virtual bool update(void)</div><div class="ttdef"><b>Definition:</b> WindManager.cpp:44</div></div>
-<div class="ttc" id="class_nimbus_1_1_wind_manager_html_ae467cbc7fa48e2a9ab94b6d83d46c7d2"><div class="ttname"><a href="class_nimbus_1_1_wind_manager.html#ae467cbc7fa48e2a9ab94b6d83d46c7d2">Nimbus::WindManager::initialize</a></div><div class="ttdeci">virtual void initialize(void)</div><div class="ttdef"><b>Definition:</b> WindManager.h:50</div></div>
-<div class="ttc" id="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener_html_ae00d59438516438ddd7d0e5113424309"><div class="ttname"><a href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html#ae00d59438516438ddd7d0e5113424309">Nimbus::WindManager::MouseWindListener::handleEvent</a></div><div class="ttdeci">virtual void handleEvent(payloadmap payload, EventListener *responder=NULL)</div><div class="ttdef"><b>Definition:</b> WindManager.cpp:49</div></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        std::list&lt;Ogre::Vector2&gt; subdivideCurrent(Ogre::Vector2 origin, Ogre::Vector2 current);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        Ogre::Vector2 boundWindVector(Ogre::Vector2 *vector);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="class_nimbus_1_1_wind_current.html">WindCurrent</a> generateCurrent(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="class_nimbus_1_1_wind_current.html">WindCurrent</a> generateCurrent(<span class="keywordtype">int</span> numVectors);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="class_nimbus_1_1_wind_current.html">WindCurrent</a> generateCurrent(<span class="keywordtype">int</span> numVectors, Ogre::Vector2 startingPosition);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        Ogre::Vector2 getCollisionPoint(Ogre::Ray* collisionRay);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="comment">// Event Listeners</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="comment">// ********************************************************************</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html">   91</a></span>&#160;<span class="comment"></span>        <span class="keyword">class </span><a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html">MouseWindUpdateListener</a> : </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keyword">public</span> <a class="code" href="class_nimbus_1_1_event_listener.html">EventListener</a></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>* mParent;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html">MouseWindUpdateListener</a>(<a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>* parent)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                { this-&gt;mParent = parent; }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keyword">virtual</span> ~<a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html">MouseWindUpdateListener</a>() {}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <span class="comment">// From Nimbus::EventListener</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html#af6baa972bd2a36bd98a50173c5edaa5c">handleEvent</a>(payloadmap payload, <a class="code" href="class_nimbus_1_1_event_listener.html">EventListener</a>* responder = NULL);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        }* mMouseWindUpdateListener;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="comment">// ********************************************************************</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html">  108</a></span>&#160;<span class="comment"></span>        <span class="keyword">class </span><a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html">MouseWindStartListener</a> : </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keyword">public</span> <a class="code" href="class_nimbus_1_1_event_listener.html">EventListener</a></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>* mParent;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html">MouseWindStartListener</a>(<a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>* containingManager)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                { this-&gt;mParent = containingManager; }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keyword">virtual</span> ~<a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html">MouseWindStartListener</a>() {}</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            <span class="comment">// From Nimbus::EventListener</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html#a13ab0b78e87ed09c466bbc8745787f59">handleEvent</a>(payloadmap payload, <a class="code" href="class_nimbus_1_1_event_listener.html">EventListener</a>* responder = NULL);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        }* mMouseWindStartListener;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="comment">// ********************************************************************</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html">  125</a></span>&#160;<span class="comment"></span>        <span class="keyword">class </span><a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html">MouseWindEndListener</a> : </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="keyword">public</span> <a class="code" href="class_nimbus_1_1_event_listener.html">EventListener</a></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>* mParent;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html">MouseWindEndListener</a>(<a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>* containingManager)</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                { this-&gt;mParent = containingManager; }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keyword">virtual</span> ~<a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html">MouseWindEndListener</a>() {}</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="comment">// From Nimbus::EventListener</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html#a72f2b2f2298aa14b9e4e5e72461f9171">handleEvent</a>(payloadmap payload, <a class="code" href="class_nimbus_1_1_event_listener.html">EventListener</a>* responder = NULL);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        }* mMouseWindEndListener;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="comment">// ********************************************************************</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_wind_manager_1_1_tick_listener.html">  143</a></span>&#160;<span class="comment"></span>        <span class="keyword">class </span><a class="code" href="class_nimbus_1_1_wind_manager_1_1_tick_listener.html">TickListener</a> :</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            <span class="keyword">public</span> <a class="code" href="class_nimbus_1_1_event_listener.html">EventListener</a></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>* mParent;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            <a class="code" href="class_nimbus_1_1_wind_manager_1_1_tick_listener.html">TickListener</a>(<a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>* parent) : mParent(parent) {}</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keyword">virtual</span> ~<a class="code" href="class_nimbus_1_1_wind_manager_1_1_tick_listener.html">TickListener</a>() {}</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="comment">// From Nimbus::EventListener</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_wind_manager_1_1_tick_listener.html#a15b4ce78f80dd76cdff30a8ca8f14b60">handleEvent</a>(payloadmap payload, <a class="code" href="class_nimbus_1_1_event_listener.html">EventListener</a>* responder = NULL);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        }* mTickListener;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>(Ogre::SceneManager* sceneManager, <a class="code" href="class_nimbus_1_1_world.html">World</a>* world, Ogre::Real beta);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="class_nimbus_1_1_wind_manager.html">WindManager</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="comment">// From Nimbus::Manager</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="class_nimbus_1_1_wind_manager.html#ae467cbc7fa48e2a9ab94b6d83d46c7d2">  162</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_nimbus_1_1_wind_manager.html#ae467cbc7fa48e2a9ab94b6d83d46c7d2">initialize</a>(<span class="keywordtype">void</span>) {}</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_nimbus_1_1_wind_manager.html#a50149c1756ea43d5ab75c361bf5de109">update</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    };</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener_html_a72f2b2f2298aa14b9e4e5e72461f9171"><div class="ttname"><a href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html#a72f2b2f2298aa14b9e4e5e72461f9171">Nimbus::WindManager::MouseWindEndListener::handleEvent</a></div><div class="ttdeci">virtual void handleEvent(payloadmap payload, EventListener *responder=NULL)</div><div class="ttdef"><b>Definition:</b> WindManager.cpp:245</div></div>
+<div class="ttc" id="class_nimbus_1_1_wind_manager_1_1_tick_listener_html"><div class="ttname"><a href="class_nimbus_1_1_wind_manager_1_1_tick_listener.html">Nimbus::WindManager::TickListener</a></div><div class="ttdef"><b>Definition:</b> WindManager.h:143</div></div>
+<div class="ttc" id="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener_html"><div class="ttname"><a href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html">Nimbus::WindManager::MouseWindEndListener</a></div><div class="ttdoc">Listens for the wind current completion events. </div><div class="ttdef"><b>Definition:</b> WindManager.h:125</div></div>
+<div class="ttc" id="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener_html"><div class="ttname"><a href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html">Nimbus::WindManager::MouseWindStartListener</a></div><div class="ttdoc">Listens for the wind current creation events. </div><div class="ttdef"><b>Definition:</b> WindManager.h:108</div></div>
+<div class="ttc" id="class_nimbus_1_1_wind_current_html"><div class="ttname"><a href="class_nimbus_1_1_wind_current.html">Nimbus::WindCurrent</a></div><div class="ttdef"><b>Definition:</b> WindCurrent.h:23</div></div>
+<div class="ttc" id="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener_html_af6baa972bd2a36bd98a50173c5edaa5c"><div class="ttname"><a href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html#af6baa972bd2a36bd98a50173c5edaa5c">Nimbus::WindManager::MouseWindUpdateListener::handleEvent</a></div><div class="ttdeci">virtual void handleEvent(payloadmap payload, EventListener *responder=NULL)</div><div class="ttdef"><b>Definition:</b> WindManager.cpp:274</div></div>
+<div class="ttc" id="class_nimbus_1_1_wind_manager_html_a50149c1756ea43d5ab75c361bf5de109"><div class="ttname"><a href="class_nimbus_1_1_wind_manager.html#a50149c1756ea43d5ab75c361bf5de109">Nimbus::WindManager::update</a></div><div class="ttdeci">virtual bool update(void)</div><div class="ttdef"><b>Definition:</b> WindManager.cpp:98</div></div>
+<div class="ttc" id="class_nimbus_1_1_wind_manager_html_ae467cbc7fa48e2a9ab94b6d83d46c7d2"><div class="ttname"><a href="class_nimbus_1_1_wind_manager.html#ae467cbc7fa48e2a9ab94b6d83d46c7d2">Nimbus::WindManager::initialize</a></div><div class="ttdeci">virtual void initialize(void)</div><div class="ttdef"><b>Definition:</b> WindManager.h:162</div></div>
+<div class="ttc" id="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener_html"><div class="ttname"><a href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html">Nimbus::WindManager::MouseWindUpdateListener</a></div><div class="ttdoc">Listens for the wind update events. </div><div class="ttdef"><b>Definition:</b> WindManager.h:91</div></div>
+<div class="ttc" id="class_nimbus_1_1_world_html"><div class="ttname"><a href="class_nimbus_1_1_world.html">Nimbus::World</a></div><div class="ttdef"><b>Definition:</b> World.h:39</div></div>
 <div class="ttc" id="class_nimbus_1_1_event_listener_html"><div class="ttname"><a href="class_nimbus_1_1_event_listener.html">Nimbus::EventListener</a></div><div class="ttdef"><b>Definition:</b> EventListener.h:19</div></div>
-<div class="ttc" id="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener_html"><div class="ttname"><a href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html">Nimbus::WindManager::MouseWindListener</a></div><div class="ttdef"><b>Definition:</b> WindManager.h:28</div></div>
+<div class="ttc" id="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener_html_a13ab0b78e87ed09c466bbc8745787f59"><div class="ttname"><a href="class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html#a13ab0b78e87ed09c466bbc8745787f59">Nimbus::WindManager::MouseWindStartListener::handleEvent</a></div><div class="ttdeci">virtual void handleEvent(payloadmap payload, EventListener *responder=NULL)</div><div class="ttdef"><b>Definition:</b> WindManager.cpp:209</div></div>
 <div class="ttc" id="class_nimbus_1_1_manager_html"><div class="ttname"><a href="class_nimbus_1_1_manager.html">Nimbus::Manager</a></div><div class="ttdef"><b>Definition:</b> Manager.h:10</div></div>
+<div class="ttc" id="class_nimbus_1_1_wind_manager_1_1_tick_listener_html_a15b4ce78f80dd76cdff30a8ca8f14b60"><div class="ttname"><a href="class_nimbus_1_1_wind_manager_1_1_tick_listener.html#a15b4ce78f80dd76cdff30a8ca8f14b60">Nimbus::WindManager::TickListener::handleEvent</a></div><div class="ttdeci">void handleEvent(payloadmap payload, EventListener *responder=NULL)</div><div class="ttdef"><b>Definition:</b> WindManager.cpp:297</div></div>
 <div class="ttc" id="class_nimbus_1_1_wind_manager_html"><div class="ttname"><a href="class_nimbus_1_1_wind_manager.html">Nimbus::WindManager</a></div><div class="ttdef"><b>Definition:</b> WindManager.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -170,7 +248,7 @@ $(document).ready(function(){initNavTree('_wind_manager_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>WindManager.h</b></li>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:24 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:49:58 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

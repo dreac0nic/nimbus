@@ -1,5 +1,8 @@
 <map id="Nimbus::WindManager" name="Nimbus::WindManager">
-<area shape="rect" id="node2" href="$class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="5,91,128,117"/>
-<area shape="rect" id="node3" href="$class_nimbus_1_1_wind_manager_1_1_mouse_wind_listener.html" title="Nimbus::WindManager\l::MouseWindListener" alt="" coords="153,83,308,125"/>
-<area shape="rect" id="node4" href="$class_nimbus_1_1_event_listener.html" title="Nimbus::EventListener" alt="" coords="155,5,307,32"/>
+<area shape="rect" id="node2" href="$class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="239,5,363,32"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_wind_manager_1_1_mouse_wind_end_listener.html" title="Listens for the wind current completion events. " alt="" coords="217,57,385,98"/>
+<area shape="rect" id="node4" href="$class_nimbus_1_1_event_listener.html" title="Nimbus::EventListener" alt="" coords="5,163,157,189"/>
+<area shape="rect" id="node5" href="$class_nimbus_1_1_wind_manager_1_1_mouse_wind_update_listener.html" title="Listens for the wind update events. " alt="" coords="208,122,395,163"/>
+<area shape="rect" id="node6" href="$class_nimbus_1_1_wind_manager_1_1_mouse_wind_start_listener.html" title="Listens for the wind current creation events. " alt="" coords="215,187,388,229"/>
+<area shape="rect" id="node7" href="$class_nimbus_1_1_wind_manager_1_1_tick_listener.html" title="Nimbus::WindManager\l::TickListener" alt="" coords="224,253,379,294"/>
 </map>

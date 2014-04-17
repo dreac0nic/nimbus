@@ -78,6 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
+      <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li class="current"><a href="functions_eval.html"><span>Enumerator</span></a></li>
     </ul>
@@ -102,7 +103,7 @@ $(document).ready(function(){initNavTree('functions_eval.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -113,41 +114,44 @@ $(document).ready(function(){initNavTree('functions_eval.html','');});
 
 <div class="contents">
 &#160;<ul>
-<li>BEGIN_TRANSLATE_ENTITY
-: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa339594c7d1a2027813fcfd12da6e8cac">Nimbus::EventSystem</a>
-</li>
 <li>CREATE_ENTITY
 : <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa1ef6e4d356d14b6d5facae3fe9c40240">Nimbus::EventSystem</a>
 </li>
 <li>DESTROY_ENTITY
 : <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa6377ea8c94e5ae05c9a58cfe3ff9c755">Nimbus::EventSystem</a>
 </li>
-<li>END_TRANSLATE_ENTITY
-: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa79ea96966c7afd9c686c412d4f7bc65b">Nimbus::EventSystem</a>
+<li>ENTITY
+: <a class="el" href="class_nimbus_1_1_event_type_handler.html#af5f1b882111816bd728fe4da54a1c377a9c5ffb673e25082233bdcd5469fd5705">Nimbus::EventTypeHandler</a>
 </li>
-<li>ENTITY_MOVED
-: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aaa7419a2a2d9cc18ef1c16d7b5809d9dd">Nimbus::EventSystem</a>
+<li>ENTITY_GROUP
+: <a class="el" href="class_nimbus_1_1_event_type_handler.html#af5f1b882111816bd728fe4da54a1c377ac5c349c8eed5446770a1c8389ea6ce52">Nimbus::EventTypeHandler</a>
+</li>
+<li>ENTITY_TRANSLATED
+: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa40b36c126442a25f6a9843308872ecee">Nimbus::EventSystem</a>
 </li>
 <li>FLOCK_UPDATE
 : <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aae63e9d69a4d7806cfa58a7801fda8446">Nimbus::EventSystem</a>
 </li>
+<li>GENERIC
+: <a class="el" href="class_nimbus_1_1_event_type_handler.html#af5f1b882111816bd728fe4da54a1c377a414cb52aaa6a89acc74adb85bc1541db">Nimbus::EventTypeHandler</a>
+</li>
 <li>MOUSE_DOWN
 : <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa8f804cb75d9b16e9fb2e0f77ca4f3065">Nimbus::EventSystem</a>
 </li>
-<li>MOUSE_POSITION
-: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa86ddf8e09ac67f8351609a61e0caf82c">Nimbus::EventSystem</a>
+<li>MOUSE_POSITION_END
+: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa97db5a829c7a7c8ffb06fc1358cc4fe7">Nimbus::EventSystem</a>
+</li>
+<li>MOUSE_POSITION_START
+: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aadc796b52004f9adb400d4f7f936f023c">Nimbus::EventSystem</a>
+</li>
+<li>MOUSE_POSITION_UPDATE
+: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aae4586a24bc5ef2da391e21a34143d13f">Nimbus::EventSystem</a>
 </li>
 <li>MOUSE_UP
 : <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa248040c2fdfc433eea89458547d3a433">Nimbus::EventSystem</a>
 </li>
 <li>MOUSE_UPDATE
 : <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa1833614b03deab49a24cffefb6458c46">Nimbus::EventSystem</a>
-</li>
-<li>POSITION_ENTITY
-: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aad2cccf3cc19715f9ba455e3e170a1901">Nimbus::EventSystem</a>
-</li>
-<li>POSITION_QUERY
-: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa2cec9cbf6afde9caec329bfc7ef6cabc">Nimbus::EventSystem</a>
 </li>
 <li>SHUTDOWN
 : <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa8d59fdf1825521b8f99398c69d30f9c3">Nimbus::EventSystem</a>
@@ -158,13 +162,19 @@ $(document).ready(function(){initNavTree('functions_eval.html','');});
 <li>TICK
 : <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa4899641baed9b11731bec84c1684cb13">Nimbus::EventSystem</a>
 </li>
+<li>TRANSLATE_ENTITY
+: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aa0526999fa27f0322f14327e5041f3f4d">Nimbus::EventSystem</a>
+</li>
+<li>TRANSLATION_QUERY
+: <a class="el" href="class_nimbus_1_1_event_system.html#afc54aee8429f6d972c6166513194ee8aaa69341d436b9ccd5acdcf0f44b999756">Nimbus::EventSystem</a>
+</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:25 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:50:00 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

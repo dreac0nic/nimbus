@@ -1,3 +1,8 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_nimbus_1_1_entity_factory.html" title="Nimbus::EntityFactory" alt="" coords="5,5,157,32"/>
+<area shape="rect" id="node2" href="$class_nimbus_1_1_input_manager.html" title="Nimbus::InputManager" alt="" coords="221,43,373,69"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="17,132,141,159"/>
+<area shape="rect" id="node4" href="$class_nimbus_1_1_entity_manager.html" title="Nimbus::EntityManager" alt="" coords="218,93,377,120"/>
+<area shape="rect" id="node5" href="$class_nimbus_1_1_environment_manager.html" title="Nimbus::EnvironmentManager" alt="" coords="200,144,395,171"/>
+<area shape="rect" id="node6" href="$class_nimbus_1_1_wind_manager.html" title="Nimbus::WindManager" alt="" coords="220,195,375,221"/>
+<area shape="rect" id="node9" href="$class_nimbus_1_1_camera.html" title="Nimbus::Camera" alt="" coords="238,245,357,272"/>
 </map>

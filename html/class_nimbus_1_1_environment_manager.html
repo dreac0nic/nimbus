@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_environment_manager.h
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -118,23 +118,21 @@ Inheritance diagram for Nimbus::EnvironmentManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nimbus_1_1_environment_manager__inherit__graph.png" border="0" usemap="#_nimbus_1_1_environment_manager_inherit__map" alt="Inheritance graph"/></div>
 <map name="_nimbus_1_1_environment_manager_inherit__map" id="_nimbus_1_1_environment_manager_inherit__map">
-<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="41,5,164,32"/>
-</map>
+<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="41,5,164,32"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for Nimbus::EnvironmentManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nimbus_1_1_environment_manager__coll__graph.png" border="0" usemap="#_nimbus_1_1_environment_manager_coll__map" alt="Collaboration graph"/></div>
 <map name="_nimbus_1_1_environment_manager_coll__map" id="_nimbus_1_1_environment_manager_coll__map">
-<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="41,5,164,32"/>
-</map>
+<area shape="rect" id="node2" href="class_nimbus_1_1_manager.html" title="Nimbus::Manager" alt="" coords="41,5,164,32"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a660510eec86a355647cd4a6ef113c07b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a660510eec86a355647cd4a6ef113c07b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>EnvironmentManager</b> (Ogre::SceneManager *sceneManager)</td></tr>
-<tr class="separator:a660510eec86a355647cd4a6ef113c07b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0fe6cc55adc14f1fd6c27afbc713a1e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0fe6cc55adc14f1fd6c27afbc713a1e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>EnvironmentManager</b> (Ogre::SceneManager *sceneManager, <a class="el" href="class_nimbus_1_1_world.html">World</a> *world)</td></tr>
+<tr class="separator:ac0fe6cc55adc14f1fd6c27afbc713a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad8a8df76cf6eec0f1a59fc866a8ca34"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_environment_manager.html#aad8a8df76cf6eec0f1a59fc866a8ca34">initialize</a> (void)</td></tr>
 <tr class="separator:aad8a8df76cf6eec0f1a59fc866a8ca34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7911b45dbf9de61c6da46faee713564d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_environment_manager.html#a7911b45dbf9de61c6da46faee713564d">update</a> (void)</td></tr>
@@ -197,6 +195,15 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_nimbus_1_1_manager.html#ab7defd34139bb09db05d89e6e935d6d8">Nimbus::Manager</a>.</p>
 
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_environment_manager_a7911b45dbf9de61c6da46faee713564d_cgraph.png" border="0" usemap="#class_nimbus_1_1_environment_manager_a7911b45dbf9de61c6da46faee713564d_cgraph" alt=""/></div>
+<map name="class_nimbus_1_1_environment_manager_a7911b45dbf9de61c6da46faee713564d_cgraph" id="class_nimbus_1_1_environment_manager_a7911b45dbf9de61c6da46faee713564d_cgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_wind_manager.html#a50149c1756ea43d5ab75c361bf5de109" title="Nimbus::WindManager\l::update" alt="" coords="248,5,403,46"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -209,7 +216,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>Nimbus</b></li><li class="navelem"><a class="el" href="class_nimbus_1_1_environment_manager.html">EnvironmentManager</a></li>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:24 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:49:59 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -1,0 +1,6 @@
+<map id="Nimbus::Soaring::update" name="Nimbus::Soaring::update">
+<area shape="rect" id="node2" href="$class_nimbus_1_1_wind_map.html#a834a3e14ac672aff34b87dd9c0ffd1c0" title="Nimbus::WindMap::getWind\lVector" alt="" coords="219,5,405,46"/>
+<area shape="rect" id="node4" href="$class_nimbus_1_1_event_system.html#a57874808edce83ec2aade2d9d02678f0" title="Nimbus::EventSystem\l::getSingleton" alt="" coords="237,70,387,111"/>
+<area shape="rect" id="node5" href="$class_nimbus_1_1_event_system.html#a0e20b8928a8f1ccc9de1844759af2370" title="Nimbus::EventSystem\l::fireEvent" alt="" coords="237,135,387,177"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_grid.html#adcbf1aebecd8103c2979c48d89255c0d" title="Nimbus::Grid::get" alt="" coords="454,12,578,39"/>
+</map>

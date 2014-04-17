@@ -1,0 +1,5 @@
+<map id="Nimbus::WindMap::getWindVector" name="Nimbus::WindMap::getWindVector">
+<area shape="rect" id="node2" href="$class_nimbus_1_1_soaring.html#aa42d5160c47059c8b12953f3588ba12f" title="Nimbus::Soaring::update" alt="" coords="259,5,424,32"/>
+<area shape="rect" id="node3" href="$class_nimbus_1_1_wind_map.html#ad416df5053631fd3d1b6069c9216ea76" title="Nimbus::WindMap::getWind\lVector" alt="" coords="249,57,434,98"/>
+<area shape="rect" id="node4" href="$class_nimbus_1_1_wind_map.html#a5365432675dfe4519830c3c6f42f742c" title="Nimbus::WindMap::getAverage\lWindVector" alt="" coords="241,122,442,163"/>
+</map>

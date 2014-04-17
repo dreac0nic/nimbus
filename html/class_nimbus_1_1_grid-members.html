@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_grid.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -111,10 +111,12 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_grid.html','');});
 
 <p>This is the complete list of members for <a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#adcbf1aebecd8103c2979c48d89255c0d">get</a>(int posx, int posy)</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#aefadf63295a206a72c65e39bc4771cf2">getXDimension</a>()</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#aa35df9d30c89aea29115d59eef67a88b">getYDimension</a>()</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#a528827ec61b5e5b0b5c458525ed7fcad">Grid</a>(int xLength, int yLength)</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#a37449a299766577a1ad840de18d6cfa9">erase</a>()</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#adcbf1aebecd8103c2979c48d89255c0d">get</a>(int posx, int posy)</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#aefadf63295a206a72c65e39bc4771cf2">getXDimension</a>()</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#aa35df9d30c89aea29115d59eef67a88b">getYDimension</a>()</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#a528827ec61b5e5b0b5c458525ed7fcad">Grid</a>(int xLength, int yLength)</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#a7773e2c1496781655b04eeb3d49ad4d6">initialize</a>(T value)</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#a15156d41f3030605dc9c796e2f9f4ef5">set</a>(int posx, int posy, T value)</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html#a0912e92f2749e1e96f85e628258ff153">str</a>()</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Grid</b>(void) (defined in <a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a>)</td><td class="entry"><a class="el" href="class_nimbus_1_1_grid.html">Nimbus::Grid&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
@@ -123,7 +125,7 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_grid.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:25 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:49:59 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

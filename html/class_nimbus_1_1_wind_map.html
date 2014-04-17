@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_wind_map.html','');})
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -105,8 +105,9 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_wind_map.html','');})
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_nimbus_1_1_wind_map-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Nimbus::WindMap Class Reference</div>  </div>
@@ -114,34 +115,443 @@ $(document).ready(function(){initNavTree('class_nimbus_1_1_wind_map.html','');})
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="_wind_map_8h_source.html">WindMap.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Nimbus::WindMap:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_wind_map__coll__graph.png" border="0" usemap="#_nimbus_1_1_wind_map_coll__map" alt="Collaboration graph"/></div>
+<map name="_nimbus_1_1_wind_map_coll__map" id="_nimbus_1_1_wind_map_coll__map">
+<area shape="rect" id="node2" href="class_nimbus_1_1_wind_map_1_1_arrow_catcher.html" title="Nimbus::WindMap::ArrowCatcher" alt="" coords="5,83,219,109"/><area shape="rect" id="node3" href="class_nimbus_1_1_event_listener.html" title="Nimbus::EventListener" alt="" coords="36,5,188,32"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map_1_1_arrow_catcher.html">ArrowCatcher</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a17e04fff72186c47ab462b227e66f589"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a17e04fff72186c47ab462b227e66f589"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>WindMap</b> (int mapSizeX, int mapSizeY)</td></tr>
-<tr class="separator:a17e04fff72186c47ab462b227e66f589"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46ec48d1a427d1e9cc6e4792c3ce9abc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a46ec48d1a427d1e9cc6e4792c3ce9abc"></a>
-Ogre::Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>getVector</b> (double x, double y)</td></tr>
-<tr class="separator:a46ec48d1a427d1e9cc6e4792c3ce9abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8177f022137dd402e8556542af4b0ffe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8177f022137dd402e8556542af4b0ffe"></a>
-Ogre::Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>getVector</b> (Ogre::Vector2 position)</td></tr>
-<tr class="separator:a8177f022137dd402e8556542af4b0ffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0558796726505c039964723dc199758"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa0558796726505c039964723dc199758"></a>
-Ogre::Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>getAreaAverage</b> (double topLeftx, double topLefty, double botRightx, double botRighty)</td></tr>
-<tr class="separator:aa0558796726505c039964723dc199758"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59704b0ca280417f81ba5a24f027240c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59704b0ca280417f81ba5a24f027240c"></a>
-Ogre::Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>getAreaAverage</b> (Ogre::Vector2 topLeft, Ogre::Vector2 botRight)</td></tr>
-<tr class="separator:a59704b0ca280417f81ba5a24f027240c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d970705e9662d1eaf30d2b8255234db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map.html#a1d970705e9662d1eaf30d2b8255234db">WindMap</a> (Ogre::Real worldSize, Ogre::Real resolution, Ogre::Vector2 offset, Ogre::Real minimumCurrentLength)</td></tr>
+<tr class="separator:a1d970705e9662d1eaf30d2b8255234db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aace3565379e73e4d3e51a839e0303ca9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map.html#aace3565379e73e4d3e51a839e0303ca9">update</a> (void)</td></tr>
+<tr class="separator:aace3565379e73e4d3e51a839e0303ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace7fb55e2bf4b84c626e5a8320636c22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map.html#ace7fb55e2bf4b84c626e5a8320636c22">addWindCurrent</a> (<a class="el" href="class_nimbus_1_1_wind_current.html">WindCurrent</a> *windCurrent)</td></tr>
+<tr class="separator:ace7fb55e2bf4b84c626e5a8320636c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a144f3641c21947ff92b7e31edc4309b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map.html#a144f3641c21947ff92b7e31edc4309b8">removeWindCurrent</a> (<a class="el" href="class_nimbus_1_1_wind_current.html">WindCurrent</a> *windCurrent)</td></tr>
+<tr class="separator:a144f3641c21947ff92b7e31edc4309b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a834a3e14ac672aff34b87dd9c0ffd1c0"><td class="memItemLeft" align="right" valign="top">Ogre::Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map.html#a834a3e14ac672aff34b87dd9c0ffd1c0">getWindVector</a> (Ogre::Real x, Ogre::Real y)</td></tr>
+<tr class="separator:a834a3e14ac672aff34b87dd9c0ffd1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad416df5053631fd3d1b6069c9216ea76"><td class="memItemLeft" align="right" valign="top">Ogre::Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map.html#ad416df5053631fd3d1b6069c9216ea76">getWindVector</a> (Ogre::Vector2 position)</td></tr>
+<tr class="separator:ad416df5053631fd3d1b6069c9216ea76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5365432675dfe4519830c3c6f42f742c"><td class="memItemLeft" align="right" valign="top">Ogre::Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map.html#a5365432675dfe4519830c3c6f42f742c">getAverageWindVector</a> (Ogre::Real topLeftx, Ogre::Real topLefty, Ogre::Real botRightx, Ogre::Real botRighty)</td></tr>
+<tr class="separator:a5365432675dfe4519830c3c6f42f742c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8786002bb753b2335d03850224cdc6f6"><td class="memItemLeft" align="right" valign="top">Ogre::Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map.html#a8786002bb753b2335d03850224cdc6f6">getAverageWindVector</a> (Ogre::Vector2 topLeft, Ogre::Vector2 botRight)</td></tr>
+<tr class="separator:a8786002bb753b2335d03850224cdc6f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0be30a09138b05a8718d2c83e7c69b0"><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="class_nimbus_1_1_wind_current.html">WindCurrent</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map.html#ab0be30a09138b05a8718d2c83e7c69b0">getWindCurrents</a> ()</td></tr>
+<tr class="separator:ab0be30a09138b05a8718d2c83e7c69b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2da367953c77490172c775bd4d065e3a"><td class="memItemLeft" align="right" valign="top">Ogre::Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map.html#a2da367953c77490172c775bd4d065e3a">getAlphaVector</a> ()</td></tr>
+<tr class="separator:a2da367953c77490172c775bd4d065e3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2df5c946eaa549c402b0738349d960b"><td class="memItemLeft" align="right" valign="top">Ogre::Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nimbus_1_1_wind_map.html#ad2df5c946eaa549c402b0738349d960b">getOffset</a> ()</td></tr>
+<tr class="separator:ad2df5c946eaa549c402b0738349d960b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a83d366c27cef5aa86d0793295259515e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a83d366c27cef5aa86d0793295259515e"></a>
-std::list&lt; <a class="el" href="class_nimbus_1_1_wind_current.html">WindCurrent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>currents</b></td></tr>
-<tr class="separator:a83d366c27cef5aa86d0793295259515e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a7ad57b8842682fdd7fa8ffeee8c869f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ad57b8842682fdd7fa8ffeee8c869f6"></a>
+<a class="el" href="class_nimbus_1_1_wind_map_1_1_arrow_catcher.html">Nimbus::WindMap::ArrowCatcher</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mArrowCatcher</b></td></tr>
+<tr class="separator:a7ad57b8842682fdd7fa8ffeee8c869f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores all information relating to wind movement Contains an VectorRow Contains an list of WindCurrents </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a1d970705e9662d1eaf30d2b8255234db"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WindMap::WindMap </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>worldSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>resolution</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::Vector2&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>minimumCurrentLength</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Creates a basic wind map. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">worldSize</td><td>The size of the world in world distance. Right now assumes everything to be square... could change </td></tr>
+    <tr><td class="paramname">resolution</td><td>The resolution of the vector map in terms of world coordinates. This value is the world distance between each wind vector in the vector map. </td></tr>
+    <tr><td class="paramname">offset</td><td>The offset to the center of the map. </td></tr>
+    <tr><td class="paramname">minimumCurrentLength</td><td>The minimum length of a current accepted by the map. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_wind_map_a1d970705e9662d1eaf30d2b8255234db_cgraph.png" border="0" usemap="#class_nimbus_1_1_wind_map_a1d970705e9662d1eaf30d2b8255234db_cgraph" alt=""/></div>
+<map name="class_nimbus_1_1_wind_map_a1d970705e9662d1eaf30d2b8255234db_cgraph" id="class_nimbus_1_1_wind_map_a1d970705e9662d1eaf30d2b8255234db_cgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_grid.html#a7773e2c1496781655b04eeb3d49ad4d6" title="Nimbus::Grid::initialize" alt="" coords="246,5,399,32"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ace7fb55e2bf4b84c626e5a8320636c22"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WindMap::addWindCurrent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_nimbus_1_1_wind_current.html">WindCurrent</a> *&#160;</td>
+          <td class="paramname"><em>windCurrent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a wind current to the wind current list. Any wind current shorter than mMinimumCurrentLength will not be added and an entry will be written to the log. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">windCurrent</td><td>A pointer to the wind current which should be added to the wind map. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_wind_map_ace7fb55e2bf4b84c626e5a8320636c22_cgraph.png" border="0" usemap="#class_nimbus_1_1_wind_map_ace7fb55e2bf4b84c626e5a8320636c22_cgraph" alt=""/></div>
+<map name="class_nimbus_1_1_wind_map_ace7fb55e2bf4b84c626e5a8320636c22_cgraph" id="class_nimbus_1_1_wind_map_ace7fb55e2bf4b84c626e5a8320636c22_cgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_wind_current.html#a3675ff54ac80b195f709bfc741520364" title="Nimbus::WindCurrent\l::length" alt="" coords="243,5,389,46"/><area shape="rect" id="node3" href="class_nimbus_1_1_wind_current.html#ac44745238e3c0871fb605d97d47069a3" title="Nimbus::WindCurrent\l::getPath" alt="" coords="243,70,389,111"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a2da367953c77490172c775bd4d065e3a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Vector2 Nimbus::WindMap::getAlphaVector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Unexpectedly gets the alpha vector. </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector, that's the alpha vector. I bet you weren't expecting that... </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5365432675dfe4519830c3c6f42f742c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Vector2 WindMap::getAverageWindVector </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>topLeftx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>topLefty</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>botRightx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>botRighty</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the average wind vector in the given area of map coordinates. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">topLeftx</td><td>The top left x coordinate in map coordinates </td></tr>
+    <tr><td class="paramname">topLefty</td><td>The top left y coordinate in map coordinates </td></tr>
+    <tr><td class="paramname">botRightx</td><td>The bottom right x coordinate in map coordinates </td></tr>
+    <tr><td class="paramname">botRighty</td><td>The bottom right y coordinate in map coordinates </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_wind_map_a5365432675dfe4519830c3c6f42f742c_cgraph.png" border="0" usemap="#class_nimbus_1_1_wind_map_a5365432675dfe4519830c3c6f42f742c_cgraph" alt=""/></div>
+<map name="class_nimbus_1_1_wind_map_a5365432675dfe4519830c3c6f42f742c_cgraph" id="class_nimbus_1_1_wind_map_a5365432675dfe4519830c3c6f42f742c_cgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_wind_map.html#a834a3e14ac672aff34b87dd9c0ffd1c0" title="Nimbus::WindMap::getWind\lVector" alt="" coords="257,5,442,46"/><area shape="rect" id="node3" href="class_nimbus_1_1_grid.html#adcbf1aebecd8103c2979c48d89255c0d" title="Nimbus::Grid::get" alt="" coords="491,12,615,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a8786002bb753b2335d03850224cdc6f6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Vector2 WindMap::getAverageWindVector </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::Vector2&#160;</td>
+          <td class="paramname"><em>topLeft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::Vector2&#160;</td>
+          <td class="paramname"><em>botRight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the average wind vector in the given area of map coordinates. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">topLeft</td><td>The top left corner of the area in map coordinates </td></tr>
+    <tr><td class="paramname">botRight</td><td>The bottom right corner of the area in map coordinates </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_wind_map_a8786002bb753b2335d03850224cdc6f6_cgraph.png" border="0" usemap="#class_nimbus_1_1_wind_map_a8786002bb753b2335d03850224cdc6f6_cgraph" alt=""/></div>
+<map name="class_nimbus_1_1_wind_map_a8786002bb753b2335d03850224cdc6f6_cgraph" id="class_nimbus_1_1_wind_map_a8786002bb753b2335d03850224cdc6f6_cgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_wind_map.html#a834a3e14ac672aff34b87dd9c0ffd1c0" title="Nimbus::WindMap::getWind\lVector" alt="" coords="257,5,442,46"/><area shape="rect" id="node3" href="class_nimbus_1_1_grid.html#adcbf1aebecd8103c2979c48d89255c0d" title="Nimbus::Grid::get" alt="" coords="491,12,615,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ad2df5c946eaa549c402b0738349d960b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Vector2 Nimbus::WindMap::getOffset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Gets the offset of the wind map to the center of the wind map </p>
+<dl class="section return"><dt>Returns</dt><dd>A Vector2 pointing to the center of the wind map </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab0be30a09138b05a8718d2c83e7c69b0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt; <a class="el" href="class_nimbus_1_1_wind_current.html">WindCurrent</a> * &gt; * WindMap::getWindCurrents </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the current list of wind currents. </p>
+
+</div>
+</div>
+<a class="anchor" id="a834a3e14ac672aff34b87dd9c0ffd1c0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Vector2 WindMap::getWindVector </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::Real&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the wind vector at the given map coordinates </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x coordinate in map coordinates of the wind vector to retrieve. </td></tr>
+    <tr><td class="paramname">y</td><td>The y coordinate in map coordinates of the wind vector to retrieve. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_wind_map_a834a3e14ac672aff34b87dd9c0ffd1c0_cgraph.png" border="0" usemap="#class_nimbus_1_1_wind_map_a834a3e14ac672aff34b87dd9c0ffd1c0_cgraph" alt=""/></div>
+<map name="class_nimbus_1_1_wind_map_a834a3e14ac672aff34b87dd9c0ffd1c0_cgraph" id="class_nimbus_1_1_wind_map_a834a3e14ac672aff34b87dd9c0ffd1c0_cgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_grid.html#adcbf1aebecd8103c2979c48d89255c0d" title="Nimbus::Grid::get" alt="" coords="241,12,365,39"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_wind_map_a834a3e14ac672aff34b87dd9c0ffd1c0_icgraph.png" border="0" usemap="#class_nimbus_1_1_wind_map_a834a3e14ac672aff34b87dd9c0ffd1c0_icgraph" alt=""/></div>
+<map name="class_nimbus_1_1_wind_map_a834a3e14ac672aff34b87dd9c0ffd1c0_icgraph" id="class_nimbus_1_1_wind_map_a834a3e14ac672aff34b87dd9c0ffd1c0_icgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_soaring.html#aa42d5160c47059c8b12953f3588ba12f" title="Nimbus::Soaring::update" alt="" coords="259,5,424,32"/><area shape="rect" id="node3" href="class_nimbus_1_1_wind_map.html#ad416df5053631fd3d1b6069c9216ea76" title="Nimbus::WindMap::getWind\lVector" alt="" coords="249,57,434,98"/><area shape="rect" id="node4" href="class_nimbus_1_1_wind_map.html#a5365432675dfe4519830c3c6f42f742c" title="Nimbus::WindMap::getAverage\lWindVector" alt="" coords="241,122,442,163"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ad416df5053631fd3d1b6069c9216ea76"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Vector2 WindMap::getWindVector </td>
+          <td>(</td>
+          <td class="paramtype">Ogre::Vector2&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the wind vector at the given map coordinates. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>The x and y coordinates in map coordinates of the wind vector to retrieve. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_wind_map_ad416df5053631fd3d1b6069c9216ea76_cgraph.png" border="0" usemap="#class_nimbus_1_1_wind_map_ad416df5053631fd3d1b6069c9216ea76_cgraph" alt=""/></div>
+<map name="class_nimbus_1_1_wind_map_ad416df5053631fd3d1b6069c9216ea76_cgraph" id="class_nimbus_1_1_wind_map_ad416df5053631fd3d1b6069c9216ea76_cgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_wind_map.html#a834a3e14ac672aff34b87dd9c0ffd1c0" title="Nimbus::WindMap::getWind\lVector" alt="" coords="241,5,426,46"/><area shape="rect" id="node3" href="class_nimbus_1_1_grid.html#adcbf1aebecd8103c2979c48d89255c0d" title="Nimbus::Grid::get" alt="" coords="475,12,599,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a144f3641c21947ff92b7e31edc4309b8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WindMap::removeWindCurrent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_nimbus_1_1_wind_current.html">WindCurrent</a> *&#160;</td>
+          <td class="paramname"><em>windCurrent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Removes a wind current from the current wind current list </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">windCurrent</td><td>A pointer to the wind current which should be deleted from the wind map. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aace3565379e73e4d3e51a839e0303ca9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WindMap::update </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Recalculates the vector map based on the current list of wind currents. </p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nimbus_1_1_wind_map_aace3565379e73e4d3e51a839e0303ca9_cgraph.png" border="0" usemap="#class_nimbus_1_1_wind_map_aace3565379e73e4d3e51a839e0303ca9_cgraph" alt=""/></div>
+<map name="class_nimbus_1_1_wind_map_aace3565379e73e4d3e51a839e0303ca9_cgraph" id="class_nimbus_1_1_wind_map_aace3565379e73e4d3e51a839e0303ca9_cgraph">
+<area shape="rect" id="node2" href="class_nimbus_1_1_grid.html#aefadf63295a206a72c65e39bc4771cf2" title="Nimbus::Grid::getXDimension" alt="" coords="231,5,423,32"/><area shape="rect" id="node3" href="class_nimbus_1_1_grid.html#aa35df9d30c89aea29115d59eef67a88b" title="Nimbus::Grid::getYDimension" alt="" coords="229,56,424,83"/><area shape="rect" id="node4" href="class_nimbus_1_1_grid.html#a15156d41f3030605dc9c796e2f9f4ef5" title="Nimbus::Grid::set" alt="" coords="265,107,389,133"/><area shape="rect" id="node5" href="class_nimbus_1_1_grid.html#adcbf1aebecd8103c2979c48d89255c0d" title="Nimbus::Grid::get" alt="" coords="265,157,389,184"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/Hazen/Documents/projects/Nimbus/src/<a class="el" href="_wind_map_8h_source.html">WindMap.h</a></li>
 <li>C:/Users/Hazen/Documents/projects/Nimbus/src/WindMap.cpp</li>
 </ul>
@@ -151,7 +561,7 @@ std::list&lt; <a class="el" href="class_nimbus_1_1_wind_current.html">WindCurren
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>Nimbus</b></li><li class="navelem"><a class="el" href="class_nimbus_1_1_wind_map.html">WindMap</a></li>
-    <li class="footer">Generated on Wed Apr 2 2014 16:01:25 for Nimbus by
+    <li class="footer">Generated on Thu Apr 17 2014 14:50:00 for Nimbus by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
