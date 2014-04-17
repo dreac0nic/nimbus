@@ -1,6 +1,7 @@
 #ifndef NIMBUS_TILE_H
 #define NIMBUS_TILE_H
 
+<<<<<<< HEAD
 #include <vector>
 
 #include <OGRE/OgreVector2.h>
@@ -8,6 +9,8 @@
 
 namespace Nimbus
 {
+
+	typedef boost::polygon::voronoi_diagram_traits<double>::cell_type cellType;
 	//Temporary; fill or replace
 	enum Biome { MOUNTAIN, DESERT, COAST, OCEAN };
 
@@ -29,15 +32,32 @@ namespace Nimbus
 		  @param temper Tile Temperature
 		  @param grnd Tile Ground Saturation
 		*/
-		Tile(double humid, double temper, double grnd, Point *loc, double elev);
+		Tile(const cellType cell);
 
+		
+		
 		/* Destructor! */
-
+		~Tile();
 		
 		// MEMBER FUNCTIONS --
 
 		
-		/*Return humidity of a tile*/
+		/** Returns a pointer to the cell that identifies this tile.
+		 */
+		cellType* getCell(void);
+
+		/** Returns a pointer to the list of neighbouring tiles. 
+		 */
+		std::vector<Tile*>* getNeighbours(void);
+
+		/** A fire-once function to set the neighbours of a tile.
+		 In normal operation, this should only be called once after generation.
+
+		 @param neighbours A vector of Tiles that neighbour this tile, passed in by map.
+		 */
+		void setNeighbours(std::vector<Tile*> neighbours);
+		
+		/**Return humidity of a tile*/
 		double getHumidity();
 		
 		/*Returns Temperature of a tile*/
@@ -55,6 +75,9 @@ namespace Nimbus
 		/*called by outside function to let tile know if */
 		void rainCloud();
 
+		/*Initializes a tiles stats*/
+		void tileInit(double humid, double temper, double grnd, double elev);
+
 		/*Changes type of a tile into a string and returns that string*/
 		std::string getType();
 
@@ -64,7 +87,11 @@ namespace Nimbus
 
 	private:
 		//MEMBER VARIABLES
+		/** The cell that this tile is represented by. */
+		cellType* mCell;
 
+		/** A list of all neighbouring tiles that we can traverse. */
+		std::vector<Tile*> mNeighbours;
 
 		/* Holds this tile's elevation. */
 		double elevation;
@@ -72,8 +99,6 @@ namespace Nimbus
 		/*Holds this tile's biome.*/
 		int biome;
 
-		/*Voronoi cell pointer*/
-		void voroCellPoin;
 		
 		void setHumidity(double humi);
 		void setTemp(double temp);
@@ -130,3 +155,4 @@ namespace Nimbus
 }
 
 #endif
+

@@ -18,20 +18,9 @@ Tile::Tile()
 
 
 // create function with inputs for humidity, temperature, ground saturation, Point, and elevation respectively
-Tile::Tile(double humid, double temper, double grnd, double elev)
+Tile::Tile(const cellType cell)
 {
-humidity = humid;
-temp = temper;
-grndSat = grnd;
-elevation = elev;
-nextHumidity = humidity;
-nextTemperature = temp;
-nextGrndSat = grndSat;
-biomeX=0;
-biomeY=0;
-biomeZ=0;
-biome=biomeArray[biomeX][biomeY][biomeZ];
-raining=false;
+
 }
 	
 Tile::~Tile(void)
@@ -79,6 +68,21 @@ Tile::~Tile(void)
 		grndSat= grnd;
 	}
 
+	void Tile::tileInit(double humid, double temper, double grnd, double elev)
+	{
+	humidity = humid;
+	temp = temper;
+	grndSat = grnd;
+	elevation = elev;
+	nextHumidity = humidity;
+	nextTemperature = temp;
+	nextGrndSat = grndSat;
+	biomeX=0;
+	biomeY=0;
+	biomeZ=0;
+	biome=biomeArray[biomeX][biomeY][biomeZ];
+	raining=false;
+	}
 	void Tile::updateTile()
 	{
 		double tempGrnd=0,tempTemp=0,tempHumi=0;

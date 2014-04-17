@@ -8,7 +8,7 @@ namespace Nimbus
 {
 	class GameEntity;
 	class GameEntitySet;
-	class Terrain;
+	class Map;
 
 	/** This class aggregates the entire world of Nimbus.
 	 
@@ -51,8 +51,8 @@ namespace Nimbus
 		Ogre::SceneNode* mWorldNode;
 		Ogre::SceneManager* mSceneManager;
 
-		// The generated world terrain
-		Terrain* mTerrain;
+		// The generated world map
+		Map* mMap;
 
 	public:
 		World(Ogre::SceneManager* sceneManager);

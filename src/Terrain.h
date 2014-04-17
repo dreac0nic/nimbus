@@ -3,10 +3,11 @@
 
 #include <boost/polygon/voronoi.hpp>
 #include "Point.h"
-#include "World.h"
 
 namespace Nimbus
 {
+	class World;
+
 	class Terrain
 	{
 	public:
