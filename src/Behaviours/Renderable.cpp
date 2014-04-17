@@ -93,7 +93,9 @@ void Nimbus::Renderable::startup(void)
 	this->mNode->setScale(mScale.x, mScale.y, mScale.z);
 
 	// Register the position update listener
-	this->mEntityEventSystem->registerListener(mPositionListener, EventSystem::EventType::ENTITY_TRANSLATED);
+	filtermap entityFilter;
+	entityFilter["EntityId"] = &this->mParentId;
+	this->mEntityEventSystem->registerListener(mPositionListener, EventSystem::EventType::ENTITY_TRANSLATED, entityFilter);
 }
 
 void Nimbus::Renderable::update(void)

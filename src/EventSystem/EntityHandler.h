@@ -25,8 +25,8 @@ namespace Nimbus
 
 		// From EventTypeHandler
 		virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
-		virtual void registerListener(EventListener* listener, filtermap filter);
-		virtual void unregisterListener(EventListener* listener, filtermap filter);
+		virtual void registerListener(EventListener* listener, filtermap filter = filtermap());
+		virtual void unregisterListener(EventListener* listener, filtermap filter = filtermap());
 		virtual bool isEmpty();
 	};
 }
