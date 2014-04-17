@@ -50,38 +50,41 @@ void EntityHandler::registerListener(EventListener* listener, filtermap filter)
 		// Add the listener to the entity specific list
 		mListeners[entityId].push_back(listener);
 	}
-
-	// Register for the global case if not only local
-	if(filter.find("LocalOnly") == filter.end())
+	// If the filter contains no entity id
+	else
 	{
-		// If the listener hasn't yet been added to the global list
-		if(std::find(mListeners[0].begin(), mListeners[0].end(), listener) == mListeners[0].end())
-		{
-			// Add the listener to the global list
-			mListeners[0].push_back(listener);
-		}
+		// Add the listener to the generic list
+		mListeners[0].push_back(listener);
 	}
+
 }
 
 void EntityHandler::unregisterListener(EventListener* listener, filtermap filter)
 {
 	std::list<EventListener*>::iterator element;
 
+	GameEntityId entityId;
+
 	// Delete the listener from the indicated entity id list
 	if(filter.find("EntityId") != filter.end())
 	{
 		// Get the game entity id
-		GameEntityId entityId = *static_cast<GameEntityId*>(filter["EntityId"]);
+		entityId = *static_cast<GameEntityId*>(filter["EntityId"]);
+	}
+	else
+	{
+		// Or from the generic list, if no entity Id was specified
+		entityId = 0;
+	}
 
-		// Find the listener in the given list
-		element = find(mListeners[entityId].begin(), mListeners[entityId].end(), listener);
+	// Find the listener in the given list
+	element = find(mListeners[entityId].begin(), mListeners[entityId].end(), listener);	
 
-		// If the listener was found
-		if(element != mListeners[entityId].end())
-		{
-			// Remove the listener
-			mListeners[entityId].erase(element);
-		}
+	// If the listener was found
+	if(element != mListeners[entityId].end())
+	{
+		// Remove the listener
+		mListeners[entityId].erase(element);
 	}
 }
 
