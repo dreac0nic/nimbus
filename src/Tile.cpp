@@ -42,10 +42,10 @@ Tile::~Tile(void)
 	
 	//=======
 
-void Tile::rainCloud()
-{
-	raining=!raining;
-}
+	void Tile::rainCloud()
+	{
+		raining=!raining;
+	}
 
 
 
@@ -97,6 +97,14 @@ void Tile::rainCloud()
 		tempTemp = tempTemp/this->neighbors.size();
 		tempHumi = tempHumi/this->neighbors.size();
 
+		//Todo add functionallity for raining and wind
+
+		
+
+
+		//Based off of wind power, tile loses .15* wind power
+		//Based off of wind power, tile gains .1 * wind power
+
 		if(tempGrnd >grndSat)
 		{nextGrndSat = grndSat +((tempGrnd - grndSat)/2);}
 		if(tempGrnd <grndSat)
@@ -110,7 +118,14 @@ void Tile::rainCloud()
 		if(tempHumi <humidity)
 		{nextHumidity = humidity -((humidity - tempHumi)/2);}
 
-
+		//if raining, tile gains 10 % of its current humidity
+		//if raining, tile gains 20% of its current ground sat
+		//if raining, tile is moves towards 50 temp by 1
+		if(raining)
+		{
+		
+		}
+		
 	}
 
 	void Tile::updateVar()
@@ -153,6 +168,8 @@ void Tile::rainCloud()
 		{biomeZ=1;}
 		if(temp>77)
 		{biomeZ=2;}
+
+		biome=biomeArray[biomeX][biomeY][biomeZ];
 	}
 
 	std::string Tile::getType()

@@ -59,7 +59,7 @@ namespace Nimbus
 		std::string getType();
 
 		/*Gives humidity to a tile based on wind*/
-		void giveHumi(Tile reciever);
+		void giveHumi();
 
 
 	private:
