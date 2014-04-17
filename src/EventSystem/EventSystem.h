@@ -10,6 +10,8 @@
 
 namespace Nimbus
 {
+	typedef int GameEntityId;
+
 	/** The EventSystem framework handles the receving and dispatching of events to registered EventListeners. 
 	 
 	 The EventSystem is responsible for dispatching and allowing the firing of events to the registered EventListeners. 
@@ -256,7 +258,7 @@ namespace Nimbus
 		 @return
 		 True for a successful registration, false if the listener could not be registered.
 		 */
-		bool registerListener(EventListener* listener, EventType type, filtermap filter);
+		bool registerListener(EventListener* listener, EventType type, filtermap filter = filtermap());
 
 		/** Used to deregister a previously registered EventListener.
 		 
@@ -268,7 +270,7 @@ namespace Nimbus
 		  filter The filter for the event which this listener is listening to.
 
 		  */
-		void unregisterListener(EventListener* listener, EventType type, filtermap filter);
+		void unregisterListener(EventListener* listener, EventType type, filtermap filter = filtermap());
 
 		/** Fires an Event to the EventSystem to distribute to the appropriate listeners.
 		 

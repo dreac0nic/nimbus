@@ -11,6 +11,8 @@ namespace Nimbus
 	typedef int GameEntityId;
 	typedef std::string BehaviourType;
 
+	class EventSystem;
+
 	/** THE ULTIMATE STUBBINESS */
 	class Behaviour
 	{

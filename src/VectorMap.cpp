@@ -74,7 +74,7 @@ namespace Nimbus
 				positionPayload["FacingVector"] = &this->map[x*length + y];
 
 				// Fire off the event
-				EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_ENTITY, positionPayload);
+				EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, positionPayload);
 			}
 		}
 	}

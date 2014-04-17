@@ -40,7 +40,7 @@ EventSystem::~EventSystem(void)
 	}
 }
 
-bool EventSystem::registerListener(EventListener* listener, EventType type, filtermap filter = filtermap())
+bool EventSystem::registerListener(EventListener* listener, EventType type, filtermap filter)
 {
 	// If there are no handlers for this type of event
 	if(mHandlers[type].size() <= 0)
@@ -72,7 +72,7 @@ bool EventSystem::registerListener(EventListener* listener, EventType type, filt
 	return true;
 }
 
-void EventSystem::unregisterListener(EventListener* listener, EventType type, filtermap filter = filtermap())
+void EventSystem::unregisterListener(EventListener* listener, EventType type, filtermap filter)
 {
 	// All handlers are empty (assume true until proven false)
 	bool empty = true;
