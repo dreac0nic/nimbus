@@ -47,7 +47,7 @@ Map::Map(void)
 			currentTile->corners.push_back(temp);
 
 			temp = new Corner();
-			temp->loc = new Ogre::Vector2(localOrigin.x + cornerSpacing.x, localOrigin.z - cornerSpacing.z);
+			temp->loc = new Ogre::Vector2(localOrigin.x - cornerSpacing.x, localOrigin.z + cornerSpacing.z);
 			temp->elevation = localOrigin.y;
 			currentTile->corners.push_back(temp);
 
@@ -57,7 +57,7 @@ Map::Map(void)
 			currentTile->corners.push_back(temp);
 
 			temp = new Corner();
-			temp->loc = new Ogre::Vector2(localOrigin.x - cornerSpacing.x, localOrigin.z + cornerSpacing.z);
+			temp->loc = new Ogre::Vector2(localOrigin.x + cornerSpacing.x, localOrigin.z - cornerSpacing.z);
 			temp->elevation = localOrigin.y;
 			currentTile->corners.push_back(temp);
 
