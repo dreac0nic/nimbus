@@ -106,7 +106,6 @@ bool TestMode::initialize()
 		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
 	material->getTechnique(0)->getPass(0)->setVertexColourTracking(TVC_AMBIENT);
-	material->setCullingMode(CULL_NONE);
 
 	// Create entity and add to the scene.
 	MeshPtr tileMesh = MeshManager::getSingleton().createManual("tileMesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
