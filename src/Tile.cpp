@@ -50,7 +50,7 @@ Tile::~Tile(void)
 
 	double Tile::getTemp()
 	{
-		return temp;
+		return temperature;
 	}
 
 	double Tile::getSat()
@@ -65,7 +65,7 @@ Tile::~Tile(void)
 
 	void Tile::setTemp(double temper)
 	{
-		temp= temper;
+		temperature = temper;
 	}
 
 	void Tile::setSat(double grnd)
@@ -76,11 +76,11 @@ Tile::~Tile(void)
 	void Tile::tileInit(double humid, double temper, double grnd, double elev)
 	{
 	humidity = humid;
-	temp = temper;
+	temperature = temper;
 	grndSat = grnd;
 	elevation = elev;
 	nextHumidity = humidity;
-	nextTemperature = temp;
+	nextTemperature = temperature;
 	nextGrndSat = grndSat;
 	biomeX=0;
 	biomeY=0;
@@ -118,10 +118,10 @@ Tile::~Tile(void)
 		{nextGrndSat = grndSat +((tempGrnd - grndSat)/2);}
 		if(tempGrnd <grndSat)
 		{nextGrndSat = grndSat -((grndSat - tempGrnd)/2);}
-		if(tempTemp >temp)
-		{nextTemperature = temp +((tempTemp - temp)/2);}
-		if(tempTemp <temp)
-		{nextTemperature = temp -((temp - tempTemp/2));}
+		if(tempTemp > temperature)
+		{nextTemperature = temperature +((tempTemp - temperature)/2);}
+		if(tempTemp < temperature)
+		{nextTemperature = temperature -((temperature - tempTemp/2));}
 		if(tempHumi >humidity)
 		{nextHumidity = humidity +((tempHumi - humidity)/2);}
 		if(tempHumi <humidity)
@@ -129,17 +129,17 @@ Tile::~Tile(void)
 
 		//if raining, tile gains 10 % of its current humidity
 		//if raining, tile gains 20% of its current ground sat
-		//if raining, tile is moves towards 50 temp by 1
+		//if raining, tile is moves towards 50 temperature by 1
 		if(raining)
 		{
 		nextHumidity = nextHumidity + (.1 * humidity);
 		nextGrndSat = nextGrndSat + (.2 * grndSat);
-		if(temp > 50)
+		if(temperature > 50)
 			{
 				nextTemperature= nextTemperature -1
 			}
 
-		if(temp > 50)
+		if(temperature > 50)
 			{
 				nextTemperature = nextTemperature + 1
 			}
@@ -150,7 +150,7 @@ Tile::~Tile(void)
 	void Tile::updateVar()
 	{
 		grndSat=nextGrndSat;
-		temp = nextTemperature;
+		temperature = nextTemperature;
 		humidity=nextHumidity;
 	}
 
@@ -165,27 +165,27 @@ Tile::~Tile(void)
 		//Threshold is 10
 
 		//Changes for Temperature
-		if(temp<23)
+		if(temperature < 23)
 		{biomeX=0;}
-		if(temp>43 && temp<56 )
+		if(temperature > 43 && temperature < 56)
 		{biomeX=1;}
-		if(temp>77)
+		if(temperature > 77)
 		{biomeX=2;}
 
 		//Changes For Ground Saturation
-		if(temp<23)
+		if(temperature < 23)
 		{biomeY=0;}
-		if(temp>43 && temp<56 )
+		if(temperature > 43 && temperature < 56)
 		{biomeY=1;}
-		if(temp>77)
+		if(temperature > 77)
 		{biomeY=2;}
 
 		//Changes for Humidity
-		if(temp<23)
+		if(temperature < 23)
 		{biomeZ=0;}
-		if(temp>43 && temp<56 )
+		if(temperature > 43 && temperature < 56)
 		{biomeZ=1;}
-		if(temp>77)
+		if(temperature > 77)
 		{biomeZ=2;}
 
 		biome=biomeArray[biomeX][biomeY][biomeZ];

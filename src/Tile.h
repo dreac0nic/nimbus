@@ -124,7 +124,7 @@ namespace Nimbus
 		double humidity;
 		
 		/*Holds this tile's temperature*/
-		double temp;
+		double temperature;
 		
 		/*Holds this tile's ground Saturation*/
 		double grndSat;
