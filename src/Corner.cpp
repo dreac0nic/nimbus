@@ -25,7 +25,7 @@ std::string Corner::str(void)
 	return buffer.str();
 }
 
-Ogre::Vector3 Corner::getVector3(void)
+Ogre::Vector3 Corner::vec3(void)
 {
 	Ogre::Vector3 pointVector3((Ogre::Real)this->loc->x, (Ogre::Real)this->elevation, (Ogre::Real)this->loc->y);
 

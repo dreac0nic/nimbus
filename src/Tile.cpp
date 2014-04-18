@@ -33,7 +33,7 @@ void Tile::toString(void)
 
 	for(vector<Corner*>::iterator it = this->corners.begin(); it != this->corners.end(); ++it)
 	{
-		Vector3 temp = (*it)->getVector3();
+		Vector3 temp = (*it)->vec3();
 		std::cout << " [" << temp.x << ", " << temp.y << ", " << temp.z << "]";
 	}
 
@@ -68,7 +68,7 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 	for(vector<Corner*>::iterator it = this->corners.begin(); it != this->corners.end(); ++it) {
 		// Add to the next point to the array.
 		// -- Position
-		Vector3 vector = (*it)->getVector3();
+		Vector3 vector = (*it)->vec3();
 
 		vertices[index++] = vector.x;
 		vertices[index++] = vector.y;

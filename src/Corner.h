@@ -39,7 +39,7 @@ namespace Nimbus
 		std::string str(void);
 
 		/* Convert the corner to a OGRE Vector3. */
-		Ogre::Vector3 getVector3(void);
+		Ogre::Vector3 vec3(void);
 	};
 }
 
