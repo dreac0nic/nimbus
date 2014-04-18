@@ -23,7 +23,7 @@ Map::Map(void)
 	Vector3 spacing = Vector3(1.0f, 1.0, 1.0f);
 	Vector3 cornerSpacing = spacing/2;
 	
-	Vector3 midOffset = (spacing*numberOfPoints)/2.0f;
+	Vector3 midOffset = (spacing*(Ogre::Real)numberOfPoints)/2.0f;
 	midOffset.y = 0.0f;
 
 	// Generate the points.

@@ -19,7 +19,7 @@ void Corner::toString()
 
 Ogre::Vector3 Corner::getVector3(void)
 {
-	Ogre::Vector3 pointVector3();
+	Ogre::Vector3 pointVector3((Ogre::Real)this->loc->x, (Ogre::Real)this->elevation, (Ogre::Real)this->loc->y);
 
-	return Ogre::Vector3(this->loc->x, this->elevation, this->loc->y);
+	return pointVector3;
 }

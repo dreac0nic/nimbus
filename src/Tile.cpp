@@ -54,7 +54,7 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 	// Manually add center vertex.
 	// -- Position (ord: x, y, z)
 	vertices[index++] = this->loc.x;
-	vertices[index++] = this->elevation;
+	vertices[index++] = (Ogre::Real)(this->elevation);
 	vertices[index++] = this->loc.y;
 
 	// -- Normal (ord: x, y, z)
