@@ -4,6 +4,7 @@
 #include <OgreSceneManager.h>
 
 #include "Manager.h"
+#include "World.h"
 #include "WindManager.h"
 
 namespace Nimbus
@@ -19,9 +20,10 @@ namespace Nimbus
 	private:
 		// The Wind manager
 		WindManager* mWindManager;
+		World* mWorld;
 
 	public:
-		EnvironmentManager(Ogre::SceneManager* sceneManager);
+		EnvironmentManager(Ogre::SceneManager* sceneManager, World* world);
 		virtual ~EnvironmentManager(void);
 
 		// From Nimbus::Manager

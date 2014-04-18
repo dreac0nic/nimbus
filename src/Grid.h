@@ -37,6 +37,22 @@ namespace Nimbus
 		{
 		}
 
+		/** Initializes the entire grid to the given value.
+			@param value The value to which the entire grid should be initialized.
+		*/
+		void initialize(T value)
+		{
+			grid.assign(xLength * yLength, value);
+		}
+
+		/** Erases all the elements in the grid
+			(though it may not delete them if they're pointers)
+		*/
+		void erase()
+		{
+			grid.clear();
+		}
+
 		/** Gets element from location (x, y)
 			@param posx The x position of the element
 			@param posy The y position of the element

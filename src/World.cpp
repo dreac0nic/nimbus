@@ -6,13 +6,14 @@
 
 using namespace Nimbus;
 
-World::World(Ogre::SceneManager* sceneManager)
+World::World(Ogre::SceneManager* sceneManager):
+	worldBounds(Ogre::Real(1000), Ogre::Real(1000))
 {
 	idCounter = 0;
 	this->mSceneManager = sceneManager;
 	this->mWorldNode = mSceneManager->createSceneNode();
 	this->mEntities = new GameEntitySet();
-	this->mWindMap = new WindMap(1000,1000);
+	this->mWindMap = new WindMap(worldBounds.x, 50.0F /* 50 is an arbitrary debug value. CHANGE THIS. */, worldBounds/2.0F, 5.0f);
 }
 
 World::~World(void)

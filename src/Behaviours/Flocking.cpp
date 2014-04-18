@@ -5,14 +5,14 @@
 using namespace Nimbus;
 using namespace Ogre;
 
-Flocking::Flocking(BehaviourType type, World* world) :
-	Behaviour(type, world)
+Flocking::Flocking(BehaviourType type, World* world, EventSystem* eventSystem) :
+	Behaviour(type, world, eventSystem)
 {
 	this->init(Real(1.0), Real(0.1));
 }
 
-Flocking::Flocking(BehaviourType type, World* world, ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(type, world, initializingSettings)
+Flocking::Flocking(BehaviourType type, World* world, ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem):
+	Behaviour(type, world, initializingSettings, eventSystem)
 {
 	stringstream optionsParser;
 
@@ -22,22 +22,22 @@ Flocking::Flocking(BehaviourType type, World* world, ConfigFile::SettingsMultiMa
 	// Load the influence factor for the flocking group
 	if(initializingSettings->find("influence") != initializingSettings->end())
 	{
-		optionsParser = stringstream(initializingSettings->find("influence")->second);
+        optionsParser.str(initializingSettings->find("influence")->second);
 		optionsParser >> influenceFactor;
 	}
 
 	// Load the override factor for the flocking group
 	if(initializingSettings->find("override") != initializingSettings->end())
 	{
-		optionsParser = stringstream(initializingSettings->find("override")->second);
+        optionsParser.str(initializingSettings->find("override")->second);
 		optionsParser >> overrideFactor;
 	}
 
 	this->init(influenceFactor, overrideFactor);
 }
 
-Flocking::Flocking(Flocking* other, World* world, int id) :
-	Behaviour(other, world, id)
+Flocking::Flocking(Flocking* other, World* world, int id, EventSystem* eventSystem) :
+	Behaviour(other, world, id, eventSystem)
 {
 	this->init(other->mComponentInfluenceFactor, other->mComponentOverrideFactor);
 }
@@ -68,9 +68,12 @@ void Flocking::init(Real influenceFactor, Real overrideFactor)
 void Flocking::startup(void)
 {
 	// Register the tick listener
-	EventSystem::getSingleton()->registerListener(mUpdateListener, EventSystem::EventType::FLOCK_UPDATE);
-	EventSystem::getSingleton()->registerListener(mSoarListener, EventSystem::EventType::SOAR_ENTITY);
-	EventSystem::getSingleton()->registerListener(mTickListener, EventSystem::EventType::TICK);
+	filtermap entityFilter;
+	entityFilter["EntityId"] = &this->mParentId;
+
+	EventSystem::getSingleton()->registerListener(mUpdateListener, EventSystem::EventType::FLOCK_UPDATE, entityFilter);
+	EventSystem::getSingleton()->registerListener(mSoarListener, EventSystem::EventType::SOAR_ENTITY, entityFilter);
+	EventSystem::getSingleton()->registerListener(mTickListener, EventSystem::EventType::TICK, entityFilter);
 }
 
 void Flocking::update(void)
@@ -85,21 +88,21 @@ void Flocking::shutdown(void)
 	*/
 }
 
-Behaviour* Flocking::clone(ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Flocking::clone(ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem)
 {
-	return new Flocking(this->mBehaviourType, this->mWorld, initializingSettings);
+	return new Flocking(this->mBehaviourType, this->mWorld, initializingSettings, eventSystem);
 }
 
-Behaviour* Flocking::clone(int id)
+Behaviour* Flocking::clone(int id, EventSystem* eventSystem)
 {
-	return new Flocking(this, this->mWorld, id);
+	return new Flocking(this, this->mWorld, id, eventSystem);
 }
 
 void Flocking::SoarListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Get the entity id
 	GameEntityId entityId = *static_cast<GameEntityId*>(payload["EntityId"]);
-
+	
 	// Return if we do not have this entity id in our entity list
 	if(mParent->mEntities.find(entityId) == mParent->mEntities.end())
 	{
@@ -151,7 +154,7 @@ void Flocking::TickListener::handleEvent(payloadmap payload, EventListener* resp
 		// Change the translation vector of the entity based on the new direction
 		translatePayload["EntityId"] = &entityId;
 		translatePayload["PositionDelta"] = &delta;
-		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::BEGIN_TRANSLATE_ENTITY, translatePayload);
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, translatePayload);
 	}
 }
 

@@ -21,6 +21,7 @@ EntityManager::~EntityManager(void)
 	delete this->mEntityFactory;
 }
 
+// Ensures world is initialized only after EntityManager is prepared
 void EntityManager::initialize(void)
 {
 	EventSystem::getSingleton()->registerListener(this->mCreateEntityListener, EventSystem::EventType::CREATE_ENTITY);
@@ -111,21 +112,20 @@ void Nimbus::EntityManager::CreateEntityListener::handleEvent(payloadmap payload
 			}
 
 			// Fire the event to set the position
-			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_ENTITY, positionalPayload);
+			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, positionalPayload);
 		}
 
-		// If there is a responder, send a response
 		if(responder != NULL)
 		{
-			// Set up necessary payload variables
-			payloadmap responderPayload;
+			// Create the entity ID payload variables
+			payloadmap entityIdPayload;
 			GameEntityId entityId = entity->getEntityId();
 
-			// Load the payload
-			responderPayload["EntityId"] = &entityId;
+			// Store the id in the payload
+			entityIdPayload["EntityId"] = &entityId;
 
-			// Fire off the response
-			responder->handleEvent(responderPayload);
+			// Call the responder
+			responder->handleEvent(entityIdPayload);
 		}
 	}
 }
@@ -178,7 +178,7 @@ void EntityManager::TickListener::generateCloudGroups()
 	{
 		// Fire off a position query
 		entityId = (*currentCloud)->getEntityId();
-		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::POSITION_QUERY, queryPayload, mParent->mPositionResponseListener);
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATION_QUERY, queryPayload, mParent->mPositionResponseListener);
 
 		// Store the position
 		positions[entityId] = mParent->mPositionResponseListener->getPosition();

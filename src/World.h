@@ -35,11 +35,15 @@ namespace Nimbus
 	 member variable for the root of the system so that the entire game world is
 	 aggregated by this class.
 	 */
+
 	class World
 	{
 	private:
 		// The counter for each thing that we add to the world
 		int idCounter;
+
+		// Bounds of World
+		Ogre::Vector2 worldBounds;
 
 		// The list that keeps track of all entities currently in the world
 		GameEntitySet* mEntities;
@@ -61,6 +65,7 @@ namespace Nimbus
 		void addEntity(GameEntity* entity);
 		Ogre::SceneNode* getWorldNode() { return this->mWorldNode; }
 		Ogre::SceneManager* getSceneManager() { return this->mSceneManager; }
+		Ogre::Vector2 getWorldBounds() { return this->worldBounds; } 
 	};
 
 }

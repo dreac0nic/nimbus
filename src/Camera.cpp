@@ -36,7 +36,9 @@ Nimbus::Camera::~Camera()
 
 void Nimbus::Camera::initialize(SceneManager* sceneMgr)
 {
-	initialize(sceneMgr, &Vector3(0, 50, 80), &Vector3(0,0,-100));
+    Vector3 position = Vector3(0,300,0);
+    Vector3 facing = Vector3(0,-300,0);
+    initialize(sceneMgr, &position, &facing);
 }
 
 void Nimbus::Camera::initialize(SceneManager* sceneMgr, Vector3* position, Vector3* facingVector)
@@ -69,7 +71,7 @@ void Nimbus::Camera::initialize(SceneManager* sceneMgr, Vector3* position, Vecto
 	// Register the render window listener
 	WindowEventUtilities::addWindowEventListener(NimbusApplication::getRenderWindow(), this);
 
-	EventSystem::getSingleton()->registerListener(this->mMousePositionListener, EventSystem::EventType::MOUSE_POSITION);
+	EventSystem::getSingleton()->registerListener(this->mMousePositionListener, EventSystem::EventType::MOUSE_POSITION_UPDATE);
 }
 
 void Nimbus::Camera::update(void)
@@ -140,36 +142,26 @@ void Nimbus::Camera::MousePositionListener::handleEvent(payloadmap payload, Even
 		Vector2 screenPosition = *static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
 		Vector3 accelerationVector = Vector3::ZERO;
 
-		std::cout << "I'z a cow ";
-
 		// Going left
 		if(screenPosition.x < threshold)
 		{
 			accelerationVector -= Vector3::UNIT_X;
-
-			std::cout << "goin leftz\n";
 		}
 		// Going right
 		else if(screenPosition.x > mParent->mViewport->getActualWidth() - threshold)
 		{
 			accelerationVector += Vector3::UNIT_X;
-
-			std::cout << "goin right\n";
 		}
 		
 		// Going up
 		if(screenPosition.y < threshold)
 		{
 			accelerationVector -= Vector3::UNIT_Z;
-
-			std::cout << "goin up\n";
 		}
 		// Going down
 		else if(screenPosition.y > mParent->mViewport->getActualHeight() - threshold)
 		{
 			accelerationVector += Vector3::UNIT_Z;
-
-			std::cout << "goin down\n";
 		}
 
 		if(accelerationVector == Vector3::ZERO)

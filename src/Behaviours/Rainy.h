@@ -22,22 +22,25 @@ namespace Nimbus
 		/** Default constructor, taking a world pointer.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
+			@param eventSystem A pointer to the parent entity's event system.
 		*/
-		Rainy(BehaviourType type, World* world);
+		Rainy(BehaviourType type, World* world, EventSystem* eventSystem);
 
 		/** Constructor based of a set of initial settings.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 			@param intitializingSettings A map of settings used to construct the intial entity.
+			@param eventSystem A pointer to the parent entity's event system.
 		*/
-		Rainy(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+		Rainy(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem);
 
 		/** Constructor based on another Rainy behaviour.
 			@param other A pointer to the other Rainy behaviour.
 			@param world A pointer to the game world.
 			@param id The id of the parent entity holding this behaviour.
+			@param eventSystem A pointer to the parent entity's event system.
 		*/
-		Rainy(Rainy* other, World* world, int id);
+		Rainy(Rainy* other, World* world, int id, EventSystem* eventSystem);
 
 		/** Virtual destructor for destroying things. */
 		virtual ~Rainy(void);
@@ -55,12 +58,12 @@ namespace Nimbus
 		/** Duplicates the entity using the settings given.
 			Currently merely returns a pointer given by the constructor.
 		*/
-		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem);
 
 		/** Duplicates the entity based on the current copy.
 			This is used to enable use of the prototype pattern.
 		*/
-		virtual Behaviour* clone(int id);
+		virtual Behaviour* clone(int id, EventSystem* eventSystem);
 	};
 }
 

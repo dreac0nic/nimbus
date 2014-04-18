@@ -5,7 +5,7 @@
 
 #include "EntityFactory.h"
 #include "./Behaviours/Renderable.h"
-#include "./Behaviours/Positional.h"
+#include "./Behaviours/Transformational.h"
 #include "./Behaviours/Soaring.h"
 #include "./Behaviours/Flocking.h"
 
@@ -29,10 +29,10 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 
 	// Load the behaviour prototype list
 	this->mBehaviourInstances.clear();
-	this->mBehaviourInstances["Renderable"] = new Renderable("Renderable", world);
-	this->mBehaviourInstances["Positional"] = new Positional("Positional", world);
-	this->mBehaviourInstances["Soaring"] = new Soaring("Soaring", world);
-	this->mBehaviourInstances["Flocking"] = new Flocking("Flocking", world);
+	this->mBehaviourInstances["Renderable"] = new Renderable("Renderable", world, NULL);
+	this->mBehaviourInstances["Transformational"] = new Transformational("Transformational", world, NULL);
+	this->mBehaviourInstances["Soaring"] = new Soaring("Soaring", world, NULL);
+	this->mBehaviourInstances["Flocking"] = new Flocking("Flocking", world, NULL);
 
 	logBuilder << "(Nimbus) Loading game entity types from " << filePathsFile;
 	LogManager::getSingleton().logMessage(logBuilder.str());
@@ -99,7 +99,7 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 						LogManager::getSingleton().logMessage(logBuilder.str());
 						logBuilder.str("");
 
-						entity->addBehaviour(this->mBehaviourInstances[entitySectionType]->clone(entitySettings),
+						entity->addBehaviour(this->mBehaviourInstances[entitySectionType]->clone(entitySettings, new EventSystem()),
 							entitySectionType);
 					}
 				}

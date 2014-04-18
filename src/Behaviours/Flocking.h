@@ -2,7 +2,7 @@
 #define NIMBUS_BEHAVIOUR_FLOCKING_H
 
 #include "Behaviour.h"
-#include "../EventSystem.h"
+#include "../EventSystem/EventSystem.h"
 #include "../GameEntity.h"
 
 namespace Nimbus
@@ -95,22 +95,25 @@ namespace Nimbus
 		/** Default constructor, taking a world pointer.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
+			@param eventSystem The event system that localized events will be passed to.
 		*/
-		Flocking(BehaviourType type, World* world);
+		Flocking(BehaviourType type, World* world, EventSystem* eventSystem);
 
 		/** Constructor based of a set of initial settings.
 			@param type The type of Behaviour being constructed.
 			@param world A pointer to the game world.
 			@param intitializingSettings A map of settings used to construct the intial entity.
+			@param eventSystem The event system that localized events will be passed to.
 		*/
-		Flocking(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+		Flocking(BehaviourType type, World* world, Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem);
 
 		/** Constructor taking a different behaviour and making a similar one.
 			@param other The template Flocking behaviour.
 			@param world A pointer to the game world.
 			@param id The id for the parent entity.
+			@param eventSystem The event system that localized events will be passed to.
 		*/
-		Flocking(Flocking* other, World* world, int id);
+		Flocking(Flocking* other, World* world, int id, EventSystem* eventSystem);
 
 		/** Virtual destructor for destroying things. */
 		virtual ~Flocking(void);
@@ -128,12 +131,12 @@ namespace Nimbus
 		/** Duplicates the entity using the settings given.
 			Currently merely returns a pointer given by the constructor.
 		*/
-		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings);
+		virtual Behaviour* clone(Ogre::ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem);
 
 		/** Duplicates the entity based on the current copy.
 			This is used to enable use of the prototype pattern.
 		*/
-		virtual Behaviour* clone(int id);
+		virtual Behaviour* clone(int id, EventSystem* eventSystem);
 	};
 }
 

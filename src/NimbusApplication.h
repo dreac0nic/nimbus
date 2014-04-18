@@ -3,8 +3,7 @@
 
 #include "RunMode.h"
 #include "InputManager.h"
-#include "EventListener.h"
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 #include <OgreRoot.h>
 #include <OgreFrameListener.h>
 
@@ -18,7 +17,7 @@ namespace Nimbus
  
 	 One possible consideration we should take is making a main loop that drives
 	 the application independent from Ogre. This would make our game more
-	 independent rather than depending on Ogre for it's vital running
+	 independent rather than depending on Ogre for its vital running
 	 functionality.
 	 */
 	class NimbusApplication : public Ogre::FrameListener

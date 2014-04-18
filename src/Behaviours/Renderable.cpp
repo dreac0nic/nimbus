@@ -4,14 +4,14 @@
 using namespace Ogre;
 using namespace Nimbus;
 
-Nimbus::Renderable::Renderable(BehaviourType type, World* world):
-	Behaviour(type, world)
+Nimbus::Renderable::Renderable(BehaviourType type, World* world, EventSystem* eventSystem):
+	Behaviour(type, world, eventSystem)
 {
 	this->init(NULL, Vector3::ZERO, "");
 }
 
-Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::SettingsMultiMap* initializingSettings):
-	Behaviour(type, world)
+Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem):
+	Behaviour(type, world, eventSystem)
 {
 	std::string ogreName;
 	Vector3 scale;
@@ -51,10 +51,10 @@ Nimbus::Renderable::Renderable(BehaviourType type, World* world, ConfigFile::Set
 	this->init(model, scale, ogreName);
 }
 
-Nimbus::Renderable::Renderable(Renderable* other, World* world, int id):
-	Behaviour(other, world, id)
+Nimbus::Renderable::Renderable(Renderable* other, World* world, int id, EventSystem* eventSystem):
+	Behaviour(other, world, id, eventSystem)
 {
-	this->init(other->getModel(), other->getScale(), other->mBaseEntityName);
+	this->init(other->getModel(), other->mScale, other->mBaseEntityName);
 }
 
 Nimbus::Renderable::~Renderable()
@@ -93,7 +93,9 @@ void Nimbus::Renderable::startup(void)
 	this->mNode->setScale(mScale.x, mScale.y, mScale.z);
 
 	// Register the position update listener
-	EventSystem::getSingleton()->registerListener(mPositionListener, EventSystem::EventType::ENTITY_MOVED);
+	filtermap entityFilter;
+	entityFilter["EntityId"] = &this->mParentId;
+	this->mEntityEventSystem->registerListener(mPositionListener, EventSystem::EventType::ENTITY_TRANSLATED, entityFilter);
 }
 
 void Nimbus::Renderable::update(void)
@@ -119,25 +121,20 @@ void Nimbus::Renderable::setModel(Ogre::Entity* model)
 	this->mOgreEntity = model;
 }
 
-Ogre::Vector3 Nimbus::Renderable::getScale()
+Behaviour* Nimbus::Renderable::clone(ConfigFile::SettingsMultiMap* initializingSettings, EventSystem* eventSystem)
 {
-	return this->mScale;
+	return new Nimbus::Renderable(this->mBehaviourType, this->mWorld, initializingSettings, eventSystem);
 }
 
-Behaviour* Nimbus::Renderable::clone(ConfigFile::SettingsMultiMap* initializingSettings)
+Behaviour* Nimbus::Renderable::clone(int id, EventSystem* eventSystem)
 {
-	return new Nimbus::Renderable(this->mBehaviourType, this->mWorld, initializingSettings);
-}
-
-Behaviour* Nimbus::Renderable::clone(int id)
-{
-	return new Nimbus::Renderable(this, this->mWorld, id);
+	return new Nimbus::Renderable(this, this->mWorld, id, eventSystem);
 }
 
 void Nimbus::Renderable::PositionListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Temporary vectors for storing direction and position
-	Vector3 position, facing, rotation;
+	Vector3 position, facing, rotation, scale;
 
 	int temp = *(static_cast<int*>(payload["EntityId"]));
 	
@@ -157,6 +154,7 @@ void Nimbus::Renderable::PositionListener::handleEvent(payloadmap payload, Event
 	// Apply facing vector if facing vector was found
 	if(payload.find("FacingVector") != payload.end())
 	{
+		position = parent->mNode->getPosition();
 		facing = *static_cast<Ogre::Vector3*>(payload["FacingVector"]);
 		parent->mNode->lookAt(facing+position, Node::TransformSpace::TS_WORLD);
 	}
@@ -168,5 +166,12 @@ void Nimbus::Renderable::PositionListener::handleEvent(payloadmap payload, Event
 		parent->mNode->pitch(Degree(rotation.x));
 		parent->mNode->yaw(Degree(rotation.y));
 		parent->mNode->roll(Degree(rotation.z));
+	}
+
+	// Apply scale vector if scale vector was found
+	if(payload.find("ScaleVector") != payload.end())
+	{
+		scale = *static_cast<Ogre::Vector3*>(payload["ScaleVector"]);
+		parent->mNode->scale(scale);
 	}
 }

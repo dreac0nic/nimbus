@@ -2,7 +2,7 @@
 #include <OgreRenderWindow.h>
 #include <OgreLogManager.h>
 #include "NimbusApplication.h"
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 
 using namespace Nimbus;
 
@@ -87,7 +87,8 @@ bool InputManager::keyReleased(const OIS::KeyEvent& evt)
 bool InputManager::mouseMoved(const OIS::MouseEvent& evt)
 {
 	std::map<std::string, void*> mouseScreen;
-	mouseScreen["ScreenPosition"] = &Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
+    Ogre::Vector2 screenPosition = Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
+    mouseScreen["ScreenPosition"] = &screenPosition;
 	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_UPDATE, mouseScreen);
 
 	return true;
@@ -113,8 +114,9 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 	std::cerr << logstring.str().c_str();
 
 	std::map<std::string, void*> mouseScreen;
+    Ogre::Vector2 screenPosition = Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
 	mouseScreen["ButtonPressed"] = &id;
-	mouseScreen["ScreenPosition"] = &Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
+    mouseScreen["ScreenPosition"] = &screenPosition;
 	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_DOWN, mouseScreen);
 
 	return true;
@@ -123,8 +125,9 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 bool InputManager::mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
 {
 	std::map<std::string, void*> mouseScreen;
+    Ogre::Vector2 screenPosition = Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
 	mouseScreen["ButtonPressed"] = &id;
-	mouseScreen["ScreenPosition"] = &Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
+    mouseScreen["ScreenPosition"] = &screenPosition;
 	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_UP, mouseScreen);
 
 	return true;

@@ -39,6 +39,7 @@ RunMode* GameMode::run(const FrameEvent& evt)
 
 	// Updating all of the entities through the manager
 	this->mEntityMan->update();
+	mEnvironmentMan->update();
 
 	// Update elapsed time
 	elapsedTime += evt.timeSinceLastEvent;
@@ -65,7 +66,7 @@ void GameMode::initialize()
 
 	// Set the ambient light
 	mSceneMgr->setAmbientLight(ColourValue(0.5, 0.5, 0.5));
-	
+
 	// Construct the game world (truthfully this should be done by the menu probably...
 	//     this would allow for game configuration and loading... of maybe we
 	//     should have a loading game mode.
@@ -73,7 +74,7 @@ void GameMode::initialize()
 
 	// Construct the world managers
 	this->mEntityMan = new EntityManager(this->mWorld);
-	this->mEnvironmentMan = new EnvironmentManager(this->mSceneMgr);
+	this->mEnvironmentMan = new EnvironmentManager(this->mSceneMgr, this->mWorld);
 
 	// Configure entity types
 	this->mEntityMan->configureEntityTypes("../../assets/scripts/ConfigFiles.ini", this->mWorld);
@@ -120,7 +121,27 @@ void GameMode::stop(void)
 
 void GameMode::MouseDownListener::handleEvent(payloadmap payload, EventListener* responder)
 {
+	// Let's not send a payload for now. This is dependent on the
+	// input development and user interface development to continue.
+	// payloadmap termPayload;
+	// We need to know what was clicked and who should know about it.
+	// That means input delegation to send to overlays/user interface,
+	// wind, or whatnot.
+	OIS::MouseButtonID* id = static_cast<OIS::MouseButtonID*>(payload["ButtonPressed"]);
+	Ogre::Vector2* position = static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
+	Ogre::Ray ray = mContainingMode->mCamera->getCamera()->getCameraToViewportRay(
+		position->x / mContainingMode->mCamera->getViewport()->getActualWidth(),
+		position->y / mContainingMode->mCamera->getViewport()->getActualHeight());
+
+	payloadmap mousePosRay;
+	mousePosRay["Context"] = new std::string("Wind");
+	mousePosRay["ButtonPressed"] = id;
+	mousePosRay["ScreenPosition"] = position;
+	mousePosRay["WorldRay"] = &ray;
+
 	mContainingMode->mCreatingWind = true;
+
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_START, mousePosRay);
 }
 
 void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
@@ -136,7 +157,7 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListene
 		mousePosRay["Context"] = new std::string("Wind");
 		mousePosRay["ScreenPosition"] = position;
 		mousePosRay["WorldRay"] = &ray;
-		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION, mousePosRay);
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_UPDATE, mousePosRay);
 	}
 
 	// Look for edge events
@@ -144,11 +165,14 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListene
 	{
 		Ogre::Vector2* position = static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
 
+		// Not using this for now, because if our mouse skips outside of the threshold
+		// into the middle of the screen, the camera continues to move. To combat this,
+		// we are going to pass all mouse events to our camera.
 		// If within a screen threshold
-		if(position->x < Camera::getScreenThreshold()*2 ||
-			position->x > (mContainingMode->mCamera->getViewport()->getActualWidth() - Camera::getScreenThreshold())*2 ||
+		/*if(position->x < Camera::getScreenThreshold()*2 ||
+			position->x > (mContainingMode->mCamera->getViewport()->getActualWidth() - Camera::getScreenThreshold()*2) ||
 			position->y < Camera::getScreenThreshold()*2 ||
-			position->y > (mContainingMode->mCamera->getViewport()->getActualHeight() - Camera::getScreenThreshold()*2))
+			position->y > (mContainingMode->mCamera->getViewport()->getActualHeight() - Camera::getScreenThreshold()*2))*/
 		{
 			// Initialize payload values
 			payloadmap mousePosPayload;
@@ -159,19 +183,32 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListene
 			mousePosPayload["ScreenPosition"] = position;
 
 			// Fire the event
-			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION, mousePosPayload);
+			EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_UPDATE, mousePosPayload);
 		}
 	}
 }
 
 void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* responder)
 {
+	// Let's not send a payload for now. This is dependent on the
+	// input development and user interface development to continue.
+	// payloadmap termPayload;
+	// We need to know what was clicked and who should know about it.
+	// That means input delegation to send to overlays/user interface,
+	// wind, or whatnot.
+	OIS::MouseButtonID* id = static_cast<OIS::MouseButtonID*>(payload["ButtonPressed"]);
+	Ogre::Vector2* position = static_cast<Ogre::Vector2*>(payload["ScreenPosition"]);
+	Ogre::Ray ray = mContainingMode->mCamera->getCamera()->getCameraToViewportRay(
+		position->x / mContainingMode->mCamera->getViewport()->getActualWidth(),
+		position->y / mContainingMode->mCamera->getViewport()->getActualHeight());
+
+	payloadmap mousePosRay;
+	mousePosRay["Context"] = new std::string("Wind");
+	mousePosRay["ButtonPressed"] = id;
+	mousePosRay["ScreenPosition"] = position;
+	mousePosRay["WorldRay"] = &ray;
+
 	mContainingMode->mCreatingWind = false;
 
-	payloadmap createCloud;
-	std::string type = "Cloud";
-	Vector3 position = Vector3(50, 30, -130);
-	createCloud["EntityType"] = &type;
-	createCloud["PositionVector"] = &position;
-	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::CREATE_ENTITY, createCloud);
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_END, mousePosRay);
 }
