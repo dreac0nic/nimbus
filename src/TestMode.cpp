@@ -72,19 +72,19 @@ bool TestMode::initialize()
 
 	mViewport->setBackgroundColour(ColourValue(0.5f, 0.2f, 0.3f, 1.0f));
 
-	//////////
-	// Set up the appropriate models
-
 	// Correct the aspect ratio of the camera
 	mCamera->setAspectRatio(
 		Real(mViewport->getActualWidth()) / Real(mViewport->getActualHeight()));
 
 	mCamera->setPolygonMode(Ogre::PM_WIREFRAME);
 
+	//////////
+	// Set up the appropriate models
+
 	// Load the dragon
 	dragon = mSceneMgr->createEntity("Dragon", "dragon.mesh");
 	dragonNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	// dragonNode->attachObject(dragon);
+	dragonNode->attachObject(dragon);
 
 	dragonNode->setPosition(0, 0, -100);
 	dragonNode->setScale(40.0f, 40.0f, 40.0f);
