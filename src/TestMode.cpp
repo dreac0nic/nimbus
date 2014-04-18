@@ -100,31 +100,6 @@ bool TestMode::initialize()
 	light = mSceneMgr->createLight("MainLight");
 	light->setPosition(20, 80, 50);
 
-	// Generate some fake map information and throw it into the scene!
-	const int pointCount = 6;
-	const float lPI = 3.14159f;
-	const float tileScalar = 10.0f;
-	Tile testTile;
-	
-	int vertRes = 5;
-	float radius = 2.0f;
-
-	for(int i = 0; i < vertRes; ++i) {
-		Corner* temp = new Corner();
-
-		temp->loc = new Ogre::Vector2(radius*cos(i*2*3.14/vertRes), radius*sin(i*2*3.14/vertRes));
-		temp->elevation = 0.0f;
-
-		testTile.corners.push_back(temp);
-
-		std::cout << "Vert: " << temp->loc->x << ", " << temp->loc->y << std::endl;
-	}
-
-	testTile.loc = Ogre::Vector2(0.0f, 0.0f);
-	testTile.elevation = 0.0f;
-
-	testTile.toString();
-
 	// Create material
 	MaterialPtr material = MaterialManager::getSingleton().create(
 		"Tiles/Default",
@@ -135,16 +110,6 @@ bool TestMode::initialize()
 
 	// Create entity and add to the scene.
 	MeshPtr tileMesh = MeshManager::getSingleton().createManual("tileMesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
-
-	Entity* tileEntity = mSceneMgr->createEntity("testTile", testTile.getMesh("singleTile"));
-	SceneNode* tileNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-
-	tileEntity->setMaterialName("Tiles/Default");
-
-	tileNode->attachObject(tileEntity);
-
-	tileNode->setPosition(0, 0, -80);
-	tileNode->setScale(10.0f, 10.0f, 10.0f);
 
 	// Create a map.
 	std::cout << "Test map." << std::endl;
