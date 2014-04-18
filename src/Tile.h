@@ -1,7 +1,6 @@
 #ifndef NIMBUS_TILE_H
 #define NIMBUS_TILE_H
 
-<<<<<<< HEAD
 #include <vector>
 
 #include <OGRE/OgreVector2.h>
