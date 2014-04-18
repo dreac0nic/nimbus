@@ -12,14 +12,9 @@ Corner::~Corner(void)
 {
 }
 
-bool Corner::operator< (const Corner &other) const
-{
-	return (elevation < other.elevation);
-}
-
 void Corner::toString()
 {
-	std::cout << "Corner, x:" << loc->x << ", y:" << loc->y << " " << (water ? "w" : "-") << (ocean ? "o" : "-") << (coast ? "c" : "-");
+	std::cout << "Corner, x:" << loc->x << ", y:" << loc->y;
 }
 
 Ogre::Vector3 Corner::getVector3(void)

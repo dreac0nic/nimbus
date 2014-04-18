@@ -42,33 +42,6 @@
     <ClCompile Include="src\EventSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MapGeneration\Edge.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MapGeneration\LineSegment.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MapGeneration\Halfedge.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MapGeneration\Vertex.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MapGeneration\Voronoi.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MapGeneration\Polygon.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MapGeneration\Site.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MapGeneration\Rectangle.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MapGeneration\Util.cpp">
-      <Filter>Source Files\MapGeneration</Filter>
-    </ClCompile>
     <ClCompile Include="src\Corner.cpp">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
@@ -76,9 +49,6 @@
       <Filter>Source Files\Map</Filter>
     </ClCompile>
     <ClCompile Include="src\Tile.cpp">
-      <Filter>Source Files\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TileEdge.cpp">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,9 +74,6 @@
     <ClInclude Include="src\EventSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\MapGeneration\Voronoi.h">
-      <Filter>Header Files\MapGeneration</Filter>
-    </ClInclude>
     <ClInclude Include="src\Map.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
@@ -114,9 +81,6 @@
       <Filter>Header Files\Map</Filter>
     </ClInclude>
     <ClInclude Include="src\Corner.h">
-      <Filter>Header Files\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TileEdge.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
   </ItemGroup>

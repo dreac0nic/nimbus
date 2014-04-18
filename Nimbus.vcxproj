@@ -16,19 +16,9 @@
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map.cpp" />
-    <ClCompile Include="src\MapGeneration\Edge.cpp" />
-    <ClCompile Include="src\MapGeneration\Halfedge.cpp" />
-    <ClCompile Include="src\MapGeneration\LineSegment.cpp" />
-    <ClCompile Include="src\MapGeneration\Polygon.cpp" />
-    <ClCompile Include="src\MapGeneration\Rectangle.cpp" />
-    <ClCompile Include="src\MapGeneration\Site.cpp" />
-    <ClCompile Include="src\MapGeneration\Util.cpp" />
-    <ClCompile Include="src\MapGeneration\Vertex.cpp" />
-    <ClCompile Include="src\MapGeneration\Voronoi.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
     <ClCompile Include="src\TestMode.cpp" />
     <ClCompile Include="src\Tile.cpp" />
-    <ClCompile Include="src\TileEdge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Corner.h" />
@@ -37,12 +27,10 @@
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Manager.h" />
     <ClInclude Include="src\Map.h" />
-    <ClInclude Include="src\MapGeneration\Voronoi.h" />
     <ClInclude Include="src\NimbusApplication.h" />
     <ClInclude Include="src\RunMode.h" />
     <ClInclude Include="src\TestMode.h" />
     <ClInclude Include="src\Tile.h" />
-    <ClInclude Include="src\TileEdge.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD12D565-5AB0-44A1-BAAD-B6B8B690D9F7}</ProjectGuid>

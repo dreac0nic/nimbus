@@ -21,46 +21,11 @@ namespace Nimbus
 	class Corner
 	{
 	public:
-		/* Vector containing all the tiles that this corner touches.
-		  (All the tiles that use this corner to define its borders)
-		*/
-		std::vector<Tile*> touches;
-
-		/* Vector containing all the corners touched by this corner via its edges. */
-		std::vector<Corner*> adjacent;
-
-		/* The edges extending from the corner.*/
-		std::vector<TileEdge*> protrudes;
-
 		/* The location of the point. */
 		Point *loc;
-		
-		/* The index of this corner. */
-		int index;
-
-		/* Contains whether or not this corner is the border corner. */
-		bool border;
 
 		/* The elevation of this corner. */
 		double elevation;
-
-		/* Weather or not this corner is a water tile. */
-		bool water;
-
-		/* Weather or not this corner is a water ocean. */
-		bool ocean;
-
-		/* Weather or not this corner is a coast. */
-		bool coast;
-
-		/* Has a pointer to the corner that is the heaviest downslope. */
-		Corner *downslope;
-
-		/* River? */
-		int river;
-
-		/* The moisture of this corner. */
-		double moisture;
 
 		// CONSTRUCTORS --
 		/* Blank default constructor. */
@@ -70,9 +35,6 @@ namespace Nimbus
 		virtual ~Corner(void);
 
 		// MEMBER FUNCTIONS --
-		/* Less-then comparison operator for Corner, comparing to other corners. */
-		bool operator< (const Corner &other) const;
-
 		/* Convert the corner to a string. */
 		void toString(void);
 
