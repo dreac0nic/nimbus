@@ -103,13 +103,15 @@ bool WindManager::update(void)
 
 void WindManager::addPoint(Ogre::Vector2& newPosition)
 {
-	// Don't add the point if it exists outside world bounds.
-	if (newPosition.x > mWorld->getWorldBounds().x - mWorld->getWindMap()->getOffset().x
-		|| newPosition.x < mWorld->getWindMap()->getOffset().x - mWorld->getWorldBounds().x
-		|| newPosition.y > mWorld->getWorldBounds().y - mWorld->getWindMap()->getOffset().y
-		|| newPosition.y < mWorld->getWindMap()->getOffset().y - mWorld->getWorldBounds().y)
-	{
-		return;
+	// Sanitize the point to world border if it's out of bounds.
+	if (newPosition.x > mWorld->getWorldBounds().x - mWorld->getWindMap()->getOffset().x) {
+		newPosition.x = mWorld->getWorldBounds().x - mWorld->getWindMap()->getOffset().x;
+	} if (newPosition.x < mWorld->getWindMap()->getOffset().x - mWorld->getWorldBounds().x) {
+		newPosition.x = mWorld->getWindMap()->getOffset().x - mWorld->getWorldBounds().x;
+	} if (newPosition.y > mWorld->getWorldBounds().y - mWorld->getWindMap()->getOffset().y) {
+		newPosition.y = mWorld->getWorldBounds().y - mWorld->getWindMap()->getOffset().y;
+	} if(newPosition.y < mWorld->getWindMap()->getOffset().y - mWorld->getWorldBounds().y) {
+		newPosition.y = mWorld->getWindMap()->getOffset().y - mWorld->getWorldBounds().y;
 	}
 
 	// If we've already started creating the wind current
