@@ -111,7 +111,6 @@ bool TestMode::initialize()
 	MeshPtr tileMesh = MeshManager::getSingleton().createManual("tileMesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
 	// Create a map.
-	std::cout << "Test map." << std::endl;
 	Map testMap;
 
 	// Get a mesh from the terrain and attach it to an entity.
