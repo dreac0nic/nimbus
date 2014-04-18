@@ -86,9 +86,6 @@ namespace Nimbus
 		virtual ~Tile(void);
 		
 		// MEMBER FUNCTIONS --
-		/* Calculate box of the tile. */
-		void calculateBox(void);
-
 		/* Convert the tile to string format! */
 		void toString(void);
 
