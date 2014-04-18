@@ -1,5 +1,7 @@
 #include "Corner.h"
 
+#include <sstream>
+
 #include <OGRE\OgreVector3.h>
 
 using namespace Nimbus;
@@ -12,9 +14,15 @@ Corner::~Corner(void)
 {
 }
 
-void Corner::toString()
+std::string Corner::str(void)
 {
-	std::cout << "Corner, x:" << loc->x << ", y:" << loc->y;
+	// Create string stream for storing the information from the tile.
+	std::stringstream buffer;
+
+	// Fill the buffer.
+	buffer << "Corner; [" << loc->x << ", " << loc->y << ": e" << elevation;
+
+	return buffer.str();
 }
 
 Ogre::Vector3 Corner::getVector3(void)
