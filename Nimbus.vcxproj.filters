@@ -31,6 +31,12 @@
     <Filter Include="Source Files\EventSystem">
       <UniqueIdentifier>{dff50a1d-1420-4fb6-b05d-980ba0e0f57e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Map">
+      <UniqueIdentifier>{cd489ea1-650c-44b0-9bb8-1c9114b5bbea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Map">
+      <UniqueIdentifier>{9c083eeb-fc1c-4b09-adf2-8442aba39367}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -104,6 +110,15 @@
     </ClCompile>
     <ClCompile Include="src\EventSystem\EntityHandler.cpp">
       <Filter>Source Files\EventSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Corner.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Map.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tile.cpp">
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +205,15 @@
     </ClInclude>
     <ClInclude Include="src\EventSystem\EntityHandler.h">
       <Filter>Header Files\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Map.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Corner.h">
+      <Filter>Header Files\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

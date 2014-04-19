@@ -27,8 +27,10 @@
     <ClCompile Include="src\GameEntity.cpp" />
     <ClCompile Include="src\GameEntitySet.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
+    <ClCompile Include="src\Corner.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
     <ClCompile Include="src\VectorMap.cpp" />
     <ClCompile Include="src\WindCurrent.cpp" />
@@ -55,8 +57,13 @@
     <ClInclude Include="src\EntityManager.h" />
     <ClInclude Include="src\EnvironmentManager.h" />
     <ClInclude Include="src\GameMode.h" />
+    <ClCompile Include="src\Tile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Corner.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Manager.h" />
+    <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\NimbusApplication.h" />
     <ClInclude Include="src\RunMode.h" />
     <ClInclude Include="src\Grid.h" />
@@ -65,6 +72,7 @@
     <ClInclude Include="src\WindManager.h" />
     <ClInclude Include="src\WindMap.h" />
     <ClInclude Include="src\World.h" />
+    <ClInclude Include="src\Tile.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD12D565-5AB0-44A1-BAAD-B6B8B690D9F7}</ProjectGuid>
@@ -97,7 +105,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\$(Configuration)\Intermediates\</IntDir>
-    <SourcePath>C:\Users\Hazen\Documents\projects\Nimbus\src;$(SourcePath)</SourcePath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Build\$(Configuration)\</OutDir>
@@ -113,6 +121,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)ogre\lib\debug;$(SolutionDir)ogre\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
     <PostBuildEvent>
       <Command>$(ProjectDir)CopyFileList.exe includeDLL_d.txt $(ProjectDir)ogre\bin\$(Configuration)\ $(ProjectDir)Build\$(Configuration)\</Command>
