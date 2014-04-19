@@ -1,5 +1,5 @@
-#ifndef TERRAIN_H
-#define TERRAIN_H
+#ifndef NIMBUS_TERRAIN_H
+#define NIMBUS_TERRAIN_H
 
 #include <boost/polygon/voronoi.hpp>
 #include "Point.h"
@@ -12,7 +12,7 @@ namespace Nimbus
 	{
 	public:
 		Terrain(World* world);
-		~Terrain();
+		~Terrain(void);
 
 	private:
 		boost::polygon::voronoi_diagram<double> diagram;
