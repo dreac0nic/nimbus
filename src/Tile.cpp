@@ -11,16 +11,13 @@
 using namespace Nimbus;
 using namespace Ogre;
 
-int Tile::deltaX = 0;
-int Tile::deltaY = 0;
-
 Tile::Tile()
 {
 }
 
-Tile::Tile(Point *loc)
+Tile::Tile(Real position)
 {
-	this->loc = *loc;
+	this->mPosition = position;
 }
 
 Tile::~Tile(void)
@@ -29,9 +26,9 @@ Tile::~Tile(void)
 
 void Tile::toString(void)
 {
-	std::cout << "Tile: " << this->loc.x << "x" << this->loc.y << ": " << this->elevation;
+	std::cout << "Tile: " << this->mPosition.x << "x" << this->mPosition.y << ": " << this->elevation;
 
-	for(vector<Corner*>::iterator it = this->corners.begin(); it != this->corners.end(); ++it)
+	for(vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it)
 	{
 		Vector3 temp = (*it)->vec3();
 		std::cout << " [" << temp.x << ", " << temp.y << ", " << temp.z << "]";
@@ -47,15 +44,15 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 
 	// Define the vertices.
 	size_t index = 0;
-	size_t vertCount = this->corners.size() + 1; // corner count + center corner
+	size_t vertCount = this->mCorners.size() + 1; // corner count + center corner
 
 	Real* vertices = new Real[vertCount*3*2];    // (number of verts)*(x, y, z)*(coord, normal) -or- vertCount*3*2
 
 	// Manually add center vertex.
 	// -- Position (ord: x, y, z)
-	vertices[index++] = this->loc.x;
+	vertices[index++] = this->mPosition.x;
 	vertices[index++] = (Ogre::Real)(this->elevation);
-	vertices[index++] = this->loc.y;
+	vertices[index++] = this->mPosition.y;
 
 	// -- Normal (ord: x, y, z)
 	Vector3 norm = Vector3::UNIT_Y;
@@ -65,7 +62,7 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 	vertices[index++] = norm.z;
 
 	// Add the rest of the vertices to data buffer.
-	for(vector<Corner*>::iterator it = this->corners.begin(); it != this->corners.end(); ++it) {
+	for(vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it) {
 		// Add to the next point to the array.
 		// -- Position
 		Vector3 vector = (*it)->vec3();
