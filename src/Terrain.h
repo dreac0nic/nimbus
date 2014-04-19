@@ -1,7 +1,9 @@
 #ifndef NIMBUS_TERRAIN_H
 #define NIMBUS_TERRAIN_H
 
+#include <OGRE/OgreMesh.h>
 #include <boost/polygon/voronoi.hpp>
+
 #include "Point.h"
 
 namespace Nimbus
@@ -29,6 +31,12 @@ namespace Nimbus
 			@return A pointer to a vector of Voronoi::Point
 		*/
 		std::vector<Point>* getPointList(void) { return &pointList; }
+
+		/** Returns a MeshPtr to a generated mesh resembling the terrain.
+			@param meshName The name to give this mesh object.
+			@return A MeshPtr holding the generated mesh.
+		*/
+		MeshPtr getMesh(std::string meshName);
 	};
 }
 

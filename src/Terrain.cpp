@@ -31,3 +31,8 @@ Terrain::~Terrain(void)
 {
 
 }
+
+MeshPtr Terrain::getMesh(std::string meshName)
+{
+	// DO IT
+}
