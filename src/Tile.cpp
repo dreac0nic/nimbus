@@ -1,4 +1,7 @@
 #include "Tile.h"
+
+#include <sstream>
+
 #include "Corner.h"
 
 #include <OGRE\OgreRoot.h>
@@ -24,17 +27,18 @@ Tile::~Tile(void)
 {
 }
 
-void Tile::toString(void)
+std::string Tile::str(void)
 {
-	std::cout << "Tile: " << this->mPosition.x << "x" << this->mPosition.y << ": " << this->elevation;
+	stringstream buffer;
+	buffer << "Tile: " << this->mPosition.x << "x" << this->mPosition.y << ": " << this->elevation;
 
 	for(vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it)
 	{
 		Vector3 temp = (*it)->vec3();
-		std::cout << " [" << temp.x << ", " << temp.y << ", " << temp.z << "]";
+		buffer << std::endl << "\t " << (*it)->str();
 	}
 
-	std::cout << std::endl;
+	return buffer.str();
 }
 
 void Tile::_generateSubMesh(MeshPtr& mesh)

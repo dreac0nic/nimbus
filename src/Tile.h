@@ -161,7 +161,7 @@ namespace Nimbus
 
 		// -- CONVERSIONS
 		/* Convert the tile to string format! */
-		void toString(void);
+		std::string str(void);
 
 		/* Convert the tile into a OGRE mesh. */
 		Ogre::MeshPtr getMesh(std::string);
