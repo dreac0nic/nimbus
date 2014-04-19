@@ -27,6 +27,16 @@ Tile::~Tile(void)
 {
 }
 
+void Tile::updateTile(void)
+{
+	// METHOD STUB
+}
+
+void Tile::updateVar(void)
+{
+	// METHOD STUB
+}
+
 std::string Tile::str(void)
 {
 	stringstream buffer;
