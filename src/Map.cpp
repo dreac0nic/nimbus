@@ -66,6 +66,8 @@ Map::Map(void)
 			// Add the corners to the tile.
 			currentTile->setCorners(tempCorners);
 
+			// Synthesize values for tile.
+
 			// Add the tile to the map.
 			this->tiles.push_back(currentTile);
 		}
