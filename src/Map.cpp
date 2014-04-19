@@ -29,36 +29,42 @@ Map::Map(void)
 	// Generate the points.
 	for(size_t i = 0; i < numberOfPoints; ++i) {
 		for(size_t j = 0; j < numberOfPoints; ++j) {
-			// Create the tile.
+			// Create the tile information ...
 			Vector3 localOrigin(origin + Vector3(spacing.x*i, spacing.y, spacing.z*j) - midOffset);
 
-			Tile* currentTile = new Tile();
+			std::vector<Corner*> tempCorners;
 
-			currentTile->loc.x = localOrigin.x;
-			currentTile->loc.y = localOrigin.z;
-
-			currentTile->elevation = localOrigin.y;
+			Corner* temp = new Corner();
 
 			// Create the corners of the tile.
-			Corner* temp = new Corner();
 			temp->loc = new Ogre::Vector2(localOrigin.x + cornerSpacing.x, localOrigin.z + cornerSpacing.z);
 			temp->elevation = localOrigin.y;
-			currentTile->corners.push_back(temp);
+			tempCorners.push_back(temp);
 
 			temp = new Corner();
 			temp->loc = new Ogre::Vector2(localOrigin.x - cornerSpacing.x, localOrigin.z + cornerSpacing.z);
 			temp->elevation = localOrigin.y;
-			currentTile->corners.push_back(temp);
+			tempCorners.push_back(temp);
 
 			temp = new Corner();
 			temp->loc = new Ogre::Vector2(localOrigin.x - cornerSpacing.x, localOrigin.z - cornerSpacing.z);
 			temp->elevation = localOrigin.y;
-			currentTile->corners.push_back(temp);
+			tempCorners.push_back(temp);
 
 			temp = new Corner();
 			temp->loc = new Ogre::Vector2(localOrigin.x + cornerSpacing.x, localOrigin.z - cornerSpacing.z);
 			temp->elevation = localOrigin.y;
-			currentTile->corners.push_back(temp);
+			tempCorners.push_back(temp);
+
+			// Create a new tile.
+			Tile* currentTile = new Tile();
+
+			// Set the tile's center position and elevation.
+			currentTile->setPosition(localOrigin.x, localOrigin.z);
+			currentTile->setElevation(localOrigin.y);
+
+			// Add the corners to the tile.
+			currentTile->setCorners(tempCorners);
 
 			// Add the tile to the map.
 			this->tiles.push_back(currentTile);
