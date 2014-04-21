@@ -8,6 +8,7 @@ namespace Nimbus
 {
 	class GameEntity;
 	class GameEntitySet;
+	class Map;
 	class WindMap;
 
 	/** This class aggregates the entire world of Nimbus.
@@ -48,6 +49,10 @@ namespace Nimbus
 		// The list that keeps track of all entities currently in the world
 		GameEntitySet* mEntities;
 
+		// The structure that holds all of the tiles and terrain data
+		Map* mMap;
+
+		// The structure that holds all of the wind vectors and currents
 		WindMap* mWindMap;
 
 		// The scene node that contains everything
