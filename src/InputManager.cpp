@@ -2,7 +2,7 @@
 #include <OgreRenderWindow.h>
 #include <OgreLogManager.h>
 #include "NimbusApplication.h"
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 
 using namespace Nimbus;
 
@@ -22,6 +22,10 @@ InputManager::InputManager(void)
 	window->getCustomAttribute("WINDOW", &windowHandle);
 	windowHandleString << windowHandle;
 	parameters.insert(std::make_pair(std::string("WINDOW"), windowHandleString.str()));
+    parameters.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
+    parameters.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
+    parameters.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_FOREGROUND")));
+    parameters.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_NONEXCLUSIVE")));
 
 	// Create the input system using the window handle
 	mInputManager = OIS::InputManager::createInputSystem(parameters);
@@ -82,6 +86,11 @@ bool InputManager::keyReleased(const OIS::KeyEvent& evt)
 
 bool InputManager::mouseMoved(const OIS::MouseEvent& evt)
 {
+	std::map<std::string, void*> mouseScreen;
+    Ogre::Vector2 screenPosition = Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
+    mouseScreen["ScreenPosition"] = &screenPosition;
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_UPDATE, mouseScreen);
+
 	return true;
 }
 
@@ -104,11 +113,23 @@ bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID i
 
 	std::cerr << logstring.str().c_str();
 
+	std::map<std::string, void*> mouseScreen;
+    Ogre::Vector2 screenPosition = Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
+	mouseScreen["ButtonPressed"] = &id;
+    mouseScreen["ScreenPosition"] = &screenPosition;
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_DOWN, mouseScreen);
+
 	return true;
 }
 
 bool InputManager::mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
 {
+	std::map<std::string, void*> mouseScreen;
+    Ogre::Vector2 screenPosition = Ogre::Vector2(Ogre::Real(evt.state.X.abs), Ogre::Real(evt.state.Y.abs));
+	mouseScreen["ButtonPressed"] = &id;
+    mouseScreen["ScreenPosition"] = &screenPosition;
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_UP, mouseScreen);
+
 	return true;
 }
 

@@ -1,4 +1,10 @@
 # .gitignore file
+# Scratch Directory Ignore, can be used to store local files with no impact.
+scratch/*
+
+# Asset Directory Ignores
+
+assets/*
 
 # Build Directory Ignores
 
@@ -10,16 +16,15 @@ assets/*
 # Include Directory Ignores
 
 ogre/*
+ipch/*
+UnitTests/Debug
 
 # IDE Specific Ignores
 
-# Visual Studio
+#   Visual Studio
 *.sdf
 *.suo
 *.opensdf
 
 # Sublime Text
 *.sublime-*
-
-# Assets
-assets/*

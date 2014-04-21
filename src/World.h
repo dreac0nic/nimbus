@@ -8,6 +8,8 @@ namespace Nimbus
 {
 	class GameEntity;
 	class GameEntitySet;
+	class Map;
+	class WindMap;
 
 	/** This class aggregates the entire world of Nimbus.
 	 
@@ -34,14 +36,24 @@ namespace Nimbus
 	 member variable for the root of the system so that the entire game world is
 	 aggregated by this class.
 	 */
+
 	class World
 	{
 	private:
 		// The counter for each thing that we add to the world
 		int idCounter;
 
+		// Bounds of World
+		Ogre::Vector2 worldBounds;
+
 		// The list that keeps track of all entities currently in the world
 		GameEntitySet* mEntities;
+
+		// The structure that holds all of the tiles and terrain data
+		Map* mMap;
+
+		// The structure that holds all of the wind vectors and currents
+		WindMap* mWindMap;
 
 		// The scene node that contains everything
 		Ogre::SceneNode* mWorldNode;
@@ -54,9 +66,11 @@ namespace Nimbus
 		// Accessor methods
 		int getCurrentId();
 		GameEntitySet* getEntities() { return this->mEntities; }
+		WindMap* getWindMap() { return this->mWindMap; }
 		void addEntity(GameEntity* entity);
 		Ogre::SceneNode* getWorldNode() { return this->mWorldNode; }
 		Ogre::SceneManager* getSceneManager() { return this->mSceneManager; }
+		Ogre::Vector2 getWorldBounds() { return this->worldBounds; } 
 	};
 
 }

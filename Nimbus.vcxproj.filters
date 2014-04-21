@@ -19,6 +19,24 @@
     <Filter Include="Source Files\Behaviours">
       <UniqueIdentifier>{7a511ab5-4d87-4a7e-822a-a38d63f9815f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Wind">
+      <UniqueIdentifier>{1bd1f581-5446-4581-9351-976930671134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Wind">
+      <UniqueIdentifier>{ce5b95d0-bd60-40ab-a5df-ec0983f7ba59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EventSystem">
+      <UniqueIdentifier>{76adca01-caa3-4fbf-8402-d14a08164989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EventSystem">
+      <UniqueIdentifier>{dff50a1d-1420-4fb6-b05d-980ba0e0f57e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Map">
+      <UniqueIdentifier>{cd489ea1-650c-44b0-9bb8-1c9114b5bbea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Map">
+      <UniqueIdentifier>{9c083eeb-fc1c-4b09-adf2-8442aba39367}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -28,9 +46,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EventSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEntity.cpp">
@@ -54,11 +69,56 @@
     <ClCompile Include="src\EntityFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderable.cpp">
+    <ClCompile Include="src\behaviours\Rainy.cpp">
+      <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="src\behaviours\Soaring.cpp">
+      <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Behaviours\Renderable.cpp">
       <Filter>Source Files\Behaviours</Filter>
     </ClCompile>
     <ClCompile Include="src\GeneralEntityIterator.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\behaviours\Flocking.cpp">
+      <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindCurrent.cpp">
+      <Filter>Source Files\Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindMap.cpp">
+      <Filter>Source Files\Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindManager.cpp">
+      <Filter>Source Files\Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VectorMap.cpp">
+      <Filter>Source Files\Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\behaviours\Transformational.cpp">
+      <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EventSystem\EventSystem.cpp">
+      <Filter>Source Files\EventSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EventSystem\GenericHander.cpp">
+      <Filter>Source Files\EventSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EventSystem\EntityHandler.cpp">
+      <Filter>Source Files\EventSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Corner.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Map.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tile.cpp">
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,12 +132,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EventListener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EventSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\GameEntity.h">
@@ -101,11 +155,65 @@
     <ClInclude Include="src\EntityFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Behaviour.h">
+    <ClInclude Include="src\behaviours\Rainy.h">
       <Filter>Header Files\Behaviours</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderable.h">
+    <ClInclude Include="src\behaviours\Soaring.h">
       <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\behaviours\Behaviour.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Behaviours\Renderable.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\behaviours\Flocking.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Grid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VectorMap.h">
+      <Filter>Header Files\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindCurrent.h">
+      <Filter>Header Files\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindManager.h">
+      <Filter>Header Files\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindMap.h">
+      <Filter>Header Files\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="src\behaviours\Transformational.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EventSystem\EventListener.h">
+      <Filter>Header Files\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EventSystem\EventSystem.h">
+      <Filter>Header Files\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EventSystem\EventTypeHandler.h">
+      <Filter>Header Files\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EventSystem\GenericHandler.h">
+      <Filter>Header Files\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EventSystem\EntityHandler.h">
+      <Filter>Header Files\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Map.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Corner.h">
+      <Filter>Header Files\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

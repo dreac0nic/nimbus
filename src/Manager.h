@@ -13,6 +13,10 @@ namespace Nimbus
 		Manager(void) {}
 		virtual ~Manager(void) {}
 
+		/** The initial initialization function.
+		 */
+		virtual void initialize(void) = 0;
+
 		/** The super complex update function.
 
 		 @return

@@ -6,6 +6,7 @@
 #include "EntityManager.h"
 #include "EntityFactory.h"
 #include "World.h"
+#include "Camera.h"
 
 namespace Nimbus
 {
@@ -20,6 +21,9 @@ namespace Nimbus
 	{
 	private:
 		// Member variables
+		// *******************************************************************
+
+		Camera* mCamera;
 
 		// The Environment Manager
 		EnvironmentManager* mEnvironmentMan;
@@ -30,21 +34,75 @@ namespace Nimbus
 		// The game World
 		World* mWorld;
 
-		// Ogre variables
-		Ogre::SceneManager* mSceneMgr;
-		Ogre::Camera* mCamera;
-		Ogre::Viewport* mViewport;
+		// Elapsed time since tick
+		Ogre::Real elapsedTime;
 
-	protected:
-		// From Nimbus::RunMode
-		virtual bool initialize();
+		// The time step between each tick
+		Ogre::Real timePerTick;
+
+		// Wind path creation
+		bool mCreatingWind;
+
+		// Event Listeners
+		// *******************************************************************
+
+		// Listens for any mouse down events
+		class MouseDownListener : 
+			public EventListener
+		{
+		private:
+			GameMode* mContainingMode;
+
+		public:
+			MouseDownListener(GameMode* containingMode)
+				{ this->mContainingMode = containingMode; }
+			virtual ~MouseDownListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mMouseDownListener;
+
+		// Listens for any mouse update events
+		class MouseUpdateListener : 
+			public EventListener
+		{
+		private:
+			GameMode* mContainingMode;
+
+		public:
+			MouseUpdateListener(GameMode* containingMode)
+				{ this->mContainingMode = containingMode; }
+			virtual ~MouseUpdateListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mMouseUpdateListener;
+
+		// Listens for any mouse up events
+		class MouseUpListener : 
+			public EventListener
+		{
+		private:
+			GameMode* mContainingMode;
+
+		public:
+			MouseUpListener(GameMode* containingMode)
+				{ this->mContainingMode = containingMode; }
+			virtual ~MouseUpListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+		}* mMouseUpListener;
 
 	public:
 		GameMode(void);
 		virtual ~GameMode(void);
 
 		// From Nimbus::RunMode
+		virtual void initialize();
 		virtual RunMode* run(const Ogre::FrameEvent& evt);
+		virtual void pause();
+		virtual void stop();
 	};
 
 }
