@@ -24,9 +24,10 @@ bool overlayFlag = FALSE;
 MenuMode::MenuMode(void)
 {
 	this->keyListener = new KeyListener();
-	RunMode* gameAtHand = new GameMode();
-	gameModePointer = gameAtHand;
 	EventSystem::getSingleton()->registerListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
+
+	//Set up the pointer for the game to go to Menu Mode
+	gameModePointer = NULL;
 }
 
 MenuMode::~MenuMode(void)
@@ -39,7 +40,6 @@ MenuMode::~MenuMode(void)
 
 RunMode* MenuMode::run(const FrameEvent& evt)
 {
-	//Green.
 // Attempt to initialize the run mode
 if(!this->initialized && !this->initialize())
 {
@@ -62,9 +62,14 @@ else if(!overlayFlag)
 //Checks to see if it needs to change into GameMode
 if(menuEndFlag)
 {
-	std::cout << "menuEndFlag is now true.";
+	if(gameModePointer == NULL)
+	{
+		gameModePointer = new GameMode();
+	}
 	// Removes the current Viewport and move on to the next RunMode
 	NimbusApplication::getRenderWindow()->removeViewport(this->mViewport->getZOrder());
+	EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
+	delete this->keyListener;
 	return gameModePointer;
 }
 
@@ -216,6 +221,5 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload)
 	if(keyCode == OIS::KC_HOME) 
 	{
 		menuEndFlag = TRUE;
-		std::cout << menuEndFlag << "\n";
 	}
 }

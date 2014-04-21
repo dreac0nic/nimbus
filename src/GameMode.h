@@ -6,6 +6,7 @@
 #include "EntityManager.h"
 #include "EntityFactory.h"
 #include "World.h"
+#include "EventSystem.h"
 
 namespace Nimbus
 {
@@ -35,9 +36,24 @@ namespace Nimbus
 		Ogre::Camera* mCamera;
 		Ogre::Viewport* mViewport;
 
+		//MenuMode Pointer
+		RunMode* menuModePointer;
+
 	protected:
 		// From Nimbus::RunMode
 		virtual bool initialize();
+
+		//Listens for Key Events
+		class KeyListener: 
+			public EventListener
+		{
+		public:
+			KeyListener() {}
+			virtual ~KeyListener() {}
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload);
+		} *keyListener;
 
 	public:
 		GameMode(void);

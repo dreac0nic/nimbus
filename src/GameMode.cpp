@@ -1,4 +1,5 @@
 #include "GameMode.h"
+#include "MenuMode.h"
 #include <OgreRoot.h>
 #include <OgreRenderWindow.h>
 #include <OgreEntity.h>
@@ -6,12 +7,24 @@
 #include <OgreViewport.h>
 #include <OgreSceneManager.h>
 #include "NimbusApplication.h"
+#include <OgreOverlay.h>
+#include <OgreOverlaySystem.h>
+#include <OgreOverlayManager.h>
+#include <OgreOverlayElement.h>
+#include <OgreFont.h>
 
 using namespace Nimbus;
 using namespace Ogre;
 
+//Flag for determining Actions
+bool pauseModeFlag = FALSE;
+
 GameMode::GameMode(void)
 {
+	this->keyListener = new KeyListener();
+	EventSystem::getSingleton()->registerListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
+
+	menuModePointer = NULL;
 }
 
 GameMode::~GameMode(void)
@@ -32,6 +45,22 @@ RunMode* GameMode::run(const FrameEvent& evt)
 		// Terminate the application if we fail to initialize
 		return 0;
 	}
+	if(pauseModeFlag)
+	{
+		std:: cout << "OK, going to the pause Menu\n";
+		if(menuModePointer == NULL)
+		{
+			menuModePointer = new MenuMode();
+			std::cout << "Created a new MenuMode";
+		}
+
+		// Removes the current Viewport and move on to the next RunMode
+		//NimbusApplication::getRenderWindow()->removeViewport(this->mViewport->getZOrder());
+		//EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
+		//delete this->keyListener;
+		return menuModePointer;
+
+	}
 
 	// Updating all of the entities through the manager
 	this->mEntityMan->update();
@@ -46,6 +75,7 @@ bool GameMode::initialize()
 	
 	// Create the scene manager
 	mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
+
 	// Create the camera
 	mCamera = mSceneMgr->createCamera("PlayerCam");
 
@@ -85,3 +115,18 @@ bool GameMode::initialize()
 	this->initialized = true;
 	return true;
 }
+
+void GameMode::KeyListener::handleEvent(payloadmap payload)
+{
+	OIS::KeyCode keyCode = *static_cast<OIS::KeyCode*>(payload["KeyCode"]);
+	bool keyReleased = *static_cast<bool*>(payload["KeyReleased"]);
+
+	//This checks if the correct key was pressed upon the release of it. (Kinda hacky, could be improved.)
+	if(keyReleased && keyCode == OIS::KC_P) 
+	{
+		pauseModeFlag = !pauseModeFlag;
+		std::cout << "The game should go into pause mode.";
+	}
+
+}
+
