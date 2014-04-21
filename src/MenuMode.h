@@ -38,11 +38,11 @@ namespace Nimbus
 			public EventListener
 		{
 		public:
-			MouseListener(Ogre::Viewport* mViewport) {viewport = mViewport;}
-			virtual ~MouseListener() {}
 			Ogre::Viewport* viewport;
+			void SetViewport(Ogre::Viewport* mViewport){viewport = mViewport; return;}
 
-			//void SetViewport(mViewport){}
+			MouseListener(Ogre::Viewport* mViewport) {viewport = mViewport; return;}
+			virtual ~MouseListener() {}
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload);

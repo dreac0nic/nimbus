@@ -158,6 +158,7 @@ mCamera->setNearClipDistance(5);
 mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
 
 // testing
+printf("\nValues of Viewport in initialize()\n");
 printf("Left of Resume Button = %f\n", float(mViewport->getActualWidth()) * 0.35);
 printf("Right of Resume Button = %f\n", float(mViewport->getActualWidth()) * 0.65);
 printf("Top of Resume Button = %f\n", float(mViewport->getActualHeight()) * 0.25);
@@ -216,6 +217,7 @@ void MenuMode::MouseListener::handleEvent(payloadmap payload)
 	OIS::MouseEvent* evt = (static_cast<OIS::MouseEvent*>(payload["MouseClicked"]));
 
 	// testing
+	printf("\nValues of Viewport in MouseListener\n");
 	printf("Left of Resume Button = %f\n", float(viewport->getActualWidth()) * 0.35);
 	printf("Right of Resume Button = %f\n", float(viewport->getActualWidth()) * 0.65);
 	printf("Top of Resume Button = %f\n", float(viewport->getActualHeight()) * 0.25);
