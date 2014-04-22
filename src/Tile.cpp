@@ -189,6 +189,9 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 	tileMesh->indexData->indexCount = faceCount*3;
 	tileMesh->indexData->indexStart = 0;
 
+	// Set material.
+	tileMesh->setMaterialName("Tiles/Snow1");
+
 	// Deallocate the vertex and face arrays.
 	if(vertices) delete[] vertices;
 	if(faces) delete[] faces;
