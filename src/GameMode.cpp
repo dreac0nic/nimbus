@@ -125,7 +125,7 @@ void GameMode::KeyListener::handleEvent(payloadmap payload)
 	if(keyReleased && keyCode == OIS::KC_P) 
 	{
 		pauseModeFlag = !pauseModeFlag;
-		std::cout << "The game should go into pause mode.";
+		std::cout <<  pauseModeFlag << "\nThe game should go into pause mode.";
 	}
 
 }

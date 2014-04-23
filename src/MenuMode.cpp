@@ -19,7 +19,7 @@ using namespace Ogre;
 
 //Flags for determining actions
 bool menuEndFlag = FALSE; 
-bool overlayFlag = FALSE;
+bool overlayFlag = TRUE;
 
 MenuMode::MenuMode(void)
 {
@@ -112,31 +112,31 @@ mPanel->setDimensions(0.3, 0.5);						// This sets the width and height of the m
 mPanel->setMaterialName( "BaseWhite" );					// This makes the menu color white
 
 // Overlay buttons
-OverlayContainer* resumeButton = static_cast<OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "NEWBUTTON"));
-resumeButton->setMetricsMode(GMM_RELATIVE);
-resumeButton->setPosition(0.47, 0.3);
-resumeButton->setDimensions(0.0, 0.0);
-//resumeButton->setMaterialName("BaseWhite");
+OverlayContainer* newGameButton = static_cast<OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "NEWBUTTON"));
+newGameButton->setMetricsMode(GMM_RELATIVE);
+newGameButton->setPosition(0.41, 0.3);
+newGameButton->setDimensions(0.0, 0.0);
+//newGameButton->setMaterialName("BaseWhite");
 
 OverlayContainer* quitButton = static_cast<OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "QUITBUTTON"));
 quitButton->setMetricsMode(GMM_RELATIVE);
-quitButton->setPosition(0.48, 0.5);
+quitButton->setPosition(0.415, 0.5);
 quitButton->setDimensions(0.0, 0.0);
 //quitButton->setMaterialName("BaseWhite");
 
 
 // Overlay element text
-TextAreaOverlayElement* resume = static_cast<TextAreaOverlayElement*>(mOverlayMgr->createOverlayElement("TextArea", "NEWGAME"));
-resume->setMetricsMode(GMM_PIXELS);
-resume->setFontName("Font");
-resume->setPosition(0.0, 0.0);
-resume->setDimensions(0.1, 0.1);
-resume->setCaption("New Game");
-resume->setCharHeight(16);
-//resume->setColourBottom(ColourValue(1.0, 0.0, 0.0));
-//resume->setColourTop(ColourValue(0.0, 1.0, 0.0));
-resume->setColour(ColourValue(0.0, 1.0, 0.0));
-printf("resume name = %s\n",resume->getName());
+TextAreaOverlayElement* newGame = static_cast<TextAreaOverlayElement*>(mOverlayMgr->createOverlayElement("TextArea", "NEWGAME"));
+newGame->setMetricsMode(GMM_PIXELS);
+newGame->setFontName("Font");
+newGame->setPosition(0.0, 0.0);
+newGame->setDimensions(0.1, 0.1);
+newGame->setCaption("Home Key to start a New Game");
+newGame->setCharHeight(16);
+//newGame->setColourBottom(ColourValue(1.0, 0.0, 0.0));
+//newGame->setColourTop(ColourValue(0.0, 1.0, 0.0));
+newGame->setColour(ColourValue(0.0, 1.0, 0.0));
+printf("newGame name = %s\n",newGame->getName());
 
 
 TextAreaOverlayElement* quit = static_cast<TextAreaOverlayElement*>(mOverlayMgr->createOverlayElement("TextArea", "QUIT"));
@@ -144,7 +144,7 @@ quit->setMetricsMode(GMM_PIXELS);
 quit->setFontName("Font");
 quit->setPosition(0.0, 0.0);
 quit->setDimensions(0.1, 0.1);
-quit->setCaption("Exit Game");
+quit->setCaption("Escape Key to Exit the Game");
 quit->setCharHeight(16);
 //quit->setColourBottom(ColourValue(1.0, 0.0, 0.0));
 //quit->setColourTop(ColourValue(0.0, 1.0, 0.0));
@@ -152,9 +152,9 @@ quit->setColour(ColourValue(1.0, 0.0, 0.0));
 printf("quit name = %s\n",quit->getName());
 
 theOverlay->add2D(mPanel);
-theOverlay->add2D(resumeButton);
+theOverlay->add2D(newGameButton);
 theOverlay->add2D(quitButton);
-resumeButton->addChild(resume);
+newGameButton->addChild(newGame);
 quitButton->addChild(quit);
 
 theOverlay->show();
