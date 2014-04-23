@@ -60,7 +60,7 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 	size_t index = 0;
 	size_t vertCount = this->mCorners.size() + 1; // corner count + center corner
 
-	Real* vertices = new Real[vertCount*3*2];    // (number of verts)*(x, y, z)*(coord, normal) -or- vertCount*3*2
+	Real* vertices = new Real[vertCount*(3*2 + 2)];    // (number of verts)*(x, y, z)*(coord, normal, texcoord) -or- vertCount*3*2
 
 	// Manually add center vertex.
 	// -- Position (ord: x, y, z)
@@ -74,6 +74,37 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 	vertices[index++] = norm.x;
 	vertices[index++] = norm.y;
 	vertices[index++] = norm.z;
+
+	vertices[index++] = 0.5f;
+	vertices[index++] = 0.5f;
+
+	// Find farthest lower position for each axis.
+	Real lowestX = 1.0f;
+	Real lowestY = 1.0f;
+	for(vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it) {
+		Vector3 vector = (*it)->vec3();
+		Real tempX = this->mPosition.x - vector.x;
+		Real tempY = this->mPosition.y - vector.y;
+
+		if(tempX < lowestX) lowestX = tempX;
+		if(tempY < lowestY) lowestY = tempY;
+	}
+
+	if(lowestX < 0.0f) lowestX *= -1;
+	if(lowestY < 0.0f) lowestY *= -1;
+
+	// Find the scaling factor for each axis.
+	Real scaleMaxX = 1.0f;
+	Real scaleMaxY = 1.0f;
+
+	for(vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it) {
+		Vector3 vector = (*it)->vec3();
+		Real tempX = lowestX + this->mPosition.x - vector.x;
+		Real tempY = lowestY + this->mPosition.y - vector.y;
+
+		if(tempX > scaleMaxX) scaleMaxX = tempX;
+		if(tempY > scaleMaxY) scaleMaxY = tempY;
+	}
 
 	// Add the rest of the vertices to data buffer.
 	for(vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it) {
@@ -91,6 +122,14 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 		vertices[index++] = normal.x;
 		vertices[index++] = normal.y;
 		vertices[index++] = normal.z;
+
+		// -- TexCoord
+		Vector2 texcoord = Vector2(this->mPosition.x - vector.x, this->mPosition.y - vector.z);
+		texcoord += Vector2(lowestX, lowestY);
+		texcoord /= Vector2(scaleMaxX, scaleMaxY);
+
+		vertices[index++] = texcoord.x;
+		vertices[index++] = texcoord.y;
 	}
 
 	// Define vertices color.
@@ -144,6 +183,10 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 	decl->addElement(0, offset, VET_FLOAT3, VES_NORMAL);
 	offset += VertexElement::getTypeSize(VET_FLOAT3);
 
+	// -- Texcoord
+	decl->addElement(0, offset, VET_FLOAT2, VES_TEXTURE_COORDINATES);
+	offset += VertexElement::getTypeSize(VET_FLOAT2);
+
 	// Allocate a vertex buffer for a number of vertices and vertex size.
 	HardwareVertexBufferSharedPtr vertBuff = 
 		HardwareBufferManager::getSingleton().createVertexBuffer(
@@ -190,7 +233,7 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 	tileMesh->indexData->indexStart = 0;
 
 	// Set material.
-	tileMesh->setMaterialName("Tiles/Snow1");
+	tileMesh->setMaterialName("Tiles/Sand1");
 
 	// Deallocate the vertex and face arrays.
 	if(vertices) delete[] vertices;
