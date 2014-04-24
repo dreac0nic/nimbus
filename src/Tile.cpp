@@ -126,7 +126,7 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 		// -- TexCoord
 		Vector2 texcoord = Vector2(this->mPosition.x - vector.x, this->mPosition.y - vector.z);
 		texcoord += Vector2(lowestX, lowestY);
-		texcoord /= Vector2(scaleFactor, scaleFactor);
+		texcoord /= scaleFactor;
 
 		vertices[index++] = texcoord.x;
 		vertices[index++] = texcoord.y;
