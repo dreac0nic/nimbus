@@ -94,17 +94,17 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 	if(lowestY < 0.0f) lowestY *= -1;
 
 	// Find the scaling factor for each axis.
-	Real scaleMaxX = 1.0f;
-	Real scaleMaxY = 1.0f;
+	Vector2 maxVector = Vector2();
 
 	for(vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it) {
-		Vector3 vector = (*it)->vec3();
-		Real tempX = lowestX + this->mPosition.x - vector.x;
-		Real tempY = lowestY + this->mPosition.y - vector.y;
+		Vector2 vector = Vector2((*it)->vec3().x - this->mPosition.x, (*it)->vec3().z - this->mPosition.y);
+		vector -= this->mPosition;
+		vector += Vector2(lowestX, lowestY);
 
-		if(tempX > scaleMaxX) scaleMaxX = tempX;
-		if(tempY > scaleMaxY) scaleMaxY = tempY;
+		if(maxVector.length() < vector.length()) maxVector = vector;
 	}
+
+	Real scaleFactor = (maxVector.x > maxVector.y ? maxVector.x : maxVector.y);
 
 	// Add the rest of the vertices to data buffer.
 	for(vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it) {
@@ -126,7 +126,7 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 		// -- TexCoord
 		Vector2 texcoord = Vector2(this->mPosition.x - vector.x, this->mPosition.y - vector.z);
 		texcoord += Vector2(lowestX, lowestY);
-		texcoord /= Vector2(scaleMaxX, scaleMaxY);
+		texcoord /= Vector2(scaleFactor, scaleFactor);
 
 		vertices[index++] = texcoord.x;
 		vertices[index++] = texcoord.y;
