@@ -24,7 +24,9 @@ bool overlayFlag = TRUE;
 MenuMode::MenuMode(void)
 {
 	this->keyListener = new KeyListener();
+	this->mouseListener = new MouseListener(mViewport);
 	EventSystem::getSingleton()->registerListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
+	EventSystem::getSingleton()->registerListener(this->mouseListener, EventSystem::EventType::MOUSE_CLICKED);
 
 	//Set up the pointer for the game to go to Menu Mode
 	gameModePointer = NULL;
@@ -33,7 +35,9 @@ MenuMode::MenuMode(void)
 MenuMode::~MenuMode(void)
 {
 	EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
+	EventSystem::getSingleton()->unregisterListener(this->mouseListener, EventSystem::EventType::MOUSE_CLICKED);
 	delete this->keyListener;
+	delete this->mouseListener;
 	
 
 }
@@ -174,6 +178,8 @@ mCamera->setNearClipDistance(5);
 // Add a viewport for the camera
 mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
 
+this->mouseListener->setViewport(mViewport);
+
 mViewport->setOverlaysEnabled(FALSE);
 //////////
 // Set up the appropriate models
@@ -221,5 +227,24 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload)
 	if(keyCode == OIS::KC_HOME) 
 	{
 		menuEndFlag = TRUE;
+	}
+}
+
+void MenuMode::MouseListener::handleEvent(payloadmap payload)
+{
+	printf("I'm in the MouseListener!\n");
+	OIS::MouseEvent* evt = (static_cast<OIS::MouseEvent*>(payload["MouseClicked"]));
+
+	if((evt->state.X.abs >= (float(viewport->getActualWidth()) * 0.35)) && (evt->state.X.abs <= (float(viewport->getActualWidth()) * 0.65))
+		&& (evt->state.Y.abs >= (float(viewport->getActualHeight()) * 0.25)) && (evt->state.Y.abs <= (float(viewport->getActualHeight()) * 0.35)))
+	{
+		menuEndFlag = TRUE;
+	}
+
+	if((evt->state.X.abs >= (float(viewport->getActualWidth()) * 0.35)) && (evt->state.X.abs <= (float(viewport->getActualWidth()) * 0.65))
+		&& (evt->state.Y.abs >= (float(viewport->getActualHeight()) * 0.45)) && (evt->state.Y.abs <= (float(viewport->getActualHeight()) * 0.55)))
+	{
+		printf("Quit Button Pressed!\n");
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::SHUTDOWN);
 	}
 }

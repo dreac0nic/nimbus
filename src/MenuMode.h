@@ -33,6 +33,22 @@ namespace Nimbus
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload);
 		} *keyListener;
+	
+		class MouseListener :
+			public EventListener
+		{
+
+		public:
+			Ogre::Viewport* viewport;
+
+			MouseListener(Ogre::Viewport* mViewport) {viewport = mViewport; return;}
+			virtual ~MouseListener() {}
+
+			void setViewport(Ogre::Viewport* tempViewport) { viewport = tempViewport; }
+
+			// From Nimbus::EventListener
+			virtual void handleEvent(payloadmap payload);
+		} *mouseListener;
 
 	public:
 		/** Creates a TestMode type run mode.

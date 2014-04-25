@@ -119,28 +119,31 @@ bool InputManager::mouseMoved(const OIS::MouseEvent& evt)
 }
 
 bool InputManager::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
+
 {
 	std::stringstream logstring;
+	std::map<std::string, void*> mouseEvent;
+	mouseEvent["MouseClicked"] = (void*)(&evt);
+	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_CLICKED, mouseEvent);
 
 	if(evt.state.buttonDown(OIS::MB_Left))
+
 	{
-		logstring << "The left mouse button was pressed at ("
-			//<< evt.state.X.rel << ", " << evt.state.Y.rel << ")"
-			<< evt.state.X.abs << ", " << evt.state.Y.abs << ")"
-			<< std::endl;
+	logstring << "The left mouse button was pressed at ("
+		<< evt.state.X.abs << ", " << evt.state.Y.abs << ")"
+		<< std::endl;
 	}
+
 	if(evt.state.buttonDown(OIS::MB_Right))
 	{
 		logstring << "The right mouse button was pressed at ("
-			//<< evt.state.X.rel << ", " << evt.state.Y.rel << ")"
-			<< evt.state.X.abs << ", " << evt.state.Y.abs << ")"
-			<< std::endl;
+		<< evt.state.X.abs << ", " << evt.state.Y.abs << ")"
+		<< std::endl;
 	}
-
 	std::cerr << logstring.str().c_str();
-
 	return true;
-}
+
+	}
 
 bool InputManager::mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
 {
