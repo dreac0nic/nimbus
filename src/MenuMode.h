@@ -2,7 +2,7 @@
 #define MENUMODE_H
 
 #include "RunMode.h"
-#include "EventSystem.h"
+#include "EventSystem/EventSystem.h"
 
 namespace Nimbus
 {
@@ -18,8 +18,7 @@ namespace Nimbus
 		
 
 	protected:
-		// From Nimbus::RunMode
-		virtual bool initialize();
+		
 
 		/** Listens for the key event
 		*/
@@ -31,7 +30,7 @@ namespace Nimbus
 			virtual ~KeyListener() {}
 
 			// From Nimbus::EventListener
-			virtual void handleEvent(payloadmap payload);
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		} *keyListener;
 	
 		class MouseListener :
@@ -47,7 +46,7 @@ namespace Nimbus
 			void setViewport(Ogre::Viewport* tempViewport) { viewport = tempViewport; }
 
 			// From Nimbus::EventListener
-			virtual void handleEvent(payloadmap payload);
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
 		} *mouseListener;
 
 	public:
@@ -55,6 +54,10 @@ namespace Nimbus
 		 */
 		MenuMode(void);
 		virtual ~MenuMode(void);
+		// From Nimbus::RunMode
+		virtual void initialize();
+		virtual void stop();
+		virtual void pause();
 
 		/** Runs the test mode.
 		 */

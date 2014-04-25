@@ -109,7 +109,7 @@ namespace Nimbus
 			virtual ~KeyListener() {}
 
 			// From Nimbus::EventListener
-			virtual void handleEvent(payloadmap payload);
+			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL );
 		} *keyListener;
 
 	public:

@@ -174,6 +174,21 @@ namespace Nimbus
 				Payload:
 					"EntityId" => GameEntityId
 					"EntityList" => list<GameEntityId>
+			 */,
+
+			  KEY_PRESS
+			 /*! The event which lets a Flocking behaviour know its new entity list.
+				
+				Payload:
+					"KeyCode" => KeyCode
+					"KeyReleased" => Bool
+			 */,
+
+			  MOUSE_CLICKED
+			 /*! The event which lets a Flocking behaviour know its new entity list.
+				
+				Payload:
+					"MouseClicked" => MouseEvent
 			 */
 		};
 

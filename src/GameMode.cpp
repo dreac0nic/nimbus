@@ -52,14 +52,6 @@ GameMode::~GameMode(void)
 
 RunMode* GameMode::run(const FrameEvent& evt)
 {
-	// Attempt to initialize the run mode
-	if(!this->initialized && !this->initialize())
-	{
-		LogManager::getSingletonPtr()->logMessage("(Nimbus) Failed to initialize RunMode");
-
-		// Terminate the application if we fail to initialize
-		return 0;
-	}
 	if(pauseModeFlag)
 	{
 		std:: cout << "OK, going to the pause Menu\n";
@@ -257,7 +249,7 @@ void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* r
 	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_END, mousePosRay);
 }
 
-void GameMode::KeyListener::handleEvent(payloadmap payload)
+void GameMode::KeyListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	OIS::KeyCode keyCode = *static_cast<OIS::KeyCode*>(payload["KeyCode"]);
 	bool keyReleased = *static_cast<bool*>(payload["KeyReleased"]);

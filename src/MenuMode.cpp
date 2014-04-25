@@ -45,13 +45,6 @@ MenuMode::~MenuMode(void)
 RunMode* MenuMode::run(const FrameEvent& evt)
 {
 // Attempt to initialize the run mode
-if(!this->initialized && !this->initialize())
-{
-LogManager::getSingletonPtr()->logMessage("(Nimbus) Failed to initialize MenuMode");
-
-// Terminate the application if we fail to initialize
-return 0;
-}
 
 //Check for if the overlay needs to be enabled.
 if(overlayFlag)
@@ -81,7 +74,17 @@ if(menuEndFlag)
 return this;
 }
 
-bool MenuMode::initialize()
+void MenuMode::stop()
+{
+
+}
+
+void MenuMode::pause()
+{
+
+}
+
+void MenuMode::initialize()
 {
 
 Light* light;
@@ -208,11 +211,9 @@ light = mSceneMgr->createLight("MainLight");
 light->setPosition(20, 80, 50);
 
 // Note that the RunMode has been initialized
-this->initialized = true;
-return true;
 }
 
-void MenuMode::KeyListener::handleEvent(payloadmap payload)
+void MenuMode::KeyListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	OIS::KeyCode keyCode = *static_cast<OIS::KeyCode*>(payload["KeyCode"]);
 	bool keyReleased = *static_cast<bool*>(payload["KeyReleased"]);
@@ -230,7 +231,7 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload)
 	}
 }
 
-void MenuMode::MouseListener::handleEvent(payloadmap payload)
+void MenuMode::MouseListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	printf("I'm in the MouseListener!\n");
 	OIS::MouseEvent* evt = (static_cast<OIS::MouseEvent*>(payload["MouseClicked"]));
