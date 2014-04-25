@@ -133,15 +133,6 @@ quitButton->addChild(quit);
 
 theOverlay->show();
 
-// testing
-printf("Overlay Enabled = %d\n", theOverlay->isInitialised());
-printf("mPanel Enabled = %d\n", mPanel->isEnabled());
-printf("resumeButton Enabled = %d\n", resumeButton->isEnabled());
-printf("resume Enabled = %d\n", resume->isEnabled());
-printf("quit Enabled = %d\n", quit->isEnabled());
-printf("resume Visible = %d\n", resume->isVisible());
-printf("quit Visible = %d\n", quit->isVisible());
-
 // Create the camera
 mCamera = mSceneMgr->createCamera("PlayerCam");
 
@@ -158,17 +149,6 @@ mCamera->setNearClipDistance(5);
 mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
 
 this->mouseListener->setViewport(mViewport);
-
-// testing
-printf("\nValues of Viewport in initialize()\n");
-printf("Left of Resume Button = %f\n", float(mViewport->getActualWidth()) * 0.35);
-printf("Right of Resume Button = %f\n", float(mViewport->getActualWidth()) * 0.65);
-printf("Top of Resume Button = %f\n", float(mViewport->getActualHeight()) * 0.25);
-printf("Bottom of Resume Button = %f\n", float(mViewport->getActualHeight()) * 0.35);
-printf("Left of Quit Button = %f\n", float(mViewport->getActualWidth()) * 0.35);
-printf("Right of Quit Button = %f\n", float(mViewport->getActualWidth()) * 0.65);
-printf("Top of Quit Button = %f\n", float(mViewport->getActualHeight()) * 0.45);
-printf("Bottom of Quit Button = %f\n", float(mViewport->getActualHeight()) * 0.55);
 
 //////////
 // Set up the appropriate models
@@ -215,7 +195,6 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload)
 
 void MenuMode::MouseListener::handleEvent(payloadmap payload)
 {
-	printf("I'm in the MouseListener!\n");
 	OIS::MouseEvent* evt = (static_cast<OIS::MouseEvent*>(payload["MouseClicked"]));
 
 	if((evt->state.X.abs >= (float(viewport->getActualWidth()) * 0.35)) && (evt->state.X.abs <= (float(viewport->getActualWidth()) * 0.65))
