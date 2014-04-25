@@ -1,9 +1,13 @@
+// Includes in source ...
 #include <sstream>
 #include <OgreConfigFile.h>
 #include <OgreLogManager.h>
 
 #include "EntityFactory.h"
-#include "Renderable.h"
+#include "./Behaviours/Renderable.h"
+#include "./Behaviours/Transformational.h"
+#include "./Behaviours/Soaring.h"
+#include "./Behaviours/Flocking.h"
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -25,7 +29,10 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 
 	// Load the behaviour prototype list
 	this->mBehaviourInstances.clear();
-	this->mBehaviourInstances["Renderable"] = new Renderable("Renderable", world);
+	this->mBehaviourInstances["Renderable"] = new Renderable("Renderable", world, NULL);
+	this->mBehaviourInstances["Transformational"] = new Transformational("Transformational", world, NULL);
+	this->mBehaviourInstances["Soaring"] = new Soaring("Soaring", world, NULL);
+	this->mBehaviourInstances["Flocking"] = new Flocking("Flocking", world, NULL);
 
 	logBuilder << "(Nimbus) Loading game entity types from " << filePathsFile;
 	LogManager::getSingleton().logMessage(logBuilder.str());
@@ -92,7 +99,7 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 						LogManager::getSingleton().logMessage(logBuilder.str());
 						logBuilder.str("");
 
-						entity->addBehaviour(this->mBehaviourInstances[entitySectionType]->clone(entitySettings),
+						entity->addBehaviour(this->mBehaviourInstances[entitySectionType]->clone(entitySettings, new EventSystem()),
 							entitySectionType);
 					}
 				}
@@ -102,8 +109,6 @@ Nimbus::EntityFactory::EntityFactory(World* world, std::string filePathsFile)
 			}
 		}
 	}
-
-	EventSystem::getSingleton()->registerListener(new CreateEntityListener(this), EventSystem::EventType::CREATE_ENTITY);
 }
 
 Nimbus::EntityFactory::~EntityFactory(void)
@@ -126,21 +131,4 @@ GameEntity* Nimbus::EntityFactory::createEntity(std::string entityType)
 	GameEntity* factorizedEntity = new GameEntity(this->mWorld->getCurrentId(), this->mEntityInstances[entityType]);
 
 	return factorizedEntity;
-}
-
-void Nimbus::EntityFactory::CreateEntityListener::handleEvent(payloadmap payload)
-{
-	if (payload.find("EntityType") != payload.end())
-	{
-		GameEntity* entity = containingFactory->createEntity(*(static_cast<string*>(payload["EntityType"])));
-		containingFactory->mWorld->addEntity(entity);
-	}
-
-	// Cleaning up any unneeded payload memory space
-	payloadmap::iterator payloads = payload.begin();
-	while (payloads != payload.end())
-	{
-		delete payloads->second;
-		payloads++;
-	}
 }

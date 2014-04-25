@@ -66,8 +66,11 @@ namespace Nimbus
 		virtual ~InputManager(void);
 
 		// From Nimbus::Manager
+		virtual void initialize(void) {}
 		// Run once per frame to update input listeners.
 		virtual bool update(void);
+		virtual void pause(void) {}
+		virtual void stop(void) {}
 	};
 }
 

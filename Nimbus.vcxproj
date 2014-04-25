@@ -11,38 +11,70 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\behaviours\Flocking.cpp" />
+    <ClCompile Include="src\behaviours\Transformational.cpp" />
+    <ClCompile Include="src\behaviours\Rainy.cpp" />
+    <ClCompile Include="src\Behaviours\Renderable.cpp" />
+    <ClCompile Include="src\behaviours\Soaring.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\EventSystem\EntityHandler.cpp" />
+    <ClCompile Include="src\EventSystem\EventSystem.cpp" />
+    <ClCompile Include="src\EventSystem\GenericHander.cpp" />
+    <ClCompile Include="src\GeneralEntityIterator.cpp" />
     <ClCompile Include="src\EntityFactory.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\EnvironmentManager.cpp" />
-    <ClCompile Include="src\EventSystem.cpp" />
     <ClCompile Include="src\GameEntity.cpp" />
     <ClCompile Include="src\GameEntitySet.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
-    <ClCompile Include="src\GeneralEntityIterator.cpp" />
+    <ClCompile Include="src\Corner.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MenuMode.cpp" />
+    <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\NimbusApplication.cpp" />
-    <ClCompile Include="src\Renderable.cpp" />
+    <ClCompile Include="src\VectorMap.cpp" />
+    <ClCompile Include="src\WindCurrent.cpp" />
+    <ClCompile Include="src\WindManager.cpp" />
+    <ClCompile Include="src\WindMap.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Behaviour.h" />
+    <ClInclude Include="src\behaviours\Behaviour.h" />
+    <ClInclude Include="src\behaviours\Flocking.h" />
+    <ClInclude Include="src\behaviours\Transformational.h" />
+    <ClInclude Include="src\behaviours\Rainy.h" />
+    <ClInclude Include="src\Behaviours\Renderable.h" />
+    <ClInclude Include="src\behaviours\Soaring.h" />
+    <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\EntityFactory.h" />
-    <ClInclude Include="src\EventListener.h" />
-    <ClInclude Include="src\EventSystem.h" />
+    <ClInclude Include="src\EventSystem\EntityHandler.h" />
+    <ClInclude Include="src\EventSystem\EventListener.h" />
+    <ClInclude Include="src\EventSystem\EventSystem.h" />
+    <ClInclude Include="src\EventSystem\EventTypeHandler.h" />
+    <ClInclude Include="src\EventSystem\GenericHandler.h" />
     <ClInclude Include="src\GameEntity.h" />
     <ClInclude Include="src\GameEntitySet.h" />
     <ClInclude Include="src\EntityManager.h" />
     <ClInclude Include="src\EnvironmentManager.h" />
     <ClInclude Include="src\GameMode.h" />
+    <ClCompile Include="src\Tile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Corner.h" />
     <ClInclude Include="src\InputManager.h" />
     <ClInclude Include="src\Manager.h" />
     <ClInclude Include="src\MenuMode.h" />
+    <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\NimbusApplication.h" />
-    <ClInclude Include="src\Renderable.h" />
     <ClInclude Include="src\RunMode.h" />
+    <ClInclude Include="src\Grid.h" />
+    <ClInclude Include="src\VectorMap.h" />
+    <ClInclude Include="src\WindCurrent.h" />
+    <ClInclude Include="src\WindManager.h" />
+    <ClInclude Include="src\WindMap.h" />
     <ClInclude Include="src\World.h" />
+    <ClInclude Include="src\Tile.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD12D565-5AB0-44A1-BAAD-B6B8B690D9F7}</ProjectGuid>
@@ -75,7 +107,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\$(Configuration)\Intermediates\</IntDir>
-    <SourcePath>C:\Users\Hazen\Documents\projects\Nimbus\src;$(SourcePath)</SourcePath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Build\$(Configuration)\</OutDir>
@@ -91,6 +123,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)ogre\lib\debug;$(SolutionDir)ogre\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
     <PostBuildEvent>
       <Command>$(ProjectDir)CopyFileList.exe includeDLL_d.txt $(ProjectDir)ogre\bin\$(Configuration)\ $(ProjectDir)Build\$(Configuration)\</Command>
