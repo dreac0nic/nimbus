@@ -254,7 +254,7 @@ void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventLis
 		}
 	}
 
-	if (payload.find("WorldRay") != payload.end()) {
+	if (payload.find("WorldRay") != payload.end() && mParent->mWindCurrent != NULL) {
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
 		Ogre::Vector2 collisionPoint = this->mParent->getCollisionPoint(worldRay);
 		Ogre::Vector2 clickDelta = collisionPoint - mParent->mCurrentPosition;
@@ -282,7 +282,7 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 		}
 	}
 
-	if (payload.find("WorldRay") != payload.end()) {
+	if (payload.find("WorldRay") != payload.end() && mParent->mWindCurrent != NULL) {
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
 		Ogre::Vector2 collisionPoint = this->mParent->getCollisionPoint(worldRay);
 		Ogre::Vector2 clickDelta = collisionPoint - mParent->mCurrentPosition;

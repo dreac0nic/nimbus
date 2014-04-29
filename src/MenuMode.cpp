@@ -62,6 +62,7 @@ if(menuEndFlag)
 	if(gameModePointer == NULL)
 	{
 		gameModePointer = new GameMode();
+		gameModePointer->initialize();
 	}
 	// Removes the current Viewport and move on to the next RunMode
 	NimbusApplication::getRenderWindow()->removeViewport(this->mViewport->getZOrder());

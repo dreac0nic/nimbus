@@ -128,6 +128,8 @@ void EventSystem::makeHandlers(EventType type)
 	case Nimbus::EventSystem::MOUSE_POSITION_END:
 	case Nimbus::EventSystem::CREATE_ENTITY:
 	case Nimbus::EventSystem::DESTROY_ENTITY:
+	case Nimbus::EventSystem::KEY_PRESS:
+	case Nimbus::EventSystem::MOUSE_CLICKED:
 		// Create the handler
 		handler = new GenericHandler();
 		break;

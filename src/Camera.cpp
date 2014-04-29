@@ -60,7 +60,7 @@ void Nimbus::Camera::initialize(SceneManager* sceneMgr, Vector3* position, Vecto
 	this->mCamera->setNearClipDistance(NEAR_CLIP_DISTANCE);
 
 	// Create the viewport
-	this->mViewport = NimbusApplication::getRenderWindow()->addViewport(this->mCamera);
+	this->mViewport = NimbusApplication::getRenderWindow()->addViewport(this->mCamera, 1);
 
 	// Resize the camera to the viewport size
 	this->mCamera->setAspectRatio(Real(mViewport->getActualWidth()) / Real(mViewport->getActualHeight()));

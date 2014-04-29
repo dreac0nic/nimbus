@@ -99,7 +99,6 @@ void GameMode::initialize()
 	mCamera = new Camera();
 	mCamera->initialize(mSceneMgr);
 
-
 	// Set the ambient light
 	mSceneMgr->setAmbientLight(ColourValue(0.5, 0.5, 0.5));
 
@@ -121,7 +120,7 @@ void GameMode::initialize()
 
 	std::map<std::string, void*> entityType;
 	entityType["EntityType"] = new std::string("Dragon");
-	EventSystem::getSingleton()->fireEvent(EventSystem::CREATE_ENTITY, entityType);
+	//EventSystem::getSingleton()->fireEvent(EventSystem::CREATE_ENTITY, entityType);
 
 	// Adding the world root node to the actual scene
 	this->mSceneMgr->getRootSceneNode()->addChild(this->mWorld->getWorldNode());
@@ -244,9 +243,12 @@ void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* r
 	mousePosRay["ScreenPosition"] = position;
 	mousePosRay["WorldRay"] = &ray;
 
-	mContainingMode->mCreatingWind = false;
+	if(mContainingMode->mCreatingWind)
+	{
+		mContainingMode->mCreatingWind = false;
 
-	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_END, mousePosRay);
+		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_END, mousePosRay);
+	}
 }
 
 void GameMode::KeyListener::handleEvent(payloadmap payload, EventListener* responder)
