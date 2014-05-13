@@ -4,12 +4,12 @@
 
 #include "Corner.h"
 
-#include <OGRE\OgreRoot.h>
-#include <OGRE\OgreMesh.h>
-#include <OGRE\OgreSubMesh.h>
-#include <OGRE\OgreMeshManager.h>
-#include <OGRE\OgreHardwareBufferManager.h>
-#include <OGRE\OgreResourceGroupManager.h>
+#include <OGRE/OgreRoot.h>
+#include <OGRE/OgreMesh.h>
+#include <OGRE/OgreSubMesh.h>
+#include <OGRE/OgreMeshManager.h>
+#include <OGRE/OgreHardwareBufferManager.h>
+#include <OGRE/OgreResourceGroupManager.h>
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -39,10 +39,10 @@ void Tile::updateVar(void)
 
 std::string Tile::str(void)
 {
-	stringstream buffer;
+    std::stringstream buffer;
 	buffer << "Tile: " << this->mPosition.x << "x" << this->mPosition.y << ": " << this->elevation;
 
-	for(vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it)
+    for(std::vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it)
 	{
 		Vector3 temp = (*it)->vec3();
 		buffer << std::endl << "\t " << (*it)->str();
@@ -76,7 +76,7 @@ void Tile::_generateSubMesh(MeshPtr& mesh)
 	vertices[index++] = norm.z;
 
 	// Add the rest of the vertices to data buffer.
-	for(vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it) {
+    for(std::vector<Corner*>::iterator it = this->mCorners.begin(); it != this->mCorners.end(); ++it) {
 		// Add to the next point to the array.
 		// -- Position
 		Vector3 vector = (*it)->vec3();

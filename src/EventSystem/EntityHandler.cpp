@@ -1,4 +1,5 @@
 #include "EntityHandler.h"
+#include <algorithm>
 
 using namespace Nimbus;
 
@@ -78,7 +79,7 @@ void EntityHandler::unregisterListener(EventListener* listener, filtermap filter
 	}
 
 	// Find the listener in the given list
-	element = find(mListeners[entityId].begin(), mListeners[entityId].end(), listener);	
+    element = std::find(mListeners[entityId].begin(), mListeners[entityId].end(), listener);
 
 	// If the listener was found
 	if(element != mListeners[entityId].end())

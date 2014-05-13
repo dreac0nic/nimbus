@@ -101,7 +101,7 @@ namespace Nimbus
 		*/
 		std::string str()
 		{
-			stringstream returnString;
+            std::stringstream returnString;
 
 			for(size_t y = 0; y < this->getYDimension(); ++y)
 			{
@@ -109,7 +109,7 @@ namespace Nimbus
 				{
 					returnString << this->get(x, y) << " ";
 				}
-				returnString << endl;
+                returnString << std::endl;
 			}
 
 			return returnString.str();

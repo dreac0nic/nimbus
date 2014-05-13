@@ -3,7 +3,7 @@
 
 #include <utility>
 
-#include <OGRE\OgreVector2.h>
+#include <OGRE/OgreVector2.h>
 
 #include "Tile.h"
 

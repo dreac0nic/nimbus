@@ -1,8 +1,8 @@
 #include <vector>
 
-#include <OGRE\OgreMesh.h>
-#include <OGRE\OgreSubMesh.h>
-#include <OGRE\OgreMeshManager.h>
+#include <OGRE/OgreMesh.h>
+#include <OGRE/OgreSubMesh.h>
+#include <OGRE/OgreMeshManager.h>
 
 #include "Map.h"
 #include "Tile.h"

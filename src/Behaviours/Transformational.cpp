@@ -20,14 +20,14 @@ Transformational::Transformational(BehaviourType type, World* world, Ogre::Confi
 	// Get the position vector
 	if(initializingSettings->find("position") != initializingSettings->end())
 	{
-		optionParser = stringstream(initializingSettings->find("position")->second);
+        optionParser.str(initializingSettings->find("position")->second);
 		optionParser >> initialPosition.x >> initialPosition.y >> initialPosition.z;
 	}
 
 	// Get the facing vector
 	if(initializingSettings->find("face") != initializingSettings->end())
 	{
-		optionParser = stringstream(initializingSettings->find("face")->second);
+        optionParser.str(initializingSettings->find("face")->second);
 		optionParser >> facingVector.x >> facingVector.y >> facingVector.z;
 		stringstream temp;
 		temp << "(Nimbus) Facing vector (" << facingVector.x << ", " << facingVector.y << ", " << facingVector.z << ")";
@@ -37,7 +37,7 @@ Transformational::Transformational(BehaviourType type, World* world, Ogre::Confi
 	// Get the scale vector
 	if(initializingSettings->find("scale") != initializingSettings->end())
 	{
-		optionParser = stringstream(initializingSettings->find("scale")->second);
+        optionParser.str(initializingSettings->find("scale")->second);
 		optionParser >> scaleVector.x >> scaleVector.y >> scaleVector.y;
 	}
 
