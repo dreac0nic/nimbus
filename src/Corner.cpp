@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-#include <OGRE\OgreVector3.h>
+#include <OGRE/OgreVector3.h>
 
 using namespace Nimbus;
 
