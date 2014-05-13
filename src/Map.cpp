@@ -67,6 +67,10 @@ Map::Map(void)
 			currentTile->setCorners(tempCorners);
 
 			// Synthesize values for tile.
+			currentTile->setType(Nimbus::Biome::DESERT);
+			currentTile->setHumidity(5);
+			currentTile->setSat(5);
+			currentTile->setTemp(5);
 
 			// Add the tile to the map.
 			this->tiles.push_back(currentTile);

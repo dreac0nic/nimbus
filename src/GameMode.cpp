@@ -88,26 +88,6 @@ void GameMode::initialize()
 	entityType["EntityType"] = new std::string("Dragon");
 	EventSystem::getSingleton()->fireEvent(EventSystem::CREATE_ENTITY, entityType);
 
-	// Create test terrain and map to demonstrate the look of our static tiles.
-	// Create a map.
-	Map testMap;
-
-	// Create material for tiles: NOTE SHOULD BE PROPERLY DONE SOON
-	MaterialPtr material = MaterialManager::getSingleton().create(
-		"Tiles/Default",
-		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
-
-	// Get a mesh from the terrain and attach it to an entity.
-	Entity* terrainEntity = mSceneMgr->createEntity("testTerrain", testMap.getMesh("terrainMesh"));
-	SceneNode* terrainNode = this->mWorld->getWorldNode()->createChildSceneNode();
-
-	terrainEntity->setMaterialName("Tiles/Default");
-
-	terrainNode->attachObject(terrainEntity);
-
-	terrainNode->setPosition(0, -120, 0);
-	terrainNode->setScale(40.0f, 40.0f, 40.0f);
-
 	// Adding the world root node to the actual scene
 	this->mSceneMgr->getRootSceneNode()->addChild(this->mWorld->getWorldNode());
 

@@ -222,14 +222,14 @@ void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventL
 		OIS::MouseButtonID* id = static_cast<OIS::MouseButtonID*>(payload["ButtonPressed"]);
 		Ogre::Ray* worldRay = (static_cast<Ogre::Ray*>(payload["WorldRay"]));
 
-		bool tempCurrent = false;
+		bool tempCurrent = true;
 		if (*id == OIS::MouseButtonID::MB_Left)
 		{
 			tempCurrent = true;
 		}
 		else if (*id == OIS::MouseButtonID::MB_Right)
 		{
-			tempCurrent = false;
+			//tempCurrent = false;
 		}
 
 		// These two constants are DEBUG VALUES. These need to change! They
