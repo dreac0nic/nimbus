@@ -18,8 +18,8 @@ using namespace Nimbus;
 using namespace Ogre;
 
 //Flags for determining actions
-bool menuEndFlag = FALSE; 
-bool overlayFlag = TRUE;
+bool menuEndFlag = false;
+bool overlayFlag = true;
 
 MenuMode::MenuMode(void)
 {
@@ -49,11 +49,11 @@ RunMode* MenuMode::run(const FrameEvent& evt)
 //Check for if the overlay needs to be enabled.
 if(overlayFlag)
 {
-	this->mViewport->setOverlaysEnabled(TRUE);
+    this->mViewport->setOverlaysEnabled(true);
 } 
 else if(!overlayFlag)
 {
-	this->mViewport->setOverlaysEnabled(FALSE);
+    this->mViewport->setOverlaysEnabled(false);
 }
 
 //Checks to see if it needs to change into GameMode
@@ -144,7 +144,7 @@ newGame->setCharHeight(16);
 //newGame->setColourBottom(ColourValue(1.0, 0.0, 0.0));
 //newGame->setColourTop(ColourValue(0.0, 1.0, 0.0));
 newGame->setColour(ColourValue(0.0, 1.0, 0.0));
-printf("newGame name = %s\n",newGame->getName());
+printf("newGame name = %s\n",newGame->getName().c_str());
 
 
 TextAreaOverlayElement* quit = static_cast<TextAreaOverlayElement*>(mOverlayMgr->createOverlayElement("TextArea", "QUIT"));
@@ -157,7 +157,7 @@ quit->setCharHeight(16);
 //quit->setColourBottom(ColourValue(1.0, 0.0, 0.0));
 //quit->setColourTop(ColourValue(0.0, 1.0, 0.0));
 quit->setColour(ColourValue(1.0, 0.0, 0.0));
-printf("quit name = %s\n",quit->getName());
+printf("quit name = %s\n",quit->getName().c_str());
 
 theOverlay->add2D(mPanel);
 theOverlay->add2D(newGameButton);
@@ -184,7 +184,7 @@ mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
 
 this->mouseListener->setViewport(mViewport);
 
-mViewport->setOverlaysEnabled(FALSE);
+mViewport->setOverlaysEnabled(false);
 //////////
 // Set up the appropriate models
 
@@ -228,7 +228,7 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload, EventListener* respo
 	//Pressing the home key should change this flag. (For testing purposes for now)
 	if(keyCode == OIS::KC_HOME) 
 	{
-		menuEndFlag = TRUE;
+        menuEndFlag = true;
 	}
 }
 
@@ -240,7 +240,7 @@ void MenuMode::MouseListener::handleEvent(payloadmap payload, EventListener* res
 	if((evt->state.X.abs >= (float(viewport->getActualWidth()) * 0.35)) && (evt->state.X.abs <= (float(viewport->getActualWidth()) * 0.65))
 		&& (evt->state.Y.abs >= (float(viewport->getActualHeight()) * 0.25)) && (evt->state.Y.abs <= (float(viewport->getActualHeight()) * 0.35)))
 	{
-		menuEndFlag = TRUE;
+        menuEndFlag = true;
 	}
 
 	if((evt->state.X.abs >= (float(viewport->getActualWidth()) * 0.35)) && (evt->state.X.abs <= (float(viewport->getActualWidth()) * 0.65))

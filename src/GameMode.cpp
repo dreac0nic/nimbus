@@ -18,7 +18,7 @@ using namespace Nimbus;
 using namespace Ogre;
 
 //Flag for determining Actions
-bool pauseModeFlag = FALSE;
+bool pauseModeFlag = false;
 
 GameMode::GameMode(void)
 {
