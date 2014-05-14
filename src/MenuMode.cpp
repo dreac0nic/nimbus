@@ -44,35 +44,35 @@ MenuMode::~MenuMode(void)
 
 RunMode* MenuMode::run(const FrameEvent& evt)
 {
-// Attempt to initialize the run mode
+    // Attempt to initialize the run mode
 
-//Check for if the overlay needs to be enabled.
-if(overlayFlag)
-{
-    this->mViewport->setOverlaysEnabled(true);
-} 
-else if(!overlayFlag)
-{
-    this->mViewport->setOverlaysEnabled(false);
-}
+    //Check for if the overlay needs to be enabled.
+    if(overlayFlag)
+    {
+        this->mViewport->setOverlaysEnabled(true);
+    }
+    else if(!overlayFlag)
+    {
+        this->mViewport->setOverlaysEnabled(false);
+    }
 
-//Checks to see if it needs to change into GameMode
-if(menuEndFlag)
-{
-	if(gameModePointer == NULL)
-	{
-		gameModePointer = new GameMode();
-		gameModePointer->initialize();
-	}
-	// Removes the current Viewport and move on to the next RunMode
-	NimbusApplication::getRenderWindow()->removeViewport(this->mViewport->getZOrder());
-	EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
-	delete this->keyListener;
-	return gameModePointer;
-}
+    //Checks to see if it needs to change into GameMode
+    if(menuEndFlag)
+    {
+        if(gameModePointer == NULL)
+        {
+            gameModePointer = new GameMode();
+            gameModePointer->initialize();
+        }
+        // Removes the current Viewport and move on to the next RunMode
+        NimbusApplication::getRenderWindow()->removeViewport(this->mViewport->getZOrder());
+        EventSystem::getSingleton()->unregisterListener(this->keyListener, EventSystem::EventType::KEY_PRESS);
+        delete this->keyListener;
+        return gameModePointer;
+    }
 
-// Continue to run this runmode
-return this;
+    // Continue to run this runmode
+    return this;
 }
 
 void MenuMode::stop()
@@ -88,130 +88,130 @@ void MenuMode::pause()
 void MenuMode::initialize()
 {
 
-Light* light;
+    Light* light;
 
-// Create the scene manager
-mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
+    // Create the scene manager
+    mSceneMgr = Root::getSingleton().createSceneManager("DefaultSceneManager");
 
-// Overlay stuffz
-OverlaySystem* overlaySystem = new OverlaySystem;
-mSceneMgr->addRenderQueueListener(overlaySystem);
+    // Overlay stuffz
+    OverlaySystem* overlaySystem = new OverlaySystem;
+    mSceneMgr->addRenderQueueListener(overlaySystem);
 
-OverlayManager* mOverlayMgr = OverlayManager::getSingletonPtr();
+    OverlayManager* mOverlayMgr = OverlayManager::getSingletonPtr();
 
-Overlay* theOverlay = mOverlayMgr->create("theOverlay");
+    Overlay* theOverlay = mOverlayMgr->create("theOverlay");
 
-theOverlay->setZOrder(500);
+    theOverlay->setZOrder(500);
 
-// Font
-FontPtr mFont = FontManager::getSingleton().create("Font", "General");
-mFont->setType(FT_TRUETYPE);
-mFont->setSource("../../times.ttf");
-mFont->setTrueTypeSize(32);
-mFont->setTrueTypeResolution(96);
-mFont->addCodePointRange(Ogre::Font::CodePointRange(33, 255));
-
-
-// Overlay element
-OverlayContainer* mPanel = static_cast<OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "PANEL"));
-mPanel->setMetricsMode(GMM_RELATIVE);
-mPanel->setPosition(0.35, 0.25);							// This sets the position of the menu on the screen
-mPanel->setDimensions(0.3, 0.5);						// This sets the width and height of the menu on the screen
-mPanel->setMaterialName( "BaseWhite" );					// This makes the menu color white
-
-// Overlay buttons
-OverlayContainer* newGameButton = static_cast<OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "NEWBUTTON"));
-newGameButton->setMetricsMode(GMM_RELATIVE);
-newGameButton->setPosition(0.41, 0.3);
-newGameButton->setDimensions(0.0, 0.0);
-//newGameButton->setMaterialName("BaseWhite");
-
-OverlayContainer* quitButton = static_cast<OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "QUITBUTTON"));
-quitButton->setMetricsMode(GMM_RELATIVE);
-quitButton->setPosition(0.415, 0.5);
-quitButton->setDimensions(0.0, 0.0);
-//quitButton->setMaterialName("BaseWhite");
+    // Font
+    FontPtr mFont = FontManager::getSingleton().create("Font", "General");
+    mFont->setType(FT_TRUETYPE);
+    mFont->setSource("../../times.ttf");
+    mFont->setTrueTypeSize(32);
+    mFont->setTrueTypeResolution(96);
+    mFont->addCodePointRange(Ogre::Font::CodePointRange(33, 255));
 
 
-// Overlay element text
-TextAreaOverlayElement* newGame = static_cast<TextAreaOverlayElement*>(mOverlayMgr->createOverlayElement("TextArea", "NEWGAME"));
-newGame->setMetricsMode(GMM_PIXELS);
-newGame->setFontName("Font");
-newGame->setPosition(0.0, 0.0);
-newGame->setDimensions(0.1, 0.1);
-newGame->setCaption("Home Key to start a New Game");
-newGame->setCharHeight(16);
-//newGame->setColourBottom(ColourValue(1.0, 0.0, 0.0));
-//newGame->setColourTop(ColourValue(0.0, 1.0, 0.0));
-newGame->setColour(ColourValue(0.0, 1.0, 0.0));
-printf("newGame name = %s\n",newGame->getName().c_str());
+    // Overlay element
+    OverlayContainer* mPanel = static_cast<OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "PANEL"));
+    mPanel->setMetricsMode(GMM_RELATIVE);
+    mPanel->setPosition(0.35, 0.25);							// This sets the position of the menu on the screen
+    mPanel->setDimensions(0.3, 0.5);						// This sets the width and height of the menu on the screen
+    mPanel->setMaterialName( "BaseWhite" );					// This makes the menu color white
+
+    // Overlay buttons
+    OverlayContainer* newGameButton = static_cast<OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "NEWBUTTON"));
+    newGameButton->setMetricsMode(GMM_RELATIVE);
+    newGameButton->setPosition(0.41, 0.3);
+    newGameButton->setDimensions(0.0, 0.0);
+    //newGameButton->setMaterialName("BaseWhite");
+
+    OverlayContainer* quitButton = static_cast<OverlayContainer*>(mOverlayMgr->createOverlayElement("Panel", "QUITBUTTON"));
+    quitButton->setMetricsMode(GMM_RELATIVE);
+    quitButton->setPosition(0.415, 0.5);
+    quitButton->setDimensions(0.0, 0.0);
+    //quitButton->setMaterialName("BaseWhite");
 
 
-TextAreaOverlayElement* quit = static_cast<TextAreaOverlayElement*>(mOverlayMgr->createOverlayElement("TextArea", "QUIT"));
-quit->setMetricsMode(GMM_PIXELS);
-quit->setFontName("Font");
-quit->setPosition(0.0, 0.0);
-quit->setDimensions(0.1, 0.1);
-quit->setCaption("Escape Key to Exit the Game");
-quit->setCharHeight(16);
-//quit->setColourBottom(ColourValue(1.0, 0.0, 0.0));
-//quit->setColourTop(ColourValue(0.0, 1.0, 0.0));
-quit->setColour(ColourValue(1.0, 0.0, 0.0));
-printf("quit name = %s\n",quit->getName().c_str());
-
-theOverlay->add2D(mPanel);
-theOverlay->add2D(newGameButton);
-theOverlay->add2D(quitButton);
-newGameButton->addChild(newGame);
-quitButton->addChild(quit);
-
-theOverlay->show();
-
-// Create the camera
-mCamera = mSceneMgr->createCamera("PlayerCam");
+    // Overlay element text
+    TextAreaOverlayElement* newGame = static_cast<TextAreaOverlayElement*>(mOverlayMgr->createOverlayElement("TextArea", "NEWGAME"));
+    newGame->setMetricsMode(GMM_PIXELS);
+    newGame->setFontName("Font");
+    newGame->setPosition(0.0, 0.0);
+    newGame->setDimensions(0.1, 0.1);
+    newGame->setCaption("Home Key to start a New Game");
+    newGame->setCharHeight(16);
+    //newGame->setColourBottom(ColourValue(1.0, 0.0, 0.0));
+    //newGame->setColourTop(ColourValue(0.0, 1.0, 0.0));
+    newGame->setColour(ColourValue(0.0, 1.0, 0.0));
+    printf("newGame name = %s\n",newGame->getName().c_str());
 
 
-//////////
-// Set up the camera
+    TextAreaOverlayElement* quit = static_cast<TextAreaOverlayElement*>(mOverlayMgr->createOverlayElement("TextArea", "QUIT"));
+    quit->setMetricsMode(GMM_PIXELS);
+    quit->setFontName("Font");
+    quit->setPosition(0.0, 0.0);
+    quit->setDimensions(0.1, 0.1);
+    quit->setCaption("Escape Key to Exit the Game");
+    quit->setCharHeight(16);
+    //quit->setColourBottom(ColourValue(1.0, 0.0, 0.0));
+    //quit->setColourTop(ColourValue(0.0, 1.0, 0.0));
+    quit->setColour(ColourValue(1.0, 0.0, 0.0));
+    printf("quit name = %s\n",quit->getName().c_str());
 
-// Position the camera
-mCamera->setPosition(Vector3(0, 50, 80));
-mCamera->lookAt(Vector3(0, 0, -100));
-mCamera->setNearClipDistance(5);
+    theOverlay->add2D(mPanel);
+    theOverlay->add2D(newGameButton);
+    theOverlay->add2D(quitButton);
+    newGameButton->addChild(newGame);
+    quitButton->addChild(quit);
 
-// Add a viewport for the camera
-mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
+    theOverlay->show();
 
-this->mouseListener->setViewport(mViewport);
+    // Create the camera
+    mCamera = mSceneMgr->createCamera("PlayerCam");
 
-mViewport->setOverlaysEnabled(false);
-//////////
-// Set up the appropriate models
 
-// Correct the aspect ratio of the camera
-mCamera->setAspectRatio(
-Real(mViewport->getActualWidth()) / Real(mViewport->getActualHeight()));
+    //////////
+    // Set up the camera
 
-//// Load the dragon
-//dragon = mSceneMgr->createEntity("Dragon", "dragon.mesh");
-//dragonNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-//dragonNode->attachObject(dragon);
-//
-//dragonNode->setPosition(0, 0, -100);
-//dragonNode->setScale(40.0, 40.0, 40.0);
-//dragonNode->pitch(Degree(90));
+    // Position the camera
+    mCamera->setPosition(Vector3(0, 50, 80));
+    mCamera->lookAt(Vector3(0, 0, -100));
+    mCamera->setNearClipDistance(5);
 
-//////////
-// Set up light sources 
+    // Add a viewport for the camera
+    mViewport = NimbusApplication::getRenderWindow()->addViewport(mCamera);
 
-// Set the ambient light
-mSceneMgr->setAmbientLight(ColourValue(0.5, 0.5, 0.5));
+    this->mouseListener->setViewport(mViewport);
 
-// Create a point light for main light
-light = mSceneMgr->createLight("MainLight");
-light->setPosition(20, 80, 50);
+    mViewport->setOverlaysEnabled(false);
+    //////////
+    // Set up the appropriate models
 
-// Note that the RunMode has been initialized
+    // Correct the aspect ratio of the camera
+    mCamera->setAspectRatio(
+    Real(mViewport->getActualWidth()) / Real(mViewport->getActualHeight()));
+
+    //// Load the dragon
+    //dragon = mSceneMgr->createEntity("Dragon", "dragon.mesh");
+    //dragonNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+    //dragonNode->attachObject(dragon);
+    //
+    //dragonNode->setPosition(0, 0, -100);
+    //dragonNode->setScale(40.0, 40.0, 40.0);
+    //dragonNode->pitch(Degree(90));
+
+    //////////
+    // Set up light sources
+
+    // Set the ambient light
+    mSceneMgr->setAmbientLight(ColourValue(0.5, 0.5, 0.5));
+
+    // Create a point light for main light
+    light = mSceneMgr->createLight("MainLight");
+    light->setPosition(20, 80, 50);
+
+    // Note that the RunMode has been initialized
 }
 
 void MenuMode::KeyListener::handleEvent(payloadmap payload, EventListener* responder)
