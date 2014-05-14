@@ -92,4 +92,11 @@ namespace Nimbus
 			this->mEntityId = *static_cast<GameEntityId*>(payload["EntityId"]);
 		}
 	}
+
+    std::string VectorMap::CatchEntityListener::str()
+    {
+        std::stringstream output;
+        output << "Catch Entity Listener (Catches arrow ids) [VectorMap]";
+        return output.str();
+    }
 }

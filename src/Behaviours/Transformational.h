@@ -74,6 +74,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mTranslationListener;
 
 		class TranslationQueryListener :
@@ -87,6 +88,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mTranslationQueryListener;
 
 	public:

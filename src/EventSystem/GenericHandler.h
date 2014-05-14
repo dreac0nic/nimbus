@@ -27,6 +27,7 @@ namespace Nimbus
 		virtual void registerListener(EventListener* listener, filtermap filter = filtermap());
 		virtual void unregisterListener(EventListener* listener, filtermap filter = filtermap());
 		virtual bool isEmpty();
+        virtual std::string str();
 	};
 }
 

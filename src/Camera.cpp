@@ -185,3 +185,10 @@ void Nimbus::Camera::MousePositionListener::handleEvent(payloadmap payload, Even
 		}
 	}
 }
+
+std::string Nimbus::Camera::MousePositionListener::str()
+{
+    std::stringstream output;
+    output << "Mouse Position Listener (Listens for mouse input) [Camera]";
+    return output.str();
+}

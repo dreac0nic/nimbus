@@ -130,12 +130,26 @@ void Nimbus::EntityManager::CreateEntityListener::handleEvent(payloadmap payload
 	}
 }
 
+std::string EntityManager::CreateEntityListener::str()
+{
+    std::stringstream output;
+    output << "Create Entity Listener (Creates game entities) [EntityManager]";
+    return output.str();
+}
+
 void EntityManager::CatchEntityListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	if(payload.find("EntityId") != payload.end())
 	{
 		this->mEntityId = *static_cast<GameEntityId*>(payload["EntityId"]);
 	}
+}
+
+std::string EntityManager::CatchEntityListener::str()
+{
+    std::stringstream output;
+    output << "Catch Entity Listener (Catches entity ids) [EntityManager]";
+    return output.str();
 }
 
 void EntityManager::DestroyEntityListener::handleEvent(payloadmap payload, EventListener* responder)
@@ -145,6 +159,13 @@ void EntityManager::DestroyEntityListener::handleEvent(payloadmap payload, Event
 		GameEntityId entityId = *static_cast<GameEntityId*>(payload["EntityId"]);
 		this->mWorld->getEntities()->removeGameEntity(entityId);
 	}
+}
+
+std::string EntityManager::DestroyEntityListener::str()
+{
+    std::stringstream output;
+    output << "Destroy Entity Listener (Destroys an entity) [EntityManager]";
+    return output.str();
 }
 
 void EntityManager::TickListener::handleEvent(payloadmap payload, EventListener* responder)
@@ -390,6 +411,13 @@ void EntityManager::TickListener::cluster(Grid<float>& proximityGrid, map<int, l
 	cluster(proximityGrid, groups);
 }
 
+std::string EntityManager::TickListener::str()
+{
+    std::stringstream output;
+    output << "Tick Listener (Per tick updates - cloud groups for the moment) [EntityManager]";
+    return output.str();
+}
+
 void EntityManager::PositionResponseListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	if(payload.find("PositionVector") != payload.end())
@@ -400,4 +428,11 @@ void EntityManager::PositionResponseListener::handleEvent(payloadmap payload, Ev
 	{
 		this->mPosition = Ogre::Vector3::ZERO;
 	}
+}
+
+std::string EntityManager::PositionResponseListener::str()
+{
+    std::stringstream output;
+    output << "Position Response Listener (Catches position query responses) [EntityManager]";
+    return output.str();
 }

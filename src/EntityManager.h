@@ -59,6 +59,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mCreateEntityListener;
 
 		/** Responder for catching created entities.
@@ -82,6 +83,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mCatchEntityListener;
 
 		/** Destroys entities on demand */
@@ -97,6 +99,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mDestroyEventListener;
 
 		/** Handles per tick updates for all entities that cannot be handled by entities themselves.
@@ -132,6 +135,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            std::string str();
 		}* mTickListener;
 
 		class PositionResponseListener :
@@ -148,6 +152,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            std::string str();
 		}* mPositionResponseListener;
 
 	public:

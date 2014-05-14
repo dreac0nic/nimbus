@@ -101,6 +101,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mMouseWindUpdateListener;
 
 		// ********************************************************************
@@ -118,6 +119,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mMouseWindStartListener;
 
 		// ********************************************************************
@@ -135,6 +137,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mMouseWindEndListener;
 
 		// ********************************************************************
@@ -152,6 +155,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mTickListener;
 
 	public:

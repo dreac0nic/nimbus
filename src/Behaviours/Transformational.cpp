@@ -227,6 +227,13 @@ void Transformational::TranslationListener::handleEvent(payloadmap payload, Even
 	}
 }
 
+std::string Transformational::TranslationListener::str()
+{
+    std::stringstream output;
+    output << "Translation Listener (Translates the game entity) [Transformational " << this->parent->mParentId << "]";
+    return output.str();
+}
+
 void Transformational::TranslationQueryListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Make sure the request is for us
@@ -245,4 +252,11 @@ void Transformational::TranslationQueryListener::handleEvent(payloadmap payload,
 		returnPayload["RotationVector"] = &mParent->mRotationVector;
 		responder->handleEvent(returnPayload);
 	}
+}
+
+std::string Transformational::TranslationQueryListener::str()
+{
+    std::stringstream output;
+    output << "Translation Query Listener (Returns transformation information) [Transformational " << this->mParent->mParentId << "]";
+    return output.str();
 }

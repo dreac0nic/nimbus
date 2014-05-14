@@ -13,6 +13,7 @@
 #include <OgreOverlayManager.h>
 #include <OgreOverlayElement.h>
 #include <OgreFont.h>
+#include <sstream>
 
 using namespace Nimbus;
 using namespace Ogre;
@@ -179,6 +180,13 @@ void GameMode::MouseDownListener::handleEvent(payloadmap payload, EventListener*
 	EventSystem::getSingleton()->fireEvent(EventSystem::EventType::MOUSE_POSITION_START, mousePosRay);
 }
 
+std::string GameMode::MouseDownListener::str()
+{
+    std::stringstream output;
+    output << "Mouse Down Listener (Distributes mouse down events) [GameMode]";
+    return output.str();
+}
+
 void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	if (mContainingMode->mCreatingWind)
@@ -223,6 +231,13 @@ void GameMode::MouseUpdateListener::handleEvent(payloadmap payload, EventListene
 	}
 }
 
+std::string GameMode::MouseUpdateListener::str()
+{
+    std::stringstream output;
+    output << "Mouse Update Listener (Distributes mouse updates) [GameMode]";
+    return output.str();
+}
+
 void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Let's not send a payload for now. This is dependent on the
@@ -251,6 +266,13 @@ void GameMode::MouseUpListener::handleEvent(payloadmap payload, EventListener* r
 	}
 }
 
+std::string GameMode::MouseUpListener::str()
+{
+    std::stringstream output;
+    output << "Mouse Up Listener (Distributes mouse up events) [GameMode]";
+    return output.str();
+}
+
 void GameMode::KeyListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	OIS::KeyCode keyCode = *static_cast<OIS::KeyCode*>(payload["KeyCode"]);
@@ -262,6 +284,19 @@ void GameMode::KeyListener::handleEvent(payloadmap payload, EventListener* respo
 		pauseModeFlag = !pauseModeFlag;
 		std::cout <<  pauseModeFlag << "\nThe game should go into pause mode.";
 	}
+    else if(keyReleased && keyCode == OIS::KC_G)
+    {
+        std::stringstream debug;
+        debug << "(Nimbus) Event System Dump:\n" << EventSystem::getSingleton()->str() << std::endl;
+
+        Ogre::LogManager::getSingleton().logMessage(debug.str());
+    }
 
 }
 
+std::string GameMode::KeyListener::str()
+{
+    std::stringstream output;
+    output << "Key Listener (Distributes keyboard input) [GameMode]";
+    return output.str();
+}

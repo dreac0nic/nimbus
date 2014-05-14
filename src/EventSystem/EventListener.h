@@ -27,6 +27,13 @@ namespace Nimbus
 		 payload A C++ STL map using a string key and a void* for data storage.
 		 */
 		virtual void handleEvent(payloadmap payload, EventListener* responder = NULL) = 0;
+
+        /** Gets a string which identifies the listener for debug purposes. Should uniquely
+            identify which listener it is (and, if possible, to which game object it belongs).
+
+            @return A std::string representing the EventListener.
+         */
+        virtual std::string str() = 0;
 	};
 }
 

@@ -227,6 +227,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            std::string str();
 		};
 
 	private:
@@ -246,6 +247,13 @@ namespace Nimbus
 			type The type of event to create handlers for.
 		*/
 		void makeHandlers(EventType type);
+
+        /** Convert the given EventType to a representative string. Useful for debugging purposes.
+
+            @param eventType The EventType to convert.
+            @return A std::string representing the EventType.
+         */
+        std::string eventTypeStr(EventType eventType);
 
 	public:
 		// CONSTRUCTORS
@@ -295,6 +303,12 @@ namespace Nimbus
 		 type The type of Event to fire.
 		 */
 		void fireEvent(EventType type, const payloadmap& payload = payloadmap(), EventListener* responder = NULL);
+
+        /** Prints the current event registrations to a string for debug purposes.
+
+         @return A std::string containing the current contents of the EventSystem
+         */
+        std::string str();
 	};
 }
 

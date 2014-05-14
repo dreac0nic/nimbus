@@ -31,6 +31,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		} *keyListener;
 	
 		class MouseListener :
@@ -47,6 +48,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		} *mouseListener;
 
 	public:

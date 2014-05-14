@@ -3,6 +3,7 @@
 #include "EntityHandler.h"
 #include <vector>
 #include <map>
+#include <sstream>
 
 using namespace std;
 using namespace Nimbus;
@@ -111,6 +112,32 @@ void EventSystem::fireEvent(EventType type, const payloadmap& payload, EventList
 	}
 }
 
+std::string EventSystem::str()
+{
+    std::stringstream output;
+    int handlerNum;
+
+    for(std::map<EventType, std::vector<EventTypeHandler*> >::iterator handlerList= this->mHandlers.begin(); handlerList != this->mHandlers.end(); ++handlerList)
+    {
+        // Output the event type for the following handlers
+        output << eventTypeStr(handlerList->first) << std::endl;
+
+        // Begin counting handlers
+        handlerNum = 0;
+        for(std::vector<EventTypeHandler* >::iterator handler = handlerList->second.begin(); handler != handlerList->second.end(); ++handler)
+        {
+            // Increment to the next handler number
+            handlerNum++;
+
+            output << handlerNum << ":\n" << (*handler)->str();
+        }
+
+        output << std::endl;
+    }
+
+    return output.str();
+}
+
 void EventSystem::makeHandlers(EventType type)
 {
 	EventTypeHandler* handler;
@@ -151,7 +178,79 @@ void EventSystem::makeHandlers(EventType type)
 	this->mHandlers[type].push_back(handler);
 }
 
+std::string EventSystem::eventTypeStr(EventType eventType)
+{
+    std::stringstream output;
+
+    switch(eventType)
+    {
+    case EventType::CREATE_ENTITY:
+        output << "CREATE_ENTITY";
+        break;
+    case EventType::DESTROY_ENTITY:
+        output << "DESTROY_ENTITY";
+        break;
+    case EventType::ENTITY_TRANSLATED:
+        output << "ENTITY_TRANSLATED";
+        break;
+    case EventType::FLOCK_UPDATE:
+        output << "FLOCK_UPDATE";
+        break;
+    case EventType::MOUSE_CLICKED:
+        output << "MOUSE_CLICKED";
+        break;
+    case EventType::MOUSE_DOWN:
+        output << "MOUSE_DOWN";
+        break;
+    case EventType::MOUSE_POSITION_END:
+        output << "MOUSE_POSITION_END";
+        break;
+    case EventType::MOUSE_POSITION_START:
+        output << "MOUSE_POSITION_START";
+        break;
+    case EventType::MOUSE_POSITION_UPDATE:
+        output << "MOUSE_POSITION_UPDATE";
+        break;
+    case EventType::MOUSE_UP:
+        output << "MOUSE_UP";
+        break;
+    case EventType::MOUSE_UPDATE:
+        output << "MOUSE_UPDATE";
+        break;
+    case EventType::KEY_PRESS:
+        output << "KEY_PRESS";
+        break;
+    case EventType::SHUTDOWN:
+        output << "SHUTDOWN";
+        break;
+    case EventType::SOAR_ENTITY:
+        output << "SOAR_ENTITY";
+        break;
+    case EventType::TICK:
+        output << "TICK";
+        break;
+    case EventType::TRANSLATE_ENTITY:
+        output << "TRANSLATE_ENTITY";
+        break;
+    case EventType::TRANSLATION_QUERY:
+        output << "TRANSLATION_QUERY";
+        break;
+    default:
+        output << "UNKNOWN_EVENT_TYPE";
+        break;
+    }
+
+    return output.str();
+}
+
 void EventSystem::GlobalListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	this->mEventSystem->fireEvent(this->mType, payload, responder);
+}
+
+std::string EventSystem::GlobalListener::str()
+{
+    std::stringstream output;
+    output << "Global Listener (DEPRECIATED? - captures global events and redistributes locally) [EventSystem " << this->mEventSystem->mOwnerId << "]";
+    return output.str();
 }

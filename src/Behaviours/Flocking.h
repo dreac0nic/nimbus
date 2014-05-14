@@ -57,6 +57,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            std::string str();
 		}* mSoarListener;
 
 		/** Updates the component entities' deltas. Performs any other, not-per-frame updates.
@@ -73,6 +74,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            std::string str();
 		}* mTickListener;
 
 		/** Updates the component entity list for this group. Called whenever groups are
@@ -89,6 +91,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            std::string str();
 		}* mUpdateListener;
 
 	public:

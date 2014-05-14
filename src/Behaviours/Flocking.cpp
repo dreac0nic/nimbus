@@ -137,6 +137,13 @@ void Flocking::SoarListener::handleEvent(payloadmap payload, EventListener* resp
 	mParent->mPositionDelta += positionDelta;
 }
 
+std::string Flocking::SoarListener::str()
+{
+    std::stringstream output;
+    output << "Soar Listener (Child cloud updates) [Flocking " << this->mParent->mParentId << "]";
+    return output.str();
+}
+
 void Flocking::TickListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Create the translation event payload
@@ -156,6 +163,13 @@ void Flocking::TickListener::handleEvent(payloadmap payload, EventListener* resp
 		translatePayload["PositionDelta"] = &delta;
 		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::TRANSLATE_ENTITY, translatePayload);
 	}
+}
+
+std::string Flocking::TickListener::str()
+{
+    std::stringstream output;
+    output << "Tick Listener (Per tick updates - translation updates) [Flocking " << this->mParent->mParentId << "]";
+    return output.str();
 }
 
 void Flocking::UpdateListener::handleEvent(payloadmap payload, EventListener* responder)
@@ -181,4 +195,11 @@ void Flocking::UpdateListener::handleEvent(payloadmap payload, EventListener* re
 			mParent->mEntities[*it] = Vector3::ZERO;
 		}
 	}
+}
+
+std::string Flocking::UpdateListener::str()
+{
+    std::stringstream output;
+    output << "Update Listener (Receives grouping updates) [Flocking " << this->mParent->mParentId << "]";
+    return output.str();
 }

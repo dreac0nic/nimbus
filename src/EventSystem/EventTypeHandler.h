@@ -70,6 +70,12 @@ namespace Nimbus
 			@return True if the handler contains no listeners.
 		*/
 		virtual bool isEmpty() = 0;
+
+        /** Generates a string representing the state of the event handler.
+
+            @return A std::string representing the state of the event handler.
+         */
+        virtual std::string str() = 0;
 	};
 }
 

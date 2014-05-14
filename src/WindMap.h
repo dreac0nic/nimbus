@@ -68,6 +68,8 @@ namespace Nimbus
 
 			// Form Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+
+            std::string str();
 		}* mArrowCatcher;
 		
 	public:

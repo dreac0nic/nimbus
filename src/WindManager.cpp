@@ -1,4 +1,5 @@
 #include <list>
+#include <sstream>
 #include <OgreEntity.h>
 #include <OISMouse.h>
 #include <OgreMeshManager.h>
@@ -244,6 +245,13 @@ void WindManager::MouseWindStartListener::handleEvent(payloadmap payload, EventL
 	}
 }
 
+std::string WindManager::MouseWindStartListener::str()
+{
+    std::stringstream output;
+    output << "Mouse Wind Start Listener (Listens for the start of a wind current) [WindManager]";
+    return output.str();
+}
+
 void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// In this function, we call our final addPoint and then send off our WindCurrent
@@ -273,6 +281,13 @@ void WindManager::MouseWindEndListener::handleEvent(payloadmap payload, EventLis
 	mParent->mCurrentPosition = Ogre::Vector2::ZERO;
 }
 
+std::string WindManager::MouseWindUpdateListener::str()
+{
+    std::stringstream output;
+    output << "Mouse Wind Update Listener (Listens for the update for a wind current) [WindManager]";
+    return output.str();
+}
+
 void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// The only thing this function needs to do is call addPoint.
@@ -296,6 +311,13 @@ void WindManager::MouseWindUpdateListener::handleEvent(payloadmap payload, Event
 	}
 }
 
+std::string WindManager::MouseWindEndListener::str()
+{
+    std::stringstream output;
+    output << "Mouse Wind End Listener (Listens for the end of a wind current) [WindManager]";
+    return output.str();
+}
+
 void WindManager::TickListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	// Arbitrary value to decide if we should add random currents... tends to be negative, ergo not generating currents
@@ -313,4 +335,11 @@ void WindManager::TickListener::handleEvent(payloadmap payload, EventListener* r
 		// Decrement the number of random currents needed
 		randomCurrents--;
 	}
+}
+
+std::string WindManager::TickListener::str()
+{
+    std::stringstream output;
+    output << "Tick Listener (Updates the wind map) [WindManager]";
+    return output.str();
 }

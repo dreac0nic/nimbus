@@ -52,6 +52,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mCatchEntityListener;
 
 	public:

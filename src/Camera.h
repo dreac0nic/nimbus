@@ -57,6 +57,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            std::string str();
 
 		}* mMousePositionListener;
 

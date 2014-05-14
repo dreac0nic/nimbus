@@ -232,6 +232,13 @@ void MenuMode::KeyListener::handleEvent(payloadmap payload, EventListener* respo
 	}
 }
 
+std::string MenuMode::KeyListener::str()
+{
+    std::stringstream output;
+    output << "Key Listener (Listens for keyboard input) [MenuMode]";
+    return output.str();
+}
+
 void MenuMode::MouseListener::handleEvent(payloadmap payload, EventListener* responder)
 {
 	printf("I'm in the MouseListener!\n");
@@ -249,4 +256,11 @@ void MenuMode::MouseListener::handleEvent(payloadmap payload, EventListener* res
 		printf("Quit Button Pressed!\n");
 		EventSystem::getSingleton()->fireEvent(EventSystem::EventType::SHUTDOWN);
 	}
+}
+
+std::string MenuMode::MouseListener::str()
+{
+    std::stringstream output;
+    output << "Mouse Listener (Listens for mouse input) [MenuMode]";
+    return output.str();
 }

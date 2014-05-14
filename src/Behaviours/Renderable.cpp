@@ -175,3 +175,10 @@ void Nimbus::Renderable::PositionListener::handleEvent(payloadmap payload, Event
 		parent->mNode->scale(scale);
 	}
 }
+
+std::string Nimbus::Renderable::PositionListener::str()
+{
+    std::stringstream output;
+    output << "Position Listener (Catches positional information) [Renderable " << this->parent->mParentId << "]";
+    return output.str();
+}

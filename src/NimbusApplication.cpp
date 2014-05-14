@@ -1,6 +1,7 @@
 #include "NimbusApplication.h"
 #include "MenuMode.h"
 #include "GameMode.h"
+#include <sstream>
 #include <OgreConfigFile.h>
 #include <OgreRenderWindow.h>
 #include <OgreCamera.h>
@@ -174,4 +175,11 @@ void NimbusApplication::ShutdownListener::handleEvent(payloadmap payload, EventL
 
 	// Set the current run mode to 0
 	NimbusApplication::app->mCurrentRunMode = 0;
+}
+
+std::string NimbusApplication::ShutdownListener::str()
+{
+    std::stringstream output;
+    output << "Shutdown Listener (Kills everything) [NimbusApplication]";
+    return output.str();
 }

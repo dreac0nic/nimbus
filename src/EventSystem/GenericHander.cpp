@@ -1,5 +1,6 @@
 #include "GenericHandler.h"
 #include <algorithm>
+#include <sstream>
 
 using namespace Nimbus;
 
@@ -45,4 +46,16 @@ bool GenericHandler::isEmpty()
 {
 	// If the listener list is 0, then the handler is empty
 	return mListeners.size() <= 0;
+}
+
+std::string GenericHandler::str()
+{
+    std::stringstream output;
+
+    for(std::list<EventListener*>::iterator listener = this->mListeners.begin(); listener != this->mListeners.end(); ++listener)
+    {
+        output << (*listener)->str() << std::endl;
+    }
+
+    return output.str();
 }

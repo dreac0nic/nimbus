@@ -1,5 +1,6 @@
 #include "EntityHandler.h"
 #include <algorithm>
+#include <sstream>
 
 using namespace Nimbus;
 
@@ -104,4 +105,21 @@ bool EntityHandler::isEmpty()
 
 	// Otherwise, the handler is empty
 	return true;
+}
+
+std::string EntityHandler::str()
+{
+    std::stringstream output;
+
+    for(std::map<GameEntityId, std::list<EventListener*> >::iterator listenerList = this->mListeners.begin(); listenerList != this->mListeners.end(); ++listenerList)
+    {
+        output << "GameEntityId: " << listenerList->first << std::endl;
+
+        for(std::list<EventListener*>::iterator listener = listenerList->second.begin(); listener != listenerList->second.end(); ++listener)
+        {
+            output << "  " << (*listener)->str() << std::endl;
+        }
+    }
+
+    return output.str();
 }

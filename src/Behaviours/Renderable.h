@@ -37,6 +37,7 @@ namespace Nimbus
 			~PositionListener() {}
 
 			void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            std::string str();
 		}* mPositionListener;
 
 	public:

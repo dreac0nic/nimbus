@@ -1,4 +1,5 @@
 #include <list>
+#include <sstream>
 #include <math.h>
 #include <algorithm>
 #include <OgreRoot.h>
@@ -369,4 +370,11 @@ void WindMap::ArrowCatcher::handleEvent(payloadmap payload, EventListener* respo
 	{
 		this->entityId = *static_cast<GameEntityId*>(payload["EntityId"]);
 	}
+}
+
+std::string WindMap::ArrowCatcher::str()
+{
+    std::stringstream output;
+    output << "Arrow Catcher (listens for Arrow ids) [WindMap]";
+    return output.str();
 }

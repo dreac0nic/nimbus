@@ -66,6 +66,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mMouseDownListener;
 
 		// Listens for any mouse update events
@@ -82,6 +83,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mMouseUpdateListener;
 
 		// Listens for any mouse up events
@@ -98,6 +100,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL);
+            virtual std::string str();
 		}* mMouseUpListener;
 
 		//Listens for Key Events
@@ -110,6 +113,7 @@ namespace Nimbus
 
 			// From Nimbus::EventListener
 			virtual void handleEvent(payloadmap payload, EventListener* responder = NULL );
+            virtual std::string str();
 		} *keyListener;
 
 	public:
