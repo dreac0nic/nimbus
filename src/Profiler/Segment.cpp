@@ -31,8 +31,8 @@ void Segment::start()
 
 void Segment::end()
 {
-    // The length definition of a millisecond duration
-    typedef std::chrono::duration<int, std::ratio<1, 1000000> > millisecondDuration;
+    // The length definition of a microsecond duration
+    typedef std::chrono::duration<int, std::ratio<1, 1000000> > microsecondDuration;
 
     // Get the end point
     std::chrono::time_point<std::chrono::high_resolution_clock> endPoint = this->mClock.now();
@@ -40,8 +40,8 @@ void Segment::end()
     // Calculate the duration of the profiler segment
     std::chrono::time_point<std::chrono::high_resolution_clock>::duration diff = endPoint - this->mStartPoint;
 
-    // Store the ticks of this duration (one tick = one millisecond)
-    this->mTicks = std::chrono::duration_cast<millisecondDuration>(diff).count();
+    // Store the ticks of this duration (one tick = one microsecond)
+    this->mTicks = std::chrono::duration_cast<microsecondDuration>(diff).count();
 }
 
 Segment* Segment::addChild(std::string module, std::string status)
@@ -68,7 +68,7 @@ std::string Segment::getStatus()
     return this->mStatus;
 }
 
-int Segment::getMilliseconds()
+int Segment::getMicroseconds()
 {
     return this->mTicks;
 }
@@ -82,7 +82,7 @@ std::string Segment::str()
 {
     std::stringstream output;
 
-    output << this->mModule << " (" << this->mStatus << "): " << this->mTicks << " milliseconds";
+    output << this->mModule << " (" << this->mStatus << "): " << this->mTicks << " microseconds";
 
     return output.str();
 }

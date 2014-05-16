@@ -138,7 +138,7 @@ namespace Nimbus
                     This field contains the Status value of the execution Segment.
 
                 duration INT
-                    This field is the duration of the execution time for this Segment in millisecond units.
+                    This field is the duration of the execution time for this Segment in microsecond units.
 
                 parent_id INT
                     This field is the id of the parent Segment to this one. Note that the root node

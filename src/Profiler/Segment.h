@@ -11,7 +11,7 @@ namespace Nimbus
     {
         /** The Segment class contains data about a specific execution period.
             It is identified by a Module and a Status value and contains the
-            duration of execution time for the execution segment in milliseconds.
+            duration of execution time for the execution segment in microseconds.
 
             It is mostly an internal class used by the Profiler object. Read that
             documentation for more information on how to use the Profiler.
@@ -89,11 +89,11 @@ namespace Nimbus
              */
             std::string getStatus();
 
-            /** Gets the millisecond duration of the profiler segment.
+            /** Gets the microsecond duration of the profiler segment.
 
-                @return An integer counting the millisecond duration.
+                @return An integer counting the microsecond duration.
              */
-            int getMilliseconds();
+            int getMicroseconds();
 
             /** Gets the list of children for the segment.
 

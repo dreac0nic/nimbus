@@ -108,7 +108,7 @@ std::string Profiler::sqlTree(Segment *printNode, int parentId)
            << ++this->mSqlId << ", '"
            << printNode->getModule() << "', '"
            << printNode->getStatus() << "', "
-           << printNode->getMilliseconds() << ", "
+           << printNode->getMicroseconds() << ", "
            << parentId << ");";
 
     if(children->size() > 0)
